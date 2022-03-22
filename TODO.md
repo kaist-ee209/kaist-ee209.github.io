@@ -1,0 +1,2 @@
+- [ ] remove all emacs from assignment page
+- [ ] check faq and make document clear

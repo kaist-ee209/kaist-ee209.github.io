@@ -1,0 +1,80 @@
+STRCPY(3)                         Linux Programmer's Manual                         STRCPY(3)
+
+
+
+NAME
+       strcpy, strncpy - copy a string
+
+SYNOPSIS
+       #include <string.h>
+
+       char *strcpy(char *dest, const char *src);
+
+       char *strncpy(char *dest, const char *src, size_t n);
+
+DESCRIPTION
+       The  strcpy()  function copies the string pointed to by src, including the terminating
+       null byte ('\0'), to the buffer pointed to by dest.  The strings may not overlap,  and
+       the destination string dest must be large enough to receive the copy.
+
+       The  strncpy()  function  is  similar,  except that at most n bytes of src are copied.
+       Warning: If there is no null byte among the first n bytes of src, the string placed in
+       dest will not be null-terminated.
+
+       If  the  length  of src is less than n, strncpy() pads the remainder of dest with null
+       bytes.
+
+       A simple implementation of strncpy() might be:
+
+           char *
+           strncpy(char *dest, const char *src, size_t n)
+           {
+               size_t i;
+
+               for (i = 0; i < n && src[i] != '\0'; i++)
+                   dest[i] = src[i];
+               for ( ; i < n; i++)
+                   dest[i] = '\0';
+
+               return dest;
+           }
+
+RETURN VALUE
+       The strcpy() and strncpy() functions return a pointer to the destination string dest.
+
+CONFORMING TO
+       SVr4, 4.3BSD, C89, C99.
+
+NOTES
+       Some programmers consider strncpy() to be inefficient and error prone.   If  the  
+       programmer  knows  (i.e.,  includes code to test!)  that the size of dest is greater 
+       than the length of src, then strcpy() can be used.
+
+       If there is no terminating null byte in the first n characters of src, strncpy()  
+       produces an unterminated string in dest.  Programmers often prevent this mistake by 
+       forcing termination as follows:
+
+           strncpy(buf, str, n);
+           if (n > 0)
+               buf[n - 1]= '\0';
+
+BUGS
+       If the destination string of a strcpy() is not large enough, then anything might  
+       happen.  Overflowing fixed-length string buffers is a favorite cracker technique for 
+       taking complete control of the machine.  Any time a program reads or copies data  
+       into  a buffer,  the  program  first  needs  to  check that there's enough space.  
+       This may be unnecessary if you can show that overflow is impossible, but be careful:
+        programs  can get changed over time, in ways that may make the impossible possible.
+
+SEE ALSO
+       bcopy(3),   memccpy(3),   memcpy(3),  memmove(3),  stpcpy(3),  stpncpy(3),  strdup(3),
+       string(3), wcscpy(3), wcsncpy(3)
+
+COLOPHON
+       This page is part of release 3.35 of the Linux man-pages project.   A  description  of
+       the   project,   and   information   about   reporting   bugs,   can   be   found   at
+       http://man7.org/linux/man-pages/.
+
+
+
+GNU                                       2010-09-20                                STRCPY(3)

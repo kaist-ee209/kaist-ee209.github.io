@@ -1,0 +1,1 @@
+echo Hello | sed s/Hello/Hi/g

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>EE 209: UNIX Shell Assignment : Supplementary Information</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+</head>
+<body>
+
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 5: A Unix Shell - Supplementary</h3></a>
+</div>
+</div>
+
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> EE 209: Programming Structures for EE</h1>
+
+<h2 class="ui center aligned header">Assignment 5: A Unix Shell - Supplementary Information</h2>
+
+<h4 class="ui center aligned header" style="font-weight: normal">(This page is borrowed and slightly modified from Princeton COS 217)  </h4>
+</div>
+
+<p style="margin-top: 2em">The following are implementation requirements and recommendations for your shell program:</p>
+
+
+<h2 class="ui dividing header">General</h2>
+
+<p>(Required) Your program should be <em>modular</em> at the function level. Define small functions, each of which does a single well-defined job.</p>
+
+<p>(Required) Your program should be <em>modular</em> at the source code file level. Define interfaces and implementations, thus splitting your program into multiple files. Define stateless modules, abstract objects, or abstract data types as appropriate. Encapsulate data structures with functions.</p>
+
+<p>(Recommended) Your program may use the <code>DynArray</code> ADT (from early precepts). The source code is available here: <a href="resource/dynarray.h">dynarray.h</a> <a href="resource/dynarray.c">dynarray.c</a>.  </p>
+
+<p>(Required) Your program should interpret commands from the <code>.ishrc</code> file when it is first launched. We will test your program by repeatedly copying command sequences to the <code>.ishrc</code> file and launching your program. If your program does not interpret commands from that file, then it will fail all of our tests. In that unfortunate circumstance, the grade would be penalized substantially.</p>
+
+<p>(Required) Your program should look for the <code>.ishrc</code> file in the HOME directory, not in the working directory.</p>
+
+<p>(Required) Your program should work properly if the <code>.ishrc</code> file does not exist or is not readable. It is <b>not</b> an error for the <code>.ishrc</code> file to not exist or to be unreadable.</p>
+
+<p>(Required) Your program should print the commands from <code>.ishrc</code>. That is, immediately after your program reads a command from the <code>.ishrc</code> file, it should print its "% " prompt and that command to the standard output stream. In that manner your program should generate a transcript that shows each command of <code>.ishrc</code>, followed by the output that results from executing that command. If your program does not print the commands of <code>.ishrc</code> to the standard output stream, then it will be difficult to interpret the transcript. In that unfortunate circumstance, the grade would be penalized substantially.</p>
+
+<p>(Required) Your program should not print the commands from the standard input stream. That is, when your program reads a command from the standard input stream, it should not print that command to the standard output stream.</p>
+
+<!--p> (Recommended) We provide the sampleish binary. You can download it and make it executable by <code>wget http://www.ndsl.kaist.edu/~kyoungsoo/ee209/assignment/unixshell/src/sampleish; chmod u+x sampleish </code> </p-->
+
+
+<h2 class="ui dividing header">Error Handling</h2>
+
+<p>(Required) Your program should detect and report each <em>programmer</em> error via a call of the <code>assert</code> macro. A programmer error is one that could not be caused by user input.</p>
+
+<p>(Required) Your program should call the <code>assert</code> macro to validate the parameters of every function in your program, especially the non-static ones.</p>
+
+<p>(Required) Your program should detect each <em>user</em> error via an <code>if</code> statement, and should report each user error via a descriptive error message. A user error is one that could be caused by user input.</p>
+
+<p>(Required) Your program should check the result of each attempt to dynamically allocate memory. It should recover from dynamic memory allocation failures as gracefully as possible.</p>
+
+<p>(Required) Your program should print error messages to the <em>standard error</em> stream, not to the <em>standard output</em> stream.</p>
+
+<p>(Required) Your program's error messages should begin with <code><em>programName</em>:</code>, where <code><em>programName</em></code> is your program's <code>argv[0]</code>. Note that the name of your program is not necessarily "ish"; the user might have renamed the executable binary file to something other than "ish".</p>
+
+<p>(Required) After a failed call of a function that sets the <code>errno</code> variable, your program should call the <code>perror</code> or <code>strerror</code> function to print an appropriate error message.</p>
+
+
+<h2 class="ui dividing header">Lexical Analysis</h2>
+
+<p>(Recommended) Your program should read each input line by calling the <code>fgets</code> function.</p>
+
+<p>(Recommended) Implement your lexical analyzer as a deterministic finite state automaton.</p>
+
+<p>(Required) Your program should call the <code>isspace</code> function to identify white-space characters.</p>
+
+<p>(Recommended) Create some temporary code that prints the token list created by your lexical analyzer. Do not proceed to subsequent phases until you test your lexical analyzer thoroughly.</p>
+
+<p>(Recommended) Test your lexical analyzer by making sure that it handles these example input lines properly:</p>
+
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th><strong>INPUT LINE</strong>
+</th>
+<th><strong>TOKEN ARRAY</strong>
+</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><pre>one</pre>
+</td>
+<td><pre>one</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>123</pre>
+</td>
+<td><pre>123</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>one123</pre>
+</td>
+<td><pre>one123</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>123one</pre>
+</td>
+<td><pre>123one</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>one two</pre>
+</td>
+<td><pre>one
+two</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>one   two</pre>
+</td>
+<td><pre>one
+two</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>   one two</pre>
+</td>
+<td><pre>one
+two</pre>
+</td>
+</tr>
+
+<span class='change'>
+<tr>
+<td>
+    <span class='change'>
+    <pre>one &#124;</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>one
+&#124;</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>one&#124;</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>one
+&#124;</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>&#124;one</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>&#124;
+one</pre>
+    </span>
+</td>
+</tr>
+
+</span>
+
+<tr>
+<td><pre>"one"</pre>
+</td>
+<td><pre>one</pre>
+</td>
+</tr>
+
+
+    
+<tr>
+<td>
+    <span class='change'>
+    <pre>"&#124;"</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>&#124; (an ordinary token)</pre>
+    </span>
+</td>
+</tr>
+
+</span>
+
+<tr>
+<td><pre>"one two"</pre>
+</td>
+<td><pre>one two</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>one"two"</pre>
+</td>
+<td><pre>onetwo</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>"one"two</pre>
+</td>
+<td><pre>onetwo</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>"one</pre>
+</td>
+<td><pre>Invalid: Unmatched quote</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>one"two</pre>
+</td>
+<td><pre>Invalid: Unmatched quote</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>'</pre>
+</td>
+<td><pre>Invalid: Unmatched quote</pre>
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<p>(Recommended) Your program's lexical analyzer should represent tokens so that the difference between quoted and unquoted special characters is adequately captured. For example, these two commands are very different, and that difference should be captured at the lexical analysis phase:</p>
+<span class='change'>
+<pre class="ui message">cat file1 &#124; grep str
+cat file1 "&#124;" grep str
+</pre>
+</span>
+
+
+<h2 class="ui dividing header">Syntactic Analysis</h2>
+
+<p>(Recommended) Your program should do as much validation of the command as possible at the syntactic analysis phase. The more error checking you do during the syntactic analysis phase, the less must be done during the (more complicated) execution phase.</p>
+
+<p>(Recommended) Create some temporary code that prints the command created by your syntactic analyzer. Do not proceed to subsequent phases until you test your syntactic analyzer thoroughly.</p>
+
+<p>(Recommended) Test your syntactic analyzer by making sure that it handles these valid and invalid example input lines properly:</p>
+
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th><strong>INPUT LINE</strong>
+</th>
+<th><strong>VALID/INVALID</strong>
+</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><pre>cat</pre>
+</td>
+<td><pre>Valid</pre>
+</td>
+</tr>
+
+<tr>
+<td><pre>cat file1</pre>
+</td>
+<td><pre>Valid</pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat file1 &#124; grep main</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat file1 &#124; cat</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat file2 &#124; grep test &#124; wc -l</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat file1 &#124;</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Invalid: Missing command name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>&#124; file1</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Invalid: Missing command name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat file1 &#124; &#124; wc -l</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Invalid: Missing command name</pre>
+    </span>
+</td>
+</tr>
+
+</span>
+
+</tbody>
+</table>
+
+
+<h2 class="ui dividing header">Execution</h2>
+
+<p>(Required) Your program should call <code>fflush(NULL)</code> before each call of <code>fork</code> to clear all I/O buffers.</p>
+
+<p>(Required) Your program should call the <code>setenv</code> function to implement the <code>setenv</code> shell built-in command.</p>
+
+<p>(Required) Your program should call the <code>unsetenv</code> function to implement the <code>unsetenv</code> shell built-in command.</p>
+
+<p>(Required) Your program should call the <code>chdir</code> function to implement the <code>cd</code> shell built-in command.</p>
+
+<p>(Required) Your program should call <code>exit(0)</code>to implement the <code>exit</code> shell built-in command. Or, implement the <code>exit</code> command by returning 0 from the program's <code>main</code> function.</p>
+
+
+<h2 class="ui dividing header">Process Handling</h2>
+
+<p>(Required) Your program should run any commands that ends with <code>&</code> in the background.</p>
+
+<p>(Required) Your program should call wait for every child that has been created.</p>
+
+<p>(Required) Your program should notify creation and termination of background process to stdout with its pid.</p>
+
+<p>(Required) Your program should bring the latest background process to the foreground when <code>fg</code> command is executed.</p>
+
+<p>(Required) Your program should print out appropriate error messages to stderr for inappropriate usage or circumstances for <code>&</code> and <code>fg</code> commands.</p>
+
+<p>(Recommended) Test your program's background processes functionality with sleep commands.</p>
+
+
+<h2 class="ui dividing header">Signal Handling</h2>
+
+<p>(Required) Your program should call the <code>signal</code>function to install signal handlers.</p>
+
+<p>(Required) Your program should call the <code>alarm</code> function to control handling of SIGQUIT signals.</p>
+
+<p>(Required) Your program should use the <code>SIG_IGN</code> and <code>SIG_DFL</code> arguments to the <code>signal</code> function, as appropriate.</p>
+
+<p> (Required) Your program should handle the <code>SIGCHLD</code> signal for reaping the 'zombie processes' (i.e., child processes that have finished but are not yet reaped by the parent process) when implementing background processes. You can call <code>wait() or waitpid()</code> to reap the finished child processes.</p>
+
+<p>(Required) Your program should call the <code>sigprocmask</code> function near the beginning of the <code>main</code> function to make sure that <code>SIGINT</code>, <code>SIGQUIT</code>, and <code>SIGALRM</code> signals are not blocked.</p>
+
+
+<div class='change'>
+    
+<h2  class="ui dividing header">Redirection</h2>
+
+<p>(Required) Your program should treat '&lt;' and '&gt;' as special characters in lexical analysis.</p>
+
+<p>(Required) Your program should treat redirection of standard out in LHS of a pipe token as a syntax error.</p>
+
+<p>(Required) Your program should treat redirection of standard in in RHS of a pipe token as a syntax error.</p>
+
+<p>(Recommended) Test your syntactic analysis with these commands:</p>
+
+</div>
+
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th><strong>INPUT LINE</strong>
+</th>
+<th><strong>VALID/INVALID</strong>
+</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &lt; file1</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &gt; file1</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &lt; file1 &gt; file2</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &gt; file1 &lt; file2</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &gt; file2</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &gt; file2 file1</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat file1 &#124; grep main &gt; result</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat &lt; file1 &#124; grep main &gt; result</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+
+<tr>
+<td>
+    <span class='change'>
+    <pre>cat &lt; file1 &#124; grep main &gt; result</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+    <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>&lt; file1</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Missing command name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &lt;</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Standard input redirection without file name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &lt; &#124; grep str</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Standard input redirection without file name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &gt;</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Standard output redirection without file name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &gt; &#124; grep str</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Standard output redirection without file name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &gt; file2 &gt; file3</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Multiple redirection of standard out</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &lt; file1 &lt; file2</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Multiple redirection of standard input</pre>
+    </span>
+</td>
+</tr
+>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &#124; cat &lt; file2</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Multiple redirection of standard input</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &gt; out  &#124; grep str</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Multiple redirection of standard out</pre>
+    </span>
+</td>
+</tr>
+
+
+
+</tbody>
+</table>
+
+<span class='change'>
+
+<p>(Required) Your program should be able to redirect the standard in stream and standard out stream to a file.</p>
+
+<p>(Required) Your program should be able to print out errors to standard error stream.</p>
+
+<p>(Required) Your program should create a file if the command's output is redirected to a non-existing file.</p>
+
+<p>(Required) Your program should truncate a file if the command's output is redirect to an existing file.</p>
+
+</span>
+<br>
+
+<h2  class="ui dividing header">Background process</h2>
+<p>(Recommended) Your program should treat '&' as special character in lexical analysis.</p>
+
+<p>(Required) Your program should treat a background operator without command as a syntax error.</p>
+
+<p>(Required) Your program should treat a background operator that is not located at the end of command line as a syntax error.</p>
+
+<p>(Required) Your program should notify creation and termination of a background process to stdout with its pid.</p>
+
+<p>(Required) Your program should bring the latest background process to the foreground when <code>fg</code> command is executed.</p>
+
+<p>(Required) Your program should print out appropriate error messages to stderr for inappropriate usage or circumstances for <code>&</code> and <code>fg</code> commands.</p>
+
+<p>(Recommended) Test your program's background processes functionality with sleep commands.</p>
+
+<p>(Recommended) Test your syntactic analysis with these commands:</p>
+
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th><strong>INPUT LINE</strong>
+</th>
+<th><strong>VALID/INVALID</strong>
+</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat &</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat file1 &</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Valid</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>&</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Missing command name</pre>
+    </span>
+</td>
+</tr>
+
+<tr>
+<td>
+    <span class='change'>
+        <pre>cat & cat</pre>
+    </span>
+</td>
+<td>
+    <span class='change'>
+        <pre>Invalid: Invalid use of background</pre>
+    </span>
+</td>
+</tr>
+</table>
+<br>
+
+</body></html>

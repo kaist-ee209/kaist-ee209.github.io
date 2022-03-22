@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>EE 209: Customer Management Table Assignment</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<link rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+</head>
+<body>
+
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 3: Hash Table Assignment</h3></a>
+</div>
+</div>
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> EE 209: Programming Structures for EE</h1>
+
+<h2 class="ui center aligned header">Assignment 3: Hash Table Assignment</h2>
+
+<h4 class="ui center aligned header" style="font-weight: normal">(Acknowledgment: This assignment is borrowed and modified from Princeton's COS 217)</h4>
+
+<h4 class="ui center aligned header" id="timer">&nbsp;</h4>
+
+</div>
+
+<h2 class="ui dividing header">Purpose</h2>
+
+<p>The purpose of this assignment is to help you learn how to
+implement common data structures in C and how to exploit them to
+achieve modularity in a real-world application. It also will give you
+the opportunity to gain more experience with the GNU/Linux programming
+tools, especially <code>bash</code>,
+<code>emacs</code> (or the editor of your choice), and <code>gdb</code>.</p>
+
+<h2 class="ui dividing header">Background</h2>
+
+<h3>Hash Table</h3>
+
+<p>A <em>hash table</em> is a data structure that maps keys to values.
+The hash table uses a hash function to compute an index of its internal
+array called <em>buckets</em> from a key.  Then, it uses the index to insert or look up a
+value from the bucket. Ideally, the hash function will assign a unique bucket
+for each key. However, due to the limited length of the buckets and hash
+outputs, two different keys may result in the same index of
+the buckets, which we call <em>collisions</em>. Therefore, the hash table
+requires to address such collisions. In this assignment, we will learn two
+techniques to resolve collisions: <em>separate chaining</em> and <em>linear
+  probing</em>.
+</p>
+
+<h3>Collision Resolution 1: Separate chaining</h3>
+  <p>Separate chaining resolves collisions by maintaining a linked list
+    of values in each bucket.
+      <img src="./fig/separate_chaining.svg" width="50%"
+      class="ui centered image" style="margin-top:20px"/>
+
+    <ul>
+      <li><b>Lookup</b>: Find a linked list from buckets using a hash function.
+        Then, scan the list to find a value corresponding to the key.
+      </li>
+      <li><b>Insertion</b>: Insert a key-value pair (i.e., mapping) to the linked list.
+      </li>
+      <li><b>Deletion</b>: Delete a mapping from the linked list.
+      </li>
+    </ul>
+
+<h3>Collision Resolution 2: Linear probing</h3>
+  <p>Linear probing resolves collisions by using an alternative bucket.
+    This type of collision resolution is called <em>open addressing</em>.
+    According to the method to discover the alternative bucket, the open addressing
+    has several variants, such as linear probing, quadratic probing, or double hashing.
+    In this assignment, we will focus on linear probing.
+
+    <ul>
+      <li><b>Lookup</b>: Find a corresponding bucket using a hash function.  If the
+        bucket is not empty, return a value if its key is equal to the
+        requested one.  Then, repeat this with the next bucket (i.e.,
+        <code>buckets[(index + 1) % bucketCount]</code>) until the bucket is
+        empty. Note that lookup may fall into an infinite loop if the buckets
+        are full. Resizing, which will be described later, can prevent this.
+      </li>
+
+      <img src="./fig/linear_probing_insertion.svg" width="30%"
+      class="ui centered image" style="margin-top:20px;margin-bottom:20px"/>
+
+      <li><b>Insertion</b>: Find a corresponding bucket using a hash function.
+        If the bucket is empty or with a tombstone (see below), set a value to the bucket.
+        Otherwise, try with the next bucket until you find a proper bucket.
+        Remember that you will never fall into an infinite loop because of resizing.
+      </li>
+
+      <li><p><b>Deletion</b>: You need to be careful when you delete a mapping. If you just
+        empty a bucket, a link between the bucket and a collision will be lost.
+        Therefore, the lookup for the collision will incorrectly report
+        that this mapping is not present. See the following figure.
+        </p>
+
+        <img src="./fig/linear_probing_deletion_wrong.svg" width="35%"
+      class="ui centered image" style="margin-top:20px;margin-bottom:20px"/>
+
+        <p> One way to handle this is to use <em>a tombstone</em>. In particular, we can
+          make a special flag value called tombstone to mark that the element is
+          deleted (see strikethrough in the below figure).
+          Then, the lookup can correctly find the collision
+          even if its previous mapping is deleted. Then, we can reuse
+          this bucket with a tombstone in inserting a new value.
+        </p>
+
+        <img src="./fig/linear_probing_deletion_correct.svg" width="35%"
+      class="ui centered image" style="margin-top:20px;margin-bottom:20px"/>
+
+      </li>
+
+      <li><p><b>Resizing</b>: As previously mentioned, you need to  resize the hash
+          table to prevent an infinite loop. Typically, you want to resize it
+          if its <em>load factor</em> is greater than a threshold value (e.g.,
+          0.75). Then, you allocate more buckets and copy all
+          mappings in the old buckets to the new one.
+      </p>
+      <p> The load factor is defined by (total number of mappings  / the number of buckets).
+        Should we consider a mapping with a tombstone as a valid one in calculating the load factor?
+        The answer is yes. Otherwise, you still can fall into an infinite loop in lookup.
+      </p>
+      </li>
+    </ul>
+  </p>
+
+
+<h2 class="ui dividing header">Your Task</h2>
+
+<p>Your task in this assignment is to create an ADT named <code>HashTable</code>. A <code>HashTable</code> object should be generic. That is, a <code>HashTable</code> object should contain values which are void pointers, and thus can point to data of any type.</p>
+
+<p>You should create two implementations of your <code>HashTable</code> ADT: one that uses separate chaining and a linked list and another one that uses linear probing for their collision resolution.</p>
+
+
+
+<h2 class="ui dividing header">The <code>HashTable</code> Interface</h2>
+
+<p>See your <code>HashTable</code> interface in a file named <a href="./src/hash_table.h"><code>hash_table.h</code></a>. It should contain these function declarations:</p>
+
+<pre style="margin-left:2em;" class="ui message">
+HashTable_T HashTable_new(size_t bucketCount);
+void HashTable_free(HashTable_T ht);
+size_t HashTable_getSize(HashTable_T ht);
+int HashTable_put(HashTable_T ht, const char *key, const void *value);
+void *HashTable_replace(HashTable_T ht, const char *key,
+   const void *newValue);
+int HashTable_contains(HashTable_T ht, const char *key);
+void *HashTable_get(HashTable_T ht, const char *key);
+void *HashTable_remove(HashTable_T ht, const char *key);
+void HashTable_map(HashTable_T ht,
+   void (*func)(const char *key, void *value, void *extra),
+   const void *extra);
+void HashTable_getBucketCount(HashTable_T ht);
+void HashTable_getBucketSize(HashTable_T ht, size_t n);
+unsigned int HashTable_hash(const char *key);
+</pre>
+
+<style>
+.ui.celled.table tr td:first-child {
+  border-left: 1px solid rgba(34,36,38,.1);
+}
+</style>
+
+<ul>
+  <li>
+    <code>HashTable_new</code> should create a new <code>HashTable</code> object
+    whose bucket count is <code>bucketCount</code>.
+
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td rowspan="2" class="three wide">
+            Return Value
+          </td>
+          <td>
+            On success, it should return a pointer to the memory block for the new <code>HashTable_T</code> object.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            If the function fails to allocate the memory, it should return NULL.
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+  </li>
+
+
+  <li>
+    <code>HashTable_free</code> should free all memory occupied by <code>ht</code>.
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td class="three wide">
+            Requirements
+          </td>
+          <td>
+            If the given pointer to the <code>HashTable_T</code> object is <code>NULL</code>, it should do nothing.
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+  </li>
+
+
+  <li>
+    <code>HashTable_getSize</code> should return the number of mappings in <code>ht</code>.
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td class="three wide">
+            Requirements
+          </td>
+          <td>
+            This should work in constant time.
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+  </li>
+
+  <li><code>HashTable_put</code> should add a mapping with <code>key</code> and <code>value</code>.
+
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td class="three wide" rowspan="2">
+            Return Value
+          </td>
+          <td>
+            If <code>ht</code> does not contain a mapping with <code>key</code>,
+            add a new mapping to <code>ht</code> and return 1 (TRUE)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Otherwise, leave <code>ht</code> unchanged and return 0 (FALSE).
+          </td>
+        </tr>
+
+        <tr>
+          <td rowspan="2">
+            Requirements
+          </td>
+          <td>
+            A <code>HashTable</code> object should <b>own</b> its key by copying it to a new buffer. Consider using <code>strdup()</code>. if you use strdup(), please define <code>_GNU_SOURCE</code> in your source code.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Conversely, a <code>HashTable</code> object should <em>not</em> own its value. Indeed, it cannot own its values; since it cannot determine the types of its values, it cannot create copies of them.
+          </td>
+        </tr>
+
+        <tr>
+          <td >
+            Implementation tips
+          </td>
+          <td>
+            For simplicity, you can safely assume that <code>value</code> is not <code>NULL</code> nor <code>(void*)-1</code>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+
+    <li><code>HashTable_replace</code> should replace a mapping's value with <code>value</code> whose key is <code>key</code>.
+
+      <table class="ui celled table">
+        <tbody>
+          <tr>
+            <td class="three wide" rowspan="2">
+              Return Value
+            </td>
+            <td>
+              If <code>ht</code> contains a mapping with <code>key</code>, replace its value with <code>value</code> and return the old value.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Otherwise, leave <code>ht</code> unchanged and return <code>NULL</code>.
+            </td>
+          </tr>
+
+          <tr>
+            <td >
+              Implementation tips
+            </td>
+            <td>
+              For simplicity, you can safely assume that <code>value</code> is not <code>NULL</code> nor <code>(void*)-1</code>.
+            </td>
+          </tr>
+
+        </tbody>
+      </table><br>
+  </li>
+
+  <li><code>HashTable_contains</code> checks whether a given <code>key</code> exists in the hash table.
+
+      <table class="ui celled table">
+        <tbody>
+          <tr>
+            <td class="three wide" rowspan="2">
+              Return Value
+            </td>
+            <td>
+              If <code>ht</code> contains a mapping with <code>key</code>, return 1 (TRUE)
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Otherwise, return 0 (FALSE).
+            </td>
+          </tr>
+        </tbody>
+      </table><br>
+  </li>
+
+  <li>
+    <code>HashTable_get</code> should return the value of the mapping whose key is <code>key</code>.
+
+      <table class="ui celled table">
+        <tbody>
+          <tr>
+            <td class="three wide" rowspan="2">
+              Return Value
+            </td>
+            <td>
+              If <code>ht</code> contains a mapping with <code>key</code>, return its value.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Otherwise, return NULL.
+            </td>
+          </tr>
+        </tbody>
+      </table><br>
+  </li>
+
+  <li>
+    <code>HashTable_remove</code> should remove a mapping whose key is <code>key</code>.
+
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td class="three wide" rowspan="2">
+            Return Value
+          </td>
+          <td>
+            If <code>ht</code> contains a mapping with <code>key</code>,
+            remove that mapping from <code>ht</code> and return the mapping's value.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Otherwise, leave <code>ht</code> unchanged and return NULL.
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+  </li>
+
+  <li>
+    <code>HashTable_map</code> should apply function <code>*func</code> to each mapping in <code>ht</code>, passing <code>extra</code> as an extra parameter. That is,the function should call <code>(*func)(key, value, extra)</code> for each <code>key/value</code> mapping in <code>ht</code>.</p>
+  <table class="ui celled table">
+    <tbody>
+      <tr>
+        <td class="three wide" rowspan="1">
+          Requirements
+        </td>
+        <td>
+          You need to call <code>*func</code> once for each mapping,
+          but the order does not matter.
+        </td>
+      </tr>
+    </tbody>
+  </table><br>
+  </li>
+
+  <li>
+    <code>HashTable_getBucketCount</code> should return the number of buckets of <code>ht</code>.
+
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td class="three wide" rowspan="1">
+            Requirements
+          </td>
+          <td>
+            This should work in constant time regardless of a bucket count.
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+  </li>
+
+  <li>
+    <code>HashTable_getBucketSize</code> should return the number of mappings in the <code>n</code>th bucket.
+
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td rowspan="2" class="three wide">
+            Return Value
+          </td>
+          <td>
+            If <code>n</code> is less than the current bucket count, return the number of mappings in the <code>n</code>th bucket.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Otherwise, return 0.
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+  </li>
+
+  <li><code>HashTable_hash</code> should return a hash result based on <code>key</code>.
+
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td rowspan="2" class="three wide">
+            Requirements
+          </td>
+          <td>
+            Should not implement <code>HashTable_hash</code> in your source code.
+            We will implement it and use it as shown in <a href="src/testclient.c">testclient.c</a>.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            An index for a bucket should be "<code>HashTable_hash(key) % bucketCount</code>".
+          </td>
+        </tr>
+      </tbody>
+    </table><br>
+
+  </li>
+</ul>
+
+
+<h2 class="ui dividing header">The <code>HashTable</code> with Separate Chaining Implementation</h2>
+
+<p>Your <code>HashTable</code> with separate chaining implementation should:</p>
+
+<ul>
+  <li>Reside in a file named <code>hash_table_sc.c</code>.</li>
+
+  <li>Implement a linked list and its basic operations
+    (e.g., <code>LinkedList_put</code>, <code>LinkedList_remove</code> ...)
+    and use them for implementing the hash table.
+  </li>
+
+  <li>
+    <code>HashTable_getBucketCount</code> should always return the initial <code>bucketCount</code> from <code>HashTable_new</code>
+    (i.e., no dynamically resizing).
+  </li>
+
+  <li><code>HashTable_getBucketSize</code> can return more than one.
+
+  <li>Contains no memory leak. Your HashTable ADT will use dynamically allocated memory. It should explicitly free all dynamically allocated memory when that memory is no longer required; for each call of <code>malloc</code> or <code>calloc</code> in your ADT, eventually there should be exactly one call of <code>free</code>.
+  </li>
+</ul>
+
+
+
+<h2 class="ui dividing header">The <code>HashTable</code> with Linear Probing Implementation</h2>
+
+
+<p>Your <code>HashTable</code> hash table implementation should:</p>
+
+<ul>
+  <li>Reside in a file named <code>hash_table_lp.c</code>.</li>
+
+  <li><code>HashTable_getSize</code> and <code>HashTable_getBucketSize</code>
+    should not include mappings with tombstones.</li>
+  <li><code>HashTable_getBucketSize</code> can return only zero or one.
+  <li>During <code>HashTable_put</code>,
+    if a load factor is greater than 0.75, double your buckets.
+    For example, if a bucket count of a hash table is 100,
+    it should be resized to have 200 buckets after adding the 75th mapping.
+    Therefore, the load factor cannot be greater than 0.75
+    after <code>HashTable_put</code>.
+<li>Contain no memory leaks. Your <code>SymTable</code> ADT will use dynamically allocated memory. It should explicitly free all dynamically allocated memory when that memory is no longer required; for each call of <code>malloc</code> or <code>calloc</code> in your ADT, eventually there should be exactly one call of <code>free</code>.</li>
+
+</ul>
+
+<h2 class="ui dividing header">Logistics</h2>
+
+<p>Develop in your own environment using <code>emacs</code> (or the editor of your choice)  to create
+source code and <code>gdb</code> to debug. Make sure to compile
+with <code>gcc209</code> and test your code on lab machine before
+submission.</p>
+
+<p>Please follow the steps through Task 1 to Task 2 to complete
+the <code>HashTable</code> API, and test your libraries.</p>
+
+<p>Create a <code>readme</code> text file that contains:</p>
+<ul>
+<li>Your name.</li>
+<li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policy" web page.</li>
+<li><strong>Compare the implementation of <code>HashTable</code> using separate chaining and the one using linear probing
+respectively. Please try to provide reasonable explanation for the pros and cons of each implementaion. </strong></li>
+<li>(Optionally) An indication of how much time you spent doing the assignment.</li>
+<li>(Optionally) Your assessment of the assignment.</li>
+<li>(Optionally) Any information that will help us to grade your work in the most favorable light.
+  In particular, you should describe all known bugs.</li>
+</ul>
+
+
+<h2 class="ui dividing header">Submission</h2>
+
+<p>
+Use <a href="http://klms.kaist.ac.kr" target="_blank">KAIST
+KLMS</a> to submit your assignments. Your submission should
+be one gzipped tar file whose name is
+
+<code>YourStudentID_assign3.tar.gz</code>
+
+</p><p>
+For example, if your student ID is 20191234,
+please name the file as
+<code>20191234_assign3.tar.gz</code>
+
+
+</p>
+<p>
+Create a local directory named '<code>YourStudentID_assign3</code>' and place all your files in it. Then, <code>tar</code> your submission file.
+Please refer <a href="../assignment1/wordcounting.html#submission">here</a> for how to archive your assignment.
+
+<p>Your submission need to include the following files:</p>
+<ul>
+<li>(Task 1) <code>hash_table_sc.c</code> </li>
+<li>(Task 2) <code>hash_table_lp.c</code> </li>
+<li><code>readme</code> text file</li>
+<li> <a href="../EthicsOath.docx">Observance of Ethics</a>. Sign on the document, save it into a PDF file, and submit it. </li>
+</ul>
+
+<p>Your submission file should look like this: </p>
+
+<div class="ui segment">
+  <div class="ui list">
+    <div class="item">
+      <i class="archive icon"></i>
+      <div class="content">
+        20191234_assign3.tar.gz
+          <div class="list">
+            <div class="item">
+              <i class="file icon"></i>
+              <div class="content">
+                hash_table_sc.c
+              </div>
+            </div>
+            <div class="item">
+              <i class="file icon"></i>
+              <div class="content">
+                hash_table_lp.c
+              </div>
+            </div>
+
+            <div class="item">
+              <i class="file icon"></i>
+              <div class="content">
+                readme
+              </div>
+            </div>
+            <div class="item">
+              <i class="file icon"></i>
+              <div class="content">
+                EthicsOath.pdf
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+          </div>
+
+</div>
+
+<h2 class="ui dividing header">Grading</h2>
+<div class="ui message error">
+If your code cannot be compiled at <code>eelab5</code> with <code>gcc209</code>, <b>we cannot give you any points (0 point)</b>. Please double check before you submit.
+</div>
+
+<p>We will grade your work on quality from the user's point of view and from the programmer's point of view. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages.</p>
+
+<p>From the user's point of view, your module has quality if it behaves as it should.</p>
+
+<p>In part, style is defined by the rules given in <em>The Practice of Programming</em> (Kernighan and Pike), as summarized by the <a href="../../style.pdf">Rules of Programming Style</a> document. These additional rules apply:</p>
+
+<p><strong>Names</strong>: You should use a clear and consistent style for variable and function names. One example of such a style is to prefix each variable name with characters that indicate its type. For example, the prefix <code>c</code> might indicate that the variable is of type <code>char</code>, <code>i</code> might indicate <code>int</code>, <code>pc</code> might mean <code>char*</code>, <code>ui</code> might mean <code>unsigned int</code>, etc. But it is fine to use another style -- a style which does not include the type of a variable in its name -- as long as the result is a readable program.</p>
+
+<p><strong>Line lengths</strong>: Limit line lengths in your source code to 72 characters. Doing so allows us to print your work in two columns, thus saving paper.</p>
+
+<p><strong>Comments</strong>: Each source code file should begin with a comment that includes your name, the number of the assignment, and the name of the file.</p>
+
+<p><strong>Comments</strong>: Each function should begin with a comment that describes what the function does from the caller's point of view. The function comment should:</p>
+
+<ul>
+<li>Explicitly refer to the function's parameters (by name) and the function's return value.</li>
+
+<li>State what, if anything, the function reads from standard input or any other stream, and what, if anything, the function writes to standard output, standard error, or any other stream.</li>
+
+<li>State which global variables the function uses or affects.</li>
+
+<li>Appear in both the interface (.h) file for the sake of the <em>clients</em> of the function and the implementation (.c) file for the sake of the <em>maintainers</em> of the function.</li>
+</ul>
+
+<p><strong>Comments</strong>: Each structure type definition and each structure field definition should have a comment that describes it. Comments should be written in <strong>English</strong>.</p>
+<div class="ui message warning">
+Please note that you might not get a full credit even if you pass the test with your <code>testclient</code>. TAs might use another <code>testclient</code> to test functionality and robustness of your implementation.
+</div>
+
+<br>

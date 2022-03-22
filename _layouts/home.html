@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<header class="pt-3 mb-3">
+  {{ content }}
+</header>
+
+<div id="content">
+
+  {% if site.paginate %}
+  <nav class="py-1" aria-label="Blog page navigation">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Previous</a>
+    {% endif %}
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">Next &raquo;</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+</div>

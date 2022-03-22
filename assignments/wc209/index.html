@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>EE209: A Word Counting Program Assignment</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+</head>
+<body>
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 1: A Word Counting Program</h3></a>
+</div>
+</div>
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> EE209: Programming Structures for EE</h1>
+
+<h2 class="ui center aligned header">Assignment 1: A Word Counting Program</h2>
+<h4 class="ui center aligned header" style="font-weight: normal">(This assignment borrows some statements and examples from Princeton COS 217's "De-Comment" Program Assignment)</h4>
+
+<h4 class="ui center aligned header" id="timer">&nbsp;</h4>
+</div>
+
+<h2 class="ui dividing header">Purpose</h2>
+
+<p>(Test text) The purpose of this assignment is to help you learn or review (1)
+the fundamentals of the C programming language, (2) a portion of the
+"de-commenting" task of the C preprocessor, and (3) how to use the
+GNU/Unix programming tools,
+especially <code>bash</code>, <code>emacs</code> (or any editor of your choice),
+and <code>gcc209</code>.</p>
+
+
+<h2 class="ui dividing header">Rules</h2>
+
+<p>Make sure you study the
+course <em><a href="../../policy">policy</a></em> web page
+before doing this assignment or any of the EE 209 assignments. In
+particular, note that you may consult with the course instructors, lab
+TAs, mailing list, etc. while doing assignments, as prescribed by that web
+page. However, there is one exception...</p>
+
+<p>Throughout the semester, each assignment will have an "on your own"
+part. You must do that part of the assignment <em>completely on your
+own</em>, without consulting with the course instructors, lab TAs,
+mailing list, etc., except for clarification of requirements. You might
+think of the "on your own" part of each assignment as a small
+take-home exam.</p>
+
+<p>For this assignment, "detecting and reporting unterminated
+comments" (as described below) is the "on your own" part. That part is
+worth 10% of this assignment.</p>
+
+
+<!--h3>Background</h3>
+
+<p> <code>wc</code> is a word counting program. Given an input
+
+<p>The C preprocessor is an important part of the C programming
+system. Given a C source code file, the C preprocessor performs three
+jobs:</p>
+
+<ul>
+<li>Merge "physical" lines of source code into "logical" lines. That
+is, when the preprocessor detects a line that ends with the backslash
+character, it merges that physical line with the next physical line to
+form one logical line.</li>
+
+<li>Remove comments from ("de-comment") the source code.</li>
+
+<li>Handle preprocessor directives
+(<code>#define</code>, <code>#include</code>, etc.) that reside in the
+source code.</li>
+</ul>
+
+<p>The de-comment job is substantial. For example, the C preprocessor
+must be sensitive to:</p>
+
+<ul>
+<li>The fact that a comment is a token delimiter. After removing a
+comment, the C preprocessor must make sure that a <b>white space
+character</b> is in its place.</li>
+
+<li>Line numbers. After removing a comment, the C
+preprocessor <b>sometimes must insert blank lines in its place</b> to
+preserve the original line numbering.</li>
+
+<li>String and character constant boundaries. The preprocessor must
+not consider the character sequence (<code>/*...*/</code>) to be a
+comment if it occurs inside a string constant (<code>"..."</code>) or
+character constant (<code>'...'</code>).</li>
+</ul>
+
+<hr-->
+
+<h2 class="ui dividing header">The Task</h2>
+
+<p>Your task is to write a C program named <code>wc209</code> that
+  prints the number of newlines, words, and characters in the input text
+  fed from standard input to standard ouput. The program behaves
+  similarly to Linux <code>wc</code>, but <code>wc209</code> skips
+  "commented text"(e.g., text in <code>/* ... */</code>, text behind <code>//...</code>) and does not
+  count such text in the output.
+
+
+<h2 class="ui dividing header" >Functionality</h2>
+
+<p>Your program should read characters from the standard input stream,
+and writes the output to the standard output stream and possibly to
+the standard error stream. Specifically, your program should (1) read
+text from the standard input stream, (2) writes the number of
+newlines, words, and characters in the input text to the standard output
+stream with block and line comment replaced by a space and an empty string respectively, and (3) writes error and
+warning messages as appropriate to the standard error stream. A
+typical execution of your program from a shell might look like
+this:</p>
+
+<div class="ui message">
+<pre>./wc209 &lt; <em>somefile</em>.txt 2&gt; <em>errorandwarningmessages</em>
+3 13 300</pre>
+</div>
+
+
+The output (<code>3 13 300</code>) indicates that there are 3 newlines,
+13 words, and 300 characters in the file, <code>somefile.txt</code>.
+
+<p> Here are a few rules.
+
+<ul>
+  <li> The syntax of comment follows that of the C language (C99).
+  <li> A word consists of one or more sequence of non-space
+  characters. A space character is recognized by <code>
+  isspace()</code> -- space, form-fead ('\f'), newline('\n'), carriage
+    return ('\r'), horizontal tab('\t'), and vertical tab ('\v').
+  <li> An empty file (with no characters at all) produces <code>0 0 0</code>.
+</ul>
+
+<p>In the following examples a space character is shown as
+"<code><sub>s</sub></code>" and a newline character as
+"<code><sub>n</sub></code>".</p>
+
+
+<p>Your program should internally consider each comment as a
+space. Examples:</p>
+<div class="scroll-x-container">
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th>Standard Input Stream
+</th>
+<th>Internal Representation After Decommenting
+</th>
+<th>Standard Output Stream
+</th>
+<th>Standard Error Stream
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><code>abc/*def*/ghi<sub>n</sub></code>
+    </td>
+    <td><code>abc<sub>s</sub>ghi<sub>n</sub></code>
+    </td>
+    <td>
+        <code>1<sub>s</sub>2<sub>s</sub>8<sub>n</sub></code>
+    </td>
+    <td>
+    </td>
+</tr>
+
+<tr>
+    <td><code>abc/*def*/<sub>s</sub>ghi<sub>n</sub></code>
+    </td>
+    <td><code>abc<sub>ss</sub>ghi<sub>n</sub></code>
+    </td>
+    <td>
+        <code>1<sub>s</sub>2<sub>s</sub>9<sub>n</sub></code>
+    </td>
+    <td>
+    </td>
+</tr>
+
+<tr>
+    <td><code>abc<sub>s</sub>/*def*/ghi<sub>n</sub></code>
+    </td>
+    <td><code>abc<sub>ss</sub>ghi<sub>n</sub></code>
+    </td>
+    <td>
+        <code>1<sub>s</sub>2<sub>s</sub>9<sub>n</sub></code>
+    </td>
+    <td>
+    </td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+
+
+<p>Your program should count the number of newlines.</p>
+
+<div class="scroll-x-container">
+  <table class="ui celled table unstackable">
+    <thead>
+      <tr>
+        <th>Standard Input Stream
+        </th>
+        <th>Internal Representation After Decommenting
+        </th>
+        <th>Standard Output Stream
+        </th>
+        <th>Standard Error Stream
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>abc</code>
+        </td>
+        <td><code>abc</code>
+        </td>
+        <td>
+          <code>0<sub>s</sub>1<sub>s</sub>3<sub>n</sub></code>
+        </td>
+        <td>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>abc<sub>n</sub>def</code>
+        </td>
+        <td><code>abc<sub>n</sub>def</code>
+        </td>
+        <td>
+          <code>1<sub>s</sub>2<sub>s</sub>7<sub>n</sub></code>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<p>Your program should define "comment" as in the C99 standard. In
+particular, your program also should consider line comment
+of the form (<code>//...</code>).
+Example:</p>
+
+<div class="scroll-x-container">
+  <table class="ui celled table unstackable">
+    <thead>
+      <tr>
+        <th>Standard Input Stream
+        </th>
+        <th>Internal Representation After Decommenting
+        </th>
+        <th>Standard Output Stream
+        </th>
+        <th>Standard Error Stream
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>abc//def<sub>n</sub></code>
+        </td>
+        <td><code>abc<sub>n</sub></code>
+        </td>
+        <td>
+          <code>1<sub>s</sub>1<sub>s</sub>4<sub>n</sub></code>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td><code>abc//def</code>
+        </td>
+        <td><code>abc</code>
+        </td>
+        <td>
+          <code>0<sub>s</sub>1<sub>s</sub>3<sub>n</sub></code>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Your program should allow a comment to span multiple lines. That
+is, your program should allow a comment to contain newline
+characters. Your program should add blank lines as necessary to
+preserve the original line numbering. Also, each newline character in
+comment is counted as one character. Examples:</p>
+
+
+<div class="scroll-x-container">
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th>Standard Input Stream
+</th>
+<th>Internal Representation After Decommenting
+</th>
+<th>Standard Output Stream
+</th>
+<th>Standard Error Stream
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abc/*def<sub>n</sub>ghi*/jkl<sub>n</sub>mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub><sub>n</sub>jkl<sub>n</sub>mno<sub>n</sub></code>
+</td>
+<td> <code>3<sub>s</sub>3<sub>s</sub>13<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def<sub>n</sub>ghi<sub>n</sub>jkl*/mno<sub>n</sub>pqr<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub><sub>n</sub><sub>n</sub>mno<sub>n</sub>pqr<sub>n</sub></code>
+</td>
+<td> <code>4<sub>s</sub>3<sub>s</sub>14<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td><code>abc//def<sub>n</sub>ghi<sub>n</sub>mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>n</sub>ghi<sub>n</sub>mno<sub>n</sub></code>
+</td>
+<td> <code>3<sub>s</sub>3<sub>s</sub>12<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Your program should not recognize nested comments. Example:</p>
+
+<div class="scroll-x-container">
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+    <th>Standard Input Stream
+    </th>
+    <th>Internal Representation After Decommenting
+    </th>
+    <th>Standard Output Stream
+    </th>
+    <th>Standard Error Stream
+    </th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><code>abc/*def/*ghi*/jkl*/mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub>jkl*/mno<sub>n</sub></code>
+</td>
+<td> <code>1<sub>s</sub>2<sub>s</sub>13<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc//def/*ghi<sub>n</sub>*/jkl<sub>n</sub></code>
+</td>
+<td><code>abc<sub>n</sub>*/jkl<sub>n</sub></code>
+</td>
+<td> <code>2<sub>s</sub>2<sub>s</sub>10<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!--
+<p>Your program should handle C string constants. In particular, your program should not consider text of the form (<code>/*...*/</code>) that occurs within a string constant (<code>"..."</code>) to be a comment. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc"def/*ghi*/jkl"mno<sub>n</sub></code>
+</td>
+<td><code>abc"def/*ghi*/jkl"mno<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def"ghi"jkl*/mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub>mno<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def"ghijkl*/mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub>mno<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Similarly, your program should handle C character constants. In particular, your program should not consider text of the form (<code>/*...*/</code>) that occurs within a character constant (<code>'...'</code>) to be a comment. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc'def/*ghi*/jkl'mno<sub>n</sub></code>
+</td>
+<td><code>abc'def/*ghi*/jkl'mno<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def'ghi'jkl*/mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub>mno<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def'ghijkl*/mno<sub>n</sub></code>
+</td>
+<td><code>abc<sub>s</sub>mno<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that the C <em>compiler</em> would consider the first of those examples to be erroneous (multiple characters in a character constant). But many C <em>preprocessors</em> would not, and your program should not.</p>
+
+<p>Your program should handle escaped characters within string constants. That is, when your program reads a backslash (<code>\</code>) while processing a string constant, your program should consider the next character to be an ordinary character that is devoid of any special meaning. In particular, your program should consider text of the form (<code>"...\"..."</code>) to be a valid string constant which happens to contain the double quote character. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc"def\"ghi"jkl<sub>n</sub></code>
+</td>
+<td><code>abc"def\"ghi"jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc"def\'ghi"jkl<sub>n</sub></code>
+</td>
+<td><code>abc"def\'ghi"jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Similarly, your program should handle escaped characters within character constants. That is, when your program reads a backslash (<code>\</code>) while processing a character constant, your program should consider the next character to be an ordinary character that is devoid of any special meaning. In particular, your program should consider text of the form (<code>'...\'...'</code>) to be a valid character constant which happens to contain the quote character. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc'def\'ghi'jkl<sub>n</sub></code>
+</td>
+<td><code>abc'def\'ghi'jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc'def\"ghi'jkl<sub>n</sub></code>
+</td>
+<td><code>abc'def\"ghi'jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that the C <em>compiler</em> would consider both of those examples to be erroneous (multiple characters in a character constant). But many C <em>preprocessors</em> would not, and your program should not.</p>
+
+<p>Your program should handle newline characters in C string constants without generating errors or warnings. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc"def<sub>n</sub>ghi"jkl<sub>n</sub></code>
+</td>
+<td><code>abc"def<sub>n</sub>ghi"jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc"def<sub>n</sub>ghi<sub>n</sub>jkl"mno/*pqr*/stu<sub>n</sub></code>
+</td>
+<td><code>abc"def<sub>n</sub>ghi<sub>n</sub>jkl"mno<sub>s</sub>stu<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that a C <em>compiler</em> would consider those examples to be erroneous (newline character in a string constant). But many C <em>preprocessors</em> would not, and your program should not.</p>
+
+<p>Similarly, your program should handle newline characters in C character constants without generating errors or warnings. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc'def<sub>n</sub>ghi'jkl<sub>n</sub></code>
+</td>
+<td><code>abc'def<sub>n</sub>ghi'jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc'def<sub>n</sub>ghi<sub>n</sub>jkl'mno/*pqr*/stu<sub>n</sub></code>
+</td>
+<td><code>abc'def<sub>n</sub>ghi<sub>n</sub>jkl'mno<sub>s</sub>stu<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that a C <em>compiler</em> would consider those examples to be erroneous (multiple characters in a character constant, newline character in a character constant). But many C <em>preprocessors</em> would not, and your program should not.</p>
+
+<p>Your program should handle unterminated string and character constants without generating errors or warnings. Examples:</p>
+
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong>
+</td>
+<td><strong>Standard Output Stream</strong>
+</td>
+<td><strong>Standard Error Stream</strong>
+</td>
+</tr>
+
+<tr>
+<td><code>abc"def/*ghi*/jkl<sub>n</sub></code>
+</td>
+<td><code>abc"def/*ghi*/jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td><code>abc'def/*ghi*/jkl<sub>n</sub></code>
+</td>
+<td><code>abc'def/*ghi*/jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that a C <em>compiler</em> would consider those examples to be erroneous (unterminated string constant, unterminated character constant, multiple characters in a character constant). But many C <em>preprocessors</em> would not, and your program should not.</p>
+
+-->
+
+<p>Your program should detect an unterminated comment. If your program detects end-of-file before a comment is terminated, it should write the message "Error: line X: unterminated comment" to the standard error stream. "X" should be the number of the line on which the unterminated comment begins. Examples:</p>
+
+<div class="scroll-x-container">
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+    <th>Standard Input Stream
+    </th>
+    <th>Standard Output Stream
+    </th>
+    <th>Standard Error Stream
+    </th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr>
+<td><code>abc/*def<sub>n</sub>ghi<sub>n</sub></code>
+</td>
+<td>
+</td>
+<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
+</td>
+</tr>
+
+<tr>
+<td><code>abcdef<sub>n</sub>ghi/*<sub>n</sub></code>
+</td>
+<td>
+</td>
+<td><code>Error:<sub>s</sub>line<sub>s</sub>2:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def/ghi<sub>n</sub>jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def*ghi<sub>n</sub>jkl<sub>n</sub></code>
+</td>
+<td>
+</td>
+<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def<sub>n</sub>ghi*<sub>n</sub></code>
+</td>
+<td>
+</td>
+<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
+</td>
+</tr>
+
+<tr>
+<td><code>abc/*def<sub>n</sub>ghi/<sub>n</sub></code>
+</td>
+<td>
+</td>
+<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Your program (more precisely, its <code>main</code> function)
+should return <code>EXIT_FAILURE</code> if it was unsuccessful, that
+is, if it detects an unterminated comment and so was unable to remove
+comments properly. Otherwise it should
+return <code>EXIT_SUCCESS</code> or, equivalently 0. Note that
+<code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> are defined in the standard header
+file, <code>stdlib.h</code>.</p>
+
+<p>Your program should work for standard input lines of any length whose number
+of characters is less than 2 billion characters.</p>
+
+<!--p>You may assume that the final line of the standard input stream ends with the newline character.</p-->
+
+<!--p>Your program may assume that the backslash-newline character sequence does not occur in the standard input stream. That is, your program may assume that logical lines are identical to physical lines in the standard input stream.</p-->
+
+
+<h2 class="ui dividing header">Design</h2>
+
+<p>Design your program as a <em>deterministic finite state
+automaton</em> (<em>DFA</em>, alias <em>FSA</em>). The DFA concept is
+described in lectures, and in Section 5.1 of the book <em>Introduction
+to Programming</em> (Sedgewick and Wayne). That book section is
+available through the web
+at <a href="http://introcs.cs.princeton.edu/java/51language/">http://introcs.cs.princeton.edu/java/51language/</a>.</p>
+
+<!--p>Generally, a (large) C program should consist of of multiple source code files. For this assignment, you need not split your source code into multiple files. Instead you may place all source code in a single source code file. Subsequent assignments will ask you to write programs consisting of multiple source code files.</p-->
+
+<p>We suggest that your program use the standard C <code>getchar</code> function to read characters from the standard input stream.</p>
+
+
+<h2 class="ui dividing header">Logistics</h2>
+
+<p>You should create your program on the lab machines cluster using <code>bash</code>, <code>emacs</code>(or any editor of your choice), and <code>gcc209</code>.</p>
+
+<h3>Step 1: Design a DFA</h3>
+
+<p>Express your DFA using the traditional "ovals and labeled arrows" notation. More precisely, use the same notation as is used in the examples from Section 5.1 of the Sedgewick and Wayne book. Let each oval represent a state. Give each state a descriptive name. Let each arrow represent a transition from one state to another. Label each arrow with the character, or class of characters, that causes the transition to occur. We encourage (but do not require) you also to label each arrow with action(s) that should occur (e.g. "print the character") when the corresponding transition occurs.</p>
+
+<p>Express as much of the program's logic as you can within your DFA. The more logic you express in your DFA, the better your grade on the DFA will be.</p>
+
+<p>To properly report unterminated comments, your program must contain logic to keep track of the current line number of the standard input stream. You need not show that logic in your DFA.</p>
+
+<h3>Step 2: Create Source Code</h3>
+
+<p>Use any editor (e.g., <code>emacs</code>) to create source code in a file named <code>wc209.c</code> that implements your DFA.</p>
+
+<h3>Step 3: Preprocess, Compile, Assemble, and Link</h3>
+
+<p>Use the <code>gcc209</code> command to preprocess, compile, assemble, and link your program. Perform each step individually, and examine the intermediate results to the extent possible.</p>
+
+<h3>Step 4: Execute</h3>
+
+<p>Execute your program multiple times on various input files that test all logical paths through your code.</p>
+
+<p>We have provided several files that you require for this assignment.
+</p>
+
+<p style="">(1) Download <a href="./assignment1.tar.gz">a tar.gz file</a>to your directory.
+  You will find <code>samplewc209</code>, test files, and several utilities.
+
+<div class="ui message">
+<pre>wget http://computer.kaist.ac.kr/EE209/assignments/assignment1/assignment1.tar.gz
+mkdir assignment1
+mv assignment1.tar.gz assignment1
+cd assignment1
+tar -zxf assignment1.tar.gz
+</pre>
+</div>
+
+<p style="">(2) <code>samplewc209</code> is an executable version of a correct assignment solution. Your program should write <em>exactly</em> (character for character) the same data to the standard output stream and the standard error stream as <code>samplewc209</code> does. You should test your program using commands similar to these:</p>
+
+<div class="ui message" style=""><pre>./samplewc209 &lt; <em>somefile</em>.c &gt; output1 2&gt; errors1
+./wc209 &lt; <em>somefile</em>.c &gt; output2 2&gt; errors2
+diff output1 output2
+diff errors1 errors2
+rm output1 errors1 output2 errors2</pre>
+</div>
+
+<p style="">The Unix <code>diff</code> command finds
+differences between two given files. <code>diff output1
+output2</code> produces output, then <code>samplewc209</code> and your
+program have written different characters to the standard output
+stream. Similarly, if the command <code>diff errors1 errors2</code>
+produces output, then <code>samplewc209</code> and your program have
+written different characters to the standard error stream.</p>
+
+<!--<p style="margin-left:2em;">(3) <code>testdecomment</code> and <code>testdecommentdiff</code> are bash scripts that automate the testing process. Comments at the beginning of those files describe how to use them. After copying the scripts to your project directory, you may need to execute the commands <code>chmod 700 testdecomment</code> and <code>chmod 700 testdecommentdiff</code> to give them "executable" permissions.</p> -->
+
+
+<p>You also can test your program against its own source code using a command sequence such as this:</p>
+
+<div class="ui message">
+<pre>./samplewc209 &lt; wc209.c &gt; output1 2&gt; errors1
+./wc209 &lt; wc209.c &gt; output2 2&gt; errors2
+diff output1 output2
+diff errors1 errors2
+rm output1 errors1 output2 errors2</pre>
+</div>
+
+<h3>Step 5: Create a <code>readme</code> File and an Ethics document</h3>
+
+<p>Use an editor to create a text file named <code>readme</code> <b>(not <code>readme.txt</code>, or <code>README</code>, or <code>Readme</code>, etc.)</b> that contains:</p>
+
+<ul>
+<li>Your name, student ID, and the assignment number.</li>
+
+<li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course policy web page.</li>
+
+<li>(Optionally) An indication of how much time you spent doing the assignment.</li>
+
+<li>(Optionally) Your assessment of the assignment: Did it help you to learn? What did it help you to learn? Do you have any suggestions for improvement? Etc.</li>
+
+<li>(Optionally) Any information that will help us to grade your work in the most favorable light. In particular you should describe all known bugs.</li>
+</ul>
+
+<p>Descriptions of your code should not be in the <code>readme</code> file. Instead they should be integrated into your code as comments.</p>
+
+<p>Your <code>readme</code> file should be a plain text file. Don't create your <code>readme</code> file using Microsoft Word, Hangul (HWP) or any other word processor.</p>
+
+
+
+<p>For <b>every</b> assignment submission, you <b>must</b> submit your
+own Ethics document that pledges that you did not violate
+any rules of <a href="../../policy"> course policy</a> or any rules of
+ethics enforced by KAIST while doing this assignment. </p>
+
+<p> Please edit an <a href="../EthicsOath.docx">Ethics
+document</a> for assignment 1 and submit it along with other
+files. Please write the assignment number, your name, sign on it, and
+make it into a PDF file (you can convert it into the PDF format in the
+FILE menu of MS Word). </p>
+
+<h3><a name="submission"></a>Step 6: Submit</h3>
+
+<p> Your submission should include your <code>wc209.c</code> file and your <code>readme</code> file.
+
+<p>
+Also submit your DFA. Create your "labeled ovals and labeled arrows" DFA
+and make it in a PDF file.  A DFA drawn using drawing software (e.g. Microsoft PowerPoint)
+would be best. But it is sufficient to submit a photo of a neatly hand-drawn DFA.
+Make sure you convert the file into a PDF file.
+</p>
+<p>Please name the DFA file <code>dfa.pdf</code> (not <code>dfa.txt</code>, <code>DFA</code>, <code>DFA.jpg</code>, <code>DFA.png</code>,etc.)
+We cannot accept your DFA via e-mail.
+
+<p>
+Create a local directory named '<code>YourID_assign1</code>' and place all your files in it. Then, <code>tar</code> your submission file by issuing the following command on a lab machine (assuming your ID is 20221234):</p>
+
+
+<div class="ui message">
+<pre>mkdir 20221234_assign1
+mv wc209.c readme EthicsOath.pdf dfa.pdf 20221234_assign1
+cd 20221234_assign1
+tar -zcf 20221234_assign1.tar.gz *</pre>
+</div>
+
+
+<p>
+Upload your submission file (20221234_assign1.tar.gz) to our KLMS assignment submission link. We do not accept e-mail submission (unless KLMS is down).
+
+<p> Please follow the same procedure for the future assignments. <!--b>Do not archive your submission file without creating a directory and moving your files inside.</b--></p>
+
+<p>Your submission file should look like this: </p>
+<div class="ui segment">
+<div class="ui list">
+<div class="item">
+    <i class="archive icon"></i>
+    <div class="content">
+        20221234_assign1.tar.gz
+<!--                    <div class="description">Source files for project</div>-->
+<!----                   <div class="list">
+            <div class="item">
+                <i class="folder icon"></i>
+                <div class="content">
+                    20221234_assign1-->
+                    <div class="list">
+                        <div class="item">
+                            <i class="file icon"></i>
+                            <div class="content">
+                                wc209.c
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="file icon"></i>
+                            <div class="content">
+                                dfa.pdf
+<!--                                            <div class="description">(Not required if you had submitted offline)</div>-->
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="file icon"></i>
+                            <div class="content">
+                                readme
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="file icon"></i>
+                            <div class="content">
+                                EthicsOath.pdf
+                            </div>
+                        </div>
+                    </div>
+<!----                        </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+</div>
+
+</div>
+<li>Update <code>STUDENT_ID</code> in your project directory with your student id.
+  Then, use a given script to check your submission file before you submit.</li>
+
+<div class="ui message">
+<pre>
+$ ./tools/check.py 20221234_assign1.tar.gz
+[+] Good to submit :) </pre>
+</div>
+
+
+<h2 class="ui dividing header">Grading</h2>
+
+<div class="ui message error">
+If your submission file does not contain the expected files,
+or your code cannot be compiled at <code>eelab5</code> with <code>gcc209</code>, we cannot give you any points. Please double check before you submit.
+</div>
+<p>We will grade your work on two kinds of quality: quality from <em>the user's</em> point of view, and quality from <em>the programmer's</em> point of view. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages.</p>
+
+<p>From the user's point of view, a program has quality if it behaves as it should. The correct behavior of your program is defined by the previous sections of this assignment specification, and by the behavior of the given <code>samplewc209</code> program.</p>
+
+<p>From the programmer's point of view, a program has quality if it is well styled and thereby easy to maintain. In part, style is defined by the rules given in <em>The Practice of Programming</em> (Kernighan and Pike), as summarized by the <a href="../../style.pdf">Rules of Programming Style</a> document. For this assignment we will pay particular attention to rules 1-24. These additional rules apply:</p>
+
+<ul>
+<li><strong>Names</strong>: You should use a clear and consistent style for variable and function names. One example of such a style is to prefix each variable name with characters that indicate its type. For example, the prefix <code>c</code> might indicate that the variable is of type <code>char</code>, <code>i</code> might indicate <code>int</code>, <code>pc</code> might mean <code>char*</code>, <code>ui</code> might mean <code>unsigned int</code>, etc. But it is fine to use another style -- a style that does not include the type of a variable in its name -- as long as the result is a clear and readable program.</li>
+
+<li><strong>Comments</strong>: Each source code file should begin with a comment that includes your name, the number of the assignment, and the name of the file.</li>
+
+<li><strong>Comments</strong>: Each function -- especially the <code>main</code> function -- should begin with a comment that describes <em>what the function does</em> from the point of view of the caller. (The comment should not describe <em>how the function works</em>.) It should do so by <em>explicitly</em> referring to the function's parameters and return value. The comment also should state what, if anything, the function reads from the standard input stream or any other stream, and what, if anything, the function writes to the standard output stream, the standard error stream, or any other stream. Finally, the function's comment should state which global variables the function uses or affects. In short, a function's comments should describe the flow of data into and out of the function.</li>
+
+<li><strong>Function modularity</strong>: Your program should not consist of one large <code>main</code> function. Instead your program should consist of multiple small functions, each of which performs a single well-defined task. For example, you might create one function to implement each state of your DFA.</li>
+
+<li><strong>Line lengths</strong>: Limit line lengths in your source code to 72 characters.
+Doing so allows us to print your work in two columns, thus saving paper.
+You don't have to count the line length to meet the limit strictly, but it is encouraged to follow the rule.</li>
+</ul>
+
+<div class="ui message warning">
+Please note that you might not get a full credit even if you pass the test with given test case. TAs might use another test cases to test functionality and robustness of your implementation.
+</div>
+<h2 class="ui dividing header">Special Note</h2>
+
+<p>As prescribed by Kernighan and Pike style rule 25, generally you should avoid using global variables. Instead all communication of data into and out of a function should occur via the function's parameters and its return value. You should use ordinary <em>call-by-value</em> parameters to communicate data from a calling function to your function. You should use your function's return value to communicate data from your function back to its calling function. You should use <em>call-by-reference</em> parameters to communicate additional data from your function back to its calling function, or as bi-directional channels of communication.</p>
+
+<p>However, call-by-reference involves using pointer variables, which we have not discussed yet. So for this assignment you may use global variables instead of call-by-reference parameters. (But we encourage you to use call-by-reference parameters.)</p>
+
+<p>In short, you should use ordinary call-by-value function parameters and function return values in your program as appropriate. But you need not use call-by-reference parameters; instead you may use global variables. In subsequent assignments you should use global variables only when there is a good reason to do so.</p>
+<br>
+
+
+<script src="../../vendor/moment.min.js"></script>
+<script src="../../vendor/ee209_assignment.js"></script>
+<script>showTimer('2022-03-18T23:55:00+0900');</script>
+</body>
+</html>
+

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>EE 209: Customer Management Table Assignment</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/styles/github-gist.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+</head>
+<body>
+
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 3: Customer Management Table Assignment (tentative to change)</h3></a>
+</div>
+</div>
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> EE 209: Programming Structures for EE</h1>
+
+<h2 class="ui center aligned header">Assignment 3: Customer Management Table Assignment <span style="color: red;">(tentative to change)</span></h2>
+
+<h4 class="ui center aligned header" id="timer">&nbsp;</h4>
+
+</div>
+
+<h2 class="ui dividing header">Purpose</h2>
+
+<p>The purpose of this assignment is to help you learn how to
+implement common data structures in C and how to exploit them to
+achieve modularity in a real-world application. It also will give you
+the opportunity to gain more experience with the GNU/Linux programming
+tools, especially <code>bash</code>,
+<code>emacs</code> (or the editor of your choice), and <code>gdb</code>.</p>
+
+
+<h2 class="ui dividing header">Background</h2>
+
+<p>A data structure is a way of organizing data for efficient
+operation. In this assignment, you will implement the required
+functionalities (register, unregister, and find) of a customer
+management program using the following data structures.
+
+</p><ul>
+<li>Array: an array is a collection of the same data type, where
+its elements are stored linearly in memory. </li>
+
+
+<li>Hash table: a more efficient implementation might use a <em>hash
+table</em>, which reduces the complexity to search for data. Hash
+tables are described
+in Lecture
+10</a> of this course, or Section 2.9 of <em>The Practice of
+Programming</em> (Kernighan &amp; Pike) and Chapter 14
+of <em>Algorithms in C, Parts 1-4</em> (Sedgewick).</li>
+</ul>
+
+<h2 class="ui dividing header">Your Task</h2>
+
+<p>You will implement and improve the customer data management API
+using various data structures. Your tasks in this assignment are below:
+</p>
+
+<ul>
+<li>[Task 1] Implement an API library for the customer data
+management, using a <b>dynamically resizable</b> array.</li>
+
+<li>[Task 2] Implement the same API library using a hash table. </li>
+
+<li>[Task 3] Test the correctness of your three libraries and measure
+the performance.</li>
+</ul>
+
+NOTE: We provide skeleton code and several utilities
+(e.g., Makefile and tests)
+in <a href="./assignment3.tar.gz">assignment3.tar.gz</a>.
+Please download it to your directory before starting your project
+and check <code>README.md</code>.
+
+
+<h2 class="ui dividing header">The <code>customer_manager</code> Interface</h2>
+<code>customer_manager</code> is an API library for the customer data management, where the users can register the customer information and perform lookup operations to retrieve the purchase amount information.
+
+<p>The <code>customer_manager</code> interface introduces a structure type definition, <code>DB_T</code>:
+</p><ul>
+<li>Conceptually, the <code>DB_T</code> structure is used for saving
+the pointer(s) to the entire customer data.</li>
+<ul>
+<li>The per-customer data includes the customer name, ID, and purchase amount. <!-- (as defined in <a href="http://www.ndsl.kaist.edu/~kyoungsoo/ee209/assignment/cr/index.html#customer">Assignment 1</a>)--></li>
+</ul>
+</ul>
+
+<p>The <code>customer_manager</code> interface is described in a file named <a href="./resource/customer_manager.h"><code>customer_manager.h</code></a>, and it contains these function declarations:</p>
+<div class="ui message">
+<pre>DB_T CreateCustomerDB(void);
+void DestroyCustomerDB(DB_T d);
+int RegisterCustomer(DB_T d, const char *id, const char *name, const int purchase);
+int UnregisterCustomerByID(DB_T d, const char *id);
+int UnregisterCustomerByName(DB_T d, const char *name);
+int GetPurchaseByID(DB_T d, const char *id);
+int GetPurchaseByName(DB_T d, const char *name);
+typedef int (*FUNCPTR_T)(const char* id, const char* name, const int purchase);
+int GetSumCustomerPurchase(DB_T d, FUNCPTR_T fp);</pre>
+</div>
+
+<p>What each function does is as follows: </p>
+
+<style type="text/css">
+.tg  {
+  border-collapse: collapse;
+  border-spacing:0;
+  width:100%;
+}
+
+.tg td {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:14px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+}
+
+.tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:14px;
+  font-weight:normal;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+}
+
+.tg .tg-baqh {
+  width:100px;
+  text-align:center;
+  vertical-align:top
+}
+
+.tg .tg-0lax {
+  text-align:left;
+  vertical-align:top
+}
+
+</style>
+
+<ul>
+<li><code>CreateCustomerDB</code> should allocate memory for a new <code>DB_T</code> object and any underlying objects.</li>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-baqh" rowspan="2">Return value</th>
+<th class="tg-0lax">On success, it should return a pointer to the memory block for the new <code>DB_T</code> object.</th>
+</tr>
+<tr>
+<td class="tg-0lax">If the function fails to allocate the memory, it should return <code>NULL</code>.<br></td>
+</tr>
+</thead>
+</table><br>
+
+<li><code>DestroyCustomerDB</code> should free all memory occupied by the <code>DB_T</code> object and all the underlying objects.</li>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-baqh">Requirements</th>
+<th class="tg-0lax">If the given pointer to the <code>DB_T</code> object is <code>NULL</code>, it should do nothing.</th>
+</tr>
+</thead>
+</table><br>
+
+<li><code>RegisterCustomer</code> registers a new item, that is, a new
+user whose ID is <code>id</code>, name is <code>name</code>, and
+purchase amount is <code>purchase</code> to the <code>DB_T</code>
+object <code>d</code>.
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-baqh">Objective</th>
+<th class="tg-0lax"> <li>This function should store a new user item with customer information with <code>d</code>.</li></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-baqh" rowspan="2">Return value</td>
+<td class="tg-0lax">
+On success, it should return 0. <br>
+Otherwise (e.g., on failure), it should return -1.</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+1) If any of <code>d</code>, <code>id</code>, or <code>name</code> is <code>NULL</code>, it is a failure.<br>
+2) If <code>purchase</code> is zero or a negative number, it is a failure.<br>
+3) If an item with the same id or with the same name already exists, it is a failure.<br>
+More about rule3: You should not modify the existing item in this case, and should not leak memory for the new item. A good strategy is to check if such an item already exists, and allocate the new item only if it does not exist. <br>
+</td>
+</tr>
+<tr>
+<td class="tg-baqh">Requirements</td>
+<td class="tg-0lax">The new item should <b>own</b> the id and name strings by copying them to new buffers. Consider using <code>strdup()</code>. If you use <code>strdup()</code>, please add <code>-D_GNU_SOURCE</code> after <code>gcc209</code>. (e.g., <code>$ gcc209 -D_GNU_SOURCE -o testclient testclient.c</code>)</td>
+</tr>
+</tbody>
+</table><br>
+
+</li><li><code>UnregisterCustomerByID</code> unregisters a user whose ID is <code>id</code> from the <code>DB_T</code> object, <code>d</code>.</li>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-baqh" rowspan="2">Return value</th>
+<th class="tg-0lax">
+On success, it should return 0.<br>
+Otherwise, it should return -1.
+</th>
+</tr>
+<tr>
+<td class="tg-0lax">
+1) If <code>d</code> or <code>id</code> is <code>NULL</code>, it is a failure. <br>
+2) If no such item exists, it is a failure.</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-baqh">Requirements</td>
+<td class="tg-0lax">Make sure that you free all the memory allocated for the item being unregistered.</td>
+</tr>
+</tbody>
+</table><br>
+
+<li><code>UnregisterCustomerByName</code> unregisters a user whose name is <code>name</code> from the <code>DB_T</code> object, <code>d</code>.</li>
+<table class="tg">
+<thread>
+<tr>
+<th class="tg-baqh" rowspan="2">Return value</th>
+<th class="tg-0lax">
+On success, it should return 0.<br>
+Otherwise, it should return -1.
+</th>
+</tr>
+<tr>
+<td class="tg-0lax">
+1) If <code>d</code> or <code>name</code> is <code>NULL</code>, it is a failure. <br>
+2) If no such item exists, it is a failure.</td>
+</tr>
+</thread>
+<tbody>
+<tr>
+<td class="tg-baqh">Requirements</td>
+<td class="tg-0lax">Make sure that you free all the memory allocated for the item being unregistered.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="tg-baqh">Caution</td>
+<td class="tg-0lax">It is identical to <code>UnregisterCustomerByID</code> except that it matches <code>name</code> instead of <code>id</code>.</td>
+</tr>
+</tbody>
+</table><br>
+
+<li><code>GetPurchaseByID</code> searches for the purchase amount of the customer whose ID is <code>id</code> from a <code>DB_T</code> object <code>d</code>.</li>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-baqh" rowspan="2">Return value</th>
+<th class="tg-0lax">
+On success, it should return the purchase amount.<br>
+Otherwise, it should return -1
+</th>
+</tr>
+<tr>
+<td class="tg-0lax">
+1) If <code>d</code> or <code>id</code> is <code>NULL</code>, it is a failure. <br>
+2) If there is no customer whose ID matches the given one, it is a failure.</td>
+</tr>
+</thead>
+</table><br>
+
+<li><code>GetPurchaseByName</code> searches for the purchase amount of the customer whose name is <code>name</code> from a <code>DB_T</code> object <code>d</code>.</li>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-baqh">Objective</th>
+<th class="tg-0lax">It is identical to <code>GetPurchaseByID</code> except that it matches <code>name</code> instead of <code>id</code>.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-baqh" rowspan="2">Return value</td>
+<td class="tg-0lax">
+On success, it should return the purchase amount.<br>
+Otherwise, it should return -1</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+1) If <code>d</code> or <code>name</code> is <code>NULL</code>, it is a failure. <br>
+2) If there is no customer whose name matches the given one, it is a failure.
+</td>
+</tr>
+
+</tbody>
+</table><br>
+
+<li><code>GetSumCustomerPurchase</code> calculates the sum of the numbers returned by <code>fp</code> by calling <code>fp</code> for each user item. That is, this function iterates every user item in <code>d</code>, calls <code>fp</code> once for each user item, and returns the sum of the numbers returned by <code>fp</code>. </li>
+<table class="tg">
+<thread>
+<tr>
+<th class="tg-baqh" rowspan="2">Return value</th>
+<th class="tg-0lax">
+On success, <code>GetCustomerPurchase</code> should return the sum of all numbers returned by <code>fp</code> by iterating each user item in <code>d</code>.
+</th>
+</tr>
+<tr>
+<td class="tg-0lax">If <code>d</code> or <code>fp</code> is NULL, it should return -1.</td>
+</tr>
+</thread>
+<tbody>
+<tr>
+<td class="tg-baqh">Requirements</td>
+<td class="tg-0lax">Note that <code>fp</code> is provided by the caller
+of <code>GetSumCustomerPurchase</code>.
+<code>fp</code> is a function
+pointer that takes user's id, name, and purchase as parameters,
+evaluates a specific condition on it, and returns a non-negative
+number.
+For example, the following code snippet shows the example of
+the function pointed by <code>fp</code>, which returns the half of the
+purchase amount of the user whose name contains with "Gorilla".</td>
+</tr>
+</tbody>
+</table>
+
+<div class="ui message">
+<pre>int GetHalfAmountOfUserWhoseNameContainsGorilla(const char *id, const char *name, const int purchase) {
+  if (strstr(name, "Gorilla") != NULL)
+    return (purchase/2);
+  return 0;
+}
+...
+
+// call of GetSumCustomerPurchase() with the above function
+int value = GetSumCustomerPurchase(d, GetHalfAmountOfUserWhoseNameContainsGorilla);
+printf("Half the purchase amount of the users whose name contains Gorilla is %d\n", value);
+</pre>
+</div>
+
+</ul>
+</ul>
+
+<h2 class="ui dividing header">[Task 1] The <code>customer_manager</code> Array Implementation</h2>
+
+<p>The goal of the first task is to implement
+the <core>customer_manager API using a dynamically resizable
+array. Array is the simplest data structure that works well for a
+small number of user items.
+
+</core></p><p>Your first <code>customer_manager</code> implementation should be as follows:</p>
+
+<ul>
+<li>Follow the function prototype described in <a href="./resource/customer_manager.h"><code>customer_manager.h</code></a>.</li>
+
+<li>Write your code in a file named <code>customer_manager1.c</code> (<a href="./resource/customer_manager1.c"><code>skeleton code</code></a>).
+
+</li>
+<!--li>Use the <code>Array_T</code> data structure to manage the customer information.</li-->
+
+<li>Avoid any memory leaks. Your <code>customer_manager</code>
+implementation should use a dynamically-allocated memory (i.e.,
+in <code>CreateCustomerDB()</code>
+and <code>DestroyCustomerDB()</code>). It should make sure to free all
+dynamically-allocated memory when the memory is no longer needed.</li>
+
+<li> Whenever is possible, validate invariants by calling
+the <code>assert</code> macro. Determine which invariant should be
+maintained is a part of your task. </li>
+
+</ul>
+<b>Implementation tips:</b>
+
+<ul>
+<li> Define the structure for a user item, and allocate an array of
+the user item structure when <code>CreateCustomerDB</code> is
+called. You may start with the initial array size as <code>UNIT_ARRAY_SIZE</code>. </li>
+
+<li> A reasonable user item structure, a DB structure,
+and <code>CreteCustomerDB</code> is as follows. You can use the
+following code or define your own structure differently.
+<div class="ui message">
+<pre>#define UNIT_ARRAY_SIZE 1024
+
+struct UserInfo {
+  char *name;     // user name
+  char *id;       // user ID
+  int purchase;   // purchase amount
+};
+
+struct DB {
+  struct UserInfo *pArray;   // pointer to the array
+  int curArrSize;            // current array size (max # of elements)
+  int numItems;              // # of stored items,
+  // needed to determine when the array should be expanded
+
+  // add more records below if needed
+  ...
+};
+
+...
+DB_T CreateCustomerDB(void)
+{
+  DB_T d;
+
+  d = (DB_T) calloc(1, sizeof(struct DB));
+  if (d == NULL) {
+    fprintf(stderr, "Can't allocate a memory for DB_T\n");
+    return NULL;
+  }
+  d-&gt;curArrSize = UNIT_ARRAY_SIZE; // start with 1024 elements
+  d-&gt;pArray = (struct UserInfo *)calloc(d-&gt;curArrSize, sizeof(struct UserInfo));
+  if (d-&gt;pArray == NULL) {
+    fprintf(stderr, "Can't allocate a memory for array of size %d\n", d-&gt;curArrSize);
+    free(d);
+    return NULL;
+  }
+  return d;
+}
+</pre></div>
+
+</li><li> Using <code>calloc()</code> to allocate the array is often helpful
+since it initializes all elements (and their fields)
+to <code>0</code>.
+
+</li><li> For <code>RegisterCustomer</code>, find an empty element in the
+array, and store the new user data in it. Make sure that you copy id
+and name strings instead of only their pointers.  If there is no empty
+element, expand the array by calling <code>realloc()</code>. The
+increment amount should be <code>UNIT_ARRAY_SIZE</code> elements each time you expand.
+</li>
+
+<li> In <code>UnregisterCustomerByID</code>
+or <code>UnregisterCustomerByName</code>, you search for the matching
+item, and deallocate the name and id. Optionally, you can set the name
+to <code>NULL</code>.  This way, you can easily know which element is
+empty by checking each element's <code>name</code>
+with <code>NULL</code>. </li>
+
+<li> For <code>GetSumCustomerPurchase</code>, scan the array from
+index 0 till the max index, and call <code>fp</code> for each <b>valid</b>
+element. </li>
+
+<li> Feel free to deviate from the above implementation tips if you
+have your own idea to make the code run faster or more
+efficiently. </li>
+
+</ul>
+<div class="ui message warning">
+You must implement dynamically resizable array. You will not get a full credit if you do not implement array expansion.
+</div>
+<!--p>Before you start this task, please go through the array implementation code and understand how it works. If you understand how the code implements dynamic memory allocation (using <code>malloc</code> and <code>free</code>), it would be helpful for Task 3. </p-->
+
+
+<!--h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Linked List Implementation</h2>
+
+<p> Unfortunately, using an array is slow when you deal with a large
+number of user items. Frequent registration and unregistration of a
+user item creates many holes (empty elements) scattered across the
+array, which, in turn, makes these operations slow. Adding, deleting,
+and searching of a user item would eventually depend on linear search
+(unless you take extra measures to manage the holes separately).
+We improve the performance and memory usage efficiency of <code>customer_manager</code>
+operations with a linked list in this task. </p>
+
+<p>
+Your linked list-based <code>customer_manager</code> implementation
+should:</p>
+<ul>
+<li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
+<li>Reside in a file named <code>customer_manager2.c</code>. (You can copy <code>customer_manager1.c</code> and change your implementation into linked list.)</li>
+<li>Avoid any memory leaks. For each call of <code>malloc</code>
+or <code>calloc</code> in any object, eventually there should be
+exactly one call of <code>free</code>.</li>
+<li>Only implementing singly linked list would be fine. (You don't have to implement a doubly linked list.)</li>
+</ul>
+
+<b>Implementation tips:</b>
+
+<ul>
+<li> Reuse the user item data structure that you defined in task 1,
+but add proper fields to keep track of the next node in a linked
+list.</li>
+
+<li>Store the head of the linked list at your DB structure. </li>
+
+<li> Unlike the array-based implementation, each new registration
+would require memory allocation of a user item structure. Please
+review the code in Lecture 10 since your implementation could be
+similar to it.
+</li>
+
+</ul>
+
+The following figure represents an example of linked list-based
+<code>customer_manager</code> implementation.
+<ul>
+<li>Your DB structure must store a pointer to the first item of the linked list.</li>
+<li>Each user item should be allocated dynamically.</li>
+<li>Each user item must link to the next item of the linked list.</li>
+</ul>
+<img alt="hash function overview" class="ui centered image" src="img/overview_ll.png" style="max-width: 740px"><br-->
+
+<h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Hash Table Implementation</h2>
+<p> Unfortunately, using an array is slow when you deal with a large number of user items. Frequent reqistration and unregisteration of a user item creates many holes (empty elements) scattered across the array, which, in turn, makes these operations slow. Adding, deleting, and searching of a user item would eventually depend on linear search (unless you take extra measures to manage the holes separately). </p>
+<p></p>
+<p>
+We improve the performance of customer_manager operations with a hash table in this task. Actually, you would need two hash tables. One is for looking up a user item with ID as a key, and the other is for a lookup with a name as a key.
+</p>
+
+<p></p>
+
+<p>
+Your hash table-based <code>customer_manager</code> implementation
+should:</p>
+
+<ul>
+<li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
+<li>Reside in a file named <code>customer_manager2.c</code>.</li>
+<li>Avoid any memory leaks. For each call of <code>malloc</code>
+or <code>calloc</code> in any object, eventually there should be
+exactly one call of <code>free</code>.</li>
+<li>Use a reasonable hash function. You are welcome to use this one. Feel
+free to modify it or define your own hash function if you'd like.
+<div class="ui message"> <pre>enum {HASH_MULTIPLIER = 65599};
+...
+static int hash_function(const char *pcKey, int iBucketCount)
+
+/* Return a hash code for pcKey that is between 0 and iBucketCount-1,
+  inclusive. Adapted from the EE209 lecture notes. */
+{
+  int i;
+  unsigned int uiHash = 0U;
+  for (i = 0; pcKey[i] != '\0'; i++)
+    uiHash = uiHash * (unsigned int)HASH_MULTIPLIER
+          + (unsigned int)pcKey[i];
+  return (int)(uiHash % (unsigned int)iBucketCount);
+}
+</pre></div>
+
+</li>
+</ul>
+
+
+
+<b>Implementation tips:</b>
+
+<ul>
+<li> Reuse the user item data structure that you defined in task 1,
+but add proper fields to keep track of the next node in a hash
+table. You would need two such pointers in the new user item data
+structure since you will need to maintain two hash tables. </li>
+
+<li> Unlike the array-based implementation, each new registration
+would require memory allocation of a user item structure. Please
+review the code in Lecture 10 since your implementation could be
+similar to it except that you need to maintain two hash tables here.
+</li>
+
+<li> Avoid gross inefficiencies. In particular, it would be grossly
+inefficient to hash the given key multiple times when a single time
+would suffice.</li>
+
+<li> Start the hash table bucket size as 1024 entries. </li>
+
+<li> (<b>Extra credit: 15%</b>) Implement hash table expansion. When
+the number of nodes (user items) in a hash table reaches 75% of the
+number of buckets, expand the hash table to double the number of
+buckets. That is, your initial number of buckets is 1024. When the
+number of nodes reaches (0.75 * 1024), you expand the number of
+buckets to 2048. Again, when the number of nodes reaches (0.75 *
+2048), the next number of buckets should be 4086. The max number of
+buckets is 1 million (1,048,576 = 2^20), so even if the number of nodes exceeds
+1 million, don't expand the hash table. Note that even after hash
+table expansion, you should be able to retrieve all existing user
+items already registered before hash table expansion. Mark if you
+implement hash table expansion in your <code>readme</code> file.
+</li>
+
+
+
+
+</ul>
+
+The following figure represents an example hash table-based
+<code>customer_manager</code> implementation
+(it uses the <code>hash_function</code> mentioned above).
+<ul>
+<li><code>hash_function("ygmoon", n)</code> and <code>hash_function
+("ch.hwang128", n)</code> are 0.</li>
+<li><code>hash_function("baesangwook89", n)</code> is 4.</li>
+<li><code>hash_function("Changho Hwang", n)</code> and <code>hash_function
+("Sangwook Bae", n)</code> are 3.</li>
+<li><code>hash_function("YoungGyoun Moon", n)</code> is 5.</li>
+</ul>
+<img alt="hash function overview" class="ui centered image" src="overview.png"><br>
+
+<h2 class="ui dividing header">[Task 3] Testing Your Library and Measuring the Performance</h2>
+
+<p>
+We
+provide <a href="resource/client.c"><code>client.c</code></a>
+to test your implementations. It first checks the correctness of your
+library functions and measures the performance over various user
+items.  Note that we may use other programs for grading.
+</p>
+
+
+<p>
+To compile your code, do the following:
+</p>
+<div class="ui message"> <pre>
+$ make
+
+// test your array-based implementation
+$ ./client1
+
+// test your hash table-based implementation
+$ ./client2
+</pre></div>
+
+<p>
+(<b>Extra credit: 15% </b>) We will give an extra credit to the
+students whose implementation is the fastest among all students. Note that only assignments whose basic functionality is implemented
+without problems deserve the extra credit. We may use our own program to measure the performance.</p>
+
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th>Rank #
+</th>
+<th>Extra credit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>2-3</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>4-6</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>7-10</td>
+<td>3%</td>
+</tr>
+</tbody>
+</table>
+
+<!--
+<p>In Assignment 1, you implemented a command-line interface which
+performs the argument validation. After finishing
+the <code>customer_manager</code> API implementation, you can put it
+together with the "Customer Management Program CLI" that is
+implemented in Assignment 1. In this assignment, we recommend you to
+modify your <code>client.c</code> from Assignment 1 to interpret the
+user command input and perform the actions (register a user, find for
+a user, etc..).</p>
+
+<ul>
+<li>In Assignment 1, you were not requested to store any argument. To pass the command-line arguments to the <code>customer_manager</code> API functions, you should modify your <code>client.c</code> to store the parsed options when validating them.</li>
+<li>In Assignment 1, <code>client.c</code> does not perform any action after validating the command-line arguments (may specified as "This will be expanded in assignment 3" in the code). In this assignment, you should develop this part to handle the user commands by using the <code>customer_manager</code> API.</li>
+<li>Your <code>client.c</code> program will eventually handle all the following commands:
+<pre style="margin-left:4em; color:blue">
+Available commands are:
+exit                                       Exit program
+reg    -i ID -n NAME -p PURCHASE           Register a customer to database
+unreg  [-n NAME | -i ID]                   Unregister a customer from database
+find   [-n NAME | -i ID]                   Search for a customer from database and print the purchase amount of the customer
+sum    [-n NAME_KEYWORD | -i ID_KEYWORD]   Calculate the sum of purchase amount of the customers whose name or ID contains the keyword
+
+</pre>
+</li>
+
+<li>Each command should following format to print customer information or error message.
+<ul>
+<li>If you choose to extend <code>client.c</code> from Assignment 1, it should handle all the argument format validation described in Assignment 1.</li>
+<li>For <code>reg</code> command, the program does not print any message on success. If there exists an already registered customer with the same name or ID, the program should print out an error message <code>"ERROR: A customer with the same name or ID already exists"</code> to stderr. </li>
+<li>For <code>unreg</code> command, the program does not print any message on success. If there is no customer whose name or ID matches the given one, the program should print out an error message <code>"ERROR: No customer found"</code> to stderr.</li>
+<li>For <code>find</code> command, if the customer is found, the program should print the customer information in a format of <code>"PURCHASED: $%d"</code> to stdout. If there is no customer whose name or ID matches the given one, the program should print out an error message <code>"ERROR: No customer found"</code> to stderr.</li>
+<li>For <code>sum</code> command, it finds for all the customers whose name contains <code>NAME_KEYWORD</code> or ID contains <code>ID_KEYWORD</code>, and prints the sum of the purchase amount of the customers in a format of <code>"TOTAL: $%d"</code>.
+</ul>
+<br>
+<li>The table below shows some real examples of using the commands. In this example, we assume that the commands are entered to the program consecutively.</li>
+<table style="border-collapse: collapse;" border="3">
+<tbody>
+<tr>
+<td><strong>Standard Input Stream</strong></td>
+<td><strong>Standard Output Stream</strong></td>
+<td><strong>Standard Error Stream</strong></td>
+</tr>
+
+<tr>
+<td><code>reg -i ch.hwang128 -n 'Changho Hwang' -p 123</code></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>reg -n 'Sangwook Bae' -p 432 -i baesangwook89</code></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>reg -n 'Sangwook Bae' -i bsw89 -p 5049</code></td>
+<td></td>
+<td><code>ERROR: A customer with the same name or ID already exists</code></td>
+</tr>
+
+<tr>
+<td><code>reg -n 'Chaehyun Hwang' -i ch.hwang128 -p 2432</code></td>
+</td><td>
+<td><code>ERROR: A customer with the same name or ID already exists</code></td>
+</tr>
+
+<tr>
+<td><code>find -n 'Changho Hwang'</code></td>
+<td><code>PURCHASED: $123
+</code></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>sum -n 'an'</code></td>
+<td><code>TOTAL: $555
+</code></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>sum -n 'smith'</code></td>
+<td><code>TOTAL: $0
+</code></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>unreg -n 'Changho Hwang'</code></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>find -n 'Changho Hwang'</code></td>
+<td></td>
+<td><code>ERROR: No customer found</code></td>
+</tr>
+
+<tr>
+<td><code>unreg -i ch.hwang128</code></td>
+<td></td>
+<td><code>ERROR: No customer found</code></td>
+</tr>
+</tbody>
+</table>
+</ul>
+-->
+
+<h2 class="ui dividing header">Logistics</h2>
+
+<p>Develop in your own environment using <code>emacs</code> to create
+source code and <code>gdb</code> to debug. Make sure to compile
+with <code>gcc209</code> and test your code on lab machine before
+submission.</p>
+
+<p>Please follow the steps through Task 1 to Task 3 to complete
+the <code>customer_manager</code> API, and test your libraries.</p>
+
+We give two opportunities for getting an extra credit (each 15%).
+<ul>
+<li> (Extra credit 15%): Implement hash table expansion. </li>
+<li> (Extra credit 15%): Make your implementation the fastest among all submissions.
+</li></ul>
+
+<!--p>The following figure represents the dependency graph for Assignment 3 codes. For example, a notation "A -> B" means that A is used by B. We provide the files in orange text, and you should develop the files in black text. </p>
+
+<img src="dependency.png"-->
+
+<p>Create a <code>readme</code> text file that contains:</p>
+<ul>
+<li>Your name.</li>
+<li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policy" web page.</li>
+<li><strong>Compare the implementation of <code>customer_manager</code> using array and the one using hash table
+respectively. Please try to provide reasonable explanation for the pros and cons of each implementaion. </strong></li>
+<li> Whether you implemented hash table expansion or not. If you
+implemented it, state which functions implement it. </li>
+<li>(Optionally) An indication of how much time you spent doing the assignment.</li>
+<li>(Optionally) Your assessment of the assignment.</li>
+<li>(Optionally) Any information that will help us to grade your work in the most favorable light. In particular you should describe all known bugs.</li>
+</ul>
+
+
+<h2 class="ui dividing header">Submission</h2>
+
+<p>
+Use KLMS submission link</a> to submit your assignments.  Your submission should
+be one gzipped tar file whose name is
+
+<code>YourStudentID_assign3.tar.gz</code>
+
+</p><p>
+For example, if your student ID is 20221234,
+please name the file as
+<code>20221234_assign3.tar.gz</code>
+
+
+</p>
+<p>
+Create a local directory named '<code>YourStudentID_assign3</code>' and place all your files in it. Then, <code>tar</code> your submission file.
+Please refer <a href="../assignment1/wordcounting.html#submission">here</a> for how to archive your assignment.
+
+<p>Your submission need to include the following files:</p>
+<ul>
+<li>(Task 1) <code>customer_manager1.c</code> </li>
+<li>(Task 2) <code>customer_manager2.c</code> </li>
+<li>(Task 3) <code>no file is needed.</code> </li>
+<li><code>readme</code> text file</li>
+<li> <a href="../EthicsOath.docx">Observance of Ethics</a>. Sign on the document, save it into a PDF file, and submit it. </li>
+</ul>
+
+<p>Your submission file should look like this: </p>
+<div class="ui segment">
+<div class="ui list">
+<div class="item">
+<i class="archive icon"></i>
+<div class="content">
+20221234_assign3.tar.gz
+<!--                    <div class="description">Source files for project</div>>
+<div class="list">
+<div class="item">
+<i class="folder icon"></i>
+<div class="content">
+20221234_assign3-->
+<div class="list">
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+customer_manager1.c
+</div>
+</div>
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+customer_manager2.c
+</div>
+</div>
+<!--div class="item">
+<i class="file icon"></i>
+<div class="content">
+customer_manager3.c
+</div>
+</div-->
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+readme
+</div>
+</div>
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+EthicsOath.pdf
+</div>
+</div>
+</div>
+<!--/div>
+</div>
+</div-->
+</div>
+</div>
+</div>
+
+</div>
+
+NOTE: Please use our <code>Makefile</code> to make your submission file.
+<div class="ui message"> <pre>
+// edit STUDENT_ID with your student id
+$ make submit
+$ ls 20221234_assign3.tar.gz
+20221234_assign3.tar.gz
+</pre></div>
+
+<h2 class="ui dividing header">Grading</h2>
+<div class="ui message error">
+If your code cannot be compiled at <code>eelab5</code> with <code>gcc209</code>, <b>we cannot give you any points (0 point)</b>. Please double check before you submit.
+</div>
+
+<p>We will grade your work on quality from the user's point of view and from the programmer's point of view. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages.</p>
+
+<p>From the user's point of view, your module has quality if it behaves as it should.</p>
+
+<p>In part, style is defined by the rules given in <em>The Practice of Programming</em> (Kernighan and Pike), as summarized by the <a href="../../style.pdf">Rules of Programming Style</a> document. These additional rules apply:</p>
+
+<p><strong>Names</strong>: You should use a clear and consistent style for variable and function names. One example of such a style is to prefix each variable name with characters that indicate its type. For example, the prefix <code>c</code> might indicate that the variable is of type <code>char</code>, <code>i</code> might indicate <code>int</code>, <code>pc</code> might mean <code>char*</code>, <code>ui</code> might mean <code>unsigned int</code>, etc. But it is fine to use another style -- a style which does not include the type of a variable in its name -- as long as the result is a readable program.</p>
+
+<p><strong>Line lengths</strong>: Limit line lengths in your source code to 72 characters. Doing so allows us to print your work in two columns, thus saving paper.</p>
+
+<p><strong>Comments</strong>: Each source code file should begin with a comment that includes your name, the number of the assignment, and the name of the file.</p>
+
+<p><strong>Comments</strong>: Each function should begin with a comment that describes what the function does from the caller's point of view. The function comment should:</p>
+
+<ul>
+<li>Explicitly refer to the function's parameters (by name) and the function's return value.</li>
+
+<li>State what, if anything, the function reads from standard input or any other stream, and what, if anything, the function writes to standard output, standard error, or any other stream.</li>
+
+<li>State which global variables the function uses or affects.</li>
+
+<!-- <li>Appear in both the interface (.h) file for the sake of the <em>clients</em> of the function and the implementation (.c) file for the sake of the <em>maintainers</em> of the function.</li> -->
+</ul>
+
+<p><strong>Comments</strong>: Each structure type definition and each structure field definition should have a comment that describes it. Comments should be written in <strong>English</strong>.</p>
+<div class="ui message warning">
+Please note that you might not get a full credit even if you pass the test with your <code>testclient</code>. TAs might use another <code>testclient</code> to test functionality and robustness of your implementation.
+</div>
+
+<br>
+
+
+<script src="../../vendor/moment.min.js"></script>
+<script src="../../vendor/highlight.pack.js"></script>
+<script src="../../vendor/ee209_assignment.js"></script>
+<script>showTimer('2022-04-29T23:55:00+0900');</script>
+</body>
+</html>

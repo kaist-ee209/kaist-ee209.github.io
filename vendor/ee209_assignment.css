@@ -1,0 +1,123 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+pre, code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace!important;
+}
+@media only screen and (max-width: 767px) {
+    div > pre, div > code {
+        font-size: 14px;
+    }
+}
+
+.ui.container{
+    margin-top: 2em !important;
+    margin-bottom: 4em !important;
+}
+.scroll-x-container {
+    overflow-x: auto; width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.6em;
+
+}
+
+.ui.segment.message-like-padding {
+    padding: 1em 1.5em;
+}
+
+.ui.message {
+    overflow-x: auto;
+}
+
+.ui.message pre {
+    margin-right: 1em;
+}
+
+tr > td > pre {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.hidden.menu {
+    display: none;
+}
+
+
+.top.fixed.menu.custom {
+    height: 60px;
+}
+
+.top.fixed.menu.custom a {
+    color: #0f0f10;
+    margin-top: -10px;
+    margin-left: 10px;
+    height: 25px;
+    overflow: hidden;
+}
+
+.top.fixed.menu.custom a.go-prev {
+    margin-right: 1em;
+}
+
+h2 > a:before , h3 > a:before {
+    content: " ";
+    margin-top: -120px;
+    height: 120px;
+}
+
+@media print {
+    .fixed.top.menu {
+        opacity: 0 !important;
+    }
+
+    .fixed.top.menu > .ui.container {
+        opacity: 0 !important;
+    }
+    div.segment, div.message, div.scroll-x-container{
+        page-break-inside: avoid;
+    }
+
+    div, p, li {
+        font-size: 12px;
+    }
+
+
+    h1 {
+        font-size: 20px !important;
+    }
+    h2 {
+        font-size: 15px !important;
+    }
+    h3 {
+        font-size: 14px !important;
+    }
+
+    h4, h5, h6 {
+        font-size: 13px !important;
+    }
+
+    pre, code {
+        font-size: 12px !important;
+    }
+
+    div > pre, div > code {
+        font-size: 10px !important;
+    }
+    table.ui.celled.table.unstackable {
+        font-size: 10px !important;
+    }
+    thead {
+        display: table-row-group
+    }
+
+    #timer {
+        display: none;
+    }
+
+}
