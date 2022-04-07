@@ -1,7 +1,7 @@
 title: EE209 Programming Structures for Electrical Engineering
 
 url: https://computer.kaist.ac.kr
-baseurl: /EE209
+baseurl: /
 
 plugins:
   - jekyll-seo-tag
@@ -25,3 +25,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - minima-reboot.gemspec
+  - vendor
