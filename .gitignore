@@ -2,3 +2,10 @@
 Gemfile.lock
 _site/
 .sass-cache
+vendor/.bundle
+.bundle
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+.ruby-version
+.tweet-cache
