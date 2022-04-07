@@ -25,4 +25,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - minima-reboot.gemspec
-  - vendor
+  - vendor/bundle
