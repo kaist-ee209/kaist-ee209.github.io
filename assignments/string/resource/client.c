@@ -18,9 +18,6 @@
   (a) ? printf("Correct!\n") : printf("Wrong!\n")
 
 
-
-
-
 /*------------------------------------------------------------------*/
 void
 TestStrCopy()
@@ -345,7 +342,7 @@ TestStrToLong()
   printf("Test5:\n");
   res1 = StrToLong(str5, &end1, 10);
   res2 = strtol(str5, &end2, 10);
-  PRINT_RESULT(res1 == res2);
+  PRINT_RESULT((res1 == res2) && (end1 == end2));
   printf("Your      Answer: %ld, endptr char: %c (%p)\n", res1, *end1, end1);
   printf("String.h  Answer: %ld, endptr char: %c (%p)\n", res2, *end2, end2);
 
@@ -353,7 +350,7 @@ TestStrToLong()
   printf("Test6:\n");
   res1 = StrToLong(str6, &end1, 10);
   res2 = strtol(str6, &end2, 10);
-  PRINT_RESULT(res1 == res2);
+  PRINT_RESULT((res1 == res2) && (end1 == end2));
   printf("Your      Answer: %ld, endptr char: %c (%p)\n", res1, *end1, end1);
   printf("String.h  Answer: %ld, endptr char: %c (%p)\n", res2, *end2, end2);
 
@@ -450,8 +447,6 @@ TestStrToLower()
 
 
 }
-
-
 
 
 /*------------------------------------------------------------------*/
