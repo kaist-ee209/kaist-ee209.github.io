@@ -478,7 +478,7 @@ You must implement dynamically resizable array. You will not get a full credit i
 
 <p> 
 <!-- Unfortunately, using an array is slow when you deal with a large number of user items.  -->
-When it comes to (un)registering of an user item, our <code>customer_manager</code> should check whether an item with the same id or with the same name already exists, 
+When it comes to (un)registering of a user item, our <code>customer_manager</code> should check whether an item with the same id or with the same name already exists, 
 by iterating all the elements in an array, which, in turn, makes the operations inefficient. </p>
 
 <p>
@@ -497,11 +497,12 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
 <ul>
 <li>Fill out the ___BLANK___ in <a href="./resource/countable_bloomfilter.c"><code>countable_bloomfilter.c</code></a> and complete the Counting Bloom filter implementation. 
 <li>Check your implementation by running the example program (<a href="./resource/example.c"><code>example.c</code></a>).</li>
-<li>The size of a Bloom filter and the number of hash functions are pre-defined in <a href="./resource/countable_bloomfilter.h"><code>countable_bloomfilter.h</code></a>. </li>
+<li>The size of a Bloom filter and the number of hash functions are pre-defined in <a href="./resource/countable_bloomfilter.h"><code>countable_bloomfilter.h</code></a>. 
+  <b>Do not change these numbers.</b></li>
 <li>Copy <code>customer_manager1.c</code> to <code>customer_manager1_b.c</code> and add your Bloom filter API library by including <code>countable_bloomfilter.h</code>.</li>
 <li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
 <li>Add two Bloom filter structures to DB structure that handles user name set and user id set respectively.</li>
-<li>Create (Destory) Bloom filter when you create (destroy) customer DB.</li>
+<li>Create (destroy) Bloom filter when you create (destroy) customer DB.</li>
 <div class="ui message">
   <pre>
   #include "customer_manager.h"
@@ -556,10 +557,10 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
 <b>Implementation tips:</b>
 <ul>
 <li>To guarantee that your Counting Bloom filter never returns false negatives, you should only add (remove) an element to (from) the Bloom filter 
-  when user item is actually registered (unregistered) from your customer DB. 
-<li>To avoid any mistakes, validate your Bloom filter to make sure that it doesnot provide false negatives. Use the <code>assert</code> macro.</li>
+  when the user item is actually registered (unregistered) from your customer DB. 
+<li>To avoid any mistakes, validate your Bloom filter to make sure that it does not provide false negatives. Use the <code>assert</code> macro.</li>
 <li>Your Task 1-2 implementation of <code>RegisterCustomerByID()</code> will perform faster than that of Task 1-1 to some extent, 
-  but will perform similarly as a number of item increases far beyond the Bloom filter size. Refer to <a href="#performance-preview">[Task 3]</a>.</li>
+  but will perform similarly as the number of item increases far beyond the Bloom filter size. Refer to <a href="#performance-preview">[Task 3]</a>.</li>
 </ul>
 
 <!-- The following figure represents an example of linked list-based
@@ -684,6 +685,9 @@ $ make
 
 // test your array-based implementation
 $ ./client1
+
+// test your array-based with bloom filter implementation
+$ ./client1_b
 
 // test your hash table-based implementation
 $ ./client2
@@ -895,7 +899,7 @@ We give two opportunities for getting an extra credit (each 15%).
 <ul>
 <li>Your name.</li>
 <li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policy" web page.</li>
-<li><strong>Compare the implementation of <code>customer_manager</code> using array, using array with Bloom filter, and the one using hash table
+<li><strong>Compare the implementation of <code>customer_manager</code> using array, the one with Bloom filter, and the one using hash table
 respectively. Please try to provide reasonable explanation for the pros and cons of each implementaion. </strong></li>
 <li> Whether you implemented hash table expansion or not. If you
 implemented it, state which functions implement it. </li>
