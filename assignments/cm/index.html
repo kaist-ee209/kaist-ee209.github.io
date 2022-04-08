@@ -537,7 +537,7 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
   }
   </pre></div>
 
-<li>Improve <code>SearchCustomerByID()</code> and <code>SearchCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li>
+<li>Improve <code>GetCustomerByID()</code> and <code>GetCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li>
 <li>Add user element to Bloom filters of both name and id when <code>RegisterCustomer()</code> is called.</li>
 <li>If your Bloom filter has reached a maximum count number (<code>UINT32_MAX</code>) of an input item, your <code>RegisterCustomer()</code> must return failure (-1). Check this with <code>bloomfilter_check()</code> as follows.</li>
 <div class="ui message">
