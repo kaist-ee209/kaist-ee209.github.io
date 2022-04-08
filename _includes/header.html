@@ -11,6 +11,7 @@
         </label>
 
         <div id="nav-menu" class="d-none d-md-block">
+          <a class="text-dark ml-3 ml-md-0 p-2 d-block d-md-inline-block" href="https://computer.kaist.ac.kr/"> KAIST EE Computer Division</a>
           {% for path in page_paths %}
             {% assign my_page = site.pages | where: "path", path | first %}
             {% if my_page.title %}
