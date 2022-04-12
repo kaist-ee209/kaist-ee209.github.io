@@ -593,7 +593,7 @@ should:</p>
 or <code>calloc</code> in any object, eventually there should be
 exactly one call of <code>free</code>.</li>
 <li>Use a reasonable hash function. You are welcome to use this one. Feel
-free to modify it or define your own hash function if you'd like.
+free to modify it or define your own hash function if you'd like.</li>
 <div class="ui message"> <pre>enum {HASH_MULTIPLIER = 65599};
 ...
 static int hash_function(const char *pcKey, int iBucketCount)
@@ -611,6 +611,8 @@ static int hash_function(const char *pcKey, int iBucketCount)
 </pre></div>
 
 </li>
+<li><b>If you want to use the <a href="./resource/murmurhash.c"><code>murmurhash.c</code></a> from Task 1-2, make sure you copy the code into your customer_manager2.c.</b>
+  Unlike Task1-2, the Makefile used for grading won't be linking the two files.</li>
 </ul>
 
 
