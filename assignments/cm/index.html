@@ -498,6 +498,7 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
 <li>Fill in the <code>___BLANK___</code> in <a href="./resource/countable_bloomfilter.c"><code>countable_bloomfilter.c</code></a> and complete the Counting Bloom filter implementation. 
 <li>The size of a Bloom filter and the number of hash functions are pre-defined in <a href="./resource/countable_bloomfilter.h"><code>countable_bloomfilter.h</code></a>. 
   <b>Do not change these numbers.</b></li>
+<li><b>For the hash function, use the given <a href="./resource/murmurhash.c"><code>murmurhash.c</code></a>. We will use the same <code>murmurhash.c</code> to compile your code for grading.</b></li>  
 <li>Check your implementation by running the example program (<a href="./resource/example.c"><code>example.c</code></a>).</li>
 <li>Copy <code>customer_manager1.c</code> to <code>customer_manager1_b.c</code> and add your Bloom filter API library by including <code>countable_bloomfilter.h</code>.</li>
 <li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
