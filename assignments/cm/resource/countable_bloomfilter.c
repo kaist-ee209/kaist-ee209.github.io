@@ -112,7 +112,7 @@ int bloomfilter_remove (struct BloomFilter *bf, const char *key) {
 }
 
 /**
- * Returns the possible number of keys inside the bloom filter. If not exist, return 0.
+ * Returns the possible number of keys inside the bloom filter. If not exist, return 0. If the Boolm filter can no longer contain the input, return -1.
  */
 int bloomfilter_check (struct BloomFilter *bf, const char *key) {
   assert(bf && bf->arr);
