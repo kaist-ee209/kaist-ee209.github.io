@@ -538,7 +538,10 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
   }
   </pre></div>
 
-<li>Improve <code>GetCustomerByID()</code> and <code>GetCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li>
+<!-- <li>Improve <code>GetCustomerByID()</code> and <code>GetCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li> -->
+<li>Use <code>bloomfilter_check()</code> to improve your  task1-1 APIs 
+  (<code>RegisterCustomer</code>, <code>UnregisterCustomerByID</code>, <code>UnregisterCustomerByName</code>, <code>GetPurchaseByID</code>, <code>GetPurchaseByName</code>) 
+  by quickly returning results for non-existing user items.</li>
 <li>Add user element to Bloom filters of both name and id when <code>RegisterCustomer()</code> is called.</li>
 <li>Your Bloom filter may reach the maximum count number (<code>UINT32_MAX</code>) of an input item, but in this task, you don't have to consider such cases. Refer to the #441 post on our campuswire page.
 <!-- <li>If your Bloom filter has reached the maximum count number (<code>UINT32_MAX</code>) of an input item, your <code>RegisterCustomer()</code> must return failure (-1). 
