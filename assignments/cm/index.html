@@ -540,10 +540,11 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
 
 <li>Improve <code>GetCustomerByID()</code> and <code>GetCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li>
 <li>Add user element to Bloom filters of both name and id when <code>RegisterCustomer()</code> is called.</li>
-<li>If your Bloom filter has reached the maximum count number (<code>UINT32_MAX</code>) of an input item, your <code>RegisterCustomer()</code> must return failure (-1). 
+<li>Your Bloom filter may reach the maximum count number (<code>UINT32_MAX</code>) of an input item, but in this task, you don't have to consider such cases. Refer to the #441 post on our campuswire page.
+<!-- <li>If your Bloom filter has reached the maximum count number (<code>UINT32_MAX</code>) of an input item, your <code>RegisterCustomer()</code> must return failure (-1). 
   In detail, you should check the max count among three Bloom filter slots (since we are using three hashes) of a given input item, and consider the Bloom filter as
-  full if the max count has reached the <code>UINT32_MAX</code>. Check this with <code>bloomfilter_check()</code> as follows. Refer to the #417 post on our campuswire page.</li>
-<div class="ui message">
+  full if the max count has reached the <code>UINT32_MAX</code>. Check this with <code>bloomfilter_check()</code> as follows. Refer to the #417 post on our campuswire page.</li> -->
+<!-- <div class="ui message">
   <pre>
   
   ...
@@ -554,7 +555,8 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
     //bloomfilter_check returns (-1) if the filter can no longer contain the input.
     if (bloomfilter_check(d->bf_id, id) == -1) return (-1);
   }
-  </pre></div>
+  </pre>
+</div> -->
 <li>Remove user element from Bloom filters of both name and id, when <code>UnregisterCustomerByID()</code> or <code>UnregisterCustomerByName()</code> is called.</li>
 </ul>
 
