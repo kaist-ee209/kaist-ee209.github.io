@@ -539,8 +539,8 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
   </pre></div>
 
 <!-- <li>Improve <code>GetCustomerByID()</code> and <code>GetCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li> -->
-<li>Use <code>bloomfilter_check()</code> to improve your  task1-1 APIs 
-  (<code>RegisterCustomer</code>, <code>UnregisterCustomerByID</code>, <code>UnregisterCustomerByName</code>, <code>GetPurchaseByID</code>, <code>GetPurchaseByName</code>) 
+<li>Use <code>bloomfilter_check()</code> to improve your following task1-1 APIs: 
+  <code>RegisterCustomer</code>, <code>UnregisterCustomerByID</code>, <code>UnregisterCustomerByName</code>, <code>GetPurchaseByID</code>, <code>GetPurchaseByName</code>
   by quickly returning results for non-existing user items.</li>
 <li>Add user element to Bloom filters of both name and id when <code>RegisterCustomer()</code> is called.</li>
 <li>Your Bloom filter may reach the maximum count number (<code>UINT32_MAX</code>) of an input item, but in this task, you don't have to consider such cases. Refer to the #441 post on our campuswire page.
@@ -565,6 +565,7 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
 
 <b>Implementation tips:</b>
 <ul>
+<li>To modularize the code, create a searching function (e.g., <code>SearchCustomerByXX</code>) and improve the function. Then use it for every other APIs that require searching an item.</li>
 <li>To guarantee that your Counting Bloom filter never returns false negatives, you should only add (remove) an element to (from) the Bloom filter 
   when the user item is actually registered (unregistered) from your customer DB. 
 <li>To avoid any mistakes, validate your Bloom filter to make sure that it does not provide false negatives. Use the <code>assert</code> macro.</li>
