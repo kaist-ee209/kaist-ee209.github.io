@@ -16,13 +16,20 @@
 <script src="../../vendor/components/visibility.js"></script>
 <script src="../../vendor/components/sidebar.js"></script>
 <script src="../../vendor/components/transition.js"></script>
+<style>
+  .table ul {
+    padding-left: 1.5em;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+</style>
 </head>
 <body>
 
 <div class="ui top fixed hidden menu custom">
 <div class="ui container">
 <a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
-<a class=""><h3 class="">Assignment 4: Assembly Language Programming (tentative to change)</h3></a>
+<a class=""><h3 class="">Assignment 4: Assembly Language Programming (x86-64) </h3></a>
 </div>
 </div>
 
@@ -30,7 +37,7 @@
 <div class="ui center aligned">
 <h1 class="ui center aligned header">KAIST<br> EE 209: Programming Structures for EE</h1>
 
-<h2 class="ui center aligned header">Assignment 4: Assembly Language Programming <span style="color: red;">(tentative to change)</span></h2>
+<h2 class="ui center aligned header">Assignment 4: Assembly Language Programming (x86-64)</h2>
 
 <h4 class="ui center aligned header" id="timer">&nbsp;</h4>
 </div>
@@ -42,8 +49,7 @@
 architecture, assembly language programming, and testing
 strategies. It will also give you the opportunity to learn more about
 the GNU/Unix programming tools,
-especially <code>bash</code>, <code>emacs</code> (or any other
-editor), <code>gcc209</code>, and <code>gdb</code> for assembly
+especially <code>bash</code>, <code>gcc</code>, and <code>gdb</code> for assembly
 language programs.
 </p>
 
@@ -162,11 +168,11 @@ fed as input. Moreover we will test <code>dc</code> by passing only 1
 operand/operator per line (meaning each operand/operator will be followed
 by a newline character). -->
 
-<p> You might want to use <code>esp</code> and <code>ebp</code>
-registers to implment your stack for computation in your code.
+<p> You might want to use <code>rsp</code> and <code>rbp</code> registers or temporary registers (<code>r12</code>, <code>r13</code>, and <code>r14</code>)
+to implement your stack for computation in your code.
 
-<p> We are providing a <a href="./assignment4.tar.gz">startup file</a> which
-  contains the pseudo-code of dc.s file. As usual, please check <code>README.md</code>.
+<p> We are providing a <a href="./assignment4_220418.tar.gz">startup file</a> which
+  contains the pseudo-code of <code>mydc.s</code> file. As usual, please check <code>README.md</code>.
   Please go through the
 pseudo-code before you begin writing the program. It is acceptable to
 use global (i.e. bss section or data section) variables
@@ -325,12 +331,12 @@ alphanumeric characters.
     You should check whether the stack has at
     least two operands for <code>+, -, *, /, %, ^</code> operations.
     If there are not enough operands, <code>dc</code> should print out
-    '<code>dc: stack empty</code>' to standard error
+    '<code>dc: stack empty</code>' to <b>standard error</b>
     and should not be terminated (i.e., keep continuing).
   </li>
   <li>
   For <code>p, d, r</code> operators, <code>dc</code> should again print '<code>dc:
-stack empty</code>' to standard error if the stack does not contain at least one
+stack empty</code>' to <b>standard error</b> if the stack does not contain at least one
 operand (two for <code>r</code>).
   </li>
   <li>
@@ -340,22 +346,198 @@ operand (two for <code>r</code>).
 
   <li>
     If <code>dc</code> has to divide by 0,
-    it should print '<code>dc: divide by zero</code>' to standard error
+    it should print '<code>dc: divide by zero</code>' to <b>standard error</b>
     and should be terminated.
   </li>
 
   <li>
     If the result of an arithmetic operation is not in the range of a 32-bit
     (i.e., overflow or underflow), <code>dc</code> should print
-    '<code>dc: overflow happens</code>' to standard error and should be terminated.
+    '<code>dc: overflow happens</code>' to <b>standard error</b> and should be terminated.
   </li>
 </ul>
 
+<h2 class="ui dividing header">Detailed Semantics</h2>
+<p>Refer to the table below for semantics of each operator.</p>
+
+  <table class="ui celled table unstackable">
+    <thead>
+    <tr>
+      <th><strong>Operator</strong>
+      </th>
+      <th><strong>Name</strong>
+      </th>
+      <th><strong>Pseudocode</strong>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>+</code></td>
+        <td>Add</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(op1+op2)
+if overflow:
+  fprintf(stderr, "dc: overflow happens\n")
+</pre></td>
+      </tr>
+      <tr>
+        <td><code>-</code></td>
+        <td>Subtract</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(op1-op2)
+if overflow:
+  fprintf(stderr, "dc: overflow happens\n")
+</pre></td>
+      </tr>
+      <tr>
+        <td><code>*</code></td>
+        <td>Multiply</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(op1*op2)
+if overflow:
+  fprintf(stderr, "dc: overflow happens\n")
+</pre></td>
+      </tr>
+      <tr>
+        <td><code>/</code></td>
+        <td>Divide</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty")
+  return
+if stack[len(stack)-1] == 0:
+  fprintf(stderr, "dc: divide by zero")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(op1/op2)</pre>
+          <ul><li>Note that <code>/</code> indicates integer division that
+            <a href="https://en.wikipedia.org/wiki/Rounding#Rounding_toward_zero">rounds toward zero</a>.<br>
+            (i.e. <code>7 / 3 = 2, 7 / -3 = -2, -7 / 3 = -2, -7 / -3 = 2</code>)
+          </li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td><code>%</code></td>
+        <td>Remainder</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+if stack[len(stack)-1] == 0:
+  fprintf(stderr, "dc: divide by zero\n")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(op1%op2)
+if overflow:
+  fprintf(stderr, "dc: overflow happens\n")</pre>
+          <ul>
+            <li>Note that <code>%</code> indicates <b>remainder</b> operation, not modulo.
+              See <a href="https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/">here</a> for the difference.<br>
+              (i.e. <code>7 % 3 = 1, 7 % -3 = 1, -7 % 3 = -1, -7 % -3 = -1</code>) </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><code>^</code></td>
+        <td>Power</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(power(op1,op2))</pre>
+          <ul>
+            <li>You can assume exponent (<code>op2</code>) is always a positive integer.</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><code>q</code></td>
+        <td>Quit</td>
+        <td>
+          <pre>exit(0)</pre>
+        </td>
+      </tr>
+      <tr>
+        <td><code>p</code></td>
+        <td>Peek</td>
+        <td>
+          <pre>if len(stack) == 0:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+printf("%d\n", stack[len(stack)-1])</pre>
+        </td>
+      </tr>
+      <tr>
+        <td><code>f</code></td>
+        <td>Print all</td>
+        <td>
+          <pre>for (i = len(stack)-1; i >= 0; i--):
+  printf("%d\n", stack[i])</pre>
+        </td>
+      </tr>
+      <tr>
+        <td><code>c</code></td>
+        <td>Clear</td>
+        <td>
+          <pre>stack.clear()   <span style="color: green">#len(stack) should be 0 after this line</span></pre>
+        </td>
+      </tr>
+      <tr>
+        <td><code>d</code></td>
+        <td>Duplicate</td>
+        <td>
+          <pre>if len(stack) == 0:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+op1 = stack.pop()
+stack.push(op1)
+stack.push(op1)</pre></td>
+      </tr>
+
+      <tr>
+        <td><code>r</code></td>
+        <td>Reverse</td>
+        <td>
+          <pre>if len(stack) < 2:
+  fprintf(stderr, "dc: stack empty\n")
+  return
+op2 = stack.pop()
+op1 = stack.pop()
+stack.push(op2)
+stack.push(op1)</pre></td>
+      </tr>
+    </tbody>
+
+
+  </table>
 
 
 <h2 class="ui dividing header">Logistics</h2>
 
-<p>Develop on lab machines. Use your favorite editor to create source code. Use <code>gdb</code> to debug.</p>
+<p>Develop on lab machines. Use your favorite editor to create source code. Use <code>gdb</code> to debug. 
+  <b>Your code must be written in x86-64 assembly (64-bit), not IA-32 (32-bit). Please do not use flags such as <code>-m32</code>.
+  <span style="color: red;">You will get zero point if your code does not compile in x86-64.</span></b>
+</p>
 
 <p><strong>Do not use a C compiler to produce any of your assembly language code. Doing so would be considered an instance of academic dishonesty.</strong> Instead, you should write your assembly language code manually.</p>
 
@@ -367,7 +549,7 @@ leaving only the possibility of <em>translation</em> errors.</p>
 
 <p>We also encourage you to use your flattened pseudo-code as comments in your assembly language code. Such comments can clarify your assembly language code substantially.</p>
 
-<p>Your <code>readme</code> file should contain:</p>
+<p>Your <code>README.md</code> file should contain:</p>
 
 <ul>
 <li>Your name and student ID.</li>
@@ -394,7 +576,7 @@ be </b>one gzipped tar file</a> whose name is </p>
 <p>Your submission need to include the following files:</p>
 <ul>
 <li>Your <code>mydc.s</code> file.</li>
-<li>A <code>readme</code> file.</li>
+<li>A <code>README.md</code> file.</li>
 <li> <a href="../EthicsOath.docx">Observance of Ethics</a>. Sign on the document, save it into a PDF file, and submit it. </li>
 <li>(Optionally) Any data file you tested your <code>mydc</code> program with.</li>
 </ul>
@@ -423,7 +605,7 @@ mydc.s
 <div class="item">
 <i class="file icon"></i>
 <div class="content">
-readme
+README.md
 </div>
 </div>
 <div class="item">
@@ -479,8 +661,6 @@ tar zcf 20221234_assign4.tar.gz 20221234_assign4
 <li>Parameter stack offsets, for example: <code>.equ OADDEND1, 8</code>.</li>
 
 <li>Local variable stack offsets, for example: <code>.equ UICARRY, -4</code>.</li>
-
-<li>Stack offsets at which callee-save registers are stored, for example: <code>.equ EBXOFFSET, -4</code>.</li>
 
 </ul>
 
