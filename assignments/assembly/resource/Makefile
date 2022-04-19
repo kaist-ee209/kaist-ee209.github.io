@@ -1,15 +1,19 @@
-STUDENT_ID := $(shell cat STUDENT_ID)
-SUBMIT_DIR := .submit
-SUBMIT_FILES:= mydc.s readme EthicsOath.pdf tests
-SUBMIT := $(STUDENT_ID)_assign4.tar.gz
+CC = gcc
+CCFLAGS = -g -O0 -no-pie
+LDFLAGS = -no-pie
 
-TARGET = dc
+STUDENT_ID = $(shell cat STUDENT_ID)
+SUBMIT_DIR = .submit
+SUBMIT_FILES = mydc.s README.md EthicsOath.pdf
+SUBMIT = $(STUDENT_ID)_assign4.tar.gz
 
-all: $(TARGET)
+all: mydc
 
-dc: mydc.s
-	as --32 -g mydc.s -o dc.o
-	gcc209 -g -m32 dc.o -o dc
+mydc: mydc.o
+	$(CC) $(LDFLAGS) -o $@ $<
+
+mydc.o: mydc.s
+	$(CC) -c $(CCFLAGS) -o $@ $<
 
 submit:
 	mkdir -p $(SUBMIT_DIR)
@@ -17,7 +21,7 @@ submit:
 	cd $(SUBMIT_DIR) && tar -czf ../$(SUBMIT) *
 	rm -rf $(SUBMIT_DIR)
 
-clean:
-	rm -rf $(TARGET) *.o
-
 .PHONY: all clean submit
+
+clean:
+	rm -rf mydc mydc.o
