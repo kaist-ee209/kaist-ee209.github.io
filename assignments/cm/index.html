@@ -215,7 +215,7 @@ More about rule3: You should not modify the existing item in this case, and shou
 </tr>
 <tr>
 <td class="tg-baqh">Requirements</td>
-<td class="tg-0lax">The new item should <b>own</b> the id and name strings by copying them to new buffers. Consider using <code>strdup()</code>. </td> 
+<td class="tg-0lax">The new item should <b>own</b> the id and name strings by copying them to new buffers. Consider using <code>strdup()</code>. If you use <code>strdup()</code>, please add <code>#define _GNU_SOURCE</code> to your code.</td> 
 <!--If you use <code>strdup()</code>, please add <code>-D_GNU_SOURCE</code> after <code>gcc209</code>. (e.g., <code>$ gcc209 -D_GNU_SOURCE -o testclient testclient.c</code>)</td>-->
 </tr>
 </tbody>
