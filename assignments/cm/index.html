@@ -495,7 +495,7 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
   To complete the task, you should:</p>
 
 <ul>
-<li>Fill in the <code>___BLANK___</code> in <a href="./resource/countable_bloomfilter.c"><code>countable_bloomfilter.c</code></a> and complete the Counting Bloom filter implementation. 
+	<li>Fill in the <code>___BLANK___</code> in <a href="./resource/countable_bloomfilter.c"><code>countable_bloomfilter.c</code></a> and complete the Counting Bloom filter implementation. Feel free to make changes to the <code>countable_bloomfilter.c</code> besides the blanks.
 <li>The size of a Bloom filter and the number of hash functions are pre-defined in <a href="./resource/countable_bloomfilter.h"><code>countable_bloomfilter.h</code></a>. 
   <b>Do not change these numbers.</b></li>
 <li><b>For the hash function, use the given <a href="./resource/murmurhash.c"><code>murmurhash.c</code></a>. We will use the same <code>murmurhash.c</code> to compile your code for grading.</b></li>  
@@ -569,6 +569,7 @@ user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloo
 <li>To guarantee that your Counting Bloom filter never returns false negatives, you should only add (remove) an element to (from) the Bloom filter 
   when the user item is actually registered (unregistered) from your customer DB. 
 <li>To avoid any mistakes, validate your Bloom filter to make sure that it does not provide false negatives. Use the <code>assert</code> macro.</li>
+<!--><li>Keep track of the next empty index of your DB when Register functions are called so that you don't have to look for empty spot every single time.</li>-->
 <li>Your Task 1-2 implementation of <code>RegisterCustomerByID()</code> will perform faster than that of Task 1-1 to some extent, 
   but will perform similarly as the number of item increases far beyond the Bloom filter size. Refer to <a href="#performance-preview">[Task 3]</a>.</li>
 <li>The improvement can be minimal depending on the test case. The purpose of this task is to have you experience different types of data structures. You will get full credit if you have successfully integrated the Bloom filter to your Task 1-1, and pass all the test cases in our grading script just like how Task 1-1 is graded. If the performance improvement is minimal it is just fine.</li>
