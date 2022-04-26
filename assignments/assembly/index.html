@@ -397,6 +397,7 @@ op1 = stack.pop()
 stack.push(op1+op2)
 if overflow:
   fprintf(stderr, "dc: overflow happens\n")
+  exit(1)
 </pre></td>
       </tr>
       <tr>
@@ -411,6 +412,7 @@ op1 = stack.pop()
 stack.push(op1-op2)
 if overflow:
   fprintf(stderr, "dc: overflow happens\n")
+  exit(1)
 </pre></td>
       </tr>
       <tr>
@@ -425,6 +427,7 @@ op1 = stack.pop()
 stack.push(op1*op2)
 if overflow:
   fprintf(stderr, "dc: overflow happens\n")
+  exit(1)
 </pre></td>
       </tr>
       <tr>
@@ -434,11 +437,11 @@ if overflow:
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty")
   return
-if stack[len(stack)-1] == 0:
-  fprintf(stderr, "dc: divide by zero")
-  return
 op2 = stack.pop()
 op1 = stack.pop()
+if op2 == 0:
+  fprintf(stderr, "dc: divide by zero\n")
+  exit(1)
 stack.push(op1/op2)</pre>
           <ul><li>Note that <code>/</code> indicates integer division that
             <a href="https://en.wikipedia.org/wiki/Rounding#Rounding_toward_zero">rounds toward zero</a>.<br>
@@ -453,14 +456,15 @@ stack.push(op1/op2)</pre>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
   return
-if stack[len(stack)-1] == 0:
-  fprintf(stderr, "dc: divide by zero\n")
-  return
 op2 = stack.pop()
 op1 = stack.pop()
+if op2 == 0:
+  fprintf(stderr, "dc: divide by zero\n")
+  exit(1)
 stack.push(op1%op2)
 if overflow:
-  fprintf(stderr, "dc: overflow happens\n")</pre>
+  fprintf(stderr, "dc: overflow happens\n")
+  exit(1)</pre>
           <ul>
             <li>Note that <code>%</code> indicates <b>remainder</b> operation, not modulo.
               See <a href="https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/">here</a> for the difference.<br>
