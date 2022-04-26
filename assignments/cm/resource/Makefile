@@ -3,7 +3,7 @@ CFLAGS += -g
 
 STUDENT_ID := $(shell cat STUDENT_ID)
 SUBMIT_DIR := .submit
-SUBMIT_FILES:= customer_manager1.c customer_manager2.c customer_manager1_b.c readme EthicsOath.pdf
+SUBMIT_FILES:= customer_manager1.c customer_manager2.c countable_bloomfilter.c customer_manager1_b.c readme EthicsOath.pdf
 SUBMIT := $(STUDENT_ID)_assign3.tar.gz
 
 TARGET := client1 client2 client1_b example
