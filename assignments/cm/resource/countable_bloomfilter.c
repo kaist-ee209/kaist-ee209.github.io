@@ -36,7 +36,6 @@
  */
 struct BloomFilter* bloomfilter_create (unsigned int size, unsigned num_hash) {
   struct BloomFilter* bf;
-  char *array;
   if(!size) {
     fprintf(stderr, "Size of bloom filter must be larger than 0!\n");
     return NULL;
@@ -45,11 +44,10 @@ struct BloomFilter* bloomfilter_create (unsigned int size, unsigned num_hash) {
   /* Fill in the Blank */
   /* ============================== */
   bf = calloc(1,    ___BLANK___   );
-  array = calloc(1,    ___BLANK___   );
+  bf->arr = calloc(1,    ___BLANK___   );
   assert(bf);
-  assert(array);
+  assert(bf->arr);
  
-  bf->arr = (unsigned int *) (     ___BLANK___    );
   bf->size = size;
   bf->num_hash = num_hash;
   return (     ___BLANK___     );

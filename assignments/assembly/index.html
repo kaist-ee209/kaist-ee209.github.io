@@ -209,8 +209,9 @@ calculates "-4 - 3", prints the top value (<code>p</code>) as below, and quit th
 
 The <code>dc</code> tool also provides additional operations that
 manipulate the input. You are required to implement the following
-operators for this assignment.
+operators for this assignment. 
 
+<p><b>(Updated Apr. 30: You don't have to implement <code>d</code> and <code>r</code> functions .)</b></p>
 <!------------------------------------------------------------------------->
 
 <table class="ui celled table unstackable">
@@ -237,7 +238,7 @@ has pushed in the stack.</td>
 <td>Clears the contents of the stack.</td>
 </tr>
 
-<tr>
+<!-- <tr>
 <td><code>d</code>
 </td>
 <td>Duplicates the top-most entry of the stack and pushes it in the stack.</td>
@@ -247,7 +248,7 @@ has pushed in the stack.</td>
 <td><code>r</code>
 </td>
 <td> Reverses the order of (swaps) the top two values on the stack.</td>
-</tr>
+</tr> -->
 </table>
 <!------------------------------------------------------------------------->
 
@@ -295,7 +296,7 @@ the empty stack. Later when <code>'f'</code> is entered, <code>dc</code>
 prints out all the contents of the stack in LIFO order.
 
 
-<p>The following self-explanatory example shows how one can use <code>'d'</code>
+<!-- <p>The following self-explanatory example shows how one can use <code>'d'</code>
 in <code>dc</code></p>
 <pre style="margin-left:2em;" class="ui message">
 4
@@ -329,7 +330,7 @@ q
 4
 4
 8
-</pre>
+</pre> -->
 
 <h3>Error Handling</h3> <strong>You are required to implement basic error
 handling and ensure that your program does not crash with any given
@@ -519,7 +520,7 @@ printf("%d\n", stack[len(stack)-1])</pre>
           <pre>stack.clear()   <span style="color: green">#len(stack) should be 0 after this line</span></pre>
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td><code>d</code></td>
         <td>Duplicate</td>
         <td>
@@ -529,9 +530,9 @@ printf("%d\n", stack[len(stack)-1])</pre>
 op1 = stack.pop()
 stack.push(op1)
 stack.push(op1)</pre></td>
-      </tr>
+      </tr> -->
 
-      <tr>
+      <!-- <tr>
         <td><code>r</code></td>
         <td>Reverse</td>
         <td>
@@ -542,7 +543,7 @@ op2 = stack.pop()
 op1 = stack.pop()
 stack.push(op2)
 stack.push(op1)</pre></td>
-      </tr>
+      </tr> -->
     </tbody>
 
 
@@ -671,7 +672,7 @@ tar zcf 20221234_assign4.tar.gz 20221234_assign4
 <h2 class="ui dividing header">Grading</h2>
 
 <div class="ui message error">
-  If your submission file does not contain the expected files, or your code cannot be compiled at <code>eelab5</code>, we cannot give you any points. Please double check before you submit.
+  If your submission file does not contain the expected files, or your code cannot be compiled at <code>lemon2</code> or <code>durian3</code>, we cannot give you any points. Please double check before you submit.
 </div>
 
 <p>As always, we will grade your work on quality from the user's and programmer's points of view. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages.</p>
