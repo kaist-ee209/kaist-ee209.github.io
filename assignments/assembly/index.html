@@ -169,7 +169,7 @@ operand/operator per line (meaning each operand/operator will be followed
 by a newline character). -->
 
 <p> You might want to use <code>rsp</code> and <code>rbp</code> registers or temporary registers (<code>r12</code>, <code>r13</code>, and <code>r14</code>)
-to implement your stack for computation in your code. For simplicity, you can assume that the <b>maximum stack size is 64</b> (i.e., your stack should be able to handle at least 64 elements.)
+to implement your stack for computation in your code. For simplicity, you can assume that the <b>maximum number of element in the stack is 64</b> (i.e., your program should be able to handle at least 64 elements.)
 
 <p> We are providing a startup file which
   contains the pseudo-code of <code>mydc.s</code> file. 
@@ -338,8 +338,9 @@ input.</strong> Here are the required error handlings.
 
 <ul>
   <li>
-    Your program should ignore those input values that have mixed
-alphanumeric characters.
+    Your program should ignore trailing characters from the input value.
+    In other words, you can just check the first letter, and regard the input as an operand if it is a number or starting with _.
+    For example, regard <code>123abc</code> as <code>123</code>, and <code>pabc</code> as <code>p</code>.
   </li>
   <li>
     You should check whether the stack has at
