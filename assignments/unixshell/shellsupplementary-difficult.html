@@ -150,7 +150,7 @@ two</pre>
 </td>
 </tr>
 
-<!-- <span class='change'>
+<span class='change'>
 <tr>
 <td>
     <span class='change'>
@@ -191,7 +191,7 @@ two</pre>
 one</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 </span>
 
@@ -204,7 +204,7 @@ one</pre>
 
 
     
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
     <pre>"&#124;"</pre>
@@ -215,7 +215,7 @@ one</pre>
     <pre>&#124; (an ordinary token)</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 </span>
 
@@ -264,12 +264,12 @@ one</pre>
 </tbody>
 </table>
 
-<!-- <p>(Recommended) Your program's lexical analyzer should represent tokens so that the difference between quoted and unquoted special characters is adequately captured. For example, these two commands are very different, and that difference should be captured at the lexical analysis phase:</p>
+<p>(Recommended) Your program's lexical analyzer should represent tokens so that the difference between quoted and unquoted special characters is adequately captured. For example, these two commands are very different, and that difference should be captured at the lexical analysis phase:</p>
 <span class='change'>
 <pre class="ui message">cat file1 &#124; grep str
 cat file1 "&#124;" grep str
 </pre>
-</span> -->
+</span>
 
 
 <h2 class="ui dividing header">Syntactic Analysis</h2>
@@ -305,7 +305,7 @@ cat file1 "&#124;" grep str
 </td>
 </tr>
 
-<!-- 
+
 <tr>
 <td>
     <span class='change'>
@@ -382,7 +382,7 @@ cat file1 "&#124;" grep str
     <pre>Invalid: Missing command name</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 </span>
 
@@ -537,7 +537,7 @@ cat file1 "&#124;" grep str
 </tr>
 
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
     <pre>cat file1 &#124; grep main &gt; result</pre>
@@ -576,7 +576,7 @@ cat file1 "&#124;" grep str
     <pre>Valid</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 <tr>
 <td>
@@ -604,7 +604,7 @@ cat file1 "&#124;" grep str
 </td>
 </tr>
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
         <pre>cat file1 &lt; &#124; grep str</pre>
@@ -615,7 +615,7 @@ cat file1 "&#124;" grep str
         <pre>Invalid: Standard input redirection without file name</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 <tr>
 <td>
@@ -630,7 +630,7 @@ cat file1 "&#124;" grep str
 </td>
 </tr>
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
         <pre>cat file1 &gt; &#124; grep str</pre>
@@ -641,7 +641,7 @@ cat file1 "&#124;" grep str
         <pre>Invalid: Standard output redirection without file name</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 <tr>
 <td>
@@ -670,7 +670,7 @@ cat file1 "&#124;" grep str
 </tr
 >
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
         <pre>cat file1 &#124; cat &lt; file2</pre>
@@ -694,7 +694,7 @@ cat file1 "&#124;" grep str
         <pre>Invalid: Multiple redirection of standard out</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 
 

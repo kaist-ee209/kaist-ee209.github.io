@@ -134,7 +134,7 @@ the <code>exit</code> command. (See also the section below entitled
 <p>Informally, a <em>token</em> should be a word. More formally, a token should consist of a sequence of non-white-space characters that are separated from other tokens by white-space characters. There should be two exceptions:</p>
 
 <ul>
-<li>The special characters '>', '<', <!-- '|', -->and '&' should form separate tokens.</li>
+<li>The special characters '>', '<', '|', and '&' should form separate tokens.</li>
 
 <li>Strings enclosed in double quotes (") or single quotes(') should form part or all of a single token. Special characters inside of strings should not form separate tokens.</li>
 
@@ -147,7 +147,7 @@ the <code>exit</code> command. (See also the section below entitled
 
 <p>A <em>command</em> should be a sequence of tokens, the first of which specifies the command name.</p>
 
-<!-- <p class='change'>The '&#124;' token should indicate that the immediate token after the '&#124;' is another command. Your program should redirect the standard output of the command on the left to the standard input of the command on the right. If there's no following token after '&#124;', your program should print out an appropriate error message. There can be multiple pipe operators in a single command.</p> -->
+<p class='change'>The '&#124;' token should indicate that the immediate token after the '&#124;' is another command. Your program should redirect the standard output of the command on the left to the standard input of the command on the right. If there's no following token after '&#124;', your program should print out an appropriate error message. There can be multiple pipe operators in a single command.</p>
 
 <h2 class="ui dividing header">Execution</h2>
 
@@ -246,7 +246,7 @@ program should print an error message if there is any piped commmand,
 	<li>If the standard output stream is redirected to a file that does not exist, then your program should create it. If the standard output stream is redirected to a file that already exists, then your program should destroy the file's contents and rewrite the file from scratch. Your program should set the permissions of the file to 0600.</li>
 </ul>
 
-<!-- <h2 class="ui dividing header">Extra Credit 2 (extra 10% of the full score of this assignment)</h2>
+<h2 class="ui dividing header">Extra Credit 2 (extra 10% of the full score of this assignment)</h2>
 
 <p> You are going to implement pipe so that you can run command piplelines such as: </p>
 
@@ -303,11 +303,11 @@ When the background process is created, your program should print "<code>[%pid]<
 When the background process is terminated, your program should print "<code>[%pid]</code> Background process is terminated"
 For that, you need to install a signal handler for <code>SIGCHLD</code>.
 </li>
-</ul> -->
+</ul>
 
-<h2 class="ui dividing header">Extra Credit 2 (extra 20% of your earned score including the extra credit) </h2>
+<h2 class="ui dividing header">Extra Credit 4 (extra 20% of your earned score including the extra credit) </h2>
 
-<p> If you do this assignment on your own without a partner, you will receive extra credit which is worth 20% of (your basic score + extra credit 1). Here is an example. If your score is 50 and you got extra credit 1, your earned score is 50 + 10 = 60.  If you worked alone, you will receive 20% x 60 = 12 additional points as extra credit 2. So, your total score will be 72. </p>
+<p> If you do this assignment on your own without a partner, you will receive extra credit which is worth 20% of (your basic score + extra credit 1, 2 and 3). Here is an example. If your score is 50 and you got extra credit 1 (and did not get extra credit 2 and 3), your earned score is 50 + 10 = 60.  If you worked alone, you will receive 20% x 60 = 12 additional points as extra credit 4. So, your total score will be 72. </p>
 
 
 <h2 class="ui dividing header">Logistics</h2>
