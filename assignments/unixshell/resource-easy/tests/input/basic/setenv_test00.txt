@@ -1,0 +1,2 @@
+setenv hw5 unixshell
+printenv hw5
