@@ -186,7 +186,7 @@ If the environment variable does not exist, just ignore.
 
 <p>Note that those built-in commands should neither read from the
 standard input stream nor write to the standard output stream. Your
-program should print an error message if there is any piped commmand,
+program should print an error message if there is any<!--  piped commmand, -->
  file redirection with those built-in commands, or any attempt to run in the background (with &).
 </p>
 
@@ -239,8 +239,8 @@ program should print an error message if there is any piped commmand,
 <p>You are going to implement redirection of standard input and standard output as an extra credit.</p>
 <ul>
 	<li>The special character '&lt;' and '&gt;' should form separate token in lexical analysis.</li>
-	<li>The '&lt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard input to that file. It should be an error to redirect a command's standard input stream more than once. It should also be an error to redirect a command's standard input stream after a pipe token (See Redirection section in supplementary information page).</li>
-	<li>The '&gt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard output to that file. It should be an error to redirect a command's standard output stream more than once. It should also be an error to redirect a command's standard output stream before a pipe token (See Redirection section in supplementary information page).</li>
+	<li>The '&lt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard input to that file. It should be an error to redirect a command's standard input stream more than once. <!-- It should also be an error to redirect a command's standard input stream after a pipe token (See Redirection section in supplementary information page).</li> -->
+	<li>The '&gt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard output to that file. It should be an error to redirect a command's standard output stream more than once. <!-- It should also be an error to redirect a command's standard output stream before a pipe token (See Redirection section in supplementary information page).</li> -->
 
         <li>If the standard input stream is redirected to a file that does not exist, then your program should print an appropriate error message.</li>
 	<li>If the standard output stream is redirected to a file that does not exist, then your program should create it. If the standard output stream is redirected to a file that already exists, then your program should destroy the file's contents and rewrite the file from scratch. Your program should set the permissions of the file to 0600.</li>
