@@ -134,7 +134,7 @@ the <code>exit</code> command. (See also the section below entitled
 <p>Informally, a <em>token</em> should be a word. More formally, a token should consist of a sequence of non-white-space characters that are separated from other tokens by white-space characters. There should be two exceptions:</p>
 
 <ul>
-<li>The special characters '>', '<', <!-- '|', -->and '&' should form separate tokens.</li>
+<li>The special characters '>', and '<' <!-- '|', and '&'-->should form separate tokens.</li>
 
 <li>Strings enclosed in double quotes (") or single quotes(') should form part or all of a single token. Special characters inside of strings should not form separate tokens.</li>
 
@@ -187,7 +187,7 @@ If the environment variable does not exist, just ignore.
 <p>Note that those built-in commands should neither read from the
 standard input stream nor write to the standard output stream. Your
 program should print an error message if there is any<!--  piped commmand, -->
- file redirection with those built-in commands, or any attempt to run in the background (with &).
+ file redirection with those built-in commands.<!--, or any attempt to run in the background (with &).-->
 </p>
 
 <p>If the command is not a built-in command, then your program should consider the command name to be the name of a file that contains code to be executed. Your program should fork a child process and pass the file name, along with its arguments, to the <code>execvp</code> system call. If the attempt to execute the file fails, then your program should print an error message indicating the reason for the failure.</p>
@@ -195,7 +195,7 @@ program should print an error message if there is any<!--  piped commmand, -->
 
 <h2 class="ui dividing header">Process Handling</h2>
 
-<p>All child processes forked by your program should run in the foreground unless you don't support background processes.</p>
+<p>All child processes forked by your program should run in the foreground<!-- unless you don't support background processes.--></p>
 <p>It is required to call wait for every child that has been created.</p>
 
 
