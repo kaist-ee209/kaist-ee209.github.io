@@ -403,11 +403,11 @@ cat file1 "&#124;" grep str
 <p>(Required) Your program should call <code>exit(0)</code>to implement the <code>exit</code> shell built-in command. Or, implement the <code>exit</code> command by returning 0 from the program's <code>main</code> function.</p>
 
 
-<!-- <h2 class="ui dividing header">Process Handling</h2> -->
+<h2 class="ui dividing header">Process Handling</h2>
 
 <!-- <p>(Required) Your program should run any commands that ends with <code>&</code> in the background.</p> -->
 
-<!-- <p>(Required) Your program should call wait for every child that has been created.</p> -->
+<p>(Required) Your program should call wait for every child that has been created.</p>
 
 <!-- <p>(Required) Your program should notify creation and termination of background process to stdout with its pid.</p> -->
 
@@ -426,7 +426,7 @@ cat file1 "&#124;" grep str
 
 <p>(Required) Your program should use the <code>SIG_IGN</code> and <code>SIG_DFL</code> arguments to the <code>signal</code> function, as appropriate.</p>
 
-<p> (Required) Your program should handle the <code>SIGCHLD</code> signal for reaping the 'zombie processes' (i.e., child processes that have finished but are not yet reaped by the parent process) when implementing background processes. You can call <code>wait() or waitpid()</code> to reap the finished child processes.</p>
+<!-- <p> (Required) Your program should handle the <code>SIGCHLD</code> signal for reaping the 'zombie processes' (i.e., child processes that have finished but are not yet reaped by the parent process) when implementing background processes. You can call <code>wait() or waitpid()</code> to reap the finished child processes.</p> -->
 
 <p>(Required) Your program should call the <code>sigprocmask</code> function near the beginning of the <code>main</code> function to make sure that <code>SIGINT</code>, <code>SIGQUIT</code>, and <code>SIGALRM</code> signals are not blocked.</p>
 
