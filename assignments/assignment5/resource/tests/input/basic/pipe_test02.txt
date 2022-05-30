@@ -1,0 +1,1 @@
+echo Hello World | sed s/Hello/Hi/g | sed s/World/Planet/g
