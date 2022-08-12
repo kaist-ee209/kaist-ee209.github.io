@@ -60,13 +60,20 @@ for each key. However, due to the limited length of the buckets and hash
 outputs, two different keys may result in the same index of
 the buckets, which we call <em>collisions</em>. Therefore, the hash table
 requires to address such collisions. In this assignment, we will learn two
-techniques to resolve collisions: <em>separate chaining</em> and <em>linear
+techniques to resolve collisions: <em>separate chaining</em> in our lecture and <em>linear
   probing</em>.
 </p>
 
 <h3>Collision Resolution 1: Separate chaining</h3>
   <p>Separate chaining resolves collisions by maintaining a linked list
     of values in each bucket.
+    When two or more elements are hash to the same location, these elements are
+    represented into a singly-linked list like a chain.
+    As a result, it requires additional memory to resolve collision.
+    In this method, a key is always stored in the bucket that its hash determines.
+    Thus, we call this type of collision resolution methods as <em>closed addressing</em>.
+    In the following, we summarize hash table operation for separate chaining.
+
       <img src="./fig/separate_chaining.svg" width="50%"
       class="ui centered image" style="margin-top:20px"/>
 
@@ -82,10 +89,12 @@ techniques to resolve collisions: <em>separate chaining</em> and <em>linear
 
 <h3>Collision Resolution 2: Linear probing</h3>
   <p>Linear probing resolves collisions by using an alternative bucket.
-    This type of collision resolution is called <em>open addressing</em>.
+    This type of collision resolution is called <em>open addressing</em>
+    because buckets for values can be different even they have same hash.
     According to the method to discover the alternative bucket, the open addressing
     has several variants, such as linear probing, quadratic probing, or double hashing.
     In this assignment, we will focus on linear probing.
+    In the following, we discuss how a hash table with linear probing supports fundemantal operations.
 
     <ul>
       <li><b>Lookup</b>: Find a corresponding bucket using a hash function.  If the
@@ -129,8 +138,8 @@ techniques to resolve collisions: <em>separate chaining</em> and <em>linear
 
       <li><p><b>Resizing</b>: As previously mentioned, you need to  resize the hash
           table to prevent an infinite loop. Typically, you want to resize it
-          if its <em>load factor</em> is greater than a threshold value (e.g.,
-          0.75). Then, you allocate more buckets and copy all
+          if its <em>load factor</em> is greater than a threshold value (0.75).
+          Then, you allocate more buckets (2x) and copy all
           mappings in the old buckets to the new one.
       </p>
       <p> The load factor is defined by (total number of mappings  / the number of buckets).
@@ -157,7 +166,6 @@ techniques to resolve collisions: <em>separate chaining</em> and <em>linear
 <pre style="margin-left:2em;" class="ui message">
 HashTable_T HashTable_new(size_t bucketCount);
 void HashTable_free(HashTable_T ht);
-size_t HashTable_getSize(HashTable_T ht);
 int HashTable_put(HashTable_T ht, const char *key, const void *value);
 void *HashTable_replace(HashTable_T ht, const char *key,
    const void *newValue);
@@ -167,8 +175,6 @@ void *HashTable_remove(HashTable_T ht, const char *key);
 void HashTable_map(HashTable_T ht,
    void (*func)(const char *key, void *value, void *extra),
    const void *extra);
-void HashTable_getBucketCount(HashTable_T ht);
-void HashTable_getBucketSize(HashTable_T ht, size_t n);
 unsigned int HashTable_hash(const char *key);
 </pre>
 
@@ -219,22 +225,6 @@ unsigned int HashTable_hash(const char *key);
     </table><br>
   </li>
 
-
-  <li>
-    <code>HashTable_getSize</code> should return the number of mappings in <code>ht</code>.
-    <table class="ui celled table">
-      <tbody>
-        <tr>
-          <td class="three wide">
-            Requirements
-          </td>
-          <td>
-            This should work in constant time.
-          </td>
-        </tr>
-      </tbody>
-    </table><br>
-  </li>
 
   <li><code>HashTable_put</code> should add a mapping with <code>key</code> and <code>value</code>.
 
@@ -395,67 +385,6 @@ unsigned int HashTable_hash(const char *key);
   </table><br>
   </li>
 
-  <li>
-    <code>HashTable_getBucketCount</code> should return the number of buckets of <code>ht</code>.
-
-    <table class="ui celled table">
-      <tbody>
-        <tr>
-          <td class="three wide" rowspan="1">
-            Requirements
-          </td>
-          <td>
-            This should work in constant time regardless of a bucket count.
-          </td>
-        </tr>
-      </tbody>
-    </table><br>
-  </li>
-
-  <li>
-    <code>HashTable_getBucketSize</code> should return the number of mappings in the <code>n</code>th bucket.
-
-    <table class="ui celled table">
-      <tbody>
-        <tr>
-          <td rowspan="2" class="three wide">
-            Return Value
-          </td>
-          <td>
-            If <code>n</code> is less than the current bucket count, return the number of mappings in the <code>n</code>th bucket.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Otherwise, return 0.
-          </td>
-        </tr>
-      </tbody>
-    </table><br>
-  </li>
-
-  <li><code>HashTable_hash</code> should return a hash result based on <code>key</code>.
-
-    <table class="ui celled table">
-      <tbody>
-        <tr>
-          <td rowspan="2" class="three wide">
-            Requirements
-          </td>
-          <td>
-            Should not implement <code>HashTable_hash</code> in your source code.
-            We will implement it and use it as shown in <a href="src/testclient.c">testclient.c</a>.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            An index for a bucket should be "<code>HashTable_hash(key) % bucketCount</code>".
-          </td>
-        </tr>
-      </tbody>
-    </table><br>
-
-  </li>
 </ul>
 
 
@@ -470,16 +399,6 @@ unsigned int HashTable_hash(const char *key);
     (e.g., <code>LinkedList_put</code>, <code>LinkedList_remove</code> ...)
     and use them for implementing the hash table.
   </li>
-
-  <li>
-    <code>HashTable_getBucketCount</code> should always return the initial <code>bucketCount</code> from <code>HashTable_new</code>
-    (i.e., no dynamically resizing).
-  </li>
-
-  <li><code>HashTable_getBucketSize</code> can return more than one.
-
-  <li>Contains no memory leak. Your HashTable ADT will use dynamically allocated memory. It should explicitly free all dynamically allocated memory when that memory is no longer required; for each call of <code>malloc</code> or <code>calloc</code> in your ADT, eventually there should be exactly one call of <code>free</code>.
-  </li>
 </ul>
 
 
@@ -492,9 +411,6 @@ unsigned int HashTable_hash(const char *key);
 <ul>
   <li>Reside in a file named <code>hash_table_lp.c</code>.</li>
 
-  <li><code>HashTable_getSize</code> and <code>HashTable_getBucketSize</code>
-    should not include mappings with tombstones.</li>
-  <li><code>HashTable_getBucketSize</code> can return only zero or one.
   <li>During <code>HashTable_put</code>,
     if a load factor is greater than 0.75, double your buckets.
     For example, if a bucket count of a hash table is 100,
