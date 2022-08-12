@@ -22,14 +22,14 @@
 <div class="ui top fixed hidden menu custom">
 <div class="ui container">
 <a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
-<a class=""><h3 class="">Assignment 3: Customer Management Table Assignment</h3></a>
+<a class=""><h3 class="">Assignment 3: Customer Management Table Assignment (tentative to change)</h3></a>
 </div>
 </div>
 <div class="ui container">
 <div class="ui center aligned">
 <h1 class="ui center aligned header">KAIST<br> <a style="color:black;" href="../../">EE209: Programming Structures for EE</a></h1>
 
-<h2 class="ui center aligned header">Assignment 3: Customer Management Table Assignment</h2>
+<h2 class="ui center aligned header">Assignment 3: Customer Management Table Assignment <span style="color: red;">(tentative to change)</span></h2>
 
 <h4 class="ui center aligned header" id="timer">&nbsp;</h4>
 
@@ -56,8 +56,6 @@ management program using the following data structures.
 <li>Array: an array is a collection of the same data type, where
 its elements are stored linearly in memory. </li>
 
-<li>Bloom filter: a simple space-efficient randomized data structure 
-for representing a set in order to support membership queries. </li>
 
 <li>Hash table: a more efficient implementation might use a <em>hash
 table</em>, which reduces the complexity to search for data. Hash
@@ -75,10 +73,8 @@ using various data structures. Your tasks in this assignment are below:
 </p>
 
 <ul>
-<li>[Task 1-1] Implement an API library for the customer data
+<li>[Task 1] Implement an API library for the customer data
 management, using a <b>dynamically resizable</b> array.</li>
-
-<li>[Task 1-2] Improve your implementation of <b>Task 1-1</b> using a Bloom filter.</li>
 
 <li>[Task 2] Implement the same API library using a hash table. </li>
 
@@ -363,7 +359,7 @@ printf("Half the purchase amount of the users whose name contains Gorilla is %d\
 </ul>
 </ul>
 
-<h2 class="ui dividing header">[Task 1-1] The <code>customer_manager</code> Array Implementation</h2>
+<h2 class="ui dividing header">[Task 1] The <code>customer_manager</code> Array Implementation</h2>
 
 <p>The goal of the first task is to implement
 the <core>customer_manager API using a dynamically resizable
@@ -474,7 +470,7 @@ You must implement dynamically resizable array. You will not get a full credit i
 <!--p>Before you start this task, please go through the array implementation code and understand how it works. If you understand how the code implements dynamic memory allocation (using <code>malloc</code> and <code>free</code>), it would be helpful for Task 3. </p-->
 
 
-<h2 class="ui dividing header">[Task 1-2] Improving your <code>customer_manager</code> Array Implementation using Bloom filter</h2>
+<!--h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Linked List Implementation</h2>
 
 <p> 
 <!-- Unfortunately, using an array is slow when you deal with a large number of user items.  -->
@@ -482,108 +478,41 @@ When it comes to (un)registering of a user item, our <code>customer_manager</cod
 by iterating all the elements in an array, which, in turn, makes the operations inefficient. </p>
 
 <p>
-<!-- In this task, we improve the performance of <code>customer_manager</code> operations with a Bloom filter.  -->
-We can slightly improve the issue by introducing a Bloom filter.
-Bloom filter, which is a probabilistic data structure is used to test whether an element is a member of a set.
-In a Bloom filter, false positive matches are possible, but false negatives are not – in other words, a query returns either "possibly in set" or "definitely not in set".
-In this task, we use this data structure to quickly return the result when non-existing user items are queried. Since our <code>customer_manager</code> adds (registers) or deletes (unregisters) 
-user items, we will use the <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter">"Counting" Bloom filter</a>, a Bloom filter that can add or remove elements in a set.</p>
-
-<p> We provide a skeleton of a 1) Counting Bloom filter (<a href="./resource/countable_bloomfilter.c"><code>countable_bloomfilter.c</code></a>, 
-  <a href="./resource/countable_bloomfilter.h"><code>countable_bloomfilter.h</code></a>), 2) hash function to use (<a href="./resource/murmurhash.c"><code>murmurhash.c</code></a>), 
-  and 3) an example program (<a href="./resource/example.c"><code>example.c</code></a>). 
-  To complete the task, you should:</p>
-
+Your linked list-based <code>customer_manager</code> implementation
+should:</p>
 <ul>
-	<li>Fill in the <code>___BLANK___</code> in <a href="./resource/countable_bloomfilter.c"><code>countable_bloomfilter.c</code></a> and complete the Counting Bloom filter implementation. Feel free to make changes to the <code>countable_bloomfilter.c</code> in addition to the blanks.
-<li>The size of a Bloom filter and the number of hash functions are pre-defined in <a href="./resource/countable_bloomfilter.h"><code>countable_bloomfilter.h</code></a>. 
-  <b>Do not change these numbers.</b></li>
-<li><b>For the hash function, use the given <a href="./resource/murmurhash.c"><code>murmurhash.c</code></a>. We will use the same <code>murmurhash.c</code> to compile your code for grading.</b></li>  
-<li>Check your implementation by running the example program (<a href="./resource/example.c"><code>example.c</code></a>).</li>
-<li>Copy <code>customer_manager1.c</code> to <code>customer_manager1_b.c</code> and add your Bloom filter API library by including <code>countable_bloomfilter.h</code>.</li>
 <li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
-<li>Add two Bloom filter structures to DB structure that handles user name set and user id set respectively.</li>
-<li>Create (destroy) Bloom filter when you create (destroy) customer DB.</li>
-<div class="ui message">
-  <pre>
-  #include "customer_manager.h"
-  #include "countable_bloomfilter.h"
-
-  ...
-  struct DB {
-    struct UserInfo *pArray;   // pointer to the array
-    int curArrSize;            // current array size (max # of elements)
-    int numItems;              // # of stored items,
-    ...
-    struct BloomFilter* bf_name;  // Counting Bloom filter for name
-    struct BloomFilter* bf_id;    // Counting Bloom filter for id
-  };
-  
-  ...
-  DB_T CreateCustomerDB(void)
-  {
-    ...
-    d->bf_id = bloomfilter_create(BLOOMFILTER_SIZE, NUM_HASH);
-    d->bf_name = bloomfilter_create(BLOOMFILTER_SIZE, NUM_HASH);    
-    return d;
-  }
-
-  ...
-  DB_T DestroyCustomerDB(DB_T d)
-  {
-    ...
-    bloomfilter_destroy(d->bf_id);
-    bloomfilter_destroy(d->bf_name);
-    free(d);
-  }
-  </pre></div>
-
-<!-- <li>Improve <code>GetCustomerByID()</code> and <code>GetCustomerByName()</code> of your Task 1-1 with <code>bloomfilter_check()</code>.</li> -->
-<li>Use <code>bloomfilter_check()</code> to improve your following task1-1 APIs: 
-  <code>RegisterCustomer</code>, <code>UnregisterCustomerByID</code>, <code>UnregisterCustomerByName</code>, <code>GetPurchaseByID</code>, <code>GetPurchaseByName</code>
-  by quickly returning results for non-existing user items.</li>
-<li>Add user element to Bloom filters of both name and id when <code>RegisterCustomer()</code> is called.</li>
-<li>Your Bloom filter may reach the maximum count number (<code>UINT32_MAX</code>) of an input item, but in this task, you don't have to consider such cases. Refer to the #441 post on our campuswire page.
-<!-- <li>If your Bloom filter has reached the maximum count number (<code>UINT32_MAX</code>) of an input item, your <code>RegisterCustomer()</code> must return failure (-1). 
-  In detail, you should check the max count among three Bloom filter slots (since we are using three hashes) of a given input item, and consider the Bloom filter as
-  full if the max count has reached the <code>UINT32_MAX</code>. Check this with <code>bloomfilter_check()</code> as follows. Refer to the #417 post on our campuswire page.</li> -->
-<!-- <div class="ui message">
-  <pre>
-  
-  ...
-  int RegisterCustomer(DB_T d, const char *id,
-				 const char *name, const int purchase)
-  {
-    ...
-    //bloomfilter_check returns (-1) if the filter can no longer contain the input.
-    if (bloomfilter_check(d->bf_id, id) == -1) return (-1);
-  }
-  </pre>
-</div> -->
-<li>Remove user element from Bloom filters of both name and id, when <code>UnregisterCustomerByID()</code> or <code>UnregisterCustomerByName()</code> is called.</li>
+<li>Reside in a file named <code>customer_manager2.c</code>. (You can copy <code>customer_manager1.c</code> and change your implementation into linked list.)</li>
+<li>Avoid any memory leaks. For each call of <code>malloc</code>
+or <code>calloc</code> in any object, eventually there should be
+exactly one call of <code>free</code>.</li>
+<li>Only implementing singly linked list would be fine. (You don't have to implement a doubly linked list.)</li>
 </ul>
 
 <b>Implementation tips:</b>
+
 <ul>
-<li>To modularize the code, create a searching function (e.g., <code>SearchCustomerByXX</code>) and improve the function. Then use it for every other APIs that require searching an item.</li>
-<li>To guarantee that your Counting Bloom filter never returns false negatives, you should only add (remove) an element to (from) the Bloom filter 
-  when the user item is actually registered (unregistered) from your customer DB. 
-<li>To avoid any mistakes, validate your Bloom filter to make sure that it does not provide false negatives. Use the <code>assert</code> macro.</li>
-<li>Keep track of the next empty index of your DB when Register functions are called so that you don't have to look for empty spot every single time.</li>
-<li>Your Task 1-2 implementation of <code>RegisterCustomerByID()</code> will perform faster than that of Task 1-1 to some extent, 
-  but will perform similarly as the number of item increases far beyond the Bloom filter size. Refer to <a href="#performance-preview">[Task 3]</a>.</li>
-<li>The improvement can be minimal depending on the test case. The purpose of this task is to have you experience different types of data structures. You will get full credit if you have successfully integrated the Bloom filter to your Task 1-1, and pass all the test cases in our grading script just like how Task 1-1 is graded. If the performance improvement is minimal it is just fine.</li>
-<li>For some useful hints, refer to the #470 post on our campuswire page.</li>
+<li> Reuse the user item data structure that you defined in task 1,
+but add proper fields to keep track of the next node in a linked
+list.</li>
+
+<li>Store the head of the linked list at your DB structure. </li>
+
+<li> Unlike the array-based implementation, each new registration
+would require memory allocation of a user item structure. Please
+review the code in Lecture 10 since your implementation could be
+similar to it.
+</li>
 </ul>
 
-<!-- The following figure represents an example of linked list-based
+The following figure represents an example of linked list-based
 <code>customer_manager</code> implementation.
 <ul>
 <li>Your DB structure must store a pointer to the first item of the linked list.</li>
 <li>Each user item should be allocated dynamically.</li>
 <li>Each user item must link to the next item of the linked list.</li>
-</ul> -->
-<!-- <img alt="hash function overview" class="ui centered image" src="img/overview_ll.png" style="max-width: 740px"><br> -->
+</ul>
+<img alt="hash function overview" class="ui centered image" src="img/overview_ll.png" style="max-width: 740px"><br-->
 
 <h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Hash Table Implementation</h2>
 <p> Unfortunately, using an array is slow when you deal with a large number of user items. Frequent reqistration and unregisteration of a user item creates many holes (empty elements) scattered across the array, which, in turn, makes these operations slow. Adding, deleting, and searching of a user item would eventually depend on linear search (unless you take extra measures to manage the holes separately). </p>
@@ -701,52 +630,10 @@ $ make
 // test your array-based implementation
 $ ./client1
 
-// test your array-based with bloom filter implementation
-$ ./client1_b
-
 // test your hash table-based implementation
 $ ./client2
 </pre></div>
 
-<p>
-  Preview of expected results:
-  </p>
-  <a id="performance-preview"> 
-  <div class="ui message" > 
-    <pre>
-  // test your array-based implementation
-  $ ./client1 -p 512
-  ---------------------------------------------------
-  Performance Test
-  ---------------------------------------------------
-  [Test 1] Register 512 users with RegisterCustomer()
-  Finished registering 512 users
-  [elapsed time: 1.652000 ms]  
-  ...
-
-  // test your array-based with bloom filter implementation
-  $ ./client1_b -p 512
-  ---------------------------------------------------
-  Performance Test
-  ---------------------------------------------------
-  [Test 1] Register 512 users with RegisterCustomer()
-  Finished registering 512 users
-  [elapsed time: 0.769000 ms]
-  ...
-
-  // test your hash table-based implementation
-  $ ./client2 -p 512
-  ---------------------------------------------------
-  Performance Test
-  ---------------------------------------------------
-  [Test 1] Register 512 users with RegisterCustomer()
-  Finished registering 512 users
-  [elapsed time: 0.163000 ms]
-  ...
-  </pre></div>
-  </a>
-
-<p></p>
 <p>
 (<b>Extra credit: 15% </b>) We will give an extra credit to the
 students whose implementation is the fastest among all students. Note that only assignments whose basic functionality is implemented
@@ -915,7 +802,7 @@ We give two opportunities for getting an extra credit (each 15%).
 <ul>
 <li>Your name.</li>
 <li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policy" web page.</li>
-<li><strong>Compare the implementation of <code>customer_manager</code> using array, the one with Bloom filter, and the one using hash table
+<li><strong>Compare the implementation of <code>customer_manager</code> using array and the one using hash table
 respectively. Please try to provide reasonable explanation for the pros and cons of each implementaion. </strong></li>
 <li> Whether you implemented hash table expansion or not. If you
 implemented it, state which functions implement it. </li>
@@ -946,9 +833,7 @@ Please refer <a href="../assignment1/wordcounting.html#submission">here</a> for 
 
 <p>Your submission need to include the following files:</p>
 <ul>
-<li>(Task 1-1) <code>customer_manager1.c</code> </li>
-<li>(Task 1-2) <code>countable_bloomfilter.c</code> </li>
-<li>(Task 1-2) <code>customer_manager1_b.c</code> </li>
+<li>(Task 1) <code>customer_manager1.c</code> </li>
 <li>(Task 2) <code>customer_manager2.c</code> </li>
 <li>(Task 3) <code>no file is needed.</code> </li>
 <li><code>readme</code> text file</li>
@@ -975,22 +860,6 @@ Please refer <a href="../assignment1/wordcounting.html#submission">here</a> for 
 customer_manager1.c
 </div>
 </div>
-
-<div class="item">
-  <i class="file icon"></i>
-  <div class="content">
-  countable_bloomfilter.c
-  </div>
-  </div>
-  
-
-<div class="item">
-<i class="file icon"></i>
-<div class="content">
-customer_manager1_b.c
-</div>
-</div>
-
 <div class="item">
 <i class="file icon"></i>
 <div class="content">

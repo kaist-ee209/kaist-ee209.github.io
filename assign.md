@@ -14,10 +14,17 @@ Some assignments provide extra credit beyond your total grade.
 
 <ul>
 <li> Assignment 1: <a href="assignment1/index.html"> A Word Counting Program</a> (due: 03/18 11:55pm) </li>
-<li> Assignment 2: <a href="#"> String Manipulation</a>  (due: 04/08 11:55pm) </li>
-<li> Assignment 3: <a href="#"> Customer Management Table </a> (due: 04/29 11:55pm) </li>
-<li> Assignment 4: <a href="#"> Assembly Language Programming </a> (due: 05/23 11:55pm) </li>
-<li> Assignment 5: <a href="#"> A Unix Shell </a> (due: 06/10 11:55pm) </li>
+<li> Assignment 2: (TBA)
+<!-- <a href="assignment2/index.html"> String Manipulation </a>  -->
+<li> Assignment 3: (TBA)
+<!-- <a href="assignment3/index.html"> Customer Management Table </a>  -->
+(due: 04/29 11:55pm) </li>
+<li> Assignment 4: (TBA)
+<!-- <a href="assignment4/index.html"> Assembly Language Programming</a>  -->
+(due: 05/20 11:55pm) </li>
+<li> Assignment 5: (TBA)
+<!-- <a href="assignment5/index.html">Unix Shell Assignment</a>  -->
+(due: 06/10 11:55pm) </li>
 </ul>
 
 
