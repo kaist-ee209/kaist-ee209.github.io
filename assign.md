@@ -7,24 +7,28 @@ permalink: /assignments/
 <h1> Programming Assignments </h1>
 
 <p>
-We will do <font color="#FF0000">five</font> programming
-assignments. Each programming assignment takes up 10% of your total grade.
+We will do <font color="#FF0000">six</font> programming
+assignments. Each programming assignment takes up XX% of your total grade.
 Some assignments provide extra credit beyond your total grade.
 </p>
 
 <ul>
-<li> Assignment 1: <a href="assignment1/index.html"> A Word Counting Program</a> (due: 03/18 11:55pm) </li>
+<li> Assignment 0: <a href="assignment0/index.html"> Drawing a Rectangle</a> (due: 09/09 11:55pm) </li>
+<li> Assignment 1: (TBA)
+<!--<a href="assignment1/index.html"> A Word Counting Program</a>-->
+(due: 09/23 11:55pm) </li>
 <li> Assignment 2: (TBA)
 <!-- <a href="assignment2/index.html"> String Manipulation </a>  -->
+(due: 10/14 11:55pm) </li>
 <li> Assignment 3: (TBA)
 <!-- <a href="assignment3/index.html"> Customer Management Table </a>  -->
-(due: 04/29 11:55pm) </li>
+(due: 11/04 11:55pm) </li>
 <li> Assignment 4: (TBA)
 <!-- <a href="assignment4/index.html"> Assembly Language Programming</a>  -->
-(due: 05/20 11:55pm) </li>
+(due: 11/28 11:55pm) </li>
 <li> Assignment 5: (TBA)
 <!-- <a href="assignment5/index.html">Unix Shell Assignment</a>  -->
-(due: 06/10 11:55pm) </li>
+(due: 12/16 11:55pm) </li>
 </ul>
 
 
