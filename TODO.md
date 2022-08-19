@@ -1,2 +1,5 @@
 - [ ] remove all emacs from assignment page
 - [ ] check faq and make document clear
+- [ ] update TA information in website
+- [ ] update https://docs.google.com/spreadsheets/d/1sQcRYTVg5YyGEGvqBlKi4QYSKiyCU-ttXxVLl1Hifq8/edit#gid=0
+- [ ] update Meeting place to zoom
