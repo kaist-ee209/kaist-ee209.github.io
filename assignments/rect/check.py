@@ -18,26 +18,12 @@ def parse_args():
     p.add_argument('tar', help='a tar.gz file to check before submission')
     return p.parse_args()
 
-def get_student_id():
-    student_id = os.path.join(os.path.dirname(__file__), '../STUDENT_ID')
-    if not os.path.exists(student_id):
-        fatal('Cannot find STUDENT_ID')
-
-    return open(student_id).read().strip()
-
 if __name__ == '__main__':
     tar = parse_args().tar
 
     # General check
     if not os.path.exists(tar):
         fatal(f'{tar} does not exist')
-
-    sid = get_student_id()
-
-    expected_filename = f'{sid}_assign0.tar.gz'
-    if os.path.basename(tar) != expected_filename:
-        fatal(f'A file name is wrong (expected: {expected_filename})')
-        sys.exit(1)
 
     if not tarfile.is_tarfile(tar):
         fatal('Not a tar file')
@@ -60,7 +46,7 @@ if __name__ == '__main__':
 
     # Check whether rect.c can be compiled with gcc209
     if not shutil.which('gcc209'):
-        fatal('Cannot find gcc209')
+        fatal('Cannot find gcc')
 
     with open('.rect.c', 'wb') as f:
         f.write(tar.extractfile('rect.c').read())
