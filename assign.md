@@ -8,8 +8,8 @@ permalink: /assignments/
 
 <p>
 We will do <font color="#FF0000">six</font> programming
-assignments. Each programming assignment takes up XX% of your total grade.
-Some assignments provide extra credit beyond your total grade.
+assignments. Assignment 0 accounts for 5% of your total grade, while other
+assignments account for 10%.
 </p>
 
 <ul>
