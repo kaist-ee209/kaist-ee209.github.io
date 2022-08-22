@@ -196,12 +196,13 @@ tar -zxf assignment0.tar.gz
 </pre>
 </div>
 
-<p style="">(2) <code>samplerect</code> is an executable version of a correct assignment solution. Your program should write <em>exactly</em> (character for character) the same data to the standard output stream as <code>samplerect</code> does. You should test your program using commands similar to these:</p>
+<p style="">(2) <code>samplerect</code> is an executable version of a correct assignment solution. Your program should write <em>exactly</em> (character for character) the same data to the standard output stream and the standard error stream as <code>samplerect</code> does. You should test your program using commands similar to these:</p>
 
-<div class="ui message" style=""><pre>./samplerect &lt; <em>somefile</em>.txt &gt; output1
-./rect &lt; <em>somefile</em>.c &gt; output2
+<div class="ui message" style=""><pre>./samplerect &lt; <em>somefile</em>.txt &gt; output1 2&gt; errors1
+./rect &lt; <em>somefile</em>.txt &gt; output2 2&gt; errors2
 diff output1 output2
-rm output1 output2</pre>
+diff errors1 errors2
+rm output1 output2 errors1 errors2</pre>
 </div>
 
 <p style="">The Unix <code>diff</code> command finds
@@ -216,10 +217,11 @@ stream.</p>
 <p>You also can test your program against its own source code using a command sequence such as this:</p>
 
 <div class="ui message">
-<pre>./samplerect &lt; sample00.txt &gt; output1
-./rect &lt; sample00.txt &gt; output2
+<pre>./samplerect &lt; sample00.txt &gt; output1 2&gt; errors2
+./rect &lt; sample00.txt &gt; output2 2&gt; errors2
 diff output1 output2
-rm output1 output2</pre>
+diff errors1 errors2
+rm output1 output2 errors1 errors2</pre>
 </div>
 
 <h3>Step 4: Create a <code>readme</code> File and an Ethics document</h3>
