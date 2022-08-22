@@ -22,14 +22,14 @@
 <div class="ui top fixed hidden menu custom">
 <div class="ui container">
 <a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
-<a class=""><h3 class="">Assignment 3: Customer Management Table Assignment (tentative to change)</h3></a>
+<a class=""><h3 class="">Assignment 3: Customer Management Table Assignment</h3></a>
 </div>
 </div>
 <div class="ui container">
 <div class="ui center aligned">
 <h1 class="ui center aligned header">KAIST<br> <a style="color:black;" href="../../">EE209: Programming Structures for EE</a></h1>
 
-<h2 class="ui center aligned header">Assignment 3: Customer Management Table Assignment <span style="color: red;">(tentative to change)</span></h2>
+<h2 class="ui center aligned header">Assignment 3: Customer Management Table Assignment</span></h2>
 
 <h4 class="ui center aligned header" id="timer">&nbsp;</h4>
 
@@ -53,10 +53,6 @@ functionalities (register, unregister, and find) of a customer
 management program using the following data structures.
 
 </p><ul>
-<li>Array: an array is a collection of the same data type, where
-its elements are stored linearly in memory. </li>
-
-
 <li>Hash table: a more efficient implementation might use a <em>hash
 table</em>, which reduces the complexity to search for data. Hash
 tables are described
@@ -74,9 +70,9 @@ using various data structures. Your tasks in this assignment are below:
 
 <ul>
 <li>[Task 1] Implement an API library for the customer data
-management, using a <b>dynamically resizable</b> array.</li>
+  management, using a hash table with <b>separate chaining</b>.
 
-<li>[Task 2] Implement the same API library using a hash table. </li>
+  <li>[Task 2] Implement the same API library using a hash table with <b>linear probing</b>. </li>
 
 <li>[Task 3] Test the correctness of your three libraries and measure
 the performance.</li>
@@ -359,12 +355,11 @@ printf("Half the purchase amount of the users whose name contains Gorilla is %d\
 </ul>
 </ul>
 
-<h2 class="ui dividing header">[Task 1] The <code>customer_manager</code> Array Implementation</h2>
+<h2 class="ui dividing header">[Task 1] The <code>customer_manager</code> Hash Table with Sepearate Chaining Implementation</h2>
 
 <p>The goal of the first task is to implement
-the <core>customer_manager API using a dynamically resizable
-array. Array is the simplest data structure that works well for a
-small number of user items.
+the <core>customer_manager API using a hash table with separate chaining.
+Actually, you would need two hash tables. One is for looking up a user item with ID as a key, and the other is for a lookup with a name as a key.
 
 </core></p><p>Your first <code>customer_manager</code> implementation should be as follows:</p>
 
@@ -374,8 +369,6 @@ small number of user items.
 <li>Write your code in a file named <code>customer_manager1.c</code> (<a href="./resource/customer_manager1.c"><code>skeleton code</code></a>).
 
 </li>
-<!--li>Use the <code>Array_T</code> data structure to manage the customer information.</li-->
-
 <li>Avoid any memory leaks. Your <code>customer_manager</code>
 implementation should use a dynamically-allocated memory (i.e.,
 in <code>CreateCustomerDB()</code>
@@ -385,6 +378,9 @@ dynamically-allocated memory when the memory is no longer needed.</li>
 <li> Whenever is possible, validate invariants by calling
 the <code>assert</code> macro. Determine which invariant should be
 maintained is a part of your task. </li>
+
+<li>Please use the <a href="./resource/murmurhash.c"><code>murmurhash.c</code></a> for your hash function (with seed=0).
+</li>
 
 </ul>
 <b>Implementation tips:</b>
@@ -457,147 +453,13 @@ with <code>NULL</code>. </li>
 
 <li> For <code>GetSumCustomerPurchase</code>, scan the array from
 index 0 till the max index, and call <code>fp</code> for each <b>valid</b>
-element. </li>
+element in the chain. </li>
 
 <li> Feel free to deviate from the above implementation tips if you
 have your own idea to make the code run faster or more
 efficiently. </li>
 
-</ul>
-<div class="ui message warning">
-You must implement dynamically resizable array. You will not get a full credit if you do not implement array expansion.
-</div>
-<!--p>Before you start this task, please go through the array implementation code and understand how it works. If you understand how the code implements dynamic memory allocation (using <code>malloc</code> and <code>free</code>), it would be helpful for Task 3. </p-->
-
-
-<!--h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Linked List Implementation</h2>
-
-<p> 
-<!-- Unfortunately, using an array is slow when you deal with a large number of user items.  -->
-When it comes to (un)registering of a user item, our <code>customer_manager</code> should check whether an item with the same id or with the same name already exists, 
-by iterating all the elements in an array, which, in turn, makes the operations inefficient. </p>
-
-<p>
-Your linked list-based <code>customer_manager</code> implementation
-should:</p>
-<ul>
-<li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
-<li>Reside in a file named <code>customer_manager2.c</code>. (You can copy <code>customer_manager1.c</code> and change your implementation into linked list.)</li>
-<li>Avoid any memory leaks. For each call of <code>malloc</code>
-or <code>calloc</code> in any object, eventually there should be
-exactly one call of <code>free</code>.</li>
-<li>Only implementing singly linked list would be fine. (You don't have to implement a doubly linked list.)</li>
-</ul>
-
-<b>Implementation tips:</b>
-
-<ul>
-<li> Reuse the user item data structure that you defined in task 1,
-but add proper fields to keep track of the next node in a linked
-list.</li>
-
-<li>Store the head of the linked list at your DB structure. </li>
-
-<li> Unlike the array-based implementation, each new registration
-would require memory allocation of a user item structure. Please
-review the code in Lecture 10 since your implementation could be
-similar to it.
-</li>
-</ul>
-
-The following figure represents an example of linked list-based
-<code>customer_manager</code> implementation.
-<ul>
-<li>Your DB structure must store a pointer to the first item of the linked list.</li>
-<li>Each user item should be allocated dynamically.</li>
-<li>Each user item must link to the next item of the linked list.</li>
-</ul>
-<img alt="hash function overview" class="ui centered image" src="img/overview_ll.png" style="max-width: 740px"><br-->
-
-<h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Hash Table Implementation</h2>
-<p> Unfortunately, using an array is slow when you deal with a large number of user items. Frequent reqistration and unregisteration of a user item creates many holes (empty elements) scattered across the array, which, in turn, makes these operations slow. Adding, deleting, and searching of a user item would eventually depend on linear search (unless you take extra measures to manage the holes separately). </p>
-<p></p>
-<p>
-We improve the performance of customer_manager operations with a hash table in this task. Actually, you would need two hash tables. One is for looking up a user item with ID as a key, and the other is for a lookup with a name as a key.
-</p>
-
-<p></p>
-
-<p>
-Your hash table-based <code>customer_manager</code> implementation
-should:</p>
-
-<ul>
-<li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
-<li>Reside in a file named <code>customer_manager2.c</code>.</li>
-<li>Avoid any memory leaks. For each call of <code>malloc</code>
-or <code>calloc</code> in any object, eventually there should be
-exactly one call of <code>free</code>.</li>
-<li>Use a reasonable hash function. You are welcome to use this one. Feel
-free to modify it or define your own hash function if you'd like.</li>
-<div class="ui message"> <pre>enum {HASH_MULTIPLIER = 65599};
-...
-static int hash_function(const char *pcKey, int iBucketCount)
-
-/* Return a hash code for pcKey that is between 0 and iBucketCount-1,
-  inclusive. Adapted from the EE209 lecture notes. */
-{
-  int i;
-  unsigned int uiHash = 0U;
-  for (i = 0; pcKey[i] != '\0'; i++)
-    uiHash = uiHash * (unsigned int)HASH_MULTIPLIER
-          + (unsigned int)pcKey[i];
-  return (int)(uiHash % (unsigned int)iBucketCount);
-}
-</pre></div>
-
-</li>
-<li><b>If you want to use the <a href="./resource/murmurhash.c"><code>murmurhash.c</code></a> from Task 1-2, make sure you copy the code into your customer_manager2.c.</b>
-  Unlike Task1-2, the Makefile used for grading won't be linking the two files.</li>
-</ul>
-
-
-
-<b>Implementation tips:</b>
-
-<ul>
-<li> Reuse the user item data structure that you defined in task 1,
-but add proper fields to keep track of the next node in a hash
-table. You would need two such pointers in the new user item data
-structure since you will need to maintain two hash tables. </li>
-
-<li> Unlike the array-based implementation, each new registration
-would require memory allocation of a user item structure. Please
-review the code in Lecture 10 since your implementation could be
-similar to it except that you need to maintain two hash tables here.
-</li>
-
-<li> Avoid gross inefficiencies. In particular, it would be grossly
-inefficient to hash the given key multiple times when a single time
-would suffice.</li>
-
-<li> Start the hash table bucket size as 1024 entries. </li>
-
-<li> (<b>Extra credit: 15%</b>) Implement hash table expansion. When
-the number of nodes (user items) in a hash table reaches 75% of the
-number of buckets, expand the hash table to double the number of
-buckets. That is, your initial number of buckets is 1024. When the
-number of nodes reaches (0.75 * 1024), you expand the number of
-buckets to 2048. Again, when the number of nodes reaches (0.75 *
-2048), the next number of buckets should be 4086. The max number of
-buckets is 1 million (1,048,576 = 2^20), so even if the number of nodes exceeds
-1 million, don't expand the hash table. Note that even after hash
-table expansion, you should be able to retrieve all existing user
-items already registered before hash table expansion. Mark if you
-implement hash table expansion in your <code>readme</code> file.
-</li>
-
-
-
-
-</ul>
-
-The following figure represents an example hash table-based
+<li>The following figure represents an example hash table-based
 <code>customer_manager</code> implementation
 (it uses the <code>hash_function</code> mentioned above).
 <ul>
@@ -609,6 +471,75 @@ The following figure represents an example hash table-based
 <li><code>hash_function("YoungGyoun Moon", n)</code> is 5.</li>
 </ul>
 <img alt="hash function overview" class="ui centered image" src="overview.png"><br>
+</li>
+
+<li> (<b>Extra credit: 10%</b>) Implement hash table expansion. When the number
+  of nodes (user items) in a hash table reaches 50% of the number of buckets,
+  expand the hash table to double the number of buckets. That is, your initial
+  number of buckets is 1024. When the number of nodes reaches (0.50 * 1024),
+  you expand the number of buckets to 2048. Again, when the number of nodes
+  reaches (0.50 * 2048), the next number of buckets should be 4086. There is no
+  maximum number of buckets.  Note that even after hash table expansion, you
+  should be able to retrieve all existing user items already registered before
+  hash table expansion. Mark if you implement hash table expansion in your
+  <code>readme</code> file.
+</li>
+
+</ul>
+<h2 class="ui dividing header">[Task 2] The <code>customer_manager</code> Hash Table with Linear Probing Implementation</h2>
+<p>
+Another way to resolve collisions is linear probing. In this task,
+we also implement customer_manager operations with linear probing.
+Similar to the previous one, you would need two hash tables: one for ID and one for name.
+</p>
+
+<p></p>
+
+<p>
+Your hash table based <code>customer_manager</code> with linear probing implementation
+should:</p>
+
+<ul>
+<li>Follow the function prototype described in <code>customer_manager.h</code>.</li>
+<li>Reside in a file named <code>customer_manager2.c</code>.</li>
+<li>Avoid any memory leaks. For each call of <code>malloc</code>
+or <code>calloc</code> in any object, eventually there should be
+exactly one call of <code>free</code>.</li>
+<li><b>You must implement a hash table expansion to get a full credit.</b></li>
+
+</ul>
+
+
+
+<b>Implementation tips:</b>
+
+<ul>
+<li> Reuse the user item data structure that you defined in task 1,
+but add proper fields to keep track of status of a hash
+table.</li>
+
+<li> Avoid gross inefficiencies. In particular, it would be grossly
+inefficient to hash the given key multiple times when a single time
+would suffice.</li>
+
+<li> Start the hash table bucket size as 1024 entries. </li>
+<li> Please carefully consider tombstone in each operation (e.g., iterate a hash table).
+<div class="ui message">
+<pre>
+#define TOMBSTONE (void*)-1
+...
+  for (i = 0; i < ht->curArrSize; i++) {
+    p = ht->pArray[i];
+    if (p == TOMBSTONE || p == NULL)
+      continue;
+    // Do something on 'p'
+  }
+...
+</pre></div>
+</li>
+
+
+</ul>
 
 <h2 class="ui dividing header">[Task 3] Testing Your Library and Measuring the Performance</h2>
 
@@ -627,157 +558,14 @@ To compile your code, do the following:
 <div class="ui message"> <pre>
 $ make
 
-// test your array-based implementation
+// test your separate-chaining-based implementation
 $ ./client1
 
-// test your hash table-based implementation
+// test your linear-probing-based implementation
 $ ./client2
 </pre></div>
 
 <p>
-(<b>Extra credit: 15% </b>) We will give an extra credit to the
-students whose implementation is the fastest among all students. Note that only assignments whose basic functionality is implemented
-without problems deserve the extra credit. We may use our own program to measure the performance.</p>
-
-<table class="ui celled table unstackable">
-<thead>
-<tr>
-<th>Rank #
-</th>
-<th>Extra credit
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>15%</td>
-</tr>
-<tr>
-<td>2-3</td>
-<td>10%</td>
-</tr>
-<tr>
-<td>4-6</td>
-<td>5%</td>
-</tr>
-<tr>
-<td>7-10</td>
-<td>3%</td>
-</tr>
-</tbody>
-</table>
-
-<!--
-<p>In Assignment 1, you implemented a command-line interface which
-performs the argument validation. After finishing
-the <code>customer_manager</code> API implementation, you can put it
-together with the "Customer Management Program CLI" that is
-implemented in Assignment 1. In this assignment, we recommend you to
-modify your <code>client.c</code> from Assignment 1 to interpret the
-user command input and perform the actions (register a user, find for
-a user, etc..).</p>
-
-<ul>
-<li>In Assignment 1, you were not requested to store any argument. To pass the command-line arguments to the <code>customer_manager</code> API functions, you should modify your <code>client.c</code> to store the parsed options when validating them.</li>
-<li>In Assignment 1, <code>client.c</code> does not perform any action after validating the command-line arguments (may specified as "This will be expanded in assignment 3" in the code). In this assignment, you should develop this part to handle the user commands by using the <code>customer_manager</code> API.</li>
-<li>Your <code>client.c</code> program will eventually handle all the following commands:
-<pre style="margin-left:4em; color:blue">
-Available commands are:
-exit                                       Exit program
-reg    -i ID -n NAME -p PURCHASE           Register a customer to database
-unreg  [-n NAME | -i ID]                   Unregister a customer from database
-find   [-n NAME | -i ID]                   Search for a customer from database and print the purchase amount of the customer
-sum    [-n NAME_KEYWORD | -i ID_KEYWORD]   Calculate the sum of purchase amount of the customers whose name or ID contains the keyword
-
-</pre>
-</li>
-
-<li>Each command should following format to print customer information or error message.
-<ul>
-<li>If you choose to extend <code>client.c</code> from Assignment 1, it should handle all the argument format validation described in Assignment 1.</li>
-<li>For <code>reg</code> command, the program does not print any message on success. If there exists an already registered customer with the same name or ID, the program should print out an error message <code>"ERROR: A customer with the same name or ID already exists"</code> to stderr. </li>
-<li>For <code>unreg</code> command, the program does not print any message on success. If there is no customer whose name or ID matches the given one, the program should print out an error message <code>"ERROR: No customer found"</code> to stderr.</li>
-<li>For <code>find</code> command, if the customer is found, the program should print the customer information in a format of <code>"PURCHASED: $%d"</code> to stdout. If there is no customer whose name or ID matches the given one, the program should print out an error message <code>"ERROR: No customer found"</code> to stderr.</li>
-<li>For <code>sum</code> command, it finds for all the customers whose name contains <code>NAME_KEYWORD</code> or ID contains <code>ID_KEYWORD</code>, and prints the sum of the purchase amount of the customers in a format of <code>"TOTAL: $%d"</code>.
-</ul>
-<br>
-<li>The table below shows some real examples of using the commands. In this example, we assume that the commands are entered to the program consecutively.</li>
-<table style="border-collapse: collapse;" border="3">
-<tbody>
-<tr>
-<td><strong>Standard Input Stream</strong></td>
-<td><strong>Standard Output Stream</strong></td>
-<td><strong>Standard Error Stream</strong></td>
-</tr>
-
-<tr>
-<td><code>reg -i ch.hwang128 -n 'Changho Hwang' -p 123</code></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td><code>reg -n 'Sangwook Bae' -p 432 -i baesangwook89</code></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td><code>reg -n 'Sangwook Bae' -i bsw89 -p 5049</code></td>
-<td></td>
-<td><code>ERROR: A customer with the same name or ID already exists</code></td>
-</tr>
-
-<tr>
-<td><code>reg -n 'Chaehyun Hwang' -i ch.hwang128 -p 2432</code></td>
-</td><td>
-<td><code>ERROR: A customer with the same name or ID already exists</code></td>
-</tr>
-
-<tr>
-<td><code>find -n 'Changho Hwang'</code></td>
-<td><code>PURCHASED: $123
-</code></td>
-<td></td>
-</tr>
-
-<tr>
-<td><code>sum -n 'an'</code></td>
-<td><code>TOTAL: $555
-</code></td>
-<td></td>
-</tr>
-
-<tr>
-<td><code>sum -n 'smith'</code></td>
-<td><code>TOTAL: $0
-</code></td>
-<td></td>
-</tr>
-
-<tr>
-<td><code>unreg -n 'Changho Hwang'</code></td>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td><code>find -n 'Changho Hwang'</code></td>
-<td></td>
-<td><code>ERROR: No customer found</code></td>
-</tr>
-
-<tr>
-<td><code>unreg -i ch.hwang128</code></td>
-<td></td>
-<td><code>ERROR: No customer found</code></td>
-</tr>
-</tbody>
-</table>
-</ul>
--->
-
 <h2 class="ui dividing header">Logistics</h2>
 
 <p>Develop in your own environment using <code>vscode</code> to create
@@ -802,7 +590,7 @@ We give two opportunities for getting an extra credit (each 15%).
 <ul>
 <li>Your name.</li>
 <li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policy" web page.</li>
-<li><strong>Compare the implementation of <code>customer_manager</code> using array and the one using hash table
+<li><strong>Compare the implementation of <code>customer_manager</code> using sepearate chaining and the one using linear probing
 respectively. Please try to provide reasonable explanation for the pros and cons of each implementaion. </strong></li>
 <li> Whether you implemented hash table expansion or not. If you
 implemented it, state which functions implement it. </li>
@@ -942,6 +730,6 @@ Please note that you might not get a full credit even if you pass the test with 
 <script src="../../vendor/moment.min.js"></script>
 <script src="../../vendor/highlight.pack.js"></script>
 <script src="../../vendor/ee209_assignment.js"></script>
-<script>showTimer('2022-04-29T23:55:00+0900');</script>
+<script>showTimer('2022-11-04T23:55:00+0900');</script>
 </body>
 </html>
