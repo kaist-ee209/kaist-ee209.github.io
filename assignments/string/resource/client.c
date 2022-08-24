@@ -12,7 +12,7 @@
 #define STRFINDSTR_STR   "StrFindStr"
 #define STRFINDCHR_STR   "StrFindChr"
 #define STRTOLONG_STR    "StrToLong"
-#define STRLWR_STR       "StrToLower"
+#define STRCASECOMPARE_STR       "StrCaseCompare"
 
 #define PRINT_RESULT(a) \
   (a) ? printf("Correct!\n") : printf("Wrong!\n")
@@ -409,43 +409,62 @@ TestStrFindChr()
 }
 /*------------------------------------------------------------------*/
 void
-TestStrToLower()
+TestStrCaseCompare()
 {
-  char str1[] = "SeIze THE DaY";
-  char str2[] = "The CoMpuTer wAs bORn tO sOlVe pRobLems tHAt dId nOt EXIST beFORe. -Bill GATES";
-  char str3[] = "sIx HOURs of Debugging CAN saVe you FiVe MinUtes OF Reading DocumenTation. LOL";
+  char str[] = "TestCompare";
+  char case_str[] = "testcompare";
+  int res1, res2;
 
-  char str1_answer[] = "seize the day";
-  char str2_answer[] = "the computer was born to solve problems that did not exist before. -bill gates";
-  char str3_answer[] = "six hours of debugging can save you five minutes of reading documentation. lol";
+  printf("===========================\n"
+	 "Test StrCompare\n"
+	 "===========================\n");
 
-  char *res1, *res2;
-
-  /* Test1: short sentence */
+  /* Test1: same length, same string */
   printf("Test1:\n");
-  res1 = StrToLower(str1);
-  res2 = str1_answer;
-  PRINT_RESULT((strcmp(res1, res2) == 0));
-  printf("Your      Answer: %s\n", res1);
-  printf("String.h  Answer: %s\n", res2);
+  res1 = StrCaseCompare(str, "TestCompare");
+  res2 = strcasecmp(str, "TestCompare");
 
-  /* Test2: longer sentence */
-  printf("Test2:\n");
-  res1 = StrToLower(str2);
-  res2 = str2_answer;
-  PRINT_RESULT((strcmp(res1, res2) == 0));
-  printf("Your      Answer: %s\n", res1);
-  printf("String.h  Answer: %s\n", res2);
+  PRINT_RESULT((res1 == res2) || (res1 > 0 && res2 > 0) || (res1 < 0 && res2 < 0));
+  printf("Your     Answer: [%d]\n", res1);
+  printf("String.h Answer: [%d]\n", res2);
 
-  /* Test3: life saving sentence */
-  printf("Test3:\n");
-  res1 = StrToLower(str3);
-  res2 = str3_answer;
-  PRINT_RESULT((strcmp(res1, res2) == 0));
-  printf("Your      Answer: %s\n", res1);
-  printf("String.h  Answer: %s\n", res2);
+  /* Test2: same length, check case-sensitive */
+  printf("\nTest2:\n");
+  res1 = StrCaseCompare(case_str, "TestComPAre");
+  res2 = strcasecmp(case_str, "TestCompare");
 
+  PRINT_RESULT((res1 == res2) || (res1 > 0 && res2 > 0) || (res1 < 0 && res2 < 0));
+  printf("Your     Answer: [%d]\n", res1);
+  printf("String.h Answer: [%d]\n", res2);
 
+  /* Test3: different length  */
+  printf("\nTest3:\n");
+  res1 = StrCaseCompare(str, "Test");
+  res2 = strcasecmp(str, "TeSt");
+
+  PRINT_RESULT((res1 == res2) || (res1 > 0 && res2 > 0) || (res1 < 0 && res2 < 0));
+  printf("Your     Answer: [%d]\n", res1);
+  printf("String.h Answer: [%d]\n", res2);
+
+  /* Test4: different length  */
+  printf("\nTest4:\n");
+  res1 = StrCaseCompare(str, "TestCompareLong");
+  res2 = strcasecmp(str, "TestComPareLong");
+
+  PRINT_RESULT((res1 == res2) || (res1 > 0 && res2 > 0) || (res1 < 0 && res2 < 0));
+  printf("Your     Answer: [%d]\n", res1);
+  printf("String.h Answer: [%d]\n", res2);
+
+  /* Test5: empty string  */
+  printf("\nTest5:\n");
+  res1 = StrCaseCompare(str, "");
+  res2 = strcasecmp(str, "");
+
+  PRINT_RESULT((res1 == res2) || (res1 > 0 && res2 > 0) || (res1 < 0 && res2 < 0));
+  printf("Your     Answer: [%d]\n", res1);
+  printf("String.h Answer: [%d]\n", res2);
+
+  return;
 }
 
 
@@ -458,7 +477,7 @@ PrintUsage(char* argv0)
 {
   printf("Test Client Usage:\n");
   printf("%s [StrGetLength|StrCopy|StrCompare|StrFindStr|StrConcat|"
-         "StrFindChr|StrToLong|StrToLower]"
+         "StrFindChr|StrToLong|StrCaseCompare]"
 	 "\n",
 	 argv0);
 }
@@ -492,8 +511,8 @@ main(int argc, char *argv[])
   if (strcmp(argv[1], STRTOLONG_STR) == 0)
     TestStrToLong();
 
-  if (strcmp(argv[1], STRLWR_STR) == 0)
-    TestStrToLower();
+  if (strcmp(argv[1], STRCASECOMPARE_STR) == 0)
+    TestStrCaseCompare();
 
   return 0;
 

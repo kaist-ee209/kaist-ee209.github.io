@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h> /* for strtol() */
 #include <string.h>
+#include <strings.h>
 #include "str.h"
 
 /* Your task is: 
@@ -73,9 +74,9 @@ long int StrToLong(const char *nptr, char **endptr, int base)
 }
 
 /*------------------------------------------------------------------------*/
-char *StrToLower(char *str)
+int StrCaseCompare(const char *pcS1, const char *pcS2)
 {
   /* TODO: fill this function */
 
-   return str;
+   return strcasecmp(pcS1,pcS2);
 }

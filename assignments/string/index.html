@@ -108,7 +108,7 @@ and check <code>README.md</code>.
 <p> Your task for the first part is to use C to implement seven basic
 string manipulation functions: <code>StrCopy(),
 StrCompare(), StrFindChr(), StrFindStr(), StrConcat(),
-StrToLong(), and StrToLower()</code>. Those seven functions should follow the format of
+StrToLong(), and StrCaseCompare()</code>. Those seven functions should follow the format of
 the corresponding standard C library functions. You can easily find
 the function's description and operation in the UNIX &quot;man&quot;
 page. </p>
@@ -201,32 +201,12 @@ page. </p>
 
 
 <tr>
-<td><code>StrToLower</code>
+<td><code>StrCaseCompare</code>
 </td>
-<td><code>strtolower</code>
+<td><code>strcasecmp</code>
 </td>
-<td>
-<p><code>StrToLower</code>, 
-which converts a given string to an all-lowercase string, is not in the standard C string.h, and we explain it below.</p>
-<p>The purpose of this function is to turn any uppercase English letters in the string to their respective lowercase English letters. For example, in <code><a href="./resource/client.c">client.c</a></code>, we have provided the following three examples which we explain here.</p>
-<blockquote>
-  <ol>
-    <li><code>"SeIze THE DaY"<br>
-    --><br>
-    "seize the day"</code></li>
-  <p>The capital S, I, T, H, E, D, and Y are changed to their lowercase forms, s, i, t, h, e, d, and y, resulting in an all-lowercase string.</p>
-    <li><code>"The CoMpuTer wAs bORn tO sOlVe pRobLems tHAt dId nOt EXIST beFORe. -Bill GATES"<br>
-      --><br>
-      "the computer was born to solve problems that did not exist before. -bill gates"</code></li>
-    <p>Besides changing the capital letters to lowercase letters, the "." and "-" were left untouched, because they are not uppercase English characters. All other non-uppercase English characters in the ASCII code, such as numbers, ",", "!", "?", etc., should be left untouched.</p>
-    <li><code>"sIx HOURs of Debugging CAN saVe you FiVe MinUtes OF Reading DocumenTation. LOL"<br>
-      --><br>
-      "six hours of debugging can save you five minutes of reading documentation. lol"</code></li>
-  </ol>
-</blockquote>
-<p>In general, you can consider this function works the same as the <code>lower()</code> method of Python, which you learned in CS101.</p>
-
-<p>Because in the provided <code>client.c</code> the <code>StrToLower</code> part has not been implemented correctly, running <code>./client</code> <code>StrToLower</code> will return that all test cases are incorrect.</p>
+<td><a href="./man/strcasecmp.txt"> strcasecmp man page
+</a>
 </td>
 </tr>
 
@@ -400,7 +380,7 @@ will test <code>StrCopy</code>. Actually, the client accepts any one of the <cod
 
 <div class="ui message">
 <pre>
-./client [StrGetLength|StrCopy|StrCompare|StrFindStr|StrConcat|StrFindChr|StrToLong|StrToLower]
+./client [StrGetLength|StrCopy|StrCompare|StrFindStr|StrConcat|StrFindChr|StrToLong|StrCaseCompare]
 </pre>
 </div>
 
