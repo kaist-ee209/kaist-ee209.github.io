@@ -104,12 +104,25 @@ A typical execution of your program from a shell might look like
 this:</p>
 
 <div class="ui message">
-<pre>./rect 2 2
+<pre>./rect
+2 2
 +--+
 |  |
 |  |
 +--+</pre>
 </div>
+
+<p>If you want input from a text file:
+
+<div class="ui message">
+<pre>./rect &lt; somefile.txt
++--+
+|  |
+|  |
++--+</pre>
+</div>
+
+
 
 In the output, <code>+</code> indicates the vertex, and <code>-</code> and <code>|</code> represent the side of the rectangle.
 
@@ -118,12 +131,14 @@ In the output, <code>+</code> indicates the vertex, and <code>-</code> and <code
 <ul>
   <li> The syntax of comment follows that of the C language (C99).
   <li> Please follow the input and output format. The incorrect format may result in deducting points.
+  <li> The limit of height and width is 30.
 </ul>
 
 <p> Belows are the examples of <code>rect</code>.
 
 <div class="ui message">
-<pre>./rect 1 1
+<pre>./rect
+1 1
 +-+
 | |
 +-+
@@ -131,7 +146,8 @@ In the output, <code>+</code> indicates the vertex, and <code>-</code> and <code
 </div>
 
 <div class="ui message">
-<pre>./rect 3 2
+<pre>./rect
+3 2
 +--+
 |  |
 |  |
@@ -141,7 +157,8 @@ In the output, <code>+</code> indicates the vertex, and <code>-</code> and <code
 </div>
 
 <div class="ui message">
-<pre>./rect 3 4
+<pre>./rect
+3 4
 +----+
 |    |
 |    |
@@ -162,7 +179,50 @@ In the output, <code>+</code> indicates the vertex, and <code>-</code> and <code
 
 <h3>Step 3: Execute</h3>
 
-<p>Execute your program multiple times on various input that test all possible cases.</p>
+<p>Execute your program multiple times on various input files that test all logical paths through your code.</p>
+
+<p>We have provided several files that you require for this assignment.
+</p>
+
+<p style="">(1) Download <a href="./assignment0.tar.gz">a tar.gz file</a>to your directory.
+  You will find <code>samplerect</code>, test files, and several utilities.
+
+<div class="ui message">
+<pre>wget http://computer.kaist.ac.kr/EE209/assignments/assignment0/assignment0.tar.gz
+mkdir assignment0
+mv assignment0.tar.gz assignment0
+cd assignment0
+tar -zxf assignment0.tar.gz
+</pre>
+</div>
+
+<p style="">(2) <code>samplerect</code> is an executable version of a correct assignment solution. Your program should write <em>exactly</em> (character for character) the same data to the standard output stream and the standard error stream as <code>samplerect</code> does. You should test your program using commands similar to these:</p>
+
+<div class="ui message" style=""><pre>./samplerect &lt; <em>somefile</em>.txt &gt; output1 2&gt; errors1
+./rect &lt; <em>somefile</em>.txt &gt; output2 2&gt; errors2
+diff output1 output2
+diff errors1 errors2
+rm output1 output2 errors1 errors2</pre>
+</div>
+
+<p style="">The Unix <code>diff</code> command finds
+differences between two given files. <code>diff output1
+output2</code> produces output, then <code>samplerect</code> and your
+program have written different characters to the standard output
+stream.</p>
+
+<!--<p style="margin-left:2em;">(3) <code>testdecomment</code> and <code>testdecommentdiff</code> are bash scripts that automate the testing process. Comments at the beginning of those files describe how to use them. After copying the scripts to your project directory, you may need to execute the commands <code>chmod 700 testdecomment</code> and <code>chmod 700 testdecommentdiff</code> to give them "executable" permissions.</p> -->
+
+
+<p>You also can test your program against its own source code using a command sequence such as this:</p>
+
+<div class="ui message">
+<pre>./samplerect &lt; sample00.txt &gt; output1 2&gt; errors2
+./rect &lt; sample00.txt &gt; output2 2&gt; errors2
+diff output1 output2
+diff errors1 errors2
+rm output1 output2 errors1 errors2</pre>
+</div>
 
 <h3>Step 4: Create a <code>readme</code> File and an Ethics document</h3>
 
@@ -260,7 +320,7 @@ Upload your submission file (20221234_assign0.tar.gz) to our KLMS assignment sub
 
 </div>
 <li>Update <code>STUDENT_ID</code> in your project directory with your student id.
-  Then, use a <a href="./check.py">given script</a> to check your submission file before you submit.</li>
+  Then, use a given script to check your submission file before you submit.</li>
 
 <div class="ui message">
 <pre>
