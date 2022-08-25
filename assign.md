@@ -13,7 +13,9 @@ assignments account for 10%.
 </p>
 
 <ul>
-<li> Assignment 0: <a href="assignment0/index.html"> Drawing a Rectangle</a> (due: 09/09 11:55pm) </li>
+<li> Assignment 0: (TBA)
+<!--<a href="assignment0/index.html"> Drawing a Rectangle</a> (due: 09/09 11:55pm) -->
+</li>
 <li> Assignment 1: (TBA)
 <!--<a href="assignment1/index.html"> A Word Counting Program</a>-->
 (due: 09/23 11:55pm) </li>
