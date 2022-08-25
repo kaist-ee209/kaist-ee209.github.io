@@ -1,16 +1,11 @@
 CC = gcc209
 
-STUDENT_ID := $(shell cat STUDENT_ID)
+STUDENT_ID := $(shell cat STUDENT_ID 2>/dev/null)
 SUBMIT_DIR := .submit
 SUBMIT_FILES:= str.c sgrep.c readme EthicsOath.pdf
 SUBMIT := $(STUDENT_ID)_assign2.tar.gz
 
-TARGET := sgrep client
-
-# ONLY FOR TA
-ifdef GRADING
-	TARGET += client_ta
-endif
+TARGET := sgrep
 
 all: $(TARGET)
 
@@ -18,9 +13,6 @@ sgrep: str.o sgrep.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 client: str.o client.o
-	$(CC) $(CFLAGS) -o $@ $^
-
-client_ta: str.o client_ta.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 submit:

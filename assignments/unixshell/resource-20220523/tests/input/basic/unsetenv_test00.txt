@@ -1,5 +1,0 @@
-setenv hw6 unixshell
-setenv hw5 unixshell
-unsetenv hw6
-printenv hw5
-printenv hw6

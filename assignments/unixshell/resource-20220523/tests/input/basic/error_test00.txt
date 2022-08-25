@@ -1,1 +1,0 @@
-cat < ../../inputStream.txt < ../../outputStream.txt
