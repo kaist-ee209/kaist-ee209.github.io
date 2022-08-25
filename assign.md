@@ -121,10 +121,10 @@ any memory and check/handle every return value of function calls.
 <hr>
 
 <p>
-Your submission will be graded on one of the Lab machines (eelab5) for the
+Your submission will be graded on one of the Lab machines (eelabg12) for the
 course. You are free to use other machines for coding and debugging,
 but please make sure to compile and test your final version on the Lab
-machines (eelab5). In a rare case, library mismatch or O/S stack difference
+machines (eelabg12). In a rare case, library mismatch or O/S stack difference
 (Solaris vs. Linux) can bypass some of your bugs, but they can
 actually show up on the Lab machines while grading. In order to avoid
 this last-minute surprise, please test on Lab machines before
