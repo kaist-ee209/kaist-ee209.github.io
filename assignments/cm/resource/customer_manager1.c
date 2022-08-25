@@ -13,10 +13,11 @@ struct UserInfo {
   char *name;                // customer name
   char *id;                  // customer id
   int purchase;              // purchase amount (> 0)
+  ...
 };
 
 struct DB {
-  struct UserInfo *pArray;   // pointer to the array
+  struct UserInfo **pArray;   // pointer to the array
   int curArrSize;            // current array size (max # of elements)
   int numItems;              // # of stored items, needed to determine
 			     // # whether the array should be expanded
@@ -38,8 +39,8 @@ CreateCustomerDB(void)
     return NULL;
   }
   d->curArrSize = UNIT_ARRAY_SIZE; // start with 1024 elements
-  d->pArray = (struct UserInfo *)calloc(d->curArrSize,
-               sizeof(struct UserInfo));
+  d->pArray = (struct UserInfo **)calloc(d->curArrSize,
+               sizeof(struct UserInfo*));
   if (d->pArray == NULL) {
     fprintf(stderr, "Can't allocate a memory for array of size %d\n",
 	    d->curArrSize);   

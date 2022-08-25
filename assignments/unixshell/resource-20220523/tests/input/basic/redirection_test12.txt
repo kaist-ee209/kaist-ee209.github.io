@@ -1,3 +1,0 @@
-echo Hello > output.txt
-cat output.txt
-rm -f output.txt
