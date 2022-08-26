@@ -22,7 +22,7 @@ Students are expected to regularly check the course webpage, class schedule upda
 <tbody>
 
 <tr>
-<td> 15% </td>
+<td> 20% </td>
 <td> Mid-term exam  </td>
 </tr>
 
@@ -37,7 +37,7 @@ Students are expected to regularly check the course webpage, class schedule upda
 </tr>
 
 <tr>
-<td> 10% </td>
+<td> 5% </td>
 <td> Contribution  </td>
 </tr>
 
