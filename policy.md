@@ -38,7 +38,7 @@ Students are expected to regularly check the course webpage, class schedule upda
 
 <tr>
 <td> 5% </td>
-<td> Contribution  </td>
+<td> Attendance / Contribution  </td>
 </tr>
 
 </tbody>
