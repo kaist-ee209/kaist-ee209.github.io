@@ -96,6 +96,30 @@ assignment files, or we won't grade your assignment.
 
 </p><h2> Late Submission </h2>
 <hr>
+<p>
+Students can use late submission (i.e. tokens) which can be late up
+to <i>three days</i> without penalty for the first five programming
+assignments. That is, you can apply your late submission days (within
+3 days in total) spread over the first five programming
+assignments. The minimum granulaity is one day: if you are 1 hour
+late, that's still counted as one day late. Your token will be used
+automatically, i.e., you will get panelty after three day delays.
+
+Beyond the free late days, we will enforce this penalty rule for each
+assignment. One will get
+</p><ul>
+<li> 95% of the full credit up to 3 hours late,
+</li><li> 90% of the full credit up to 6 hours late,
+</li><li> 85% of the full credit up to 12 hours late,
+</li><li> 75% of the full credit up to 24 hours late,
+</li><li> 50% of the full credit up to 48 hours late,
+</li><li>  0% of the full credit beyond 48 hours late
+</li></ul>
+
+<p> <b>Important</b>: Note that we do not accept late submission for the last
+assignment (assignment 5). Any late submission will result in zero credit for
+the last assignment.
+</p>
 
 <p><b>No late submission is allowed!</b></p>
 
