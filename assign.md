@@ -165,18 +165,19 @@ diff errors1 errors2
 rm output1 errors1 output2 errors2</pre>
 </div> 
 
-<!--
-<h2> Manual grading policy </h2>
+<h2> Fix a small mistake </h2>
 <hr>
 
 <p>
-Trivial mistake in your submission may cause huge amount of deduction in your assignment score.
-For such exceptional circumstances, you can request and get manual grading at the TA's discretion.
-This is only allowed for <b>assignment 1</b>,
-and you will get <font color="#FF0000">15% amount of deduction</font> from your total score.
+Because we used an automatic grading system, trivial mistake in your submission
+may cause huge amount of deduction in your assignment score.  For such
+exceptional circumstances, you can request changes and get modified grading at
+the TA's discretion.  You will get <font color="#FF0000">15% amount of
+deduction</font> from your total score. For <b>assignment 0</b>, you will not
+get this panelty. 
 </p>
 <br>
--->
+
 <hr>
 
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
