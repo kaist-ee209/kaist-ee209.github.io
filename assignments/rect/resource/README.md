@@ -1,4 +1,4 @@
-# Assignment0: Drawing a Rectangle
+# Assignment2: String Manipulation
 
 ## Build
 ```sh
