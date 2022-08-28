@@ -44,16 +44,6 @@ Students are expected to regularly check the course webpage, class schedule upda
 </tbody>
 </table>
 
-<h2> Extra point </h2>
-<hr>
-<p>
-Some programming assignments provide extra points.  Except for Assignment 5,
-the total score, including these extra points, cannot exceed the perfect score
-that you can obtain from normal tasks.  With the exception, any extra points
-from Assignment 5 that gained beyond the perfect score will affect your final
-grade.
-</p>
-
 
 <h2> Assignment &amp; Exam Policy </h2>
 

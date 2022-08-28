@@ -176,9 +176,19 @@ the TA's discretion.  You will get <font color="#FF0000">15% amount of
 deduction</font> from your total score. For <b>assignment 0</b>, you will not
 get this panelty. 
 </p>
+
+<h2> Extra point </h2>
+<hr>
+<p>
+Some programming assignments provide extra points.  Except for Assignment 5,
+the total score, including these extra points, cannot exceed the perfect score
+that you can obtain from normal tasks.  With the exception, any extra points
+from Assignment 5 that gained beyond the perfect score will affect your final
+grade.
+</p>
+
 <br>
 
-<hr>
 
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
 <script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script>
