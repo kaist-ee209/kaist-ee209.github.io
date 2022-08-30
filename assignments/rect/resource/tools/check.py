@@ -10,7 +10,7 @@ import subprocess
 FILES = ['rect.c', 'readme', 'EthicsOath.pdf']
 
 def fatal(msg):
-    print(f'[-] ERROR: {msg}')
+    print('[-] ERROR: {}'.format(msg))
     sys.exit(1)
 
 def parse_args():
@@ -30,13 +30,13 @@ if __name__ == '__main__':
 
     # General check
     if not os.path.exists(tar):
-        fatal(f'{tar} does not exist')
+        fatal('{} does not exist'.format(tar))
 
     sid = get_student_id()
 
-    expected_filename = f'{sid}_assign0.tar.gz'
+    expected_filename = '{}_assign0.tar.gz'.format(sid)
     if os.path.basename(tar) != expected_filename:
-        fatal(f'A file name is wrong (expected: {expected_filename})')
+        fatal('A file name is wrong (expected: {})'.format(expected_filename))
         sys.exit(1)
 
     if not tarfile.is_tarfile(tar):
@@ -50,13 +50,13 @@ if __name__ == '__main__':
     for f in tar:
         name = f.name
         if not name in files:
-            fatal(f'{name} does not exist')
+            fatal('{} does not exist'.format(name))
 
         files.remove(name)
 
     if files:
         for name in files:
-            fatal(f'{name} should be included')
+            fatal('{} should be included'.format(name))
 
     # Check whether rect.c can be compiled with gcc209
     if not shutil.which('gcc209'):
