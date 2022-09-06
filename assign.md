@@ -137,7 +137,7 @@ Please refer to <a href="../policy">the course policy page</a>.
 Good coding style will be one criterion for grading each
 assignment. Please make sure your code has proper indentation and
 descriptive comments. At the start of each file, please add your name,
-lab account ID and the description of the file. Make sure not to leak
+student ID, and the description of the file. Make sure not to leak
 any memory and check/handle every return value of function calls.
 </p>
 
