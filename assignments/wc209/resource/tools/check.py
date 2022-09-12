@@ -8,6 +8,7 @@ import shutil
 import subprocess
 
 FILES = ['wc209.c', 'dfa.pdf', 'readme', 'EthicsOath.pdf']
+PLACEHOLDER = '20009999'
 
 def fatal(msg):
     print('[-] ERROR: {}'.format(msg))
@@ -23,7 +24,12 @@ def get_student_id():
     if not os.path.exists(student_id):
         fatal('Cannot find STUDENT_ID')
 
-    return open(student_id).read().strip()
+    sid = open(student_id).read().strip()
+
+    if sid == PLACEHOLDER:
+        fatal('Please update STUDENT_ID to your student id')
+
+    return sid
 
 if __name__ == '__main__':
     tar = parse_args().tar
