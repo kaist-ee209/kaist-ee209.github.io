@@ -20,9 +20,8 @@ assignments account for 10%.
 <a href="assignment1/index.html"> A Word Counting Program</a> (due: 09/23 11:55pm) </li>
 <li> Assignment 2:
 <a href="assignment2/index.html"> String Manipulation</a> (due: 10/14 11:55pm) </li>
-<li> Assignment 3: (TBA)
-<!-- <a href="assignment3/index.html"> Customer Management Table </a>  -->
-(due: 11/04 11:55pm) </li>
+<li> Assignment 3:
+<a href="assignment3/index.html"> Customer Management Table </a> (due: 11/04 11:55pm) </li>
 <li> Assignment 4: (TBA)
 <!-- <a href="assignment4/index.html"> Assembly Language Programming</a>  -->
 (due: 11/28 11:55pm) </li>
