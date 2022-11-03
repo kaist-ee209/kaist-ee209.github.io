@@ -478,7 +478,10 @@ stack.push(op1%op2)</pre>
   return
 op2 = stack.pop()
 op1 = stack.pop()
-stack.push(power(op1,op2))</pre>
+stack.push(power(op1,op2))
+if overflow:
+  fprintf(stderr, "dc: overflow happens\n")
+  exit(1)</pre>
           <ul>
             <li>You can assume exponent (<code>op2</code>) is always a positive integer.</li>
           </ul>
