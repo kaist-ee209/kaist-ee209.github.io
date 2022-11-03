@@ -66,12 +66,14 @@ language programs.
 
 <h3>Part a: Implement basic functions of dc</h3>
 
+<p>
 In this work, you are required to write the <code>dc</code> (desk
 calculator) program in assembly language. We provide you the skeleton
 code for <code>dc</code> written in assembly language, a startup file
 (details are in the below). You will start from reviewing this code
 and modifying and adding the code with respect to the requirement
 specified below. Good luck!
+</p>
 
 <p><code>dc</code> (<em>d</em>esk <em>c</em>alculator) is a tool on
 Unix-like operating systems. In its simplest form, <code>dc</code>
@@ -170,25 +172,14 @@ by a newline character). -->
 
 <p> You might want to use <code>rsp</code> and <code>rbp</code> registers or temporary registers (<code>r12</code>, <code>r13</code>, and <code>r14</code>)
 to implement your stack for computation in your code. For simplicity, you can assume that the <b>maximum number of element in the stack is 64</b> (i.e., your program should be able to handle at least 64 elements.)
-
-<p> We are providing a startup file which
-  contains the pseudo-code of <code>mydc.s</code> file. 
-  You can download the startup files by either of the following commands.
-</p>
-<pre class="ui message">
-<span style="color: green"># Method 1: use git clone (Recommended)</span>
-git clone https://github.com/kaist-ee209/assembly-skeleton.git assignment4
-</pre>
-<pre class="ui message">
-<span style="color: green"># Method 2: use wget and unzip</span>
-wget https://github.com/kaist-ee209/assembly-skeleton/archive/refs/heads/main.zip -O assignment4.zip
-unzip assignment4.zip
-mv assembly-skeleton-main assignment4
-</pre>
-<p>As usual, please check <code>README.md</code>.
+<p>
+  We provide skeleton code and several utilities
+  (e.g., Makefile and tests)
+  in <a href="./assignment4.tar.gz">assignment4.tar.gz</a>.
+  As usual, please check <code>README.md</code>.
   Please go through the
-pseudo-code before you begin writing the program. It is acceptable to
-use global (i.e. bss section or data section) variables
+  pseudo-code before you begin writing the program. It is acceptable to
+  use global (i.e. bss section or data section) variables
   in <code>mydc.s</code>. Please make sure that you create your own function to implement the power (^) arithmetic operator. In dc, negative numbers can be added by pre-appending '_' symbol to the number. For example
 
 <pre style="margin-left:2em;" class="ui message">
@@ -210,8 +201,6 @@ calculates "-4 - 3", prints the top value (<code>p</code>) as below, and quit th
 The <code>dc</code> tool also provides additional operations that
 manipulate the input. You are required to implement the following
 operators for this assignment. 
-
-<p><b>(Updated Apr. 30: You don't have to implement <code>d</code> and <code>r</code> functions .)</b></p>
 <!------------------------------------------------------------------------->
 
 <table class="ui celled table unstackable">
@@ -350,9 +339,9 @@ input.</strong> Here are the required error handlings.
     and should not be terminated (i.e., keep continuing).
   </li>
   <li>
-  For <code>p, d, r</code> operators, <code>dc</code> should again print '<code>dc:
+  For <code>p</code> operators, <code>dc</code> should again print '<code>dc:
 stack empty</code>' to <b>standard error</b> if the stack does not contain at least one
-operand (two for <code>r</code>).
+operand.
   </li>
   <li>
     For other operators (i.e., <code>f, c</code> operators</code>),
@@ -362,6 +351,12 @@ operand (two for <code>r</code>).
   <li>
     If <code>dc</code> has to divide by 0,
     it should print '<code>dc: divide by zero</code>' to <b>standard error</b>
+    and should be terminated.
+  </li>
+
+  <li>
+    If <code>dc</code> has to computer remainder by 0,
+    it should print '<code>dc: remainder by zero</code>' to <b>standard error</b>
     and should be terminated.
   </li>
 
@@ -464,9 +459,12 @@ if overflow:
 op2 = stack.pop()
 op1 = stack.pop()
 if op2 == 0:
-  fprintf(stderr, "dc: divide by zero\n")
+  fprintf(stderr, "dc: remainder by zero\n")
   exit(1)
-stack.push(op1%op2)</pre>
+stack.push(op1%op2)
+if overflow:
+  fprintf(stderr, "dc: overflow happens\n")
+  exit(1)</pre>
           <ul>
             <li>Note that <code>%</code> indicates <b>remainder</b> operation, not modulo.
               See <a href="https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/">here</a> for the difference.<br>
@@ -701,7 +699,7 @@ Please note that you might not get a full credit even if you pass the test with 
 <script src="../../vendor/moment.min.js"></script>>
 <script src="../../vendor/highlight.pack.js"></script>
 <script src="../../vendor/ee209_assignment.js"></script>
-<script>showTimer('2022-05-23T23:55:00+0900');</script>
+<script>showTimer('2022-11-25T23:55:00+0900');</script>
 </body>
 </html>
 

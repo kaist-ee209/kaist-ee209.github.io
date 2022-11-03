@@ -5,7 +5,7 @@ SUBMIT_DIR := .submit
 SUBMIT_FILES:= str.c sgrep.c readme EthicsOath.pdf
 SUBMIT := $(STUDENT_ID)_assign2.tar.gz
 
-TARGET := sgrep
+TARGET := sgrep client
 
 all: $(TARGET)
 
