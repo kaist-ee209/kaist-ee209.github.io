@@ -461,10 +461,7 @@ op1 = stack.pop()
 if op2 == 0:
   fprintf(stderr, "dc: remainder by zero\n")
   exit(1)
-stack.push(op1%op2)
-if overflow:
-  fprintf(stderr, "dc: overflow happens\n")
-  exit(1)</pre>
+stack.push(op1%op2)</pre>
           <ul>
             <li>Note that <code>%</code> indicates <b>remainder</b> operation, not modulo.
               See <a href="https://rob.conery.io/2018/08/21/mod-and-remainder-are-not-the-same/">here</a> for the difference.<br>
