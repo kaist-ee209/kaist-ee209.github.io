@@ -114,7 +114,7 @@ assignment. One will get
 
 <p> <b>Important</b>: Note that we do not accept late submission for the last
 assignment (assignment 5). Any late submission will result in zero credit for
-the last assignment.
+the last assignment. Token is not available for assignment 5.
 </p>
 
 <p><b>No late submission is allowed!</b></p>
