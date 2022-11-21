@@ -2,7 +2,7 @@
 # dc.s
 #
 # Desk Calculator (dc) (x86-64)
-# 
+#
 # Student ID: 2022xxxx
 # --------------------------------------------------------------------
 
@@ -24,11 +24,6 @@ scanfFormat:
 
     .section ".bss"
 
-buffer:
-    .skip  BUFFERSIZE
-
-stackBase:
-    .skip  4
 # --------------------------------------------------------------------
     .section ".text"
 
@@ -36,7 +31,7 @@ stackBase:
     # int powerfunc(int base, int exponent)
     # Runs the power function.  Returns result.
     # -------------------------------------------------------------
-    
+
     .globl	powerfunc
     .type   powerfunc, @function
 
@@ -67,7 +62,7 @@ main:
     # Note %rsp must be 16-B aligned before call
 
 .input:
-    
+
     # while (1) {
     # scanf("%s", buffer)
     # %al must be set to 0 before scanf call
@@ -115,7 +110,7 @@ main:
     # 	}
     # }
 
-.quit:	
+.quit:
     # return 0
     movq    $0, %rax
     addq    $BUFFERSIZE, %rsp
