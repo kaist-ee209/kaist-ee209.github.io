@@ -388,7 +388,7 @@ operand.
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 stack.push(op1+op2)
@@ -403,7 +403,7 @@ if overflow:
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 stack.push(op1-op2)
@@ -418,7 +418,7 @@ if overflow:
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 stack.push(op1*op2)
@@ -433,7 +433,7 @@ if overflow:
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 if op2 == 0:
@@ -455,7 +455,7 @@ if overflow:
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 if op2 == 0:
@@ -475,7 +475,7 @@ stack.push(op1%op2)</pre>
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 stack.push(power(op1,op2))
@@ -500,7 +500,7 @@ if overflow:
         <td>
           <pre>if len(stack) == 0:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 printf("%d\n", stack[len(stack)-1])</pre>
         </td>
       </tr>
@@ -525,7 +525,7 @@ printf("%d\n", stack[len(stack)-1])</pre>
         <td>
           <pre>if len(stack) == 0:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op1 = stack.pop()
 stack.push(op1)
 stack.push(op1)</pre></td>
@@ -537,7 +537,7 @@ stack.push(op1)</pre></td>
         <td>
           <pre>if len(stack) < 2:
   fprintf(stderr, "dc: stack empty\n")
-  return
+  continue
 op2 = stack.pop()
 op1 = stack.pop()
 stack.push(op2)
