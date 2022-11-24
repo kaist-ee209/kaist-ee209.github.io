@@ -43,7 +43,7 @@
 
 <p>(Required) Your program should be <em>modular</em> at the source code file level. Define interfaces and implementations, thus splitting your program into multiple files. Define stateless modules, abstract objects, or abstract data types as appropriate. Encapsulate data structures with functions.</p>
 
-<p>(Recommended) Your program may use the <code>DynArray</code> ADT (from early precepts). The source code is available here: <a href="resource-20220523/dynarray.h">dynarray.h</a> <a href="resource-20220523/dynarray.c">dynarray.c</a>.  </p>
+<p>(Recommended) Your program may use the <code>DynArray</code> ADT (from early precepts). The source code is available here: <a href="resource/dynarray.h">dynarray.h</a> <a href="resource/dynarray.c">dynarray.c</a>.  </p>
 
 <p>(Required) Your program should interpret commands from the <code>.ishrc</code> file when it is first launched. We will test your program by repeatedly copying command sequences to the <code>.ishrc</code> file and launching your program. If your program does not interpret commands from that file, then it will fail all of our tests. In that unfortunate circumstance, the grade would be penalized substantially.</p>
 
@@ -150,7 +150,7 @@ two</pre>
 </td>
 </tr>
 
-<!-- <span class='change'>
+<span class='change'>
 <tr>
 <td>
     <span class='change'>
@@ -191,7 +191,7 @@ two</pre>
 one</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 </span>
 
@@ -204,7 +204,7 @@ one</pre>
 
 
     
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
     <pre>"&#124;"</pre>
@@ -215,7 +215,7 @@ one</pre>
     <pre>&#124; (an ordinary token)</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 </span>
 
@@ -264,12 +264,12 @@ one</pre>
 </tbody>
 </table>
 
-<!-- <p>(Recommended) Your program's lexical analyzer should represent tokens so that the difference between quoted and unquoted special characters is adequately captured. For example, these two commands are very different, and that difference should be captured at the lexical analysis phase:</p>
+<p>(Recommended) Your program's lexical analyzer should represent tokens so that the difference between quoted and unquoted special characters is adequately captured. For example, these two commands are very different, and that difference should be captured at the lexical analysis phase:</p>
 <span class='change'>
-<pre class="ui message">cat file1 &#124; grep str
-cat file1 "&#124;" grep str
+<pre class="ui message">cat file1 > out
+cat file1 ">" out
 </pre>
-</span> -->
+</span>
 
 
 <h2 class="ui dividing header">Syntactic Analysis</h2>
@@ -305,7 +305,7 @@ cat file1 "&#124;" grep str
 </td>
 </tr>
 
-<!-- 
+
 <tr>
 <td>
     <span class='change'>
@@ -382,7 +382,7 @@ cat file1 "&#124;" grep str
     <pre>Invalid: Missing command name</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 </span>
 
@@ -405,17 +405,7 @@ cat file1 "&#124;" grep str
 
 <h2 class="ui dividing header">Process Handling</h2>
 
-<!-- <p>(Required) Your program should run any commands that ends with <code>&</code> in the background.</p> -->
-
 <p>(Required) Your program should call wait for every child that has been created.</p>
-
-<!-- <p>(Required) Your program should notify creation and termination of background process to stdout with its pid.</p> -->
-
-<!-- <p>(Required) Your program should bring the latest background process to the foreground when <code>fg</code> command is executed.</p> -->
-
-<!-- <p>(Required) Your program should print out appropriate error messages to stderr for inappropriate usage or circumstances for <code>&</code> and <code>fg</code> commands.</p> -->
-
-<!-- <p>(Recommended) Test your program's background processes functionality with sleep commands.</p> -->
 
 
 <h2 class="ui dividing header">Signal Handling</h2>
@@ -426,8 +416,6 @@ cat file1 "&#124;" grep str
 
 <p>(Required) Your program should use the <code>SIG_IGN</code> and <code>SIG_DFL</code> arguments to the <code>signal</code> function, as appropriate.</p>
 
-<!-- <p> (Required) Your program should handle the <code>SIGCHLD</code> signal for reaping the 'zombie processes' (i.e., child processes that have finished but are not yet reaped by the parent process) when implementing background processes. You can call <code>wait() or waitpid()</code> to reap the finished child processes.</p> -->
-
 <p>(Required) Your program should call the <code>sigprocmask</code> function near the beginning of the <code>main</code> function to make sure that <code>SIGINT</code>, <code>SIGQUIT</code>, and <code>SIGALRM</code> signals are not blocked.</p>
 
 
@@ -437,9 +425,9 @@ cat file1 "&#124;" grep str
 
 <p>(Required) Your program should treat '&lt;' and '&gt;' as special characters in lexical analysis.</p>
 
-<!-- <p>(Required) Your program should treat redirection of standard out in LHS of a pipe token as a syntax error.</p> -->
+<p>(Required) Your program should treat redirection of standard out in LHS of a pipe token as a syntax error.</p>
 
-<!-- <p>(Required) Your program should treat redirection of standard in in RHS of a pipe token as a syntax error.</p> -->
+<p>(Required) Your program should treat redirection of standard in in RHS of a pipe token as a syntax error.</p>
 
 <p>(Recommended) Test your syntactic analysis with these commands:</p>
 
@@ -537,7 +525,7 @@ cat file1 "&#124;" grep str
 </tr>
 
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
     <pre>cat file1 &#124; grep main &gt; result</pre>
@@ -576,7 +564,7 @@ cat file1 "&#124;" grep str
     <pre>Valid</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 <tr>
 <td>
@@ -604,7 +592,7 @@ cat file1 "&#124;" grep str
 </td>
 </tr>
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
         <pre>cat file1 &lt; &#124; grep str</pre>
@@ -615,7 +603,7 @@ cat file1 "&#124;" grep str
         <pre>Invalid: Standard input redirection without file name</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 <tr>
 <td>
@@ -630,7 +618,7 @@ cat file1 "&#124;" grep str
 </td>
 </tr>
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
         <pre>cat file1 &gt; &#124; grep str</pre>
@@ -641,7 +629,7 @@ cat file1 "&#124;" grep str
         <pre>Invalid: Standard output redirection without file name</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 <tr>
 <td>
@@ -670,7 +658,7 @@ cat file1 "&#124;" grep str
 </tr
 >
 
-<!-- <tr>
+<tr>
 <td>
     <span class='change'>
         <pre>cat file1 &#124; cat &lt; file2</pre>
@@ -694,7 +682,7 @@ cat file1 "&#124;" grep str
         <pre>Invalid: Multiple redirection of standard out</pre>
     </span>
 </td>
-</tr> -->
+</tr>
 
 
 
@@ -712,90 +700,6 @@ cat file1 "&#124;" grep str
 <p>(Required) Your program should truncate a file if the command's output is redirect to an existing file.</p>
 
 </span>
-<br>
-
-<!-- <h2  class="ui dividing header">Background process</h2>
-<p>(Recommended) Your program should treat '&' as special character in lexical analysis.</p>
-
-<p>(Required) Your program should treat a background operator without command as a syntax error.</p>
-
-<p>(Required) Your program should treat a background operator that is not located at the end of command line as a syntax error.</p>
-
-<p>(Required) Your program should notify creation and termination of a background process to stdout with its pid.</p>
-
-<p>(Required) Your program should bring the latest background process to the foreground when <code>fg</code> command is executed.</p>
-
-<p>(Required) Your program should print out appropriate error messages to stderr for inappropriate usage or circumstances for <code>&</code> and <code>fg</code> commands.</p>
-
-<p>(Recommended) Test your program's background processes functionality with sleep commands.</p>
-
-<p>(Recommended) Test your syntactic analysis with these commands:</p>
-
-<table class="ui celled table unstackable">
-<thead>
-<tr>
-<th><strong>INPUT LINE</strong>
-</th>
-<th><strong>VALID/INVALID</strong>
-</th>
-</tr>
-</thead>
-
-
-<tbody>
-
-<tr>
-<td>
-    <span class='change'>
-        <pre>cat &</pre>
-    </span>
-</td>
-<td>
-    <span class='change'>
-        <pre>Valid</pre>
-    </span>
-</td>
-</tr>
-
-<tr>
-<td>
-    <span class='change'>
-        <pre>cat file1 &</pre>
-    </span>
-</td>
-<td>
-    <span class='change'>
-        <pre>Valid</pre>
-    </span>
-</td>
-</tr>
-
-<tr>
-<td>
-    <span class='change'>
-        <pre>&</pre>
-    </span>
-</td>
-<td>
-    <span class='change'>
-        <pre>Invalid: Missing command name</pre>
-    </span>
-</td>
-</tr>
-
-<tr>
-<td>
-    <span class='change'>
-        <pre>cat & cat</pre>
-    </span>
-</td>
-<td>
-    <span class='change'>
-        <pre>Invalid: Invalid use of background</pre>
-    </span>
-</td>
-</tr>
-</table> -->
 <br>
 
 </body></html>

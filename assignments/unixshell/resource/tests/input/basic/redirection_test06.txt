@@ -1,0 +1,1 @@
+cat < ../../input_stream.txt < ../../output_stream.txt

@@ -74,7 +74,7 @@ We consider it plagiarism when you work on this assignment with another student 
 <ul>
   <li>A team should be a duo. 
   <li>It is totally okay to team up with a student from another section.
-  <li>One of the team members SHOULD register your team by 11:55 PM, 27th May.
+  <li>One of the team members SHOULD register your team by 11:55 PM, 30th Nov.
     We won't receive team registration afterward the deadline. <br>
     [<a href="https://forms.gle/m4xf2D3wVWr5F4jY9">Click here to register your team</a>]
   <li> If you want to be a team, but you don't have peers in this course, we allow you to make a post to find a teammate in CampusWire.
@@ -86,8 +86,7 @@ We consider it plagiarism when you work on this assignment with another student 
 
 <h2 class="ui dividing header">Building a Program</h2>
 
-<p>Use <code>-D_BSD_SOURCE</code> (or <code>-D_DEFAULT_SOURCE</code>) and <code>-D_GNU_SOURCE</code> options when building your program.</p>
-
+<p>You should write your own Makefile; Your shell should be compiled with <code>make</code> command. For certain library functions, you require <code>-D_BSD_SOURCE</code> (or <code>-D_DEFAULT_SOURCE</code>) and <code>-D_GNU_SOURCE</code> options. Please include them in your Makefile.</p>
 
 <h2 class="ui dividing header">Initialization and Termination</h2>
 
@@ -219,6 +218,17 @@ program should print an error message if there is any<!--  piped commmand, -->
 <li>A child process should not necessarily ignore the SIGQUIT signal. That is, unless the child process itself (beyond the control of the parent process) has installed a handler for SIGQUIT signals, the child process should terminate.</li>
 </ul>
 
+<h2 class="ui dividing header">Redirection</h2>
+<p>You are going to implement redirection of standard input and standard output as an extra credit.</p>
+<ul>
+	<li>The special character '&lt;' and '&gt;' should form separate token in lexical analysis.</li>
+	<li>The '&lt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard input to that file. It should be an error to redirect a command's standard input stream more than once. <!-- It should also be an error to redirect a command's standard input stream after a pipe token (See Redirection section in supplementary information page).</li> -->
+	<li>The '&gt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard output to that file. It should be an error to redirect a command's standard output stream more than once. <!-- It should also be an error to redirect a command's standard output stream before a pipe token (See Redirection section in supplementary information page).</li> -->
+
+        <li>If the standard input stream is redirected to a file that does not exist, then your program should print an appropriate error message.</li>
+	<li>If the standard output stream is redirected to a file that does not exist, then your program should create it. If the standard output stream is redirected to a file that already exists, then your program should destroy the file's contents and rewrite the file from scratch. Your program should set the permissions of the file to 0600.</li>
+</ul>
+
 
 <h2 class="ui dividing header">Error Handling</h2>
 
@@ -235,18 +245,8 @@ program should print an error message if there is any<!--  piped commmand, -->
 
 <p>Your program should contain no memory leaks. For every call of <code>malloc</code> or <code>calloc</code>, eventually there should be a corresponding call of <code>free</code>.</p>
 
+
 <h2 class="ui dividing header">Extra Credit 1 (extra 10% of the full score of this assignment)</h2>
-<p>You are going to implement redirection of standard input and standard output as an extra credit.</p>
-<ul>
-	<li>The special character '&lt;' and '&gt;' should form separate token in lexical analysis.</li>
-	<li>The '&lt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard input to that file. It should be an error to redirect a command's standard input stream more than once. <!-- It should also be an error to redirect a command's standard input stream after a pipe token (See Redirection section in supplementary information page).</li> -->
-	<li>The '&gt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard output to that file. It should be an error to redirect a command's standard output stream more than once. <!-- It should also be an error to redirect a command's standard output stream before a pipe token (See Redirection section in supplementary information page).</li> -->
-
-        <li>If the standard input stream is redirected to a file that does not exist, then your program should print an appropriate error message.</li>
-	<li>If the standard output stream is redirected to a file that does not exist, then your program should create it. If the standard output stream is redirected to a file that already exists, then your program should destroy the file's contents and rewrite the file from scratch. Your program should set the permissions of the file to 0600.</li>
-</ul>
-
-<!-- <h2 class="ui dividing header">Extra Credit 2 (extra 10% of the full score of this assignment)</h2>
 
 <p> You are going to implement pipe so that you can run command piplelines such as: </p>
 
@@ -265,6 +265,7 @@ program should print an error message if there is any<!--  piped commmand, -->
 
 </ul>
 
+<!--
 <h2 class="ui dividing header">Extra Credit 3 (extra 10% of the full score of this assignment) </h2>
 
 You are going to implement background processes. For that, you need to support this additional built-in command.
@@ -303,18 +304,18 @@ When the background process is created, your program should print "<code>[%pid]<
 When the background process is terminated, your program should print "<code>[%pid]</code> Background process is terminated"
 For that, you need to install a signal handler for <code>SIGCHLD</code>.
 </li>
-</ul> -->
+</ul>
+-->
+<h2 class="ui dividing header">Extra Credit 2 (extra 5% of your earned score including the extra credit) </h2>
 
-<h2 class="ui dividing header">Extra Credit 2 (extra 20% of your earned score including the extra credit) </h2>
-
-<p> If you do this assignment on your own without a partner, you will receive extra credit which is worth 20% of (your basic score + extra credit 1). Here is an example. If your score is 50 and you got extra credit 1, your earned score is 50 + 10 = 60.  If you worked alone, you will receive 20% x 60 = 12 additional points as extra credit 2. So, your total score will be 72. </p>
+<p> If you do this assignment on your own without a partner, you will receive extra credit which is worth 5% of (your basic score + extra credit 1). Here is an example. If your score is 50 and you got extra credit 1, your earned score is 50 + 10 = 60.  If you worked alone, you will receive 5% x 60 = 3 additional points as extra credit 2. So, your total score will be 63. </p>
 
 
 <h2 class="ui dividing header">Logistics</h2>
 
 <p>Develop on lab machines. Use your favorite edtor to create source code. Use <code>make</code> to automate the build process. Use <code>gdb</code> to debug.</p>
 
-<p>As always, we provide you <a href="resource-20220523/assignment5.tar.gz">the startup file</a>. An executable version of the assignment solution is available in <code><a href="resource-20220523/sampleish">sampleish</a></code>. Use it to resolve any issues concerning the desired functionality of your program. We also provide the <a href="resource-20220523/dynarray.h">interface</a> and <a href="resource-20220523/dynarray.c">implementation</a> of the <code>DynArray</code> ADT. You are welcome to use that ADT in your program. You may use <a href="resource-20220523/dfa.c">dfa.c</a> as reference. Note, however, it does not have the full functionality required by ish.</p>
+<p>As always, we provide you <a href="resource/assignment5.tar.gz">the startup file</a>. An executable version of the assignment solution is available in <code><a href="resource/sampleish">sampleish</a></code>. Use it to resolve any issues concerning the desired functionality of your program. We also provide the <a href="resource/dynarray.h">interface</a> and <a href="resource/dynarray.c">implementation</a> of the <code>DynArray</code> ADT. You are welcome to use that ADT in your program. You may use <a href="resource/dfa.c">dfa.c</a> as reference. Note, however, it does not have the full functionality required by ish.</p>
 
 <p>Your <code>readme</code> file should contain:</p>
 
@@ -457,7 +458,7 @@ Explicitly refer to the function's parameters (by name) and the function's retur
 
 <script src="../../vendor/moment.min.js"></script>
 <script src="../../vendor/ee209_assignment.js"></script>
-<script>showTimer('2022-06-10T23:55:00+0900');</script>
+<script>showTimer('2022-12-16T23:55:00+0900');</script>
 </body>
 
 

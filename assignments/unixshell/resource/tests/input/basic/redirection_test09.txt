@@ -1,0 +1,1 @@
+cat ./input_stream.txt > ./output_stream1.txt > ./output_stream2.txt
