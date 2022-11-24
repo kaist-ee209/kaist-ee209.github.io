@@ -52,7 +52,7 @@ def run_test(filter):
     n_tests = 0
     n_success = 0
 
-    for subdir in ['basic', 'regexp', 'ishrc']:
+    for subdir in ['basic','ishrc']:
         input_dir = os.path.join(ROOT, '../tests/input', subdir)
         answer_dir = os.path.join(ROOT, '../tests/answer', subdir)
 
