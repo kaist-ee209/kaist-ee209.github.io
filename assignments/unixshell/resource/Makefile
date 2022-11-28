@@ -4,10 +4,14 @@ SUBMIT_FILES:= *.c *.h Makefile readme EthicsOath.pdf
 SUBMIT := $(STUDENT_ID)_assign5.tar.gz
 
 TARGET = ish
+SRCS = $(wildcard *.c)
+OBJS = $(patsubst %.o, %.o, $(SRCS))
 
 # FIX THIS FILE
 
 all: $(TARGET)
+
+$(TARGET): $(OBJS) 
 
 submit:
 	mkdir -p $(SUBMIT_DIR)
