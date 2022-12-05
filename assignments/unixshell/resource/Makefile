@@ -5,7 +5,7 @@ SUBMIT := $(STUDENT_ID)_assign5.tar.gz
 
 TARGET = ish
 SRCS = $(wildcard *.c)
-OBJS = $(patsubst %.o, %.o, $(SRCS))
+OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 # FIX THIS FILE
 
