@@ -32,13 +32,13 @@ Students are expected to regularly check the course webpage, class schedule upda
 </tr>
 
 <tr>
-<td> 55% </td>
+<td> 50% </td>
 <td> Programming assignments</td>
 </tr>
 
 <tr>
-<td> 5% </td>
-<td> Attendance / Contribution  </td>
+<td> 10% </td>
+<td> Contribution  </td>
 </tr>
 
 </tbody>
