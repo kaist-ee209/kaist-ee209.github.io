@@ -14,18 +14,18 @@ assignments account for 10%.
 
 <ul>
 <li> Assignment 0:
-<a href="assignment0/index.html"> Drawing a Rectangle</a> (due: 09/09 11:55pm)
+Drawing a Rectangle (<span style="color:blue;">TBA</span>)
 </li>
 <li> Assignment 1:
-<a href="assignment1/index.html"> A Word Counting Program</a> (due: 09/23 11:55pm) </li>
+A Word Counting Program (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 2:
-<a href="assignment2/index.html"> String Manipulation</a> (due: 10/14 11:55pm) </li>
+String Manipulation (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 3:
-<a href="assignment3/index.html"> Customer Management Table </a> (due: 11/04 11:55pm) </li>
+Customer Management Table (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 4:
-<a href="assignment4/index.html"> Assembly Language Programming</a> (due: 11/25 11:55pm) </li>
+Assembly Language Programming (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 5:
-<a href="assignment5/index.html">Unix Shell Assignment</a> (due: 12/16 11:55pm) </li>
+Unix Shell Assignment (<span style="color:blue;">TBA</span>) </li>
 </ul>
 
 
