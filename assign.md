@@ -32,25 +32,25 @@ Unix Shell Assignment (<span style="color:blue;">TBA</span>) </li>
 Use the KLMS to submit your
 assignments. (Link will be announced at KLMS.) Your submission should be one gzipped tar file whose name is <b>YourStudentID_assign#.tar.gz</b>.
 
-For example, if your student ID is 20221234, and it is for assignment #1,
-please name the file as 20221234_assign1.tar.gz.
+For example, if your student ID is 20231234, and it is for assignment #1,
+please name the file as 20231234_assign1.tar.gz.
 
 </p><p>
-To create the .tar.gz, first move all your files to the directory (20221234_assign1).
+To create the .tar.gz, first move all your files to the directory (20231234_assign1).
 </p>
 
 <p>
 <pre class="ui message">
-mkdir 20221234_assign1
-mv all_your_files 20221234_assign1
+mkdir 20231234_assign1
+mv all_your_files 20231234_assign1
 </pre>
 
 </p><p>
-Then, move to your directory 20221234
+Then, move to your directory 20231234
 
 </p>
 <pre class="ui message">
-cd 20221234_assign1
+cd 20231234_assign1
 </pre>
 
 <p>
@@ -58,15 +58,15 @@ Create a .tar.gz file by the 'tar' command like
 
 </p><p>
 <pre class="ui message">
-tar -zcf 20221234_assign1.tar.gz *
+tar -zcf 20231234_assign1.tar.gz *
 </pre>
 
 </p><p>
-Then, you'll see  20221234_assign1.tar.gz. If you want to decompress and release the files in it (in a different directory),
+Then, you'll see  20231234_assign1.tar.gz. If you want to decompress and release the files in it (in a different directory),
 
 </p>
 <pre class="ui message">
-tar zxf 20221234_assign1.tar.gz
+tar zxf 20231234_assign1.tar.gz
 </pre>
 
 <h2> Ethics Document (Important) </h2>
@@ -164,8 +164,7 @@ Because we used an automatic grading system, trivial mistake in your submission
 may cause huge amount of deduction in your assignment score.  For such
 exceptional circumstances, you can request changes and get modified grading at
 the TA's discretion.  You will get <font color="#FF0000">15% amount of
-deduction</font> from your total score. For <b>assignment 0</b>, you will not
-get this panelty. 
+deduction</font> from your total score.
 </p>
 
 <h2> Extra point </h2>
