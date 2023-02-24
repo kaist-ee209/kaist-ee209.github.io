@@ -13,7 +13,7 @@ assignments. Each programming assignment takes up 10% of your total grade. Some 
 
 <ul>
 <li> Assignment 1:
-Drawing a Rectangle & A Word Counting Program (<span style="color:blue;">TBA</span>) </li>
+A Word Counting Program (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 2:
 String Manipulation (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 3:
