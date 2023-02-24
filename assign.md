@@ -88,31 +88,21 @@ assignment files, or we won't grade your assignment.
 </p><h2> Late Submission </h2>
 <hr>
 <p>
-Students can use late submission (i.e. tokens) which can be late up
-to <i>three days</i> without penalty for the first five programming
-assignments. That is, you can apply your late submission days (within
-3 days in total) spread over the first five programming
-assignments. The minimum granulaity is one day: if you are 1 hour
-late, that's still counted as one day late. Your token will be used
-automatically, i.e., you will get panelty after three day delays.
+Students can use two late submission tokens which can be late up
+to <i>one day</i> with penalty for the programming assignments. 
+That is, you can use your tokens for a total of two assignments.
+Your token will be used automatically, i.e., the token is applied 
+to the first two assignments you submit late.
 
-Beyond the free late days, we will enforce this penalty rule for each
-assignment. One will get
+With your tokens, you can submit your assignment with the following penalty. 
 </p><ul>
-<li> 95% of the full credit up to 3 hours late,
-</li><li> 90% of the full credit up to 6 hours late,
-</li><li> 85% of the full credit up to 12 hours late,
-</li><li> 75% of the full credit up to 24 hours late,
-</li><li> 50% of the full credit up to 48 hours late,
-</li><li>  0% of the full credit beyond 48 hours late
+<li> 95% of the full credit up to 1 hour late,
+</li><li> 80% of the full credit up to 24 hours late,
+</li><li>  0% of the full credit beyond 24 hours late.
 </li></ul>
 
-<p> <b>Important</b>: Note that we do not accept late submission for the last
-assignment (assignment 5). Any late submission will result in zero credit for
-the last assignment. Token is not available for assignment 5.
+<p> <b>Important</b>: Any late submission without token will result in zero credit.
 </p>
-
-<p><b>No late submission is allowed!</b></p>
 
 <h2> Collaboration Policy </h2>
 <hr>
@@ -170,11 +160,9 @@ deduction</font> from your total score.
 <h2> Extra point </h2>
 <hr>
 <p>
-Some programming assignments provide extra points.  Except for Assignment 5,
-the total score, including these extra points, cannot exceed the perfect score
-that you can obtain from normal tasks.  With the exception, any extra points
-from Assignment 5 that gained beyond the perfect score will affect your final
-grade.
+Some programming assignments provide extra points. These extra points cannot exceed 
+the total score that you can obtain from assignments. But, within the total score,
+the extra points will affect your final score. 
 </p>
 
 <br>
