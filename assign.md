@@ -101,7 +101,12 @@ With your tokens, you can submit your assignment with the following penalty.
 </li><li>  0% of the full credit beyond 24 hours late.
 </li></ul>
 
-<p> <b>Important</b>: Any late submission without token will result in zero credit.
+<p> <b>Important</b>: 
+<ul>
+<li> Any late submission without token will result in zero credit.
+</li><li> Note that we do not accept late submission for the <b>last
+assignment (assignment 5)</b>.
+</li></ul>
 </p>
 
 <h2> Collaboration Policy </h2>
