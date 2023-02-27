@@ -57,11 +57,12 @@ part. You must do that part of the assignment <em>completely on your
 own</em>, without consulting with the course instructors, lab TAs,
 mailing list, etc., except for clarification of requirements. You might
 think of the "on your own" part of each assignment as a small
-take-home exam.</p>
+take-home exam. </p>
 
-<p>For this assignment, "detecting and reporting unterminated
+<!-- Commnet out error check-->
+<!--p>For this assignment, "detecting and reporting unterminated
 comments" (as described below) is the "on your own" part. That part is
-worth 10% of this assignment.</p>
+worth 10% of this assignment.</p-->
 
 
 <!--h3>Background</h3>
@@ -118,17 +119,17 @@ character constant (<code>'...'</code>).</li>
 <h2 class="ui dividing header" >Functionality</h2>
 
 <p>Your program should read characters from the standard input stream,
-and write the output to the standard output stream and possibly to
-the standard error stream. Specifically, your program should (1) read
+and write the output to the standard output stream <!--and possibly to
+the standard error stream-->. Specifically, your program should (1) read
 text from the standard input stream, (2) write the number of
 newlines, words, and characters in the input text to the standard output
-stream with block and line comment replaced by a space and an empty string respectively, and (3) write error and
-warning messages as appropriate to the standard error stream. A
+stream with block and line comment replaced by a space and an empty string respectively<!--, and (3) write error and
+warning messages as appropriate to the standard error stream-->. A
 typical execution of your program from a shell might look like
 this:</p>
 
 <div class="ui message">
-<pre>./wc209 &lt; <em>somefile</em>.txt 2&gt; <em>errorandwarningmessages</em>
+<pre>./wc209 &lt; <em>somefile</em>.txt <!--2&gt; <em>errorandwarningmessages</em>-->
 3 13 300</pre>
 </div>
 
@@ -164,8 +165,8 @@ space. Examples:</p>
 </th>
 <th>Standard Output Stream
 </th>
-<th>Standard Error Stream
-</th>
+<!--th>Standard Error Stream
+</th-->
 </tr>
 </thead>
 <tbody>
@@ -177,8 +178,6 @@ space. Examples:</p>
     <td>
         <code>1<sub>s</sub>2<sub>s</sub>8<sub>n</sub></code>
     </td>
-    <td>
-    </td>
 </tr>
 
 <tr>
@@ -189,8 +188,6 @@ space. Examples:</p>
     <td>
         <code>1<sub>s</sub>2<sub>s</sub>9<sub>n</sub></code>
     </td>
-    <td>
-    </td>
 </tr>
 
 <tr>
@@ -200,8 +197,6 @@ space. Examples:</p>
     </td>
     <td>
         <code>1<sub>s</sub>2<sub>s</sub>9<sub>n</sub></code>
-    </td>
-    <td>
     </td>
 </tr>
 
@@ -223,8 +218,8 @@ space. Examples:</p>
         </th>
         <th>Standard Output Stream
         </th>
-        <th>Standard Error Stream
-        </th>
+        <!--th>Standard Error Stream
+        </th-->
       </tr>
     </thead>
     <tbody>
@@ -236,8 +231,6 @@ space. Examples:</p>
         <td>
           <code>0<sub>s</sub>1<sub>s</sub>3<sub>n</sub></code>
         </td>
-        <td>
-        </td>
       </tr>
 
       <tr>
@@ -247,8 +240,6 @@ space. Examples:</p>
         </td>
         <td>
           <code>1<sub>s</sub>2<sub>s</sub>7<sub>n</sub></code>
-        </td>
-        <td>
         </td>
       </tr>
     </tbody>
@@ -271,8 +262,8 @@ Example:</p>
         </th>
         <th>Standard Output Stream
         </th>
-        <th>Standard Error Stream
-        </th>
+        <!--th>Standard Error Stream
+        </th-->
       </tr>
     </thead>
     <tbody>
@@ -284,8 +275,6 @@ Example:</p>
         <td>
           <code>1<sub>s</sub>1<sub>s</sub>4<sub>n</sub></code>
         </td>
-        <td>
-        </td>
       </tr>
       <tr>
         <td><code>abc//def</code>
@@ -294,8 +283,6 @@ Example:</p>
         </td>
         <td>
           <code>0<sub>s</sub>1<sub>s</sub>3<sub>n</sub></code>
-        </td>
-        <td>
         </td>
       </tr>
     </tbody>
@@ -319,8 +306,8 @@ a comment is counted as one character. Examples:</p>
 </th>
 <th>Standard Output Stream
 </th>
-<th>Standard Error Stream
-</th>
+<!--th>Standard Error Stream
+</th-->
 </tr>
 </thead>
 <tbody>
@@ -331,8 +318,6 @@ a comment is counted as one character. Examples:</p>
 </td>
 <td> <code>3<sub>s</sub>3<sub>s</sub>13<sub>n</sub></code>
 </td>
-<td>
-</td>
 </tr>
 
 <tr>
@@ -342,8 +327,6 @@ a comment is counted as one character. Examples:</p>
 </td>
 <td> <code>4<sub>s</sub>3<sub>s</sub>14<sub>n</sub></code>
 </td>
-<td>
-</td>
 </tr>
 <tr>
 <td><code>abc//def<sub>n</sub>ghi<sub>n</sub>mno<sub>n</sub></code>
@@ -351,8 +334,6 @@ a comment is counted as one character. Examples:</p>
 <td><code>abc<sub>n</sub>ghi<sub>n</sub>mno<sub>n</sub></code>
 </td>
 <td> <code>3<sub>s</sub>3<sub>s</sub>12<sub>n</sub></code>
-</td>
-<td>
 </td>
 </tr>
 </tbody>
@@ -371,8 +352,8 @@ a comment is counted as one character. Examples:</p>
     </th>
     <th>Standard Output Stream
     </th>
-    <th>Standard Error Stream
-    </th>
+    <!--th>Standard Error Stream
+    </th-->
 </tr>
 </thead>
 <tbody>
@@ -384,8 +365,6 @@ a comment is counted as one character. Examples:</p>
 </td>
 <td> <code>1<sub>s</sub>2<sub>s</sub>13<sub>n</sub></code>
 </td>
-<td>
-</td>
 </tr>
 
 <tr>
@@ -394,8 +373,6 @@ a comment is counted as one character. Examples:</p>
 <td><code>abc<sub>n</sub>*/jkl<sub>n</sub></code>
 </td>
 <td> <code>2<sub>s</sub>2<sub>s</sub>10<sub>n</sub></code>
-</td>
-<td>
 </td>
 </tr>
 </tbody>
@@ -664,84 +641,12 @@ a comment is counted as one character. Examples:</p>
 
 -->
 
-<p>Your program should detect an unterminated comment. If your program detects end-of-file before a comment is terminated, it should write the message "Error: line X: unterminated comment" to the standard error stream. "X" should be the number of the line on which the unterminated comment begins. Examples:</p>
-
-<div class="scroll-x-container">
-<table class="ui celled table unstackable">
-<thead>
-<tr>
-    <th>Standard Input Stream
-    </th>
-    <th>Standard Output Stream
-    </th>
-    <th>Standard Error Stream
-    </th>
-</tr>
-</thead>
-<tbody>
-
-
-<tr>
-<td><code>abc/*def<sub>n</sub>ghi<sub>n</sub></code>
-</td>
-<td>
-</td>
-<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
-</td>
-</tr>
-
-<tr>
-<td><code>abcdef<sub>n</sub>ghi/*<sub>n</sub></code>
-</td>
-<td>
-</td>
-<td><code>Error:<sub>s</sub>line<sub>s</sub>2:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
-</td>
-</tr>
-
-<tr>
-<td><code>abc/*def/ghi<sub>n</sub>jkl<sub>n</sub></code>
-</td>
-<td>
-</td>
-<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
-</td>
-</tr>
-
-<tr>
-<td><code>abc/*def*ghi<sub>n</sub>jkl<sub>n</sub></code>
-</td>
-<td>
-</td>
-<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
-</td>
-</tr>
-
-<tr>
-<td><code>abc/*def<sub>n</sub>ghi*<sub>n</sub></code>
-</td>
-<td>
-</td>
-<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
-</td>
-</tr>
-
-<tr>
-<td><code>abc/*def<sub>n</sub>ghi/<sub>n</sub></code>
-</td>
-<td>
-</td>
-<td><code>Error:<sub>s</sub>line<sub>s</sub>1:<sub>s</sub>unterminated<sub>s</sub>comment<sub>n</sub></code>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>Your program don't have to consider unterminated comment. You can assume that all comments are correctly terminated.</p>
 
 <p>Your program (more precisely, its <code>main</code> function)
-should return <code>EXIT_FAILURE</code> if it was unsuccessful, that
+should return <code>EXIT_FAILURE</code> if it was unsuccessful<!--, that
 is, if it detects an unterminated comment and so was unable to remove
-comments properly. Otherwise it should
+comments properly-->. Otherwise it should
 return <code>EXIT_SUCCESS</code> or, equivalently 0. Note that
 <code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> are defined in the standard header
 file, <code>stdlib.h</code>.</p>
@@ -778,7 +683,7 @@ at <a href="http://introcs.cs.princeton.edu/java/51language/">http://introcs.cs.
 
 <p>Express as much of the program's logic as you can within your DFA. The more logic you express in your DFA, the better your grade on the DFA will be.</p>
 
-<p>To properly report unterminated comments, your program must contain logic to keep track of the current line number of the standard input stream. You need not show that logic in your DFA.</p>
+<!--p>To properly report unterminated comments, your program must contain logic to keep track of the current line number of the standard input stream. You need not show that logic in your DFA.</p-->
 
 <h3>Step 2: Create Source Code</h3>
 
@@ -807,22 +712,21 @@ tar -zxf assignment1.tar.gz
 </pre>
 </div>
 
-<p style="">(2) <code>samplewc209</code> is an executable version of a correct assignment solution. Your program should write <em>exactly</em> (character for character) the same data to the standard output stream and the standard error stream as <code>samplewc209</code> does. You should test your program using commands similar to these:</p>
+<p style="">(2) <code>samplewc209</code> is an executable version of a correct assignment solution. Your program should write <em>exactly</em> (character for character) the same data to the standard output stream as <code>samplewc209</code> does. You should test your program using commands similar to these:</p>
 
-<div class="ui message" style=""><pre>./samplewc209 &lt; <em>somefile</em>.c &gt; output1 2&gt; errors1
-./wc209 &lt; <em>somefile</em>.c &gt; output2 2&gt; errors2
+<div class="ui message" style=""><pre>./samplewc209 &lt; <em>somefile</em>.c &gt; output1
+./wc209 &lt; <em>somefile</em>.c &gt; output2
 diff output1 output2
-diff errors1 errors2
-rm output1 errors1 output2 errors2</pre>
+rm output1 output2 </pre>
 </div>
 
 <p style="">The Unix <code>diff</code> command finds
 differences between two given files. <code>diff output1
 output2</code> produces output, then <code>samplewc209</code> and your
 program have written different characters to the standard output
-stream. Similarly, if the command <code>diff errors1 errors2</code>
+stream. <!--Similarly, if the command <code>diff errors1 errors2</code>
 produces output, then <code>samplewc209</code> and your program have
-written different characters to the standard error stream.</p>
+written different characters to the standard error stream.</p> -->
 
 <!--<p style="margin-left:2em;">(3) <code>testdecomment</code> and <code>testdecommentdiff</code> are bash scripts that automate the testing process. Comments at the beginning of those files describe how to use them. After copying the scripts to your project directory, you may need to execute the commands <code>chmod 700 testdecomment</code> and <code>chmod 700 testdecommentdiff</code> to give them "executable" permissions.</p> -->
 
@@ -830,11 +734,10 @@ written different characters to the standard error stream.</p>
 <p>You also can test your program against its own source code using a command sequence such as this:</p>
 
 <div class="ui message">
-<pre>./samplewc209 &lt; wc209.c &gt; output1 2&gt; errors1
-./wc209 &lt; wc209.c &gt; output2 2&gt; errors2
+<pre>./samplewc209 &lt; wc209.c &gt; output1
+./wc209 &lt; wc209.c &gt; output2
 diff output1 output2
-diff errors1 errors2
-rm output1 errors1 output2 errors2</pre>
+rm output1 output2</pre>
 </div>
 
 <h3>Step 5: Create a <code>readme</code> File and an Ethics document</h3>
@@ -999,7 +902,7 @@ Please note that you might not get a full credit even if you pass the test with 
 
 <script src="../../vendor/moment.min.js"></script>
 <script src="../../vendor/ee209_assignment.js"></script>
-<script>showTimer('2022-09-23T23:55:00+0900');</script>
+<script>showTimer('2023-03-14T23:55:00+0900');</script>
 </body>
 </html>
 
