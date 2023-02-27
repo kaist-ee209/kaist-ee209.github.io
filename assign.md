@@ -8,12 +8,12 @@ permalink: /assignments/
 
 <p>
 We will do <font color="#FF0000">five</font> programming
-assignments. Each programming assignment takes up 10% of your total grade. Some assignments provide extra credit beyond your total grade.
+assignments. Each programming assignment takes up 10% of your total grade.
 </p>
 
 <ul>
 <li> Assignment 1:
-A Word Counting Program (<span style="color:blue;">TBA</span>) </li>
+<a href="assignment1/index.html"> A Word Counting Program</a> (due: 03/14 11:55pm) </li>
 <li> Assignment 2:
 String Manipulation (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 3:
