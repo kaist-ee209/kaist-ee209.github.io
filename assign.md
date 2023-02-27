@@ -166,7 +166,7 @@ deduction</font> from your total score.
 <hr>
 <p>
 Some programming assignments provide extra points. These extra points cannot exceed 
-the total score that you can obtain from assignments. But, within the total score,
+the total score (50% of final score) that you can obtain from assignments. But, within the total score,
 the extra points will affect your final score. 
 </p>
 
