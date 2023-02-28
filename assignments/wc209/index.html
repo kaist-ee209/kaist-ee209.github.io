@@ -643,12 +643,12 @@ a comment is counted as one character. Examples:</p>
 
 <p>Your program don't have to consider unterminated comment. You can assume that all comments are correctly terminated.</p>
 
-<p>Your program (more precisely, its <code>main</code> function)
-should return <code>EXIT_FAILURE</code> if it was unsuccessful<!--, that
+<p><!--Your program (more precisely, its <code>main</code> function)
+should return <code>EXIT_FAILURE</code> if it was unsuccessful, that
 is, if it detects an unterminated comment and so was unable to remove
-comments properly-->. Otherwise it should
+comments properly-->At the end of your main function, your program should
 return <code>EXIT_SUCCESS</code> or, equivalently 0. Note that
-<code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> are defined in the standard header
+<code>EXIT_SUCCESS</code> <!--and <code>EXIT_FAILURE</code> are-->is defined in the standard header
 file, <code>stdlib.h</code>.</p>
 
 <p>Your program should work for standard input lines of any length whose number
