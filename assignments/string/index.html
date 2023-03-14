@@ -520,6 +520,7 @@ slow (e.g., seconds of delay for a short text).
 <div class="ui message" style="overflow-x: auto">
 <pre>
 $ chmod +x ./tests/input/find01.sh
+$ ./tests/input/find01.sh >stdout 2>stderr
 $ diff ./tests/answer/find01.stdout stdout
 $ diff ./tests/answer/find01.stderr stderr
 </pre>
@@ -570,16 +571,16 @@ following files:</p>
 <li> <a href="../EthicsOath.docx">Observance of Ethics</a>. Sign on the document, save it into a PDF file, and submit it. </li>
 </ul>
 
-<p>In order to create a gzipped tar file, (1) Put <code>readme</code> and <code>EthicsOath.pdf</code> into the current directory, 
-	where your <code>str.c</code> and <code>sgre.c</code> exist; (2) Change the <code>STUDENT_ID</code> with yours; (3) run the following command:</p>
+<p>In order to create a gzipped tar file, (1) put <code>readme</code> and <code>EthicsOath.pdf</code> into the current directory where 
+	your <code>str.c</code> and <code>sgrep.c</code> exist, (2) change the <code>STUDENT_ID</code> with yours, and (3) run the following command:</p>
 
 <div class="ui message">
 <pre>
-make submit
+$ make submit
 </pre>
 </div>
 
-<p>If you complete all steps, <code>(STUDENT_ID)_assign2.tar.gz</code> will be created.</p>
+<p>If you complete all steps, <b>YourStudentID_assign2.tar.gz</b> will be created.</p>
 
 <p>Finally, your submission file should look like this: </p>
 <div class="ui segment">
