@@ -122,6 +122,8 @@ mkdir ee209
 chmod 700 ee209
 </pre>
 
+<h3> Manual Grading of the assignments </h3>
+Once submitted no algorithmic change to the code is allowed and you cannot propose any changes to the submitted code.
 
 <h3> Exam Conduct</h3>
 
