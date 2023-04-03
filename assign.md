@@ -17,7 +17,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <li> Assignment 2:
 <a href="assignment2/index.html"> String Manipulation</a> (due: 04/02 11:55pm) </li>
 <li> Assignment 3:
-Customer Management Table (<span style="color:blue;">TBA</span>) </li>
+<a href="assignment3/index.html"> Customer Management Table</a> (due: 04/23 11:55pm) </li>
 <li> Assignment 4:
 Assembly Language Programming (<span style="color:blue;">TBA</span>) </li>
 <li> Assignment 5:
