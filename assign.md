@@ -19,7 +19,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <li> Assignment 3:
 <a href="assignment3/index.html"> Customer Management Table</a> (due: 04/24 11:55pm) </li>
 <li> Assignment 4:
-Assembly Language Programming (<span style="color:blue;">TBA</span>) </li>
+<a href="assignment4/index.html"> Assembly Language Programming</a> (due: 05/21 11:55pm) </li>
 <li> Assignment 5:
 Unix Shell Assignment (<span style="color:blue;">TBA</span>) </li>
 </ul>
