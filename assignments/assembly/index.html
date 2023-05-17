@@ -328,8 +328,10 @@ input.</strong> Here are the required error handlings.
 <ul>
   <li>
     Your program should ignore trailing characters from the input value.
-    In other words, you can just check the first letter, and regard the input as an operand if it is a number or starting with _.
-    For example, regard <code>123abc</code> as <code>123</code>, and <code>pabc</code> as <code>p</code>.
+    In other words, you can just check the first letter, and regard the input as an operand if it is a number or starting with _. 
+    For example, regard <code>123abc</code> as <code>123</code>, <code>pabc</code> as <code>p</code>, and
+    <code>abc123</code> as <code>a</code> (not an operator, do nothing). Additionally, the words pre-appending '_'
+    symbol to the characters, such as _abc, can be ignored or treated as 0.
   </li>
   <li>
     You should check whether the stack has at
