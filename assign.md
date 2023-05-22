@@ -21,7 +21,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <li> Assignment 4:
 <a href="assignment4/index.html"> Assembly Language Programming</a> (due: 05/21 11:55pm) </li>
 <li> Assignment 5:
-Unix Shell Assignment (<span style="color:blue;">TBA</span>) </li>
+<a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 05/21 11:55pm) </li>
 </ul>
 
 
@@ -89,19 +89,19 @@ assignment files, or we won't grade your assignment.
 <hr>
 <p>
 Students can use two late submission tokens which can be late up
-to <i>one day</i> with penalty for the programming assignments. 
+to <i>one day</i> with penalty for the programming assignments.
 That is, you can use your tokens for a total of two assignments.
-Your token will be used automatically, i.e., the token is applied 
+Your token will be used automatically, i.e., the token is applied
 to the first two assignments you submit late.
 
-With your tokens, you can submit your assignment with the following penalty. 
+With your tokens, you can submit your assignment with the following penalty.
 </p><ul>
 <li> 95% of the full credit up to 1 hour late,
 </li><li> 80% of the full credit up to 24 hours late,
 </li><li>  0% of the full credit beyond 24 hours late.
 </li></ul>
 
-<p> <b>Important</b>: 
+<p> <b>Important</b>:
 <ul>
 <li> Any late submission without token will result in zero credit.
 </li><li> Note that we do not accept late submission for the <b>last
@@ -149,7 +149,7 @@ So you can check your functionality using diff command.</p>
 diff output1 output2
 diff errors1 errors2
 rm output1 errors1 output2 errors2</pre>
-</div> 
+</div>
 
 <h2> Fix a small mistake </h2>
 <hr>
@@ -165,9 +165,9 @@ deduction</font> from your total score. Note that once submitted no alogirhtm ch
 <h2> Extra point </h2>
 <hr>
 <p>
-Some programming assignments provide extra points. These extra points cannot exceed 
+Some programming assignments provide extra points. These extra points cannot exceed
 the total score (50% of final score) that you can obtain from assignments. But, within the total score,
-the extra points will affect your final score. 
+the extra points will affect your final score.
 </p>
 
 <br>
