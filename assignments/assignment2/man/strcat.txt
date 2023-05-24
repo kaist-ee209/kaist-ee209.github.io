@@ -1,0 +1,51 @@
+STRCAT(3)                        Linux Programmer's Manual                        STRCAT(3)
+
+
+
+NAME
+       strcat, strncat - concatenate two strings
+
+SYNOPSIS
+       #include <string.h>
+
+       char *strcat(char *dest, const char *src);
+
+       char *strncat(char *dest, const char *src, size_t n);
+
+DESCRIPTION
+       The  strcat()  function  appends  the src string to the dest string, overwriting the
+       terminating null byte ('\0') at the end of dest, and then adds  a  terminating  null
+       byte.   The  strings may not overlap, and the dest string must have enough space for
+       the result.
+
+       The strncat() function is similar, except that
+
+       *  it will use at most n characters from src; and
+
+       *  src does not need to be null-terminated if it contains n or more characters.
+
+       As with strcat(), the resulting string in dest is always null-terminated.
+
+       If src contains n or more characters, strncat() writes n+1  characters  to  dest  (n
+       from  src  plus  the terminating null byte).  Therefore, the size of dest must be at
+       least strlen(dest)+n+1.
+
+
+RETURN VALUE
+       The strcat() and strncat() functions return a pointer to the resulting string dest.
+
+CONFORMING TO
+       SVr4, 4.3BSD, C89, C99.
+
+SEE ALSO
+       bcopy(3),  memccpy(3),  memcpy(3),  strcpy(3),  string(3),  strncpy(3),   wcscat(3),
+       wcsncat(3)
+
+COLOPHON
+       This  page is part of release 3.35 of the Linux man-pages project.  A description of
+       the  project,  and   information   about   reporting   bugs,   can   be   found   at
+       http://man7.org/linux/man-pages/.
+
+
+
+GNU                                      2011-09-28                               STRCAT(3)
