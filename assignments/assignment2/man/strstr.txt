@@ -1,0 +1,49 @@
+STRSTR(3)                         Linux Programmer's Manual                         STRSTR(3)
+
+
+
+NAME
+       strstr, strcasestr - locate a substring
+
+SYNOPSIS
+       #include <string.h>
+
+       char *strstr(const char *haystack, const char *needle);
+
+       #define _GNU_SOURCE         /* See feature_test_macros(7) */
+
+       #include <string.h>
+
+       char *strcasestr(const char *haystack, const char *needle);
+
+DESCRIPTION
+       The strstr() function finds the first occurrence of the substring needle in the string
+       haystack.  The terminating null bytes ('\0') are not compared.
+
+       The strcasestr() function is like strstr(), but ignores the case of both arguments.
+
+RETURN VALUE
+       These functions return a pointer to the beginning of the substring,  or  NULL  if  the
+       substring is not found.
+
+CONFORMING TO
+       The  strstr()  function  conforms to C89 and C99.  The strcasestr() function is a non
+       standard extension.
+
+BUGS
+       Early versions of Linux libc (like 4.5.26) would not allow an  empty  needle  argument
+       for  strstr().   Later versions (like 4.6.27) work correctly, and return haystack when
+       needle is empty.
+
+SEE ALSO
+       index(3),  memchr(3),  rindex(3),  strcasecmp(3),  strchr(3),  string(3),  strpbrk(3),
+       strsep(3), strspn(3), strtok(3), wcsstr(3)
+
+COLOPHON
+       This  page  is  part of release 3.35 of the Linux man-pages project.  A description of
+       the   project,   and   information   about   reporting   bugs,   can   be   found   at
+       http://man7.org/linux/man-pages/.
+
+
+
+GNU                                       2011-09-28                                STRSTR(3)

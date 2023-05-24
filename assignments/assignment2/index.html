@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>EE209: String Manipulation</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+</head>
+<body>
+
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 2: String Manipulation</h3></a>
+</div>
+</div>
+
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> <a style="color:black;" href="../../">EE209: Programming Structures for EE</a></h1>
+
+<h2 class="ui center aligned header">Assignment 2: String Manipulation</h2>
+<h4 class="ui center aligned header" style="font-weight: normal">(Acknowledgment: This assignment is borrowed and modified from Princeton's COS 217)</h4>
+
+<h4 class="ui center aligned header" id="timer">&nbsp;</h4>
+</div>
+
+
+<h2 class="ui dividing header">Purpose</h2>
+
+<p>The purpose of this assignment is to help you learn/review (1)
+arrays and pointers in the C programming language, (2) how to create
+and use stateless modules in C, (3) the &quot;design by contract&quot;
+style of programming, and (4) how to use the GNU/UNIX programming
+tools, especially <code>bash</code>, <code>vscode</code> (or any other
+editor of your choice), <code>gcc</code>, and <code>gdb</code>.</p>
+
+
+<h2 class="ui dividing header">Rules</h2>
+
+<p> Implement the string functions listed by the Table
+ in <a href="#part1">Part 1</a>. and <a href="#part2">Part 2</a> is implementing 'Simple Grep', which is worth 50% of this assignment.
+</p>
+
+<p> You will get an <b>extra</b> 10% of the full score if you
+  implement the Part 1 only with pointer notation when you access the
+  character.  See the <a href="#extra">Extra credit</a> section below
+  (Extra Credit for Part 1).
+</p>
+
+
+<h2 class="ui dividing header">Background</h2>
+
+<p>As you know, the C programming environment provides a standard
+library. The facilities provided in the standard library are declared
+in header files. One of those header files is string.h; it contains
+the declarations of &quot;string functions,&quot; that is, functions
+that perform operations on character strings. Appendix D of the King
+textbook, Appendix B3 of the Kernighan and Ritchie textbook, and the
+UNIX &quot;man&quot; pages describe the string functions. The string
+functions are used heavily in programming systems; certainly any
+editor, compiler, assembler, or operating system created with the C
+programming language would use them.</p>
+
+<h2 class="ui dividing header">Overview of Your Task</h2>
+
+<p>Your task in this assignment is to use C to create the
+&quot;Str&quot; module that provides string manipulation
+functions. Specifically, design your Str module so that
+each function behaves the same as described below.
+Your task in this assignment is twofold. </p>
+
+<P><a href="#part1"><strong>[Part 1]</strong></a>
+
+Read the description of the basic string library functions carefully,
+and implement each function. The basic functions are most commonly
+used standard string functions. Each function should behave the same
+as its corresponding standard C function.
+</p>
+
+<p> <a href="#part2"> <strong>[Part 2]</strong></a>
+
+Implement a simplified version of <code>grep</code>
+using <code>Str</code> functions. Read the provided file that contains
+skeleton code carefully, edit the file to make it process the required
+functionality. </p>
+
+</ul>
+
+NOTE: We provide skeleton code and several utilities
+(e.g., Makefile and tests)
+in <a href="./assignment2.tar.gz">assignment2.tar.gz</a>.
+Please download it to your directory before starting your project
+and check <code>README.md</code>.
+
+<h2 class="ui dividing header"><a name="part1"></a>Part 1: The Basic <code>Str</code> Function Implementation</h2>
+
+<p> Your task for the first part is to use C to implement seven basic
+string manipulation functions: <code>StrCopy(),
+StrCompare(), StrFindChr(), StrFindStr(), StrConcat(),
+StrToLong(), and StrCaseCompare()</code>. Those seven functions should follow the format of
+the corresponding standard C library functions. You can easily find
+the function's description and operation in the UNIX &quot;man&quot;
+page. </p>
+
+<p> The following table shows the required basic string functions in Part 1 and their corresponding function names in the standard C library.</p>
+
+
+<div class="scroll-x-container">
+<table class="ui celled table unstackable">
+<thead>
+<tr>
+<th><strong><code>Str</code> Function</strong>
+</th>
+<th><strong>Standard C Function</strong>
+</th>
+<th><strong> Man page link </strong>
+</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>StrGetLength</code>
+</td>
+<td><code>strlen</code>
+</td>
+<td> <a href="./man/strlen.txt"> strlen man page
+</a>
+</td>
+</tr>
+
+<tr>
+<td><code>StrCopy</code>
+</td>
+<td><code>strcpy</code>
+</td>
+<td> <a href="./man/strcpy.txt"> strcpy man page
+</a>
+</td>
+</tr>
+
+<tr>
+<td><code>StrCompare</code>
+</td>
+<td><code>strcmp</code>
+</td>
+<td> <a href="./man/strcmp.txt"> strcmp man page
+</a>
+</td>
+</tr>
+
+<tr>
+<td><code>StrFindChr</code>
+</td>
+<td><code>strchr</code>
+<td> <a href="./man/strchr.txt"> strchr man page
+</a>
+</td>
+</tr>
+
+<tr>
+<td><code>StrFindStr</code>
+</td>
+<td><code>strstr</code>
+<td> <a href="./man/strstr.txt"> strstr man page
+</a>
+</td>
+</tr>
+
+<tr>
+<td><code>StrConcat</code>
+</td>
+<td><code>strcat</code>
+</td>
+<td> <a href="./man/strcat.txt"> strcat man page
+</a>
+</td>
+</tr>
+
+
+<tr>
+<td><code>StrToLong</code>
+</td>
+<td><code>strtol</code>
+</td>
+<td> <a href="./man/strtol.txt"> strtol man page
+</a>
+</td>
+</tr>
+
+
+<tr>
+<td><code>StrCaseCompare</code>
+</td>
+<td><code>strcasecmp</code>
+</td>
+<td><a href="./man/strcasecmp.txt"> strcasecmp man page
+</a>
+</td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+
+<p>Use the <code>Str</code> module's <em>interface</em> in a file named <a href="./resource/str.h"><code>str.h</code></a>, and place your <code>Str</code> function definitions
+in <a href="./resource/str.c"><code>str.c</code></a>. </p>
+
+<p>Note that your Str functions <b>should not</b> call any of the
+standard string functions. In the context of this assignment, pretend
+that the standard string functions do not exist. However, your
+functions may call each other, and you may define additional
+(non-interface) functions.</p>
+
+<p>Design each function definition so it calls the <code>assert</code>
+macro to validate the function's parameters. In that way,
+your <code>Str</code> functions should differ from the standard C
+string functions. Specifically, design each function definition to
+assert that <b>each string parameter is not <code>NULL</code>
+except for the second argument of <code>StrToLong</code>, which could be NULL
+by the specification.</b> See the
+<a href="#assert">note</a> below for more information of
+the <code>assert()</code> macro function.</p>
+
+
+<p>Beware of type mismatches. In particular, beware of the difference
+between type size_t and type int: a variable of type size_t can store
+larger integers than a variable of type int can. Your functions should
+(in principle) be able to handle strings whose lengths exceed the
+capacity of type int. Also beware of type mismatches related to the
+use of the const keyword.
+</p>
+
+<p> Assume the third parameter in <code>StrToLong()</code> is always
+  10 (base == 10). Otherwise, the function should simply returns 0. Also, the
+  function does not have to set <code>errno</code> in case of an
+  error, but the return value must be identical as that
+  of <code>strtol()</code> even in the case of an error (e.g., 0,
+  <code>LONG_MIN</code>, <code>LONG_MAX</code>). <u>Use <code>
+  #include &lt;limits.h&gt; </code> to use
+  <code>LONG_MIN</code> and <code>LONG_MAX</code> in your code. BTW,
+  you should not use a similar function like
+  <code> atoi(), atol(), ... </code> to implement this function</u>.
+</p>
+
+<h3 class="ui dividing header"> Some hints on implementation of <code>StrToLong()</code> </h3>
+
+<h4> 1. How to skip spaces? </h4>
+
+<p> Use <code>isspace() </code> to check if the current character is
+      one of spaces. For example,
+
+      <code> while (*p && isspace(*p))
+	p++; </code>
+
+      would move <code>p</code> to point to a non-space character in
+      the string, assuming <code>p</code> initially points to the
+      input string. For each character, make sure to check
+      if <code>*p</code> is not '\0' (or simply 0). If <code>p</code>
+      points to a null charater, you have reached the end of the
+      string.
+</p>
+
+
+<h4> 2. How to convert a number string to an int value? </h4>
+
+<p> Refer to the following code. p points to a number string, and x
+is the current result (with initial value of 0). For each digit, you
+need to multiply x with 10 and add the digit to x.
+
+<div class="ui message">
+  <pre>
+  int x = 0;
+  char *p = "3456";
+  int temp;
+
+  while (*p && isdigit(*p)) {
+     temp = *p - '0';
+      x = 10 * x + temp;
+     p++;
+  }
+  printf("number =%d\n", x); // it will print out 3456
+  </pre>
+</div>
+
+Of course, you should use <code>long int</code> as the result type for
+<code>StrToLong()</code>, and take care of over/underflows while
+handling the <code>'+'</code> and <code>'-'</code> sign as well.
+
+</p>
+
+
+<h3 class="ui dividing header"><a name="extra"></a>  Extra Credit for Part 1: Implement functions with pointer notation </h3>
+
+<p>There are various ways to implement the functions in Part
+1. Especially, you can access the character by pointer dereferencing
+like <code> *pcSrc </code> or by using an array notation such
+as <code> pcSrc[uiLength] </code>. </p>
+
+<p>Here are two examples of <code>StrGetLength() </code>
+implementation.  The first code implements the StrGetLength() function
+with the array notation; it traverses each given string or accesses
+the character using an index relative to the beginning of the string.
+However, with the pointer notation, the second version traverses each
+given string using an incremented pointer.
+
+<div class="ui message" style="overflow-x: auto">
+<pre>
+size_t StrGetLength(const char pcSrc[]) /* Use array notation */
+{
+   size_t uiLength = 0U;
+   assert(pcSrc != NULL);
+   while (pcSrc[uiLength] != '\0')
+      uiLength++;
+   return uiLength;
+}
+</pre>
+</div>
+
+<div class="ui message" style="overflow-x: auto">
+<pre>
+size_t StrGetLength(const char *pcSrc) /* Use pointer notation */
+{
+   const char *pcEnd;
+   assert(pcSrc != NULL);
+   pcEnd = pcSrc;
+   while (*pcEnd != '\0') /* note that *(pcSrc + uiLength) is valid but is "NOT" acceptable as pointer notation */
+      pcEnd++;
+   return (size_t)(pcEnd - pcSrc);
+}
+</pre>
+</div>
+
+<p> You can freely implement Part 1. However, <strong> if you
+implement part 1 only with pointer notation, you can get extra 10% of
+the full score. </strong> Please write your choice of implementation in
+the <code>readme</code> file. That is, specify if you used only the
+pointer notation for Part 1 in the <code>readme</code> file.
+</p>
+
+
+<h3 class="ui dividing header"> Test your Str Functions </h3>
+
+<p> We provide a test client
+(<a href="./resource/client.c"><code>client.c</code></a>) that compares
+the results of the <code>Str</code> and C standard library functions
+with various input. Please use this code for testing and
+debugging. You can compile the test client with <code>gcc209</code> as
+follows.
+
+<div class="ui message">
+<pre>
+gcc209 -o client client.c str.c
+</pre>
+</div>
+
+</p>
+Then, test each of your <code>Str</code> functions separately by providing
+a function name as an argument. For example,
+
+<div class="ui message">
+<pre>
+./client StrCopy
+</pre>
+</div>
+
+will test <code>StrCopy</code>. Actually, the client accepts any one of the <code>Str</code> function names as a command-line argument: </p>
+
+<div class="ui message">
+<pre>
+./client [StrGetLength|StrCopy|StrCompare|StrFindStr|StrConcat|StrFindChr|StrToLong|StrCaseCompare]
+</pre>
+</div>
+
+<p> Note that passing all tests provided by the client does <b>not</b>
+mean that your function always behaves correctly. Please devise your
+own testing (e.g., by changing the client code) for more confidence.
+Note that we may use a different test client for grading.
+
+
+<h2 class="ui dividing header"><a name="part2"></a> Part 2: Simple Grep </h2>
+
+<p> <code>grep</code> is a popular UNIX tool that manipulates input
+strings. In this part, you implement a simplified version
+of <code>grep</code> called <code>sgrep</code>. <code>sgrep</code>
+searches for a given pattern in each line from stdin, and prints out
+the line to stdout if it matches the pattern.
+
+<div class="ui message">
+<pre>
+./sgrep [pattern]
+</pre>
+</div>
+
+<p> pattern can be a simple string (e.g., 'hello', 'kaist') or it can
+inlcude one or more '*' in the string. '*' matches zero or more
+repetition of any character (<u>except one character ('\n')</u>).
+For example, 'ka*is*t' can be matched with 'kaist', 'kaxxist', or 'kaaaisss ?kkt'.
+</p>
+
+<p> Here are some usage examples of <code>sgrep</code> (you can also
+see the test files
+(<a href="./resource/files/google.txt"><code>google.txt</code></a>
+and <a href="./resource/files/microsoft.txt"><code>microsoft.txt</code></a>)
+which are used in the following example): </p>
+
+<div class="ui message" style="overflow-x: auto">
+<pre>
+$ ./sgrep "*og*e" < google.txt
+Google Inc. is an American multinational technology company specializing
+advertising technologies, search, cloud computing, and software.[5]
+Google was founded by Larry Page and Sergey Brin while they were Ph.D.
+students at Stanford University. Together, they own about 14 percent of
+ supervoting stock. They incorporated Google as a privately held company on
+ be evil".[9][10] In 2004, Google moved to its new headquarters in Mountain
+View, California, nicknamed the Googleplex.[11] In August 2015, Google
+Alphabet Inc. When this restructuring took place on October 2, 2015, Google
+became Alphabet's leading subsidiary, as well as the parent for Google's
+
+$ ./sgrep "s*t" < microsoft.txt
+Microsoft Inc. is an American multinational technology company specializing
+in Internet-related services and products. These include online
+advertising technologies, search, cloud computing, and software.[5]
+Most of its profits are derived from AdWords,[6][7] an online advertising
+service that places advertising near the list of search results.
+Microsoft was founded by Larry Page and Sergey Brin while they were Ph.D.
+students at Stanford University. Together, they own about 14 percent of
+its shares and control 56 percent of the stockholder voting power through
+ supervoting stock. They incorporated Microsoft as a privately held company on
+An initial public offering followed on August 19, 2004.
+Its mission statement from the outset was "to organize the world's
+and its unofficial slogan was "Don't
+ be evil".[9][10] In 2004, Microsoft moved to its new headquarters in Mountain
+View, California, nicknamed the Microsoftplex.[11] In August 2015, Microsoft
+announced plans to reorganize its interests as a holding company called
+Alphabet Inc. When this restructuring took place on October 2, 2015, Microsoft
+became Alphabet's leading subsidiary, as well as the parent for Microsoft's
+Internet interests.[12][13][14][15][16]
+
+$ ./sgrep "s t" < microsoft.txt
+announced plans to reorganize its interests as a holding company called
+became Alphabet's leading subsidiary, as well as the parent for Microsoft's
+</pre>
+</div>
+
+<p>
+<b>Rules:</b>
+
+<ul>
+<li> Use your Str functions to implement the functionality. That is,
+you need to finish Part 1 first to get any credit for this task. You
+should not use any string function in string.h </li>
+<li> Assume each line (including a new line character ('&#92;n') is no more than 1023 bytes.
+You should stop your program with a proper error message(<code>"Error: input line is too long\n"</code>)
+if you encounter a line larger than 1023 bytes.</li>
+<li> <u>A <code> pattern</code> argument refers to a sequence of any
+  characters that may contain spaces or '*'. In case it contains
+  spaces or '*', it must be enclosed with double quote (&quot)
+  characters (e.g., "hello world", "s*t"). The pattern can be empty
+  (&quot;&quot;), and an empty pattern matches any line. No need to
+  handle an escape character in the pattern string for this
+  assignment.</u>
+</li>
+<li> Assume a pattern string no more than 1023 bytes. You should stop
+your program with a proper error message(<code>"Error: pattern is too long\n"</code>) if you encounter a
+command-line argument that is too long.
+<li> Any error message should be printed out to standard error
+(<code>stderr</code>). Use <code>fprintf(stderr, ...)</code> for
+that.</li>
+<li> Unlike Part 1, you don't have to add assert function while
+implementing <code>sgrep</code>. In other words, after printing out the error
+messages in error case, <code>sgrep</code> should be finished with EXIT_FAILURE as
+the return value. Details are written in skeleton code, so please read
+the comments in skeletion code
+(<code><a href="./resource/sgrep.c">sgrep.c</a></code>). </li>
+</ul>
+<!--li> <b> Rules for FrequentWord </b> </li>
+<ul>
+<li> The length of the words in <code>file</code> used in 'frequentword (-w)' option is no more than 1023 bytes, and the number of words is also no more than 5000. You should stop your program with a proper error message if you encounter a word that's too long or the total number of words exceeds 5000. (Error messages are written in skeleton code)</li>
+<li> Note that a word cannot include the space(" ") or newline(\n). (e.g., a sentence "In 2004, Google's Google Inc." consists of five words: "In", "2004,", "Google's", "Google", "Inc.")
+<li> The two words are regarded as the same words only if they are exactly matched. (e.g., "Google" and "google" are the different words (case-sensitive). "Google's" and "Google" are the different words (ignore substring)). </li>
+<li> When you print out the multiple words, you don't need to consider the order of printing word. </li>
+</ul!-->
+
+</ul>
+</p>
+
+<p>
+<b>Tips:</b>
+
+<ul>
+<li> We provide a skeleton code file (<code><a href="./resource/sgrep.c">sgrep.c</a></code>). You can start with the file. </li>
+<li> <code>fgets</code> should be useful for reading a line from a file. 'man fgets' should give you more information. </li>
+<li> You are free to choose whatever implementation strategy, but we
+suggest using a recursive function for implementing '*'. In fact, it
+will require less then 20 lines of code to implement '*' with a
+recursive function. Well, a higher performance implementation should
+use another technique, but that's not necessary for this
+assignment. We won't penalize for low performance unless it's really
+slow (e.g., seconds of delay for a short text).
+</ul>
+
+<h3 class="ui dividing header"> Test your <code>sgrep</code> Function </h3>
+
+<p> We provide the test files in the <code>tests</code> directory. After compiling your code, test your pragram using: <code>find01.sh, find02.sh, find03.sh, find08.sh, and find09.sh</code>.
+	The example commandlines are provided below.</p>
+
+<div class="ui message" style="overflow-x: auto">
+<pre>
+$ chmod +x ./tests/input/find01.sh
+$ ./tests/input/find01.sh >stdout 2>stderr
+$ diff ./tests/answer/find01.stdout stdout
+$ diff ./tests/answer/find01.stderr stderr
+</pre>
+</div>
+
+<p>If your program is working fine, nothing will be printed out after the <code>diff</code> command.</p>
+
+<h2  class="ui dividing header">Logistics</h2>
+
+<p>Develop on lab machines using <code>vscode</code> (or any other editor of your choice) to create source code and <code>gdb</code> to debug.</p>
+
+<p> For part 1, you implement the code <code>str.c</code>, which should contain the definitions of required functions.
+
+<p> For part 2, a skeleton C file is available here: <a href="./resource/sgrep.c">sgrep.c</a>. It implements the basic I/O and argument parsing, so all you need is fill out the rest of the functionalities with <code>Str</code> functions. Feel free to use this file as your starting point (of course, you don't have to use it), and change any part in the code if you'd like. </p>
+
+<p>Create a <code>readme</code> text file that contains:</p>
+
+<ul>
+<li>Your name and your student ID</li>
+
+<li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policy" web page.</li>
+
+<li><em>Is it possible for <code>StrCopy</code> to call <code>assert</code> to verify that the destination memory area specified by the caller is large enough? Explain.</em></li>
+
+<li>(Optionally) Please write the your implementation method in <code>readme</code> text file whether you use pointer notation for the extra credit. </li>
+
+<li>(Optionally) An indication of how much time you spent doing the assignment.</li>
+
+<li>(Optionally) Your assessment of the assignment.</li>
+
+<li>(Optionally) Any information that will help us to grade your work in the most favorable light. In particular you should describe all known bugs.</li>
+</ul>
+
+<h2 class="ui dividing header">Submission</h2>
+
+<p>
+Use KLMS submission link to submit your assignments. Your submission should
+be </b>one gzipped tar file</a> whose name is <b>YourStudentID_assign2.tar.gz </b>.
+For example, if your student ID is 20221234,
+please name the file as 20221234_assign2.tar.gz.
+
+<p>Your submission file need to include the
+following files:</p>
+<ul>
+<li>(Task 1) updated <code>str.c</code> file</li>
+<li>(Task 2) updated <code>sgrep.c</code> file</li>
+<li><code>readme</code> text file</li>
+<li> <a href="../EthicsOath.docx">Observance of Ethics</a>. Sign on the document, save it into a PDF file, and submit it. </li>
+</ul>
+
+<p>In order to create a gzipped tar file, (1) put <code>readme</code> and <code>EthicsOath.pdf</code> into the current directory where 
+	your <code>str.c</code> and <code>sgrep.c</code> exist, (2) change the <code>STUDENT_ID</code> with yours, and (3) run the following command:</p>
+
+<div class="ui message">
+<pre>
+$ make submit
+</pre>
+</div>
+
+<p>If you complete all steps, <b>YourStudentID_assign2.tar.gz</b> will be created.</p>
+
+<p>Finally, your submission file should look like this: </p>
+<div class="ui segment">
+  <div class="ui list">
+    <div class="item">
+      <i class="archive icon"></i>
+      <div class="content">
+        20221234_assign2.tar.gz
+         <div class="list">
+            <div class="item">
+              <i class="file icon"></i>
+              <div class="content">
+                str.c
+              </div>
+            </div>
+            <div class="item">
+              <i class="file icon"></i>
+              <div class="content">
+                sgrep.c
+              </div>
+            </div>
+             <div class="item">
+                <i class="file icon"></i>
+                <div class="content">
+                  readme
+                </div>
+              </div>
+              <div class="item">
+                <i class="file icon"></i>
+                <div class="content">
+                  EthicsOath.pdf
+                </div>
+              </div>
+          </div>
+          </div>
+          </div>
+      </div>
+    </div>
+
+
+<h2 class="ui dividing header">Grading</h2>
+
+<div class="ui message error">
+  If your submission file does not contain the expected files, or your code cannot be compiled at <code>eelabg12</code> with <code>gcc209</code>, we cannot give you any points. Please double check before you submit.
+</div>
+
+<p>We will grade your work on quality from the user's point of view and from the programmer's point of view. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages.</p>
+
+<p>From the user's point of view, your module has quality if it behaves as it should.</p>
+
+<p>In part, style is defined by the rules given in <em>The Practice of Programming</em> (Kernighan and Pike), as summarized by the <a href="../style.pdf">Rules of Programming Style</a> document. These additional rules apply:</p>
+
+<p><strong>Names</strong>: You should use a clear and consistent style for variable and function names. One example of such a style is to prefix each variable name with characters that indicate its type. For example, the prefix <code>c</code> might indicate that the variable is of type <code>char</code>, <code>i</code> might indicate <code>int</code>, <code>pc</code> might mean <code>char*</code>, <code>ui</code> might mean <code>unsigned int</code>, etc. But it is fine to use another style -- a style which does not include the type of a variable in its name -- as long as the result is a readable program.</p>
+
+<p><strong>Line lengths</strong>: Limit line lengths in your source code to 72 characters. Doing so allows us to print your work in two columns, thus saving paper.</p>
+
+<p><strong>Comments</strong>: Each source code file should begin with a comment that includes your name, student ID, and the description of the file.</p>
+
+<p><strong>Comments</strong>: Each function should begin with a comment that describes what the function does from the caller's point of view. The function comment should:</p>
+
+<ul>
+<li>
+Explicitly refer to the function's parameters (by name) and the function's return value.</li>
+<li>State what, if anything, the function reads from standard input or any other stream, and what, if anything, the function writes to standard output, standard error, or any other stream.</li>
+
+<li>State which global variables the function uses or affects.</li>
+</ul>
+
+<p><strong>Parameter Validation</strong>: Validate function parameters via asserts whenever possible.</p>
+
+<div class="ui message warning">
+  Please note that you might not get a full credit even if you pass the test with your <code>testclient</code>. TAs might use another <code>testclient</code> to test functionality and robustness of your implementation.
+</div>
+
+
+<!-- =============================================================== -->
+
+
+<h2 class="ui dividing header"><a name="assert"></a>Note: assert and NDEBUG</h2>
+
+<p> assert is a macro implementations of assertion, used for verifying the conditions. If the condition is true, it does nothing. However, if the conditions is FALSE, it displays an error messages and aborts the running program. </p>
+
+<p> In this assignment, you should validate the function's parameters with <code>assert</code>. When you try to check whether your <code>Str</code> functions validate the given parameters correctly or not, the aborted program may annoy you. In that case, you can add <code>NDEBUG</code> macro in your source file to ignore the assert functions. Otherwise, you can also add -D NDEBUG argument to the <code>gcc</code>. The <code>-D NDEBUG</code> argument commands <code>gcc209</code> to define the <code>NDEBUG</code> macro, just as if the preprocessor directive <code>#define NDEBUG</code> appeared in the specified .c file(s). Following OBcommands are example of disabling assert using -D option</p>
+
+<div class="ui message">
+<pre>
+gcc209 -D NDEBUG sgrep.c str.c -o sgrep
+</pre></div>
+
+<p> If NDEBUG is defined as a macro name in the source file, the assert macro is defined as <code>((void)0)</code>, which means that the assert macro will be ignore.
+</p>
+
+<!-- =============================================================== -->
+
+<h2 class="ui dividing header">Note: Using Idioms</h2>
+
+<p>C programmers sometimes use idioms that rely on the fact that the null character ('&#92;0'), the <code>NULL</code> address, the integer 0, and the logical concept FALSE have the same representation. You may use those idioms. For example, you may define <code>StrGetLength</code> like this:</p>
+
+<div class="ui message" style="overflow-x: auto">
+<pre>
+size_t StrGetLength(const char pcSrc[])
+{
+   size_t uiLength = 0U;
+   assert(pcSrc); /* NULL address, 0, and FALSE are identical. */
+   while (pcSrc[uiLength]) /* null character and FALSE are identical. */
+      uiLength++;
+   return uiLength;
+}
+</pre>
+</div>
+
+<p>or like this:</p>
+
+<div class="ui message" style="overflow-x: auto">
+<pre>
+size_t StrGetLength(const char *pcSrc)
+{
+   const char *pcEnd;
+   assert(pcSrc); /* NULL address, 0, and FALSE are identical. */
+   pcEnd = pcSrc;
+   while (*pcEnd) /* null character and FALSE are identical. */
+      pcEnd++;
+   return (size_t)(pcEnd - pcSrc);
+}
+</pre>
+</div>
+
+<p>But you are not required to use those idioms. In fact, we recommend that you avoid the use of idioms that adversely affect understandability.</p>
+
+<!-- =============================================================== -->
+
+<h2 class="ui dividing header">Note: The <code>const</code> Keyword and <code>StrSearch</code></h2>
+
+<p>The use of the <code>const</code> keyword within <code>StrFndStr</code> is tricky, as this question-and-answer sequence indicates.</p>
+
+<h4>Question</h4>
+
+<p>According to the man pages, the parameters of <code>strstr</code> are of type <code>const char*</code>. That implies that the parameters of <code>StrFndStr</code> also should be of type <code>const char*</code>. Why are they not of type <code>char*</code>?</p>
+
+<h4>Answer</h4>
+
+<p>Suppose you were to define <code>StrFindStr</code> like this:</p>
+
+
+<div class="ui message">
+<pre>
+char *StrFindStr(char *pcHaystack, char *pcNeedle)
+{
+   ...
+}
+</pre>
+</div>
+
+<p>Further suppose the client then calls <code>StrFindStr</code> like this:</p>
+
+<div class="ui message">
+<pre>
+const char *pcBig = "hello";
+const char *pcSmall = "lo";
+ ...
+ ... StrFindStr(pcBig, pcSmall) ...
+ ...
+</pre>
+</div>
+
+<p>(Note that's a perfectly reasonable way to call the function.) In that case the compiler, noting that <code>pcBig</code> is of type <code>const char*</code> and that <code>pcHaystack</code> is of type <code>char*</code>, would generate a warning on the function call. Thus <code>pcHaystack</code> (and <code>pcNeedle</code>) should be of type <code>const char*</code>.</p>
+
+<h4>Question</h4>
+
+<p>According to the man pages, the return type of <code>strstr</code> is <code>char*</code>. That implies that the return type of <code>StrFindStr</code> also should be of type <code>char*</code>. Why is the return type not <code>const char*</code>?</p>
+
+<h4>Answer</h4>
+
+<p>Suppose you were to define <code>StrFindStr</code> like this:</p>
+
+<div class="ui message">
+<pre>
+const char *StrFindStr(const char *pcHaystack, const char *pcNeedle)
+{
+   ...
+}
+</pre>
+</div>
+
+<p>Further suppose the client then calls <code>StrFindStr</code> like this:</p>
+
+<div class="ui message">
+<pre>
+char *pcBig = "hello";
+char *pcSmall = "lo";
+char *pc;
+ ...
+pc = StrFindStr(pcBig, pcSmall);
+ ...
+</pre>
+</div>
+
+<p>(Note that's a perfectly reasonable way to call the function.) In that case the compiler, noting that <code>pc</code> is of type <code>char*</code> and that the value returned by <code>StrFindStr</code> is of type <code>const char*</code>, would generate a warning on the assignment statement. Thus the return type of <code>StrFindStr</code> should be <code>char*</code> and should not be <code>const char*</code>.</p>
+
+<h4>Question</h4>
+
+<p>Within the definition of <code>StrFindStr</code>, I decided to define a local variable named <code>pc</code> that "points into" the first of the two given strings, as indicated by this code:</p>
+
+<div class="ui message">
+<pre>
+char *StrFindStr(const char *pcHaystack, const char *pcNeedle)
+{
+   ...
+   pc = pcHaystack;
+   ...
+   /* Increment pc so it points to the appropriate character. */
+   ...
+   return pc;
+}
+</pre>
+</div>
+
+<p>If I define <code>pc</code> to be of type <code>char*</code>, then the assignment statement generates a warning. If I define <code>pc</code> to be of type <code>const char*</code>, then the <code>return</code> statement generates a warning. How can I resolve that problem?</p>
+
+<h4>Answer</h4>
+
+<p>Unfortunately, C provides no elegant solution. We recommend that you define <code>pc</code> to be of type <code>const char*</code> so the assignment statement is warningless. Then use a cast operator in the <code>return</code> statement:</p>
+
+
+<div class="ui message">
+<pre>
+return (char*)pc;
+</pre>
+</div>
+
+<p>to explicitly inform the compiler to not generate a warning. C programmers refer to that solution as "casting away the constness" of the variable. Sadly, often that inelegant technique is unavoidable.</p>
+
+
+</div>
+
+<br>
+
+<script src="../../vendor/moment.min.js"></script>
+<script src="../../vendor/highlight.pack.js"></script>
+<script src="../../vendor/ee209_assignment.js"></script>
+<script>showTimer('2023-04-02T23:55:00+0900');</script>
+</body>
+</html>
+</div>
