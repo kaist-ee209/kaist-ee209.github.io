@@ -7,11 +7,15 @@ permalink: /policy/
 <h1> Lectures and Precepts </h1>
 
 <p>
+TBA
+</p>
+
+<!-- <p>
 Lecture attendance is mandatory. You are responsible for
 the materials presented in the lecture and precepts. Some of the
 content is not in the textbook.
 
-Students are expected to regularly check the course webpage, class schedule updates, lecture notes, programming assignments and other related course materials. <!-- <b>Please refer to logistics (Lecture #1) and <a href="https://campuswire.com/c/G915469DF/feed">Campuswire</a> for more detailed information such as contribution rules, grading systems, and all other regulations for this class</b> -->
+Students are expected to regularly check the course webpage, class schedule updates, lecture notes, programming assignments and other related course materials. 
 </p>
 
 <h2> Grading </h2>
@@ -131,4 +135,4 @@ If we find a student commits inappropriate conduct during an in-class exam, the 
 <span style=" font: bold; color:red;">automatic failure (F)</span> of the EE 209 course.
 
 <br>
-<br>
+<br> -->

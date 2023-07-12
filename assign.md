@@ -5,8 +5,11 @@ permalink: /assignments/
 ---
 
 <h1> Programming Assignments </h1>
-
 <p>
+TBA
+</p>
+
+<!-- <p>
 We will do <font color="#FF0000">five</font> programming
 assignments. Each programming assignment takes up 10% of your total grade.
 </p>
@@ -174,4 +177,4 @@ the extra points will affect your final score.
 
 
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
-<script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script>
+<script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script> -->
