@@ -5,15 +5,26 @@ permalink: /assignments/
 ---
 
 <h1> Programming Assignments </h1>
-<p>
-TBA
-</p>
 
-<!-- <p>
+<p>
 We will do <font color="#FF0000">five</font> programming
 assignments. Each programming assignment takes up 10% of your total grade.
 </p>
 
+<ul>
+<li> Assignment 1:
+<a href="assignment1/index.html"> A Word Counting Program</a> (due: TBA) </li>
+<li> Assignment 2:
+<a href="assignment2/index.html"> String Manipulation</a> (due: TBA) </li>
+<li> Assignment 3:
+<a href="assignment3/index.html"> Customer Management Table</a> (due: TBA) </li>
+<li> Assignment 4:
+<a href="assignment4/index.html"> Assembly Language Programming</a> (due: TBA) </li>
+<li> Assignment 5:
+<a href="assignment5/index.html"> Unix Shell Assignment</a> (due: TBA) </li>
+</ul>
+
+<!-- 2023 ### SPRING Schedule ###
 <ul>
 <li> Assignment 1:
 <a href="assignment1/index.html"> A Word Counting Program</a> (due: 03/15 11:55pm) </li>
@@ -25,8 +36,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <a href="assignment4/index.html"> Assembly Language Programming</a> (due: 05/21 11:55pm) </li>
 <li> Assignment 5:
 <a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 06/11 11:55pm) </li>
-</ul>
-
+</ul> -->
 
 <h2> Assignment Submission (Important) </h2>
 <hr>
@@ -177,4 +187,4 @@ the extra points will affect your final score.
 
 
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
-<script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script> -->
+<script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script>
