@@ -7,10 +7,6 @@ permalink: /policy/
 <h1> Lectures and Precepts </h1>
 
 <p>
-TBA
-</p>
-
-<!-- <p>
 Lecture attendance is mandatory. You are responsible for
 the materials presented in the lecture and precepts. Some of the
 content is not in the textbook.
@@ -36,12 +32,12 @@ Students are expected to regularly check the course webpage, class schedule upda
 </tr>
 
 <tr>
-<td> 50% </td>
+<td> 55% </td>
 <td> Programming assignments</td>
 </tr>
 
 <tr>
-<td> 10% </td>
+<td> 5% </td>
 <td> Contribution  </td>
 </tr>
 
@@ -135,4 +131,4 @@ If we find a student commits inappropriate conduct during an in-class exam, the 
 <span style=" font: bold; color:red;">automatic failure (F)</span> of the EE 209 course.
 
 <br>
-<br> -->
+<br>
