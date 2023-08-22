@@ -183,6 +183,19 @@ the total score (50% of final score) that you can obtain from assignments. But, 
 the extra points will affect your final score.
 </p>
 
+<h2> gcc209 </h2>
+<hr>
+<p>
+gcc209 is a special script made for EE209. Students need to use the script for assignments. How to make gcc209 is as follows.
+1. Make the following script by yourself using editor
+<div class="ui message" style="margin-left:1em;">
+<pre>
+#!/bin/bash
+gcc -Wall -Werror -ansi -pedantic -std=c99 "$@"
+</pre>
+</div>
+</p>
+
 <br>
 
 
