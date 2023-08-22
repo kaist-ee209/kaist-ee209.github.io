@@ -187,7 +187,7 @@ the extra points will affect your final score.
 <hr>
 <p>
 gcc209 is a special script made for EE209. Students need to use the script for assignments. How to make gcc209 is as follows.
-1. Make the following script by yourself using editor
+<br>1. Make the following script by yourself using editor
 <div class="ui message" style="margin-left:1em;">
 <pre>
 #!/bin/bash
@@ -195,9 +195,18 @@ gcc -Wall -Werror -ansi -pedantic -std=c99 "$@"
 </pre>
 </div>
 </p>
-
-<br>
-
+<br>2. Make this script executable.
+<div class="ui message" style="margin-left:1em;">
+<pre>
+&dollarchmod +x gcc209
+</pre>
+</div>
+<br>3. Move this file to folder that can be accessed globally
+<div class="ui message" style="margin-left:1em;">
+<pre>
+&dollarsudo mv gcc209 /usr/bin/gcc209
+</pre>
+</div>
 
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
 <script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script>
