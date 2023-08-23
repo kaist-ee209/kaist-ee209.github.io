@@ -194,19 +194,18 @@ gcc209 is a special script made for EE209. Students need to use the script for a
 gcc -Wall -Werror -ansi -pedantic -std=c99 "$@"
 </pre>
 </div>
-</p>
-<br>2. Make this script executable.
+</p><p>2. Make this script executable.
 <div class="ui message" style="margin-left:1em;">
 <pre>
 &#36;chmod +x gcc209
 </pre>
 </div>
-<br>3. Move this file to folder that can be accessed globally
+</p><p>3. Move this file to folder that can be accessed globally
 <div class="ui message" style="margin-left:1em;">
 <pre>
 &#36;sudo mv gcc209 /usr/bin/gcc209
 </pre>
 </div>
-
+</p>
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
 <script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script>
