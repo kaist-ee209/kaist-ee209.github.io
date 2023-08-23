@@ -198,13 +198,13 @@ gcc -Wall -Werror -ansi -pedantic -std=c99 "$@"
 <br>2. Make this script executable.
 <div class="ui message" style="margin-left:1em;">
 <pre>
-&#36chmod +x gcc209
+&#36;chmod +x gcc209
 </pre>
 </div>
 <br>3. Move this file to folder that can be accessed globally
 <div class="ui message" style="margin-left:1em;">
 <pre>
-&#36sudo mv gcc209 /usr/bin/gcc209
+&#36;sudo mv gcc209 /usr/bin/gcc209
 </pre>
 </div>
 
