@@ -38,7 +38,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 06/11 11:55pm) </li>
 </ul> -->
 
-<h2> Grading Policy of Assignment </h2>
+<h2> Grading Policy of Assignments </h2>
 <hr>
 <table style="border-collapse: collapse;" border="3" cellpadding="3">
 <tbody>
