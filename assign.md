@@ -14,7 +14,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <ul>
 <li> Assignment 1:
 <a href="assignment1/index.html"> A Word Counting Program</a> (due: 9/15 11:55pm) </li>
-<li> Assignment 2:
+<!-- <li> Assignment 2:
 <a href="assignment2/index.html"> String Manipulation</a> (due: 10/6 11:55pm) </li>
 <li> Assignment 3:
 <a href="assignment3/index.html"> Customer Management Table</a> (due: 10/27 11:55pm) </li>
@@ -23,7 +23,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <li> Assignment 5:
 <a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 12/18 11:55pm) </li>
 </ul>
-
+ -->
 <!-- 2023 ### SPRING Schedule ###
 <ul>
 <li> Assignment 1:
@@ -194,19 +194,18 @@ gcc209 is a special script made for EE209. Students need to use the script for a
 gcc -Wall -Werror -ansi -pedantic -std=c99 "$@"
 </pre>
 </div>
-</p>
-<br>2. Make this script executable.
+</p><p>2. Make this script executable.
 <div class="ui message" style="margin-left:1em;">
 <pre>
 &#36;chmod +x gcc209
 </pre>
 </div>
-<br>3. Move this file to folder that can be accessed globally
+</p><p>3. Move this file to folder that can be accessed globally
 <div class="ui message" style="margin-left:1em;">
 <pre>
 &#36;sudo mv gcc209 /usr/bin/gcc209
 </pre>
 </div>
-
+</p>
 <script src="{{ "/vendor/moment.min.js" | relative_url }}"></script>
 <script src="{{ "/vendor/ee209_assignment.js" | relative_url }}"></script>
