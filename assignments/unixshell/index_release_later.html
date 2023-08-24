@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title> TBA </title>
+<title>EE 209: Unix Shell Assignment</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+</head>
+<body>
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 5: A Unix Shell </h3></a>
+</div>
+</div>
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> <a style="color:black;" href="../../">EE209: Programming Structures for EE</a></h1>
+
+<h2 class="ui center aligned header">Assignment 5: A Unix Shell </span></h2>
+
+<h4 class="ui center aligned header" style="font-weight: normal">(Acknowledgment: This assignment is borrowed and slightly modified from Princeton COS 217) </h4>
+
+<h4 class="ui center aligned header" id="timer">&nbsp; </h4>
+
+</div>
+
+<h2 class="ui dividing header">Purpose</h2>
+
+<p>The purpose of this assignment is to help you learn about Unix
+processes, low-level input/output, and signals. It will also give you
+ample opportunity to define software modules; in that sense the
+assignment is a capstone for the course.</p>
+
+
+<h2 class="ui dividing header">Background</h2>
+
+<p>A Unix shell is a program that makes the facilities of the
+operating system available to interactive users. There are several
+popular Unix shells: <code>sh</code> (the Bourne
+shell), <code>csh</code> (the C shell), and <code>bash</code> (the
+Bourne Again shell) are a few.</p>
+
+<h2 class="ui dividing header">Your Task</h2>
+
+<p>Your task in this assignment is to create a program
+named <code>ish</code>.
+<strong>If your program name isn't <code>ish</code>, you cannot get any score</strong>.
+Your program should be a minimal but
+realistic interactive
+Unix shell. A <a href="./shellsupplementary.html">Supplementary
+Information</a> page lists detailed implementation requirements and
+recommendations.</p>
+
+<p> You can work on this assignment either by yourself or with a partner in this class.
+If you choose to work alone (e.g., without a partner) on this
+assignment, you will receive extra credit as described below.
+We consider it plagiarism when you work on this assignment with another student without team registration.<br>
+<b>If you want to do by yourself,</b>
+<ul>
+  <li> Please do NOT submit the team registration.
+</ul>
+<b>If you want to do with a partner in this class,</b>
+<ul>
+  <li>A team should be a duo.
+  <li>It is totally okay to team up with a student from another section.
+  <li>One of the team members SHOULD register your team by 11:55 PM, 24th May.
+    We won't receive team registration afterward the deadline. <br>
+    [<a href="https://forms.gle/TCT3fZ6XKVDwbqXJ7">Click here to register your team</a>]
+  <li> If you want to be a team, but you don't have peers in this course, we allow you to make a post to find a teammate in CampusWire.
+    Feel free to promote yourself in CampusWire and reach out to other students.
+  <li> When you submit the code, submit just one copy to the KLMS submission link if you work in a team.
+</ul>
+</p>
+
+
+<h2 class="ui dividing header">Building a Program</h2>
+
+<p>You should write your own Makefile; Your shell should be compiled with <code>make</code> command. For certain library functions, you require <code>-D_BSD_SOURCE</code> (or <code>-D_DEFAULT_SOURCE</code>) and <code>-D_GNU_SOURCE</code> options. Please include them in your Makefile.</p>
+
+<h2 class="ui dividing header">Initialization and Termination</h2>
+
+<p>When first started, your program should read and interpret lines
+from the file <code>.ishrc</code> in the user's HOME directory,
+provided that the file exists and is readable. Note that the file name
+is <code>.ishrc</code> (not <code>ishrc</code>), and that it resides
+in the user's <em>HOME</em> directory, not the <em>current</em>
+(alias <em>working</em>) directory. Note that your HOME directory is specified
+by the environment variable <code>HOME</code>.
+</p>
+
+<p>To facilitate your debugging and our testing, your program should
+print each line that it reads from <code>.ishrc</code> immediately
+after reading it. Your program should print a <strong>percent sign and a space
+(% )</strong> before each such line.</p>
+
+<p>Your program should terminate when the user types Ctrl-d or issues
+the <code>exit</code> command. (See also the section below entitled
+  "Signal Handling.")</p>
+
+<p><u>Important</u>: In supplementary information: (Required) Your program should work properly if the <code>.ishrc</code> file does not exist or is not readable. It is <b>not</b> an error for the <code>.ishrc</code> file to not exist or to be unreadable.
+
+
+<h2 class="ui dividing header">Interactive Operation</h2>
+
+<p>After start-up processing, your program repeatedly should perform these actions:</p>
+
+<ul>
+<li>Print a prompt, which is consisting of a percent sign followed by a space, to the standard output stream.</li>
+
+<li>Read a line from the standard input stream.</li>
+
+<li>Lexically analyze the line to form an array of tokens.</li>
+
+<li>Syntactically analyze (i.e. parse) the token array to form a command.</li>
+
+<li>Execute the command.</li>
+</ul>
+
+
+<h2 class="ui dividing header">Lexical Analysis</h2>
+
+<p>Informally, a <em>token</em> should be a word. More formally, a token should consist of a sequence of non-white-space characters that are separated from other tokens by white-space characters. There should be two exceptions:</p>
+
+<ul>
+<li>The special characters '>', and '<' <!-- '|', and '&'-->should form separate tokens.</li>
+
+<li>Strings enclosed in double quotes (") or single quotes(') should form part or all of a single token. Special characters inside of strings should not form separate tokens.</li>
+
+</ul>
+
+<p>Your program should assume that no line of the standard input stream contains more than 1023 characters; the terminating newline character is included in that count. In other words, your program should assume that a string composed from a line of input can fit in an array of characters of length 1024. If a line of the standard input stream is longer than 1023 characters, then your program need not handle it properly; but it should not corrupt memory.</p>
+
+
+<h2 class="ui dividing header">Syntactic Analysis</h2>
+
+<p>A <em>command</em> should be a sequence of tokens, the first of which specifies the command name.</p>
+
+<!-- <p class='change'>The '&#124;' token should indicate that the immediate token after the '&#124;' is another command. Your program should redirect the standard output of the command on the left to the standard input of the command on the right. If there's no following token after '&#124;', your program should print out an appropriate error message. There can be multiple pipe operators in a single command.</p> -->
+
+<h2 class="ui dividing header">Execution</h2>
+
+<p>Your program should interpret four shell built-in commands:</p>
+
+<table class="ui celled table unstackable">
+<tbody>
+<tr>
+<td><code>setenv <em>var</em> [<em>value</em>]</code>
+</td>
+<td>If environment variable <code><em>var</em></code> does not exist, then your program should create it. Your program should set the value of <code><em>var</em></code> to <code><em>value</em></code>, or to the empty string if <code><em>value</em></code> is omitted. Note: Initially, your program inherits environment variables from its parent. Your program should be able to modify the value of an existing environment variable or create a new environment variable via the <code>setenv</code> command. Your program should be able to set the value of any environment variable; but the only environment variable that it explicitly uses is HOME.</td>
+</tr>
+
+<tr>
+<td><code>unsetenv <em>var</em></code>
+</td>
+<td>Your program should destroy the environment variable <code><em>var</em></code>.
+If the environment variable does not exist, just ignore.
+</td>
+</tr>
+
+<tr>
+<td><code>cd [<em>dir</em>]</code>
+</td>
+<td>Your program should change its working directory to <code><em>dir</em></code>, or to the HOME directory if <code><em>dir</em></code> is omitted.</td>
+</tr>
+
+<tr>
+<td><code>exit</code>
+</td>
+<td>Your program should exit with exit status 0.</td>
+</tr>
+
+</tbody>
+</table>
+
+<p>Note that those built-in commands should neither read from the
+standard input stream nor write to the standard output stream. Your
+program should print an error message if there is any<!--  piped commmand, -->
+ file redirection with those built-in commands.<!--, or any attempt to run in the background (with &).-->
+</p>
+
+<p>If the command is not a built-in command, then your program should consider the command name to be the name of a file that contains code to be executed. Your program should fork a child process and pass the file name, along with its arguments, to the <code>execvp</code> system call. If the attempt to execute the file fails, then your program should print an error message indicating the reason for the failure.</p>
+
+
+<h2 class="ui dividing header">Process Handling</h2>
+
+<p>All child processes forked by your program should run in the foreground<!-- unless you don't support background processes.--></p>
+<p>It is required to call wait for every child that has been created.</p>
+
+
+<h2 class="ui dividing header">Signal Handling</h2>
+
+<p><strong>[NOTE] Ctrl-d represents EOF, not a signal. Do NOT make a signal handler for Ctrl-d.</strong></p>
+
+<p>When the user types Ctrl-c, Linux sends a SIGINT signal to the parent process and its children. Upon receiving a SIGINT signal:</p>
+
+<ul>
+<li>The parent process should ignore the SIGINT signal.</li>
+
+<li>A child process should not necessarily ignore the SIGINT signal. That is, unless the child process itself (beyond the control of parent process) has installed a handler for SIGINT signals, the child process should terminate.</li>
+</ul>
+
+<p>When the user types Ctrl-\, Linux sends a SIGQUIT signal to the parent process and its children. Upon receiving a SIGQUIT signal:</p>
+
+<ul>
+<li>The parent process should print the message "Type Ctrl-\ again within 5 seconds to exit." to the standard output stream. If and only if the user indeed types Ctrl-\ again within 5 seconds of wall-clock time, then the parent process should terminate.</li>
+
+<li>A child process should not necessarily ignore the SIGQUIT signal. That is, unless the child process itself (beyond the control of the parent process) has installed a handler for SIGQUIT signals, the child process should terminate.</li>
+</ul>
+
+<h2 class="ui dividing header">Redirection</h2>
+<p>You are going to implement redirection of standard input and standard output.</p>
+<ul>
+	<li>The special character '&lt;' and '&gt;' should form separate token in lexical analysis.</li>
+	<li>The '&lt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard input to that file. It should be an error to redirect a command's standard input stream more than once. <!-- It should also be an error to redirect a command's standard input stream after a pipe token (See Redirection section in supplementary information page).</li> -->
+	<li>The '&gt;' token should indicate that the following token is a name of a file. Your program should redirect the command's standard output to that file. It should be an error to redirect a command's standard output stream more than once. <!-- It should also be an error to redirect a command's standard output stream before a pipe token (See Redirection section in supplementary information page).</li> -->
+
+        <li>If the standard input stream is redirected to a file that does not exist, then your program should print an appropriate error message.</li>
+	<li>If the standard output stream is redirected to a file that does not exist, then your program should create it. If the standard output stream is redirected to a file that already exists, then your program should destroy the file's contents and rewrite the file from scratch. Your program should set the permissions of the file to 0600.</li>
+</ul>
+
+
+<h2 class="ui dividing header">Error Handling</h2>
+
+<p>Your program should handle an erroneous line gracefully by rejecting the line and writing a descriptive error message to the standard error stream. An error message written by your program should begin with "<code><em>programName</em>:</code> " where <code><em>programName</em></code> is <code>argv[0]</code>, that is, the name of your program's executable binary file. <!--Note that <code>argv[0]</code> will be <code>ish</code>.</p>-->
+
+
+<p>The error messages written by your program <strong>should be identical</strong> to those written by the given <code>sampleish</code> program.
+
+<p><strong>Your program should handle all user errors. It should be impossible for the user's input to cause your program to crash.</strong>
+</p>
+
+
+<h2 class="ui dividing header">Memory Management</h2>
+
+<p>Your program should contain no memory leaks. For every call of <code>malloc</code> or <code>calloc</code>, eventually there should be a corresponding call of <code>free</code>.</p>
+
+
+<h2 class="ui dividing header">Extra Credit 1 (extra 10% of the full score of this assignment)</h2>
+
+<p> You are going to implement pipe so that you can run command piplelines such as: </p>
+
+<code>% ls | sort | grep | wc</code>
+
+<ul>
+<li>The '|' token should indicate that the immediate token after the '|' is another command.
+
+<li> You might find the man pages for pipe, fork, close, and dup.
+
+<li> Your program should redirect the standard output of the command on the left to the standard input of the command on the right.
+
+<li> If there is  no following token after '|', your program should print out an appropriate error message.
+
+<li> There can be multiple pipe operators in a single command.
+
+</ul>
+
+<!--
+<h2 class="ui dividing header">Extra Credit 3 (extra 10% of the full score of this assignment) </h2>
+
+You are going to implement background processes. For that, you need to support this additional built-in command.
+
+<table class="ui celled table unstackable">
+<tbody>
+<tr>
+<td><code>fg</code>
+</td>
+<td>
+'fg' command brings a command that has been running in the background to the
+foreground. When there are multiple programs running in the background, 'fg'
+should bring the most recently launched program to the foreground.
+</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li> A command is executed in the background if '&' is appended at the end of the command line.
+<li> If the background operator ('&') is not located at the end of the command line,
+    your shell needs to print out an error message (See Background process section in supplementary information page).
+<li> If the background operator ('&') comes without a command,
+your shell needs to print out an error message.
+<li>
+If there is
+a background process, your program should print "[<code>%pid</code>] Latest background
+  process is running", where <code>%pid</code> is the process id of the
+background process.  Otherwise, your program should print an error message,
+"There is no background process".
+</li>
+<li>
+When the background process is created, your program should print "<code>[%pid]</code> Background process is created".
+</li>
+<li>
+When the background process is terminated, your program should print "<code>[%pid]</code> Background process is terminated"
+For that, you need to install a signal handler for <code>SIGCHLD</code>.
+</li>
+</ul>
+-->
+<h2 class="ui dividing header">Extra Credit 2 (extra 5% of your earned score including the extra credit) </h2>
+
+<p> If you do this assignment on your own without a partner, you will receive extra credit which is worth 5% of (your basic score + extra credit 1). Here is an example. If your score is 50 and you got extra credit 1, your earned score is 50 + 10 = 60.  If you worked alone, you will receive 5% x 60 = 3 additional points as extra credit 2. So, your total score will be 63. </p>
+
+
+<h2 class="ui dividing header">Logistics</h2>
+
+<p>Develop on lab machines. Use your favorite edtor to create source code. Use <code>make</code> to automate the build process. Use <code>gdb</code> to debug.</p>
+
+<p>As always, we provide you <a href="assignment5.tar.gz">the startup file</a>. An executable version of the assignment solution is available in <code><a href="resource/sampleish">sampleish</a></code>. Use it to resolve any issues concerning the desired functionality of your program. We also provide the <a href="resource/dynarray.h">interface</a> and <a href="resource/dynarray.c">implementation</a> of the <code>DynArray</code> ADT. You are welcome to use that ADT in your program. <!-- You may use <a href="resource/dfa.c">dfa.c</a> as reference. Note, however, it does not have the full functionality required by ish.</p>-->
+
+<p>Your <code>readme</code> file should contain:</p>
+
+<ul>
+<li> Your name and the name and the student ID of your partner.  If you worked alone, only your name is needed.</li>
+
+<li> Description of work division between you and your partner.
+
+<li>A description of whatever help (if any) you received from others while doing the assignment, and the names of any individuals with whom you collaborated, as prescribed by the course "Policies" web page.</li>
+
+<li>(Optionally) An indication of how much time you spent doing the assignment.</li>
+
+<li>(Optionally) Your assessment of the assignment.</li>
+
+<li>(Optionally) Any information that will help us to grade your work in the most favorable light. In particular you should describe all known bugs.</li>
+</ul>
+
+
+<h2 class="ui dividing header"> Submission </h2>
+
+<p>Use KLMS submission link
+  to submit your assignments. Your submission should
+be </b>one gzipped tar file</a> whose name is </p>
+
+<p>YourStudentID_assign5.tar.gz
+<br>Do not include your partner's student ID in the file name.
+</p>
+
+<p> When you submit the code, submit just one copy to the KLMS submission link if you work in a team.</p>
+
+<p>Your submission need to include the following files:</p>
+<ul>
+
+<li>Your source code files. (If you used <code>DynArray</code> ADT, then submit the <code>dynarray.h</code> and <code>dynarray.c</code> files as well.)</li>
+
+<li><code>Makefile</code>. The first dependency rule should build your entire program. The <code>Makefile</code> should maintain object (.o) files to allow for partial builds, and encode the dependencies among the files that comprise your program. As always, use the <code>gcc209</code> command to build.</li>
+
+<li>A <code>readme</code> file.</li>
+
+<li> <a href="../EthicsOath.docx">Observance of Ethics</a>. Sign on the document, save it into a PDF file, and submit it. </li>
+
+<p>Your submission file should look like this: </p>
+<div class="ui segment">
+<div class="ui list">
+<div class="item">
+<i class="archive icon"></i>
+<div class="content">
+20221234_assign5.tar.gz
+<!--                    <div class="description">Source files for project</div>-->
+<!--div class="list">
+<div class="item">
+<i class="folder icon"></i>
+<div class="content">
+20221234_assign5-->
+<div class="list">
+
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+your_source_code.c
+<div class="description">(can be any name or multiple files)</div>
+</div>
+</div>
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+your_header.h
+<div class="description">(can be any name or multiple files)</div>
+</div>
+</div>
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+Makefile
+</div>
+</div>
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+readme
+</div>
+</div>
+<div class="item">
+<i class="file icon"></i>
+<div class="content">
+EthicsOath.pdf
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</ul>
+
+<p>You can use "<code>make submit</code>" to create submission files.
+Note that it only includes *.c and *.h files that are not included your subdirectories.
+If you created subdirectories, please be aware of that.
+</p>
+
+
+<h2 class="ui dividing header">Grading</h2>
+
+
+<div class="ui message error">
+  If your submission file does not contain the expected files, or your code cannot be compiled at <code>eelabg12</code> or <code>eelabg13</code> with <code>gcc209</code>, we cannot give you any points. Please double check before you submit.
+</div>
+
+<p>We will grade your work on quality from the user's point of view and from the programmer's point of view. From the user's point of view, your program has quality if it behaves as it should. The correct behavior of your program is defined by the previous sections of this assignment specification and by the given <code>sampleish</code> program. From the programmer's point of view, your program has quality if it is well styled and thereby simple to maintain. See the specifications of previous assignments for guidelines concerning style. Proper function-level and file-level modularity will be a prominent part of your grade. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages. Remember that the <a href="./shellsupplementary.html">Supplementary Information</a> page lists detailed implementation requirements and recommendations.</p>
+
+<p>In part, style is defined by the rules given in <em>The Practice of Programming</em> (Kernighan and Pike), as summarized by the <a href="../../style.pdf">Rules of Programming Style</a> document. These additional rules apply:</p>
+
+<p><strong>Names</strong>: You should use a clear and consistent style for variable and function names. One example of such a style is to prefix each variable name with characters that indicate its type. For example, the prefix <code>c</code> might indicate that the variable is of type <code>char</code>, <code>i</code> might indicate <code>int</code>, <code>pc</code> might mean <code>char*</code>, <code>ui</code> might mean <code>unsigned int</code>, etc. But it is fine to use another style -- a style which does not include the type of a variable in its name -- as long as the result is a readable program.</p>
+
+<p><strong>Line lengths</strong>: Limit line lengths in your source code to 72 characters. Doing so allows us to print your work in two columns, thus saving paper.</p>
+
+<p><strong>Comments</strong>: Each source code file should begin with a comment that includes your name, student ID, and the description of the file.</p>
+
+<p><strong>Comments</strong>: Each function should begin with a comment that describes what the function does from the caller's point of view. The function comment should:</p>
+
+<ul>
+<li>
+Explicitly refer to the function's parameters (by name) and the function's return value.</li>
+<li>State what, if anything, the function reads from standard input or any other stream, and what, if anything, the function writes to standard output, standard error, or any other stream.</li>
+
+<li>State which global variables the function uses or affects.</li>
+</ul>
+
+
+<div class="ui message warning">
+  Please note that you might not get a full credit even if you pass the test with your <code>./ish</code>. TAs will use other test cases to test functionality and robustness of your implementation.
+</div>
+
+
+
+
+<br>
+
+<script src="../../vendor/moment.min.js"></script>
+<script src="../../vendor/ee209_assignment.js"></script>
+<!-- <script>showTimer('2023-06-11T23:55:00+0900');</script> -->
+</body>
+
+
+</body></html>
