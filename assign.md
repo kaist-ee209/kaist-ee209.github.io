@@ -13,7 +13,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 
 <ul>
 <li> Assignment 1:
-<a href="assignment1/index.html"> A Word Counting Program</a> (due: 9/15 11:55pm) </li>
+<a href="assignment1/index.html"> A Word Counting Program</a> (due: 9/15 11:55pm, 10% ) </li>
 <!-- <li> Assignment 2:
 <a href="assignment2/index.html"> String Manipulation</a> (due: 10/6 11:55pm) </li>
 <li> Assignment 3:
@@ -37,6 +37,40 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <li> Assignment 5:
 <a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 06/11 11:55pm) </li>
 </ul> -->
+
+<h2> Grading Policy of Assignment </h2>
+<hr>
+<table style="border-collapse: collapse;" border="3" cellpadding="3">
+<tbody>
+
+<tr>
+<td> 10% </td>
+<td> Assignment #1  </td>
+</tr>
+
+<tr>
+<td> 10% </td>
+<td> Assignment #2  </td>
+</tr>
+
+<tr>
+<td> 10% </td>
+<td> Assignment #3  </td>
+</tr>
+
+<tr>
+<td> 10% </td>
+<td> Assignment #4  </td>
+</tr>
+
+<tr>
+<td> 15% </td>
+<td> Assignment #5  </td>
+</tr>
+
+</tbody>
+</table>
+
 
 <h2> Assignment Submission (Important) </h2>
 <hr>
