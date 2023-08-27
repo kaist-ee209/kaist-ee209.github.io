@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org">
+<title>EE 209: Basic Unix Command Cheatsheet</title>
+</head>
+<style>
+    .change {color:red}
+</style>
+<body>
+<center>
+<h1>KAIST<br>
+EE 209: Programming Structures for EE</h1>
+
+<h2>Basic Unix Command Cheatsheet<br>
+</h2>
+
+</center>
+
+<hr>
+
+<h3>Files &amp; Directories</h3>
+
+<ul>
+
+<li class="toplevel-2"><strong><code>cd</code></strong> : move to a directory
+<ul>
+	<li class="toclevel-2"> <code>cd /usr/bin/</code>
+	<p>move to <code>/usr/bin/</code> directory.</p>
+	<li class="toclevel-2"> <code>cd</code>
+	<p>move to the home directory.</p>
+	<li class="toclevel-2"> <code>cd ~</code>
+	<p>also move to the home directory.</p>
+	<li class="toclevel-2"> <code>cd ..</code>
+	<p>move to the parent directory.</p>
+</ul>
+<li class="toplevel-2"><strong><code>ls</code></strong> : list files and directories in the current directory
+<ul>
+	<li class="toclevel-2"> <code>ls -a</code>
+	<p>list including files and directories which start with "<code>.</code>".</p>
+	<li class="toclevel-2"> <code>ls -l</code>
+	<p>list with more detailed information (e.g., file permission, ownership, size, last modified time, etc.).</p>
+	<li class="toclevel-2"> <code>ls -al</code>
+	<p>list with more detailed information including files and directories which start with "<code>.</code>".</p>
+	<li class="toclevel-2"> <code>ll</code>
+	<p>this is a shortcut of "<code>ls -al</code>".</p>
+</ul>
+<li class="toplevel-2"><strong><code>mv</code></strong> : move a file to a specified directory or rename a file
+<ul>
+	<li class="toclevel-2"> <code>mv hello.c /path/to/dir/</code>
+	<p>move <code>hello.c</code> under the directory <code>/path/to/dir/</code>.</p>
+	<li class="toclevel-2"> <code>mv hello.c ./dir/</code>
+	<p>move <code>hello.c</code> under the directory <code>dir/</code> which exists on the current directory (".").</p>
+	<li class="toclevel-2"> <code>mv /path/to/dir/hello.c /another/path/to/dir/</code>
+	<p>move <code>hello.c</code> which is under the <code>/path/to/dir/</code> directory to the another directory, <code>/another/path/to/dir/</code>.</p>
+	<li class="toclevel-2"> <code>mv /path/to/dir/hello.c .</code>
+	<p>move <code>hello.c</code> which is under the <code>/path/to/dir/</code> directory to the current directory (".").</p>
+	<li class="toclevel-2"> <code>mv hello.c new_hello.c</code>
+	<p>rename <code>hello.c</code> to <code>new_hello.c</code>.</p>
+	<li class="toclevel-2"> <code>mv hello.c /path/to/dir/new_hello.c</code>
+	<p>move <code>hello.c</code> under the directory <code>/path/to/dir/</code> and rename it into <code>new_hello.c</code>.</p>
+	<li class="toclevel-2"> <code>mv /path/to/dir/ /another/path/to/dir/</code>
+	<p>move the whole directory <code>/path/to/dir/</code> as <code>/another/path/to/dir/</code>.</p>
+</ul>
+<li class="toplevel-2"><strong><code>cp</code></strong> : copy a file under a directory
+<ul>
+	<li class="toclevel-2"> <code>cp hello.c /path/to/dir/</code>
+	<p>copy <code>hello.c</code> under the directory <code>/path/to/dir/</code>.</p>
+	<li class="toclevel-2"> <code>cp hello.c new_hello.c</code>
+	<p>copy <code>hello.c</code> and name the new file as <code>new_hello.c</code>.</p>
+	<li class="toclevel-2"> <code>cp -r /path/to/dir/ /another/path/to/dir/</code>
+	<p>copy the whole directory <code>/path/to/dir/</code> under the directory <code>/another/path/to/dir/</code>. -r means "recursively". </p>
+</ul>
+<li class="toplevel-2"><strong><code>rm</code></strong> : remove a file 
+<p>BE CAREFUL IN USING <code>rm</code> : REMOVED FILES CAN NEVER BE REVIVED</p>
+<ul>
+	<li class="toclevel-2"> <code>rm hello.c</code>
+	<p>remove <code>hello.c</code>.</p>
+	<li class="toclevel-2"> <code>rm -d /path/to/dir/</code>
+	<p>remove an empty directory <code>/path/to/dir</code>.</p>
+	<li class="toclevel-2"> <code>rm -r /path/to/dir/</code>
+	<p>remove <code>/path/to/dir/</code> directory and all files under the directory.</p>
+</ul>
+<li class="toplevel-2"><strong><code>mkdir</code></strong> : make a new directory
+<ul>
+	<li class="toclevel-2"> <code>mkdir /path/to/dir/</code>
+	<p>make a new directory, <code>/path/to/dir/</code>. The <code>/path/to/</code> directory should already exist.</p>
+	<li class="toclevel-2"> <code>mkdir dir/</code>
+	<p>make a new directory <code>dir/</code> under the current directory.</p>
+	<li class="toclevel-2"> <code>mkdir -p /path/to/dir/</code>
+	<p>make a new directory, <code>/path/to/dir/</code>. If parent directories such as <code>/path/</code> or <code>/path/to/</code> doesn't exist, make them also.</p>
+</ul>
+<li class="toplevel-2"><strong><code>rmdir</code></strong> : remove an empty directory
+<ul>
+	<li class="toclevel-2"> <code>rmdir /path/to/dir/</code>
+	<p>remove <code>/path/to/dir/</code> directory if empty.</p>
+	<li class="toclevel-2"> <code>rmdir -p /path/to/dir/</code>
+	<p>remove <code>/path/to/dir/</code> and all of its parent directories, such as <code>/path/</code> or <code>/path/to/</code>. In this case, it will try to remove the root directory, <code>/</code>, because it is also one of the parent directories. This means you are trying to remove all of your file system! (which will not work properly.)</p>
+	<li class="toclevel-2"> <code>rmdir -p path/to/dir/</code>
+	<p>Now this command doesn't start from the root directory, thus it is more plausible than the command above. It removes <code>path/to/dir/</code>, <code>path/to/</code>, and <code>path/</code> directories.</p>
+</ul>
+<li class="toplevel-2"><strong><code>cat</code></strong> : write contents of a file to stdout stream.
+<ul>
+	<li class="toclevel-2"> <code>cat hello.c</code>
+	<p>show contents written in <code>hello.c</code> on the console. (To be more specific, it writes contents in <code>hello.c</code> to stdout stream.)</p>
+	<li class="toclevel-2"> <code>cat -n hello.c</code>
+	<p>show contents written in <code>hello.c</code> on the console with line numbers.</p>
+</ul>
+</ul>
+
+<!--ul>
+<hr>
+
+<h3>Processes &amp; Signaling</h3>
+
+<ul>
+
+<li class="toplevel-2"><strong><code>jobs</code></strong> : show all alive processes via this session
+<p>example</p>
+<li class="toplevel-2"><strong><code>fg</code></strong> : bring a process to the foreground
+<p>example</p>
+<li class="toplevel-2"><strong><code>^Z</code> (ctrl + z)</strong> : send SIGTSTP (terminal stop) signal to the foreground process
+<p>example</p>
+<li class="toplevel-2"><strong><code>^C</code> (ctrl + c)</strong> : send SIGINT (terminal interupt) signal to the foreground process
+<p>example</p>
+<li class="toplevel-2"><strong><code>^D</code> (ctrl + d)</strong> : write EOF (end-of-file character) to stdin stream.
+<p>example</p>
+
+</ul>
+</ul-->
+
+<hr>
+
+<h3>Networking</h3>
+
+<ul>
+
+<li class="toplevel-2"><strong><code>ping</code></strong> : check whether a host (or an IP address) is accessible 
+<ul>
+	<li class="toclevel-2"> <code>ping www.kaist.ac.kr</code>
+	<p>check whether you can access to <code>www.kaist.ac.kr</code>.</p>
+	<li class="toclevel-2"> <code>ping eelab1.kaist.ac.kr</code>
+	<p>check whether you can access to <code>eelab1.kaist.ac.kr</code>.</p>
+</ul>
+<li class="toplevel-2"><strong><code>ssh</code></strong> : access a host via ssh protocol. you login to the host remotely in a secure manner (all communication between your machine and the remote host is encrypted). ssh = secure shell
+<ul>
+	<li class="toclevel-2"> <code>ssh 20160001@eelab1.kaist.ac.kr</code>
+	<p>access to <code>eelab1.kaist.ac.kr</code> with the account <code>20160001</code>.</p>
+</ul>
+<li class="toplevel-2"><strong><code>scp</code></strong> : copy a file to a host via ssh protocol
+<ul>
+	<li class="toclevel-2"> <code>scp hello.c 20160001@eelab1.kaist.ac.kr:</code>
+	<p>copy <code>hello.c</code> file in the current directory to the home directory of the account <code>20160001</code> in the <code>eelab1.kaist.ac.kr</code> machine.</p>
+	<li class="toclevel-2"> <code>scp 20160001@eelab1.kaist.ac.kr:ee209_assign1/hello1.c .</code>
+	<p>copy <code>ee209_assign1/hello.c</code> under 2016001's home directory at eelab1.kaist.ac.kr to the current directory (".") of my local machine. </p>
+	<li class="toclevel-2"> <code>scp -r dir/ 20160001@eelab1.kaist.ac.kr:</code>
+	<p>copy <code>dir/</code> directory under the current directory to the home directory of the account <code>20160001</code> in the <code>eelab1.kaist.ac.kr</code> machine.</p>
+</ul>
+<li class="toplevel-2"><strong><code>wget</code></strong> : download a file from web
+<ul>
+	<li class="toclevel-2"> <code>wget https://www.ndsl.kaist.edu/~kyoungsoo/ee209/assignment/cr/src/client.c</code>
+	<p>Download the skeleton code of assignment 1.</p>
+</ul>
+
+</ul>
+
+<hr>
+
+<h3>Special</h3>
+
+<ul>
+
+<li class="toplevel-2"><strong><code>man</code></strong> : show UNIX &amp; LINUX manual
+<ul>
+	<li class="toclevel-2"> <code>man cp</code>
+	<p>show the manual of <code>cp</code> command.</p>
+	<li class="toclevel-2"> <code>man printf</code>
+	<p>show the manual of <code>printf</code> function.</p>
+</ul>
+
+</ul>
+</body>
+</html>
