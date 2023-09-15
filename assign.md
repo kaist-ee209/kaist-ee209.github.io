@@ -92,24 +92,16 @@ mkdir 20231234_assign1
 mv all_your_files 20231234_assign1
 </pre>
 
-</p><p>
-Then, move to your directory 20231234
-
-</p>
-<pre class="ui message">
-cd 20231234_assign1
-</pre>
-
 <p>
 Create a .tar.gz file by the 'tar' command like
 
 </p><p>
 <pre class="ui message">
-tar -zcf 20231234_assign1.tar.gz *
+tar zcf 20231234_assign1.tar.gz 20231234_assign1
 </pre>
 
 </p><p>
-Then, you'll see  20231234_assign1.tar.gz. If you want to decompress and release the files in it (in a different directory),
+Then, you'll see 20231234_assign1.tar.gz. If you want to decompress and release the files in it (in a different directory),
 
 </p>
 <pre class="ui message">
