@@ -16,7 +16,7 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <a href="assignment1/index.html"> A Word Counting Program</a> (due: 9/15 11:55pm) </li>
 <li> Assignment 2:
 <a href="assignment2/index.html"> String Manipulation</a> (due: 10/6 11:55pm) </li>
-<-- <li> Assignment 3:
+<!-- <li> Assignment 3:
 <a href="assignment3/index.html"> Customer Management Table</a> (due: 10/27 11:55pm) </li>
 <li> Assignment 4:
 <a href="assignment4/index.html"> Assembly Language Programming</a> (due: 11/17 11:55pm) </li>
