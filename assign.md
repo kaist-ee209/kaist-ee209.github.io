@@ -24,19 +24,6 @@ assignments. Each programming assignment takes up 10% of your total grade.
 <a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 12/18 11:55pm) </li>
 </ul>
  -->
-<!-- 2023 ### SPRING Schedule ###
-<ul>
-<li> Assignment 1:
-<a href="assignment1/index.html"> A Word Counting Program</a> (due: 03/15 11:55pm) </li>
-<li> Assignment 2:
-<a href="assignment2/index.html"> String Manipulation</a> (due: 04/02 11:55pm) </li>
-<li> Assignment 3:
-<a href="assignment3/index.html"> Customer Management Table</a> (due: 04/24 11:55pm) </li>
-<li> Assignment 4:
-<a href="assignment4/index.html"> Assembly Language Programming</a> (due: 05/21 11:55pm) </li>
-<li> Assignment 5:
-<a href="assignment5/index.html"> Unix Shell Assignment</a> (due: 06/11 11:55pm) </li>
-</ul> -->
 
 <h2> Grading Policy of Assignments </h2>
 <hr>
