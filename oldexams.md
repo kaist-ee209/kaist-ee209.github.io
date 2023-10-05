@@ -64,8 +64,8 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <tr>
 <td> 2010 </td>
 <td> Fall </td>
-<td> <a href="assets/old_midterm/fall10exam_KAIST.pdf"> Exam sheet</a> </td>
-<td> <a href="assets/old_midterm/fall10exam_KAISTans.pdf"> Solution </a> </td>
+<td> <a href="./assets/old_midterm/fall10exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="./assets/old_midterm/fall10exam_KAISTans.pdf"> Solution </a> </td>
 </tr>
 
 <tr>
@@ -86,7 +86,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> 2013 </td>
 <td> Fall </td>
 <td> <a href="assets/old_midterm/fall13exam_KAIST.pdf"> Exam sheet</a> </td>
-<td> <a href="assets/old_midterm/fall13exam_KAISTans.pdf"> Solution</a> </td>
+<td> </td>
 </tr>
 
 
@@ -94,7 +94,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> 2015 </td>
 <td> Spring </td>
 <td> <a href="assets/old_midterm/spring15exam_KAIST.pdf"> Exam sheet</a> </td>
-<td> <a href="assets/old_midterm/spring15exam_KAISTans.pdf"> Solution</a> </td>
+<td> </td>
 </tr>
 
 <tr>
@@ -186,7 +186,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 
 
 
-<h3> EE209 Old FinalExams </h3>
+<h3> EE209 Old Final Exams </h3>
 <hr>
 <table style="border-collapse: collapse;" border="3" cellpadding="3">
 <tbody>
