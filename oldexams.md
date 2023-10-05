@@ -8,8 +8,7 @@ permalink: /oldexams/
 
 We provide students with midterms/finals from previous semesters. Solutions for some exam are not provided.
 
-<!-- If you want to browse the old slides, here is [the link](/assets/EE485_old.zip).    -->
-
+<!-- 
 **EE209 Old Midterm Exams**
 | Year | Semester | Exam sheet | Solution |
 |------|---------|-------------|----------|
@@ -46,7 +45,250 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 | 2020 | Fall  |  | [Solution](/assets/old_final/fall20exam_final_KAIST.pdf) |
 | 2021 | Spring| [Exam sheet](/assets/old_final/spring21exam_final_KAIST.pdf)| [Solution](/assets/old_final/spring21exam_final_KAISTans.pdf) |
 | 2021 | Fall  | [Exam sheet](/assets/old_final/fall21exam_final_KAIST.pdf)| [Solution](/assets/old_final/fall21exam_final_KAISTans.pdf) |
-| 2022 | Fall  | [Exam sheet](/assets/old_final/fall22exam_final_KAIST.pdf)| [Solution](/assets/old_final/fall22exam_final_KAISTans.pdf) |
+| 2022 | Fall  | [Exam sheet](/assets/old_final/fall22exam_final_KAIST.pdf)| [Solution](/assets/old_final/fall22exam_final_KAISTans.pdf) | -->
 
 
 
+<h3> EE209 Old Midterm Exams </h3>
+<hr>
+<table style="border-collapse: collapse;" border="3" cellpadding="3">
+<tbody>
+
+<tr>
+<td> Year </td>
+<td> Semester </td>
+<td> Exam sheet </td>
+<td> Solution </td>
+</tr>
+
+<tr>
+<td> 2010 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall10exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall10exam_KAISTans.pdf"> Solution </a> </td>
+</tr>
+
+<tr>
+<td> 2011 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall11exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall11exam_KAISTans.pdf"> Solution </a> </td>
+</tr>
+
+<tr>
+<td> 2012 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall12exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall12exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2013 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall13exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall13exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+
+<tr>
+<td> 2015 </td>
+<td> Spring </td>
+<td> <a href="assets/old_midterm/spring15exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/spring15exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2015 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall15exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall15exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2016 </td>
+<td> Spring </td>
+<td> <a href="assets/old_midterm/spring16exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/spring16exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2016 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall16exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall16exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2017 </td>
+<td> Spring </td>
+<td> <a href="assets/old_midterm/spring17exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/spring17exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2017 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall17exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall17exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2018 </td>
+<td> Spring </td>
+<td> <a href="assets/old_midterm/spring18exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/spring18exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2018 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall18exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall18exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2020 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall20exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall20exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2021 </td>
+<td> Spring </td>
+<td> <a href="assets/old_midterm/spring21exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/spring21exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2021 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall21exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall21exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2022 </td>
+<td> Spring </td>
+<td> <a href="assets/old_midterm/spring22exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/spring22exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2022 </td>
+<td> Fall </td>
+<td> <a href="assets/old_midterm/fall22exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_midterm/fall22exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+<h3> EE209 Old FinalExams </h3>
+<hr>
+<table style="border-collapse: collapse;" border="3" cellpadding="3">
+<tbody>
+
+<tr>
+<td> Year </td>
+<td> Semester </td>
+<td> Exam sheet </td>
+<td> Solution </td>
+</tr>
+
+<tr>
+<td> 2010 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall10exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/fall10exam_final_KAISTans.pdf"> Solution </a> </td>
+</tr>
+
+<tr>
+<td> 2011 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall11exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/fall11exam_final_KAISTans.pdf"> Solution </a> </td>
+</tr>
+
+<tr>
+<td> 2012 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall12exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/fall12exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2013 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall13exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td>  </td>
+</tr>
+
+
+<tr>
+<td> 2015 </td>
+<td> Spring </td>
+<td> <a href="assets/old_final/spring15exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> </td>
+</tr>
+
+<tr>
+<td> 2015 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall15exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> </td>
+</tr>
+
+<tr>
+<td> 2016 </td>
+<td> Spring </td>
+<td> <a href="assets/old_final/spring16exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/spring16exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2016 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall16exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/fall16exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2017 </td>
+<td> Spring </td>
+<td> <a href="assets/old_final/spring17exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/spring17exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2020 </td>
+<td> Fall </td>
+<td> </td>
+<td> <a href="assets/old_final/fall20exam_final_KAIST.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2021 </td>
+<td> Spring </td>
+<td> <a href="assets/old_final/spring21exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/spring21exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2021 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall21exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/fall21exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2022 </td>
+<td> Fall </td>
+<td> <a href="assets/old_final/fall22exam_final_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="assets/old_final/fall22exam_final_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+</tbody>
+</table>
