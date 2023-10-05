@@ -1,0 +1,52 @@
+---
+layout: page
+title: Precepts
+permalink: /precepts/
+---
+
+<h2>Old Exams</h2>
+
+We provide students with midterms/finals from previous semesters. Solutions for some exam are not provided.
+
+<!-- If you want to browse the old slides, here is [the link](/assets/EE485_old.zip).    -->
+
+**EE209 Old Midterm Exams**
+| Year | Semester | Exam sheet | Solution |
+|------|---------|-------------|----------|
+| 2010 | Fall  | [Exam sheet](/assets/old_midterm/fall10exam_KAIST.pdf)  | [Solution](/assets/old_midterm/fall10exam_KAISTans.pdf) |
+| 2011 | Fall  | [Exam sheet](/assets/old_midterm/fall11exam_KAIST.pdf)  | [Solution](/assets/old_midterm/fall11exam_KAISTans.pdf) |
+| 2012 | Fall  | [Exam sheet](/assets/old_midterm/fall12exam_KAIST.pdf)  | [Solution](/assets/old_midterm/fall12exam_KAISTans.pdf) |
+| 2013 | Fall  | [Exam sheet](/assets/old_midterm/fall13exam_KAIST.pdf)  | |
+| 2015 | Spring| [Exam sheet](/assets/old_midterm/spring15exam_KAIST.pdf)| |
+| 2015 | Fall  | [Exam sheet](/assets/old_midterm/fall15exam_KAIST.pdf)| [Solution](/assets/old_midterm/fall15exam_KAISTans.pdf) |
+| 2016 | Spring| [Exam sheet](/assets/old_midterm/spring16exam_KAIST.pdf)| [Solution](/assets/old_midterm/spring16exam_KAISTans.pdf) |
+| 2016 | Fall  | [Exam sheet](/assets/old_midterm/fall16exam_KAIST.pdf)| [Solution](/assets/old_midterm/fall16exam_KAISTans.pdf) |
+| 2017 | Spring| [Exam sheet](/assets/old_midterm/spring17exam_KAIST.pdf)| [Solution](/assets/old_midterm/spring17exam_KAISTans.pdf) |
+| 2017 | Fall  | [Exam sheet](/assets/old_midterm/fall17exam_KAIST.pdf)| [Solution](/assets/old_midterm/fall17exam_KAISTans.pdf) |
+| 2018 | Spring| [Exam sheet](/assets/old_midterm/spring18exam_KAIST.pdf)| [Solution](/assets/old_midterm/spring18exam_KAISTans.pdf) |
+| 2018 | Spring  | [C++ sample](/assets/old_midterm/spring18c++sample_KAIST.pdf)| [Solution](/assets/old_midterm/spring18c++sample_KAISTans.pdf) |
+| 2020 | Fall  |  | [Solution](/assets/old_midterm/fall20exam_KAISTans.pdf) |
+| 2021 | Spring| [Exam sheet](/assets/old_midterm/spring21exam_KAIST.pdf)| [Solution](/assets/old_midterm/spring21exam_KAISTans.pdf) |
+| 2021 | Fall  | [Exam sheet](/assets/old_midterm/fall21exam_KAIST.pdf)| [Solution](/assets/old_midterm/fall21exam_KAISTans.pdf) |
+| 2022 | Spring| [Exam sheet](/assets/old_midterm/spring22exam_KAIST.pdf)| [Solution](/assets/old_midterm/spring22exam_KAISTans.pdf) |
+| 2022 | Fall  | [Exam sheet](/assets/old_midterm/fall22exam_KAIST.pdf)| [Solution](/assets/old_midterm/fall22exam_KAISTans.pdf) |
+
+**EE209 Old Final Exams**
+| Year | Semester | Exam sheet | Solution |
+|------|---------|-------------|----------|
+| 2010 | Fall  | [Exam sheet](/assets/old_final/fall10exam_final_KAIST.pdf)  | [Solution](/assets/old_final/fall10exam_final_KAISTans.pdf) |
+| 2011 | Fall  | [Exam sheet](/assets/old_final/fall11exam_final_KAIST.pdf)  | [Solution](/assets/old_final/fall11exam_final_KAISTans.pdf) |
+| 2012 | Fall  | [Exam sheet](/assets/old_final/fall12exam_final_KAIST.pdf)  | [Solution](/assets/old_final/fall12exam_final_KAISTans.pdf) |
+| 2013 | Fall  | [Exam sheet](/assets/old_final/fall13exam_final_KAIST.pdf)  | |
+| 2015 | Spring| [Exam sheet](/assets/old_final/spring15exam_final_KAIST.pdf)| |
+| 2015 | Fall  | [Exam sheet](/assets/old_final/fall15exam_final_KAIST.pdf)| |
+| 2016 | Spring| [Exam sheet](/assets/old_final/spring16exam_final_KAIST.pdf)| [Solution](/assets/old_final/spring16exam_final_KAISTans.pdf) |
+| 2016 | Fall  | [Exam sheet](/assets/old_final/fall16exam_final_KAIST.pdf)| [Solution](/assets/old_final/fall16exam_final_KAISTans.pdf) |
+| 2017 | Spring| [Exam sheet](/assets/old_final/spring17exam_final_KAIST.pdf)| [Solution](/assets/old_final/spring17exam_final_KAISTans.pdf) |
+| 2020 | Fall  |  | [Solution](/assets/old_final/fall20exam_final_KAIST.pdf) |
+| 2021 | Spring| [Exam sheet](/assets/old_final/spring21exam_final_KAIST.pdf)| [Solution](/assets/old_final/spring21exam_final_KAISTans.pdf) |
+| 2021 | Fall  | [Exam sheet](/assets/old_final/fall21exam_final_KAIST.pdf)| [Solution](/assets/old_final/fall21exam_final_KAISTans.pdf) |
+| 2022 | Fall  | [Exam sheet](/assets/old_final/fall22exam_final_KAIST.pdf)| [Solution](/assets/old_final/fall22exam_final_KAISTans.pdf) |
+
+
+
