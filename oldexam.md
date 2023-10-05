@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Precepts
-permalink: /precepts/
+title: OldExams
+permalink: /oldexams/
 ---
 
 <h2>Old Exams</h2>
