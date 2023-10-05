@@ -141,9 +141,9 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 
 <tr>
 <td> 2018 </td>
-<td> Fall </td>
-<td> <a href="../assets/old_midterm/fall18exam_KAIST.pdf"> Exam sheet</a> </td>
-<td> <a href="../assets/old_midterm/fall18exam_KAISTans.pdf"> Solution</a> </td>
+<td> Spring </td>
+<td> <a href="../assets/old_midterm/spring18c++sample_KAIST.pdf"> C++ sample</a> </td>
+<td> <a href="../assets/old_midterm/spring18c++sample_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 <tr>
@@ -156,7 +156,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <tr>
 <td> 2021 </td>
 <td> Spring </td>
-<td> <a href="../assets/old_midterm/spring21exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> </td>
 <td> <a href="../assets/old_midterm/spring21exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
