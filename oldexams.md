@@ -6,7 +6,7 @@ permalink: /oldexams/
 
 <h2>Old Exams</h2>
 
-We provide students with midterms/finals from previous semesters. Solutions for some exam are not provided.
+We provide students with midterms/finals from previous semesters. Solutions for some exams are not provided.
 
 <!-- 
 **EE209 Old Midterm Exams**
@@ -149,22 +149,22 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <tr>
 <td> 2020 </td>
 <td> Fall </td>
-<td> <a href="../assets/old_midterm/fall20exam_KAIST.pdf"> Exam sheet</a> </td>
+<td> <</td>
 <td> <a href="../assets/old_midterm/fall20exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 <tr>
 <td> 2021 </td>
 <td> Spring </td>
-<td> </td>
+<td> <a href="../assets/old_midterm/spring21exam_KAIST.pdf"> Exam sheet</a> </td>
 <td> <a href="../assets/old_midterm/spring21exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 <tr>
 <td> 2021 </td>
 <td> Fall </td>
-<td> <a href="../assets/old_midterm/fall21exam_KAIST.pdf"> Exam sheet</a> </td>
-<td> <a href="../assets/old_midterm/fall21exam_KAISTans.pdf"> Solution</a> </td>
+<td> <a href="../assets/old_midterm/fall21exam_midterm_KAIST.pdf"> Exam sheet</a> </td>
+<td> <a href="../assets/old_midterm/fall21exam_midterm_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 <tr>
