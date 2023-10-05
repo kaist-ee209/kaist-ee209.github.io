@@ -245,7 +245,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> 2016 </td>
 <td> Spring </td>
 <td> <a href="../assets/old_final/spring16exam_final_KAIST.pdf"> Exam sheet</a> </td>
-<td> <a href="../ssets/old_final/spring16exam_final_KAISTans.pdf"> Solution</a> </td>
+<td> <a href="../assets/old_final/spring16exam_final_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 <tr>
