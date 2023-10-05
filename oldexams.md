@@ -185,7 +185,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 </table>
 
 
-
+<!-- 
 <h3> EE209 Old Final Exams </h3>
 <hr>
 <table style="border-collapse: collapse;" border="3" cellpadding="3">
@@ -291,4 +291,4 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 </tr>
 
 </tbody>
-</table>
+</table> -->
