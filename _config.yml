@@ -15,8 +15,8 @@ minima_reboot:
 header_pages:
 - precepts.md
 - assign.md
+- oldexams.md
 - policy.md
-# - oldexams.md
 
 paginate: 5
 
