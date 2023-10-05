@@ -149,7 +149,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <tr>
 <td> 2020 </td>
 <td> Fall </td>
-<td> <</td>
+<td> </td>
 <td> <a href="../assets/old_midterm/fall20exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
