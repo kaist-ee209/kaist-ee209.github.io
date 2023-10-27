@@ -331,7 +331,7 @@ input.</strong> Here are the required error handlings.
     In other words, you can just check the first letter, and regard the input as an operand if it is a number or starting with _. 
     For example, regard <code>123abc</code> as <code>123</code>, <code>pabc</code> as <code>p</code>, and
     <code>abc123</code> as <code>a</code> (not an operator, do nothing). Additionally, the words pre-appending '_'
-    symbol to the characters, such as _abc, can be ignored or treated as 0.
+    symbol to the characters, such as _abc, can be treated as 0.
   </li>
   <li>
     You should check whether the stack has at
@@ -357,7 +357,7 @@ operand.
   </li>
 
   <li>
-    If <code>dc</code> has to computer remainder by 0,
+    If <code>dc</code> has to compute remainder by 0,
     it should print '<code>dc: remainder by zero</code>' to <b>standard error</b>
     and should be terminated.
   </li>
@@ -620,7 +620,7 @@ be </b>one gzipped tar file</a> whose name is </p>
 <div class="item">
 <i class="folder icon"></i>
 <div class="content">
-20231234_assign3
+20231234_assign4
 <div class="list">
 <div class="item">
 <i class="file icon"></i>
@@ -696,7 +696,7 @@ tar zcf 20221234_assign4.tar.gz 20221234_assign4
 <div class="ui message warning">
 Please note that you might not get a full credit even if you pass the test with your test case. TAs might use another test cases to test functionality and robustness of your implementation.
 </div>
-</div>
+
 <script src="../../vendor/moment.min.js"></script>>
 <script src="../../vendor/highlight.pack.js"></script>
 <script src="../../vendor/ee209_assignment.js"></script>
