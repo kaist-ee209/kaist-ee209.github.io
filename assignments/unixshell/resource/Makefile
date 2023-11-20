@@ -1,5 +1,5 @@
 STUDENT_ID := $(shell cat STUDENT_ID)
-SUBMIT_DIR := .submit
+SUBMIT_DIR := $(STUDENT_ID)_assign5
 SUBMIT_FILES:= *.c *.h Makefile readme EthicsOath.pdf
 SUBMIT := $(STUDENT_ID)_assign5.tar.gz
 
@@ -16,7 +16,7 @@ $(TARGET): $(OBJS)
 submit:
 	mkdir -p $(SUBMIT_DIR)
 	cp $(SUBMIT_FILES) $(SUBMIT_DIR)
-	cd $(SUBMIT_DIR) && tar -czf ../$(SUBMIT) *
+	tar zcf ./$(SUBMIT) $(SUBMIT_DIR)
 	rm -rf $(SUBMIT_DIR)
 
 clean:

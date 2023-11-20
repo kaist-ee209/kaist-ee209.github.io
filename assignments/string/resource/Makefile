@@ -1,7 +1,7 @@
 CC = gcc209
 
 STUDENT_ID := $(shell cat STUDENT_ID 2>/dev/null)
-SUBMIT_DIR := .submit
+SUBMIT_DIR := $(STUDENT_ID)_assign2
 SUBMIT_FILES:= str.c sgrep.c readme EthicsOath.pdf
 SUBMIT := $(STUDENT_ID)_assign2.tar.gz
 
@@ -18,7 +18,7 @@ client: str.o client.o
 submit:
 	mkdir -p $(SUBMIT_DIR)
 	cp $(SUBMIT_FILES) $(SUBMIT_DIR)
-	cd $(SUBMIT_DIR) && tar -czf ../$(SUBMIT) *
+	tar zcf ./$(SUBMIT) $(SUBMIT_DIR)
 	rm -rf $(SUBMIT_DIR)
 
 clean:
