@@ -13,15 +13,15 @@ assignments. Each programming assignment takes up 10% of your total grade.
 
 <ul>
 <li> Assignment 1:
-A Word Counting Program</a> (TBD) </li>
+A Word Counting Program (TBD) </li>
 <li> Assignment 2:
-String Manipulation</a> (TBD) </li>
+String Manipulation (TBD) </li>
 <li> Assignment 3:
- Customer Management Table</a> (TBD) </li>
+ Customer Management Table (TBD) </li>
 <li> Assignment 4:
-Assembly Language Programming</a> (TBD) </li>
+Assembly Language Programming (TBD) </li>
 <li> Assignment 5:
-Unix Shell Assignment </a> (TBD) </li>
+Unix Shell Assignment (TBD) </li>
 </ul>
 
 
