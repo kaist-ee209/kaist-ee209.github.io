@@ -644,13 +644,19 @@ a comment is counted as one character. Examples:</p>
 <p>
 Your word counting program should handle unterminated comment case.<br>
 This is an example of unterminated comment:<br>
+<div class="ui message">
+<pre>I want to go home <br>
+as early /* as possible.</pre>
+</div>
 <code>I want to go home <br> as early /*as possible. </code>
 When your program meets the unterminated comment case, <b>it should not make any standard output.</b>
 Instead, <b>it should print out the following message to the standard error:</b> <br>
 <code>Error: line 2: unterminated comment</code><br>
 For those who have hard time dealing with errors, we will give you a sample code.<br>
 Include <code>stdio.h</code> header, and use:<br>
-<code>fprintf(stderr, "Error: line %d: unterminated comment\n", /*Error Line Value*/);</code>
+<div class="ui message">
+<pre>fprintf(stderr, "Error: line %d: unterminated comment\n", /*Error Line Value*/);</pre>
+</div>
 </p>
 
 <p><!--Your program (more precisely, its <code>main</code> function)
