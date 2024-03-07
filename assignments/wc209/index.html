@@ -641,7 +641,10 @@ a comment is counted as one character. Examples:</p>
 
 -->
 
-<p>Your program don't have to consider unterminated comment. You can assume that all comments are correctly terminated.</p>
+<p>When your program met unterminated comment, your program should print the following error message to the <code>stderr</code>; <code>"Error : line ${LINE_NUMBER}:unterminated comment"</code>
+You can use the following code snippets.
+<code>fprintf(stderr, "Error: line %d: unterminated comment\n", startLines + 1);</code>
+</p>
 
 <p><!--Your program (more precisely, its <code>main</code> function)
 should return <code>EXIT_FAILURE</code> if it was unsuccessful, that
