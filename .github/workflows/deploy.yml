@@ -4,12 +4,12 @@ on:
   push:
     branches:
       # - master
-      - 2024f
+      - 2023s
       - main
   pull_request:
     branches:
       # - master
-      - 2024f
+      - 2023s
       - main
 
 jobs:
