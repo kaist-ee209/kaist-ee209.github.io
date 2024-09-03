@@ -13,15 +13,15 @@ assignments. Each programming assignment takes up 10% of your total grade.
 
 <ul>
 <li> Assignment 1:
-<a href="assignment1/index.html"> A Word Counting Program</a> (9/24, 11:55pm) </li>
+<!-- <a href="assignment1/index.html"> --> A Word Counting Program</a> (9/24, 11:55pm) </li>
 <li> Assignment 2:
-<a href="assignment2/index.html"> String Manipulation</a> (10/11, 11:55pm) </li>
+<!-- <a href="assignment2/index.html"> --> String Manipulation</a> (10/11, 11:55pm) </li>
 <li> Assignment 3:
-<a href="assignment3/index.html"> Customer Management Table</a> (11/1, 11:55pm) </li>
+<!-- <a href="assignment3/index.html"> --> Customer Management Table</a> (11/1, 11:55pm) </li>
 <li> Assignment 4:
-<a href="assignment4/index.html"> Assembly Language Programming</a> (12/6, 11:55pm) </li>
+<!-- <a href="assignment4/index.html"> --> Assembly Language Programming</a> (12/6, 11:55pm) </li>
 <li> Assignment 5:
-<a href="assignment5/index.html"> Unix Shell Assignment</a> (12/22, 11:55pm) </li>
+<!-- <a href="assignment5/index.html"> --> Unix Shell Assignment</a> (12/22, 11:55pm) </li>
 </ul>
 
 
