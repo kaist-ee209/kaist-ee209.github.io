@@ -66,17 +66,17 @@ assignments. Each programming assignment takes up 10% of your total grade.
 Use the KLMS to submit your
 assignments. (Link will be announced at KLMS.) Your submission should be one gzipped tar file whose name is <b>YourStudentID_assign#.tar.gz</b>.
 
-For example, if your student ID is 20231234, and it is for assignment #1,
-please name the file as 20231234_assign1.tar.gz.
+For example, if your student ID is 20241234, and it is for assignment #1,
+please name the file as 20241234_assign1.tar.gz.
 
 </p><p>
-To create the .tar.gz, first move all your files to the directory (20231234_assign1).
+To create the .tar.gz, first move all your files to the directory (20241234_assign1).
 </p>
 
 <p>
 <pre class="ui message">
-mkdir 20231234_assign1
-mv all_your_files 20231234_assign1
+mkdir 20241234_assign1
+mv all_your_files 20241234_assign1
 </pre>
 
 <p>
@@ -84,15 +84,15 @@ Create a .tar.gz file by the 'tar' command like
 
 </p><p>
 <pre class="ui message">
-tar zcf 20231234_assign1.tar.gz 20231234_assign1
+tar zcf 20241234_assign1.tar.gz 20241234_assign1
 </pre>
 
 </p><p>
-Then, you'll see 20231234_assign1.tar.gz. If you want to decompress and release the files in it (in a different directory),
+Then, you'll see 20241234_assign1.tar.gz. If you want to decompress and release the files in it (in a different directory),
 
 </p>
 <pre class="ui message">
-tar zxf 20231234_assign1.tar.gz
+tar zxf 20241234_assign1.tar.gz
 </pre>
 
 <h2> Ethics Document (Important) </h2>
