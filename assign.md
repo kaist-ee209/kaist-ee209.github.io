@@ -185,7 +185,7 @@ Because we used an automatic grading system, trivial mistake in your submission
 may cause huge amount of deduction in your assignment score.  For such
 exceptional circumstances, you can request changes and get modified grading at
 the TA's discretion.  You will get <font color="#FF0000">15% amount of
-deduction</font> from your total score. Note that once submitted no alogirhtm change to the code is allowed and you cannot propose any changes to the submitted code.
+deduction</font> from your total score. Note that once submitted no algorithm change to the code is allowed and you cannot propose any changes to the submitted code.
 </p>
 
 <h2> Extra point </h2>
