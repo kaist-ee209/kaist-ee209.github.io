@@ -191,7 +191,7 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <tr>
 <td> 2024 </td>
 <td> Spring </td>
-<td> </a> </td>
+<td> </td>
 <td> <a href="../assets/old_midterm/spring24exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
