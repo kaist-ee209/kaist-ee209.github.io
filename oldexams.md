@@ -181,6 +181,20 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> <a href="../assets/old_midterm/fall22exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
+<tr>
+<td> 2023 </td>
+<td> Spring </td>
+<td>  </td>
+<td> <a href="../assets/old_midterm/spring23exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2024 </td>
+<td> Spring </td>
+<td> </a> </td>
+<td> <a href="../assets/old_midterm/spring24exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
 </tbody>
 </table>
 
@@ -289,6 +303,21 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> <a href="../assets/old_final/fall22exam_final_KAIST.pdf"> Exam sheet</a> </td>
 <td> <a href="../assets/old_final/fall22exam_final_KAISTans.pdf"> Solution</a> </td>
 </tr>
+
+<tr>
+<td> 2023 </td>
+<td> Spring </td>
+<td>  </td>
+<td> <a href="../assets/old_final/spring23exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
+<tr>
+<td> 2024 </td>
+<td> Spring </td>
+<td>  </td>
+<td> <a href="../assets/old_final/spring24exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
 
 </tbody>
 </table>
