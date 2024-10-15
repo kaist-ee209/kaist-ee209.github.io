@@ -308,14 +308,14 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> 2023 </td>
 <td> Spring </td>
 <td>  </td>
-<td> <a href="../assets/old_final/spring23exam_KAISTans.pdf"> Solution</a> </td>
+<td> <a href="../assets/old_final/spring23exam_final_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 <tr>
 <td> 2024 </td>
 <td> Spring </td>
 <td>  </td>
-<td> <a href="../assets/old_final/spring24exam_KAISTans.pdf"> Solution</a> </td>
+<td> <a href="../assets/old_final/spring24exam_final_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
 
