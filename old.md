@@ -1,12 +1,8 @@
 ---
 layout: page
-title: Old_Page
+title: old
 permalink: /old/
 ---
-
-<link rel=“stylesheet” href=“https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css”
-  integrity=“sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm” crossorigin=“anonymous”>
-
 
 <h2> Course Description </h2>
 
@@ -28,8 +24,8 @@ linkers, debuggers, and other software tools.
   <li>Both EE209A and EE209B class will be held offline.
     <!--We will also record the lectures and upload the video.-->
   </li>
-  <li><!<b>All the exams (midterm/final) will be conducted offline.</b></li>
-  <li><!<b>Some lectures will be held in online via Zoom.</b></li>
+  <li><b>All the exams (midterm/final) will be conducted offline.</b></li>
+  <li><b>Some lectures will be held in online via Zoom.</b></li>
   <li>We will use Campuswire and KLMS.</span> <b>You can join our Campuswire with password 4938.</b>  </li>
   <ul>
     <li>Campuswire: [<a href="https://campuswire.com/p/G48E4589B">EE209A &#38; EE209B</a>]
