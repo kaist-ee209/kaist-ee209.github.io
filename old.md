@@ -1,0 +1,456 @@
+---
+layout: page
+title: Old_Page
+permalink: /old/
+---
+
+<link rel=“stylesheet” href=“https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css”
+  integrity=“sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm” crossorigin=“anonymous”>
+
+
+<h2> Course Description </h2>
+
+This course provides the basic background necessary to understand the
+design and implementation of software components that support modern
+computer systems. The course covers C programming, machine
+organization, assembly language, and design, testing and debugging of
+software components as well as portions of operating systems
+concepts. Students will also learn how to use text editors, compilers,
+linkers, debuggers, and other software tools.
+
+
+<hr>
+
+<h2> Important Notes </h2>
+
+<ul>
+  <!-- <li><b><font color="#FF0000">This week’s lectures on 9/9 (Mon) and 9/11(Wed) will be held via Zoom (for both EE209A/B)!</font></b></li> -->
+  <li>Both EE209A and EE209B class will be held offline.
+    <!--We will also record the lectures and upload the video.-->
+  </li>
+  <li><!<b>All the exams (midterm/final) will be conducted offline.</b></li>
+  <li><!<b>Some lectures will be held in online via Zoom.</b></li>
+  <li>We will use Campuswire and KLMS.</span> <b>You can join our Campuswire with password 4938.</b>  </li>
+  <ul>
+    <li>Campuswire: [<a href="https://campuswire.com/p/G48E4589B">EE209A &#38; EE209B</a>]
+  </ul>
+  <li>To contact TAs, please use <b> 
+     kaist.ee209.ta.fall24@gmail.com </b> instead of individual emails.
+  </li>
+  <li>Manual for Tools : <a href="https://oslab.kaist.ac.kr/wp-content/uploads/2022/06/2022_Pintos_part0_02_tools.pptx">Slide</a>, 
+    Video Link [<a href="https://www.youtube.com/watch?v=9njGpwomscE&t=5s">ctags</a>,
+    <a href="https://www.youtube.com/watch?v=p6LyC6FodMY&t=2s">cscope</a>,
+    <a href="https://www.youtube.com/watch?v=bbz51NsQcWA&t=2s">gdb</a>]
+  </li>
+  <!-- <li><b>We will not answer emails sent to individuals.</b></li> -->
+
+</ul>
+
+<hr>
+<p></p>
+<h3> Lectures : </h3>
+<p></p>
+<div class="col-lg-12 table-responsive">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td align="center"><strong>Meeting Time</strong>
+        </td>
+        <td align="center" colspan="2"><strong>Meeting Place</strong>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="2"> Mon/Wed <br>10:30~12:00</td>
+        <td> EE209A </td>
+        <td> Creative Learning Building (E11) Room 301 </a>
+        </td>
+      </tr>
+      <tr>
+        <td> EE209B </td>
+        <td> Creative Learning Building (E11) Room 302 </a>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<hr>
+<p></p>
+<h3> Professors : </h3>
+<p>
+<div class="col-lg-12 table-responsive">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td align="center"><strong>Name</strong>
+        </td>
+        <td align="center"><strong>Office Hours</strong>
+        </td>
+        <td align="center"><strong>Office</strong>
+        </td>
+        <td align="center"><strong>Email</strong>
+        </td>
+      </tr>
+      <tr>
+        <td> <a href="https://sites.google.com/view/whanglab/di-lab">Steven Euijong Whang</a> (EE209A)</td>
+        <td> By appointment </td>
+        <td> N1 516 </td>
+        <td> swhang@kaist.ac.kr </td>
+      </tr>
+      <tr>
+        <td> <a href="https://insuhan.github.io/">Insu Han</a> (EE209B) </td>
+        <td> By appointment </td>
+        <td> N1 914 </td>
+        <td> insu.han@kaist.ac.kr </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<hr>
+<p></p>
+
+<!-- <iframe src="https://calendar.google.com/calendar/embed?height=800&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showCalendars=0&showPrint=0&title=EE209%20-%20Spring%202022&hl=en&src=a2Fpc3QuZWUyMDkudGFAZ21haWwuY29t&src=YTFuYWM1MDcwczZhb3JwdTFhcG50bzdlZjhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=YTRhdmpndXFsOWRhbGsxN3BwajQ5b25tc2dAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&color=%2333B679&color=%23D50000" style="border:solid 1px #777" width="1100" height="800" frameborder="0" scrolling="no"></iframe> -->
+
+<h3>Important Schedule: </h3>
+<div class="col-lg-12 table-responsive" id="schedule">
+  <table class="table">
+    <tr>
+      <th style="width: 15%;">Release</th>
+      <th style="width: 15%;">Due (11:55pm)</th>
+      <th>Class / Assignment</th>
+      <!-- <th style="width: 10%;">Videos</th>
+      <th style="width: 10%;">Submission</th> -->
+    </tr>
+
+    <!-- Week 1 -->
+    <tr>
+      <td rowspan="1">9/11</td>
+      <td rowspan="1">9/24</td>
+      <td class="table-success">Assignment 1 </td>
+    </tr>
+    
+    <tr>
+      <td rowspan="1">9/24</td>
+      <td rowspan="1">10/11</td>
+      <td class="table-success">Assignment 2 </td>
+    </tr>
+    
+    <tr>
+      <td rowspan="1">10/23</td>
+      <td rowspan="1">Wed</td>
+      <td class="table-warning">Midterm</td>
+    </tr>
+    
+    <tr>
+      <td rowspan="1">10/11</td>
+      <td rowspan="1">11/1</td>
+      <td class="table-success">Assignment 3 </td>
+    </tr>
+    
+    <tr>
+      <td rowspan="1">11/1</td>
+      <td rowspan="1">12/6</td>
+      <td class="table-success">Assignment 4 </td>
+    </tr>
+
+    <tr>
+      <td rowspan="1">12/18</td>
+      <td rowspan="1">Wed</td>
+      <td class="table-warning">Finals</td>
+    </tr>
+
+    <tr>
+      <td rowspan="1">12/2</td>
+      <td rowspan="1">12/22</td>
+      <td class="table-success">Assignment 5 </td>
+    </tr>
+
+  </table>
+</div>
+<hr>
+<p></p>
+<h3>Lecture Schedule: </h3>
+<div class="col-lg-12 table-responsive" id="schedule">
+  <table class="table table-bordered">
+    <tr>
+      <th style="width: 20%;">Period</th>
+      <th>Topic</th>
+      <!-- <th style="width: 10%;">Videos</th>
+      <th style="width: 10%;">Submission</th> -->
+    </tr>
+
+    <tr>
+      <td rowspan="1">Week 1</td>
+      <td>(9/2) Introduction [<a href="https://drive.google.com/file/d/1-CHnf5JykHW__OoM-RdfFXTK8mHgym08/view?usp=sharing">slides-A</a>, <a href="https://drive.google.com/file/d/1-CYq_HrnbGVqIfnTX9iSz1VqkESU2RpI/view?usp=sharing">slides-B</a>]<br> (9/4) Numbers & Data Types [<a href="https://drive.google.com/file/d/1-awTnAFD3iTYsWRwBbz06MjMW0AKegAl/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 2</td>
+      <td>(9/9, <b>Zoom</b>) Expressions, Control Flow & C Examples [<a href="https://drive.google.com/file/d/1-vkgAdSZcxjCJmskqjWFfzyvm4YjNLsw/view?usp=sharing">slides</a>] <br> (9/11, <b>Zoom</b>) Functions [<a href="https://drive.google.com/file/d/106njDBWBz-70e9JaJFdvqqlbgwEGMRhG/view?usp=sharing">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 3</td>
+      <td>(9/16) No class (Chuseok)<br>(9/18) No class (Chuseok)</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 4</td>
+      <td>(9/23) Variables and Scopes [<a href="https://drive.google.com/file/d/10DzNqVvPKyC8w0Us7XjtfispVi0CJOxl/view?usp=sharing">slides</a>] <br>(9/25) Arrays & Strings [<a href="https://drive.google.com/file/d/10M2P5E5zZ7rAOXBjvwkB2ywLsIh4FnEy/view?usp=sharing">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 5</td>
+      <td>(9/30) Pointers [<a href="https://drive.google.com/file/d/10SkWWE8h32BxlGOaad-rerD1kPZxB-8O/view?usp=sharing">slides</a>] <br>(10/2) Structures & Dynamic Memory Management [<a href="https://drive.google.com/file/d/10cdL7akqGoVxumItHOZJb3UeOy-36ezl/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 6</td>
+      <td>(10/7) Testing [<a href="https://drive.google.com/file/d/1-1gAoPT4IxF5BpvIcZjtLIcGmBSQmHAR/view?usp=drive_link">slides</a>]<br>(10/9) No class (Hangul Proclamation Day)</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 7</td>
+      <td>(10/14) Debugging [<a href="https://drive.google.com/file/d/1-9yXy1N4GX4rZ4UQQPCe0pwOC6oavJVd/view?usp=drive_link">slides</a>] <br>(10/16) Linked List [<a href="https://drive.google.com/file/d/1-UuR3YRwU_PZzK5hRBhPqYTLB9Xw8m1Y/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 8</td>
+      <td>(10/23) Midterm </td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 9</td>
+      <td>(10/28) Hash Table [<a href="https://drive.google.com/file/d/1-clmf0TgYgEhmV5BuYXfpOBtJn3O2JoG/view?usp=drive_link">slides</a>]<br>(10/30) Modularity [<a href="https://drive.google.com/file/d/1-oyc33ay9OZEqEL7KS4VGtC9EZkVsAYg/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 10</td>
+      <td>(11/4) Assembly Language I [<a href="https://drive.google.com/file/d/10SaRlEEUuvzn4e4fo-rghs59-wXovqs_/view?usp=drive_link">slides</a>] <br>(11/6) Assembly Language II [<a href="https://drive.google.com/file/d/10kK5oI0EfpJ91IN8eB-ccGzrToWj1895/view?usp=drive_link">slides</a>] </td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 11</td>
+      <td>(11/11) Assembly Languages – Functions [<a href="https://drive.google.com/file/d/10qdXB-uytGhuc8UPwk3zncq680IBHugy/view?usp=drive_link">slides</a>]<br>(11/13) Assembly Languages – AMD64 [<a href="https://drive.google.com/file/d/112P789y_k3v-fcxv-zuCHe9obaGqo2e0/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 12</td>
+      <td>(11/18) Assembly Languages – Linkers [<a href="https://drive.google.com/file/d/11OLe6_7LC8Y349FNio2yt_iMfC0VBpDu/view?usp=drive_link">slides</a>]<br>(11/20) Exceptions and Processes [<a href="https://drive.google.com/file/d/11Uy9BuvtuOD_KkgfSB5WZ9HGwCDb_MzH/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 13</td>
+      <td>(11/25) Memory Management [<a href="https://drive.google.com/file/d/11ai2wanUFWL7-1-Tc7a84WJ5YWctvTYR/view?usp=drive_link">slides</a>]<br>(11/27) Dynamic Memory Management [<a href="https://drive.google.com/file/d/11iCfWueUtrqTnNtS-_58U4-FzhiTnMj_/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 14</td>
+      <td>(12/2) I/O Management [<a href="https://drive.google.com/file/d/11kgsATqZLvdkvOA3LFzATtUSDr_0qT0p/view?usp=drive_link">slides</a>]<br>(12/4) Process Management [<a href="https://drive.google.com/file/d/11v9STd1VpMCpfoLelal1WBDQhYeD5jfY/view?usp=drive_link">slides</a>]</td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 15</td>
+      <td>(12/9) Signals [<a href="https://drive.google.com/file/d/11wxNtRlFG1pml0KXFf4LdPgEWJDtglQF/view?usp=drive_link">slides</a>]<br>(12/11) TBA </td>
+    </tr>
+    <tr>
+      <td rowspan="1">Week 16</td>
+      <td>(12/18) Final Exam </td>
+    </tr>
+    
+  </table>
+</div>
+<hr>
+<p></p>
+<h3> Teaching Assistants (EE209A): </h3>
+<p>
+<div class="col-lg-12 table-responsive">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        </td>
+        <td style="width:15%" align="center" colspan="5"><strong>Name</strong>
+        </td>
+
+      <tr>
+        <td> Junseok Seo (Head TA) </td>
+        <td> Min Su Kim </td>
+        <td> Taeckyung Lee </td>
+        <td> Jaehyun Kwak </td>
+        <td> Subin Park </td>
+      </tr>  
+
+      <tr>
+        <td> Taehyun Kim </td>
+        <td> Taehoon Kim </td>
+        <td> Changho Choi </td>
+        <td> </td>
+        <td> </td>
+      </tr>  
+
+    </tbody>
+  </table>
+</div>
+
+<hr>
+<p></p>
+<h3> Teaching Assistants (EE209B) : </h3>
+<p>
+<div class="col-lg-12 table-responsive">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        </td>
+        <td style="width:15%" align="center" colspan="5"><strong>Name</strong>
+        </td>
+
+      <tr>
+        <td> Jaehan Kim (Head TA) </td>
+        <td> Seungkwan Kang </td>
+        <td> Seungjun Lee </td>
+        <td> Minkyoo Song </td>
+        <td> Hyeonho Shin </td>
+      </tr>
+
+      <tr>
+        <td> Minseok Kim </td>
+        <td> Haksun Son </td>
+        <td> Inje Hwang </td>
+        <td> Hyeon-Jik Lee </td>
+        <td> </td>
+      </tr>  
+
+    </tbody>
+  </table>
+</div>
+
+<hr>
+<p></p>
+<h3> Assignments: </h3>
+<div class="col-lg-12 table-responsive">
+  <table class="table table-bordered">
+    <tr>
+      <th></th>
+      <th align="center">Assignment 1</th>
+      <th align="center">Assignment 2</th>
+      <th align="center">Assignment 3</th>
+      <th align="center">Assignment 4</th>
+      <th align="center">Assignment 5</th>
+    </tr>
+
+    <tr>
+      <td rowspan="5" align="center" valign="middle">TA</td>
+      <td> Taehyun Kim </b> </td>
+      <td> Minseok Kim </td>
+      <td> Jaehyun Kwak </td>
+      <td> Seungkwan Kang </td>
+      <td> Minsu Kim </td>
+    </tr>
+
+    <tr> 
+      <td> Taehoon Kim </td> 
+      <td> Haksun Son </td>
+      <td> Subin Park </td>
+      <td> Seungjun Lee </td>
+      <td> Changho Choi </td>
+    </tr>
+    
+    <tr> 
+      <td> Junseok Seo </td> 
+      <td> Hyeonho Shin </td>
+      <td> Taeckyung Lee </td>
+      <td> Minkyoo Song </td>
+      <td> Inje Hwang </td>
+    </tr> 
+
+    <tr> 
+      <td> Jaehan Kim </td> 
+      <td>  </td>
+      <td>  </td>
+      <td>  </td>
+      <td> Hyeonjik Lee </td>
+    </tr> 
+
+  </table>
+</div>
+
+
+<hr>
+<p></p>
+<h3> Office hour: </h3>
+<h4> Professors' office hours </h4>
+<ul>
+  <li>Start the email subject with [EE209].</li>
+  <li><b>Set up an appointment by contacting the professor via email.</b></li>
+  <ul>
+    <li>E.g., <i>"Hello Professor XXX"</i> is not a good email subject, but <i></i>"[EE209] Office hour
+      registration"</i> is.</li>
+  </ul>
+</ul>
+
+<h4> TA office hours </h4>
+  <ul>
+  <li> If you would like to schedule the office hour, visit this <a href="https://docs.google.com/spreadsheets/d/1eU10VlDzm6DjWDqbnUQU4vgKKAuJEPW25l5FuViSUb8/edit?gid=178634157#gid=178634157">spreadsheet</a> to sign up for office hours.
+  </li><li> Let us know in advance by emailing us at kaist.ee209.ta.fall24@gmail.com.
+  </li>
+  <li>
+    You should register office hours and let us know <b>at least one day in advance</b>.
+  </li>
+  <li>
+    Location: Online (Zoom)
+  </li>
+</ul>
+
+
+<hr>
+<p></p>
+<h3> Textbooks: </h3>
+<style type="text/css">
+</style>
+<table class="tg">
+  <thead>
+    <tr>
+      <th class="tg-8jgo" colspan="2">
+        <h4>Main</h4>
+      </th>
+      <th class="tg-8jgo" colspan="3">
+        <h4>Highly recommended books</h4>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="tg-8jgo"><img src="images/textbook1.jpg" width=100> <br>
+        <a href="http://knking.com/books/c2/index.html">
+          C Programming: A Modern Approach (2nd Edition), by K.N. King, Norton & Co. 2008 </a>
+      </td>
+      <td class="tg-8jgo"> <img src="images/textbook2.jpg" width=100> <br>
+        <a href="http://csapp.cs.cmu.edu/">
+          Computer Systems: A Programmer's Perspective (3rd Edition), by Randal Bryant and DaviO'Hallaron, Pearson 2015
+        </a>
+      </td>
+      <td class="tg-8jgo"> <img src="images/textbook3.jpg" width=100> <br>
+        <a href="http://www.amazon.cProgramming-Language-2nd-Brian-Kernighan/dp/0131103628">
+          The C Programming Language (2nd Edition), by Brian Kernighan and Dennis Ritchie, Prentic Hall 1988 </a>
+      </td>
+      <td class="tg-8jgo"> <img src="images/textbook4.jpg" width=100> <br>
+        <a href="http://www.cs.princeton.edu/~bwk/tpop.webpage/">
+          The Practice of Programming, by Brian Kernighan and Rob Pike, Addison-Wesley 1999 </a>
+      </td>
+      <td class="tg-8jgo"> <img src="images/textbook5.jpg" width=100> <br>
+        <a href="http://oreilly.com/catalog/9781565921122">
+          Programming with GNU Software, by Michael K. Loukides & Andrew Oram, O'Reilly 1996 </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+<p></p>
+<h3> Useful resources: </h3>
+<li class="toclevel-1"> <a href="commands.html">Basic UNIX command cheatsheet</a>
+<li class="toclevel-1"> Reference manuals:
+ this course uses these manuals, for reference only:
+<ul>
+
+   <li class="toplevel-2"> <a href="./references/253665.pdf"> Intel® 64 and IA-32 Architecture Software Developer's Manual, Volume 1: Basic Architecture </a>
+   <li class="toplevel-2"> <a href="./references/253666.pdf"> Intel® 64 and IA-32 Architecture Software Developer's Manual, Volume 2A: Instruction Set Referece, A-M </a>
+   <li class="toplevel-2"> <a href="./references/253667.pdf"> Intel® 64 and IA-32 Architecture Software Developer's Manual, Volume 2B: Instruction Set Referece, N-Z </a>
+   <li class="toplevel-2"> <a href="./references/253668.pdf"> Intel® 64 and IA-32 Architecture Software Developer's Manual, Volume 3A: System Programming Guide </a>
+   <li class="toplevel-2"> <a href="./references/253669.pdf"> Intel® 64 and IA-32 Architecture Software Developer's Manual, Volume 3B: System Programming Guide </a>
+   <li class="toplevel-2"> <a href="./references/elf.pdf"> Tool Interface Standard (TIS) Executable and Linking Format (ELF) Specification </a>
+   <li class="toplevel-2"> <a href="./references/gnu-assembler.pdf"> Using as The GNU Assembler </a>
+
+</ul>
+  
+
+<hr>
+<p></p>
