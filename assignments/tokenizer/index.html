@@ -50,12 +50,12 @@ particular, note that you may consult with the course instructors, lab
 TAs, mailing list, etc. while doing assignments, as prescribed by that web
 page. However, there is one exception...</p>
 
-<p>Throughout the semester, each assignment will have an "on your own"
+<!-- <p>Throughout the semester, each assignment will have an "on your own"
 part. You must do that part of the assignment <em>completely on your
 own</em>, without consulting with the course instructors, lab TAs,
 mailing list, etc., except for clarification of requirements. You might
 think of the "on your own" part of each assignment as a small
-take-home exam. </p>
+take-home exam. </p> -->
 
 <!-- Commnet out error check-->
 <!--p>For this assignment, "detecting and reporting unterminated
@@ -143,6 +143,7 @@ The output (<code>13 3 300</code>) indicates that there are 13 words,
     <!-- isspace()</code> -- space, form-fead ('\f'), newline('\n'), carriage
     return ('\r'), horizontal tab('\t'), and vertical tab ('\v'). -->
   <li> An empty file (with no characters at all) produces <code>0 0 0</code>.
+  <li> A input text consists only of <b>alphanumeric characters, spaces (including form-feed, newline, carriage return, horizontal tab, and vertical tab), and sentence-ending punctuation (., ?, !)</b>.
 </ul>
 
 <!-- <p>In the following examples a space character is shown as
@@ -773,7 +774,7 @@ int main(void)
 </svg>
 </div>
 
-<p> <b><code>O.W</code></b> represents <em>Out of Word</em>, <b><code>I.W</code></b> represents <em>In of Word</em>, <b><code>E.S</code></b> represents <em>End of Sentence</em>. The program begins in the <b>O.W</b> state. When it reads a letter or digit, it transitions to the <b>I.W</b> state and increments the word count. If it encounters a period, question mark, or exclamation point while in the <b>I.W</b> state, it transitions to the <b>E.S</b> state.</p>
+<p> <b><code>O.W</code></b> represents <em>Out of Word</em>, <b><code>I.W</code></b> represents <em>In a Word</em>, <b><code>E.S</code></b> represents <em>End of Sentence</em>. The program begins in the <b>O.W</b> state. When it reads a letter or digit, it transitions to the <b>I.W</b> state and increments the word count. If it encounters a period, question mark, or exclamation point while in the <b>I.W</b> state, it transitions to the <b>E.S</b> state.</p>
 
 <p>After entering the <b>E.S</b> state, it remains in the <b>E.S</b> state until it encounters a non-space character. A space character is recognized by the <code>isspace(c)</code> function, which includes form-feed (<code>'\f'</code>), newline (<code>'\n'</code>), carriage return (<code>'\r'</code>), tab (<code>'\t'</code>), and vertical tab (<code>'\v'</code>). If the next character is a alphanumeric, it transitions to the <b>I.W</b> state; otherwise, it transitions to the <b>O.W</b> state.</p>
 
