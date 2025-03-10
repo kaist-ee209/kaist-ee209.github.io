@@ -13,15 +13,15 @@ assignments. Each programming assignment takes up 10% of your total grade.
 
 <ul>
 <li> Assignment 1:
-<a href="."> TBD </a> (3/24, 11:55pm) </li>
+<a href="./tokenizer"> Tokenizer </a> (3/24, 11:55pm) </li>
 <li> Assignment 2:
-<a href="."> String Manipulation </a> (4/07, 11:55pm) </li>
+<a> String Manipulation </a> (4/07, 11:55pm) </li>
 <li> Assignment 3:
-<a href="."> TBD </a> (4/28, 11:55pm) </li>
+<a> TBD </a> (4/28, 11:55pm) </li>
 <li> Assignment 4:
-<a href="."> Assembly Language Programming </a> (5/14, 11:55pm) </li>
+<a> Assembly Language Programming </a> (5/14, 11:55pm) </li>
 <li> Assignment 5:
-<a href="."> Unix Shell Assignment </a> (6/14, 11:55pm) </li>
+<a> Unix Shell Assignment </a> (6/14, 11:55pm) </li>
 </ul>
 
 
