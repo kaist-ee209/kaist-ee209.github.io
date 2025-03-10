@@ -8,7 +8,7 @@ permalink: /assignments/
 
 <p>
 We will do <font color="#FF0000">five</font> programming
-assignments. Each programming assignment takes up 10% of your total grade.
+assignments. 
 </p>
 
 <ul>
