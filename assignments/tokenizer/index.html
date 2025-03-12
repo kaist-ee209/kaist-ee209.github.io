@@ -761,22 +761,33 @@ int main(void)
 	<polygon fill="black" stroke-width="1" points="153.523,259.376 148.516,251.38 144.142,260.372"/>
 	<polygon stroke="black" stroke-width="1" points="591.436,294.804 425.564,479.196"/>
 	<polygon fill="black" stroke-width="1" points="425.564,479.196 434.631,476.593 427.197,469.905"/>
-	<text x="341.5" y="378.5" font-family="Times New Roman" font-size="20">c == '.' or '?' or '!'</text>
-	<path stroke="black" stroke-width="1" fill="none" d="M 604.592,301.68 A 294.114,294.114 0 0 1 433.789,491.553"/>
-	<polygon fill="black" stroke-width="1" points="604.592,301.68 597.554,307.963 607.155,310.76"/>
-	<text x="546.5" y="436.5" font-family="Times New Roman" font-size="20">!isspace(c) &amp;&amp; !(c == '.' or '?' or '!') &amp;&amp; isalnum(c)</text>
-	<polygon stroke="black" stroke-width="1" points="384.475,480.101 201.525,293.899"/>
-	<polygon fill="black" stroke-width="1" points="201.525,293.899 203.566,303.11 210.699,296.101"/>
-	<text x="-184.5" y="407.5" font-family="Times New Roman" font-size="20">!isspace(c) &amp;&amp; !(c == '.' or '?' or '!') &amp;&amp; !isalnum(c)</text>
+	<text x="503.5" y="407.5" font-family="Times New Roman" font-size="20">c == '.' or '?' or '!'</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 623.458,299.968 A 163.114,163.114 0 0 1 434.076,510.495"/>
+	<polygon fill="black" stroke-width="1" points="623.458,299.968 621.216,309.131 630.712,305.999"/>
+	<text x="595.5" y="480.5" font-family="Times New Roman" font-size="20">!isspace(c) &amp;&amp;</text>
+  <text x="595.5" y="510.5" font-family="Times New Roman" font-size="20">!(c == '.' or '?' or '!') &amp;&amp; </text>
+  <text x="595.5" y="540.5" font-family="Times New Roman" font-size="20">isalnum(c)</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 376.537,509.181 A 176.8,176.8 0 0 1 172.31,301.323"/>
+	<polygon fill="black" stroke-width="1" points="172.31,301.323 165.875,308.222 175.691,310.13"/>
+	<text x="100" y="479.5" font-family="Times New Roman" font-size="20">!isspace(c) &amp;&amp; </text>
+  <text x="30" y="509.5" font-family="Times New Roman" font-size="20">!(c == '.' or '?' or '!') &amp;&amp; </text>
+  <text x="130" y="539.5" font-family="Times New Roman" font-size="20">!isalnum(c)</text>
 	<path stroke="black" stroke-width="1" fill="none" d="M 418.725,528.297 A 22.5,22.5 0 1 1 392.275,528.297"/>
 	<text x="261.5" y="590.5" font-family="Times New Roman" font-size="20">isspace(c) || c == '." or '?' or '!'</text>
 	<polygon fill="black" stroke-width="1" points="392.275,528.297 383.527,531.83 391.618,537.708"/>
+	<polygon stroke="black" stroke-width="1" points="201.525,293.899 384.475,480.101"/>
+	<polygon fill="black" stroke-width="1" points="384.475,480.101 382.434,470.89 375.301,477.899"/>
+	<text x="173.5" y="377.5" font-family="Times New Roman" font-size="20">word_count != 0 &amp;&amp;</text>
+	<text x="213.5" y="407.5" font-family="Times New Roman" font-size="20">(c=='.' or '?' or '!')</text>
 </svg>
 </div>
 
 <p> <b><code>O.W</code></b> represents <em>Out of Word</em>, <b><code>I.W</code></b> represents <em>In a Word</em>, <b><code>E.S</code></b> represents <em>End of Sentence</em>. The program begins in the <b>O.W</b> state. When it reads a letter or digit, it transitions to the <b>I.W</b> state and increments the word count. If it encounters a period, question mark, or exclamation point while in the <b>I.W</b> state, it transitions to the <b>E.S</b> state.</p>
 
-<p>After entering the <b>E.S</b> state, it remains in the <b>E.S</b> state until it encounters a non-space character. A space character is recognized by the <code>isspace(c)</code> function, which includes form-feed (<code>'\f'</code>), newline (<code>'\n'</code>), carriage return (<code>'\r'</code>), tab (<code>'\t'</code>), and vertical tab (<code>'\v'</code>). If the next character is a alphanumeric, it transitions to the <b>I.W</b> state; otherwise, it transitions to the <b>O.W</b> state.</p>
+<p> Note that if the program encounters a period, question mark, or exclamation point while in the <b>O.W</b> state, it should transition to the <b>E.S only if the word count in the current sentence is larger than 0</b>. 
+</p>
+
+<p>After entering the <b>E.S</b> state, it remains in the <b>E.S</b> state until it encounters a non-space character and non-punctuation character. A space character is recognized by the <code>isspace(c)</code> function, which includes form-feed (<code>'\f'</code>), newline (<code>'\n'</code>), carriage return (<code>'\r'</code>), tab (<code>'\t'</code>), and vertical tab (<code>'\v'</code>). If the next character is a alphanumeric, it transitions to the <b>I.W</b> state; otherwise, it transitions to the <b>O.W</b> state.</p>
 
 <p>Note that the program increments the character count for each read character.</p>
 
