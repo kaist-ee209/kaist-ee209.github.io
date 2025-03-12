@@ -1,1 +1,1 @@
-You should create your program on the lab machines cluster using bash, vscode, or any editor of your choice, and gcc209.
+You should create your program on the lab machines cluster using bash or gcc209.
