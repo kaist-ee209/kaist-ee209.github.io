@@ -15,7 +15,7 @@ assignments.
 <li> Assignment 1:
 <a href="./tokenizer"> Tokenizer </a> (3/24, 11:55pm) </li>
 <li> Assignment 2:
-<a> String Manipulation </a> (4/07, 11:55pm) </li>
+<a href="./string"> String Manipulation </a> (4/07, 11:55pm) </li>
 <li> Assignment 3:
 <a> TBD </a> (4/28, 11:55pm) </li>
 <li> Assignment 4:
