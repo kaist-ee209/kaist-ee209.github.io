@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>EE 209: Game Ranking System</title>
+<link rel='stylesheet' href='../../vendor/semantic.min.css' />
+<link rel="stylesheet" type="text/css" href="../../vendor/components/menu.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/components/transition.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../vendor/styles/github-gist.css"/>
+<link rel='stylesheet' href='../../vendor/ee209_assignment.css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="../../vendor/semantic.min.js"></script>
+<script src="../../vendor/components/visibility.js"></script>
+<script src="../../vendor/components/sidebar.js"></script>
+<script src="../../vendor/components/transition.js"></script>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    margin: 12px 0;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+  }
+  th {
+    background-color: #F5F5F1;
+  }
+  /* Remove padding specifically for lists inside table cells */
+  td ol, td ul {
+      margin: 0;
+      padding-left: 14px;
+      padding-right: 14px;
+  }
+  code {
+    background-color: #F5F5F1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #D15251;
+  }
+  br {
+    display: block; /* makes it have a width */
+    content: ""; /* clears default height */
+    margin-top: 0; /* change this to whatever height you want it */
+  }
+</style>
+
+</head>
+<body>
+
+<div class="ui top fixed hidden menu custom">
+<div class="ui container">
+<a class="go-prev" href="../../assignments"><h3 class><i class="chevron left icon"></i></h3></a>
+<a class=""><h3 class="">Assignment 3: Game Ranking System</h3></a>
+</div>
+</div>
+<div class="ui container">
+<div class="ui center aligned">
+<h1 class="ui center aligned header">KAIST<br> <a style="color:black;" href="../../">EE209: Programming Structures for EE</a></h1>
+
+<h2 class="ui center aligned header">Assignment 3: Game Ranking System</span></h2>
+
+<h4 class="ui center aligned header" id="timer">&nbsp;</h4>
+
+</div>
+
+<h2 class="ui dividing header">1. Purpose</h2>
+
+<p>The goal of this assignment is to deepen your understanding of common dictionary implementations using two fundamental data structures in C: 
+<b>Hash Tables</b> and <b>Binary Search Trees (BSTs)</b>. You will learn (1) how each data structure operates, (2) their strengths and weaknesses, 
+and (3) when and why to choose one over the other. By the end, you’ll have practical experience implementing data structures and analyzing their 
+efficiency in real-world scenarios.</p>
+
+<h2 class="ui dividing header">2. Background</h2>
+<p>In online gaming platforms, a player’s skill level is commonly quantified through a Matchmaking Rating (MMR), a numerical measure designed 
+to ensure balanced and competitive matches. When players search for a match, the system typically pairs them with opponents of similar MMR to
+create fair gameplay experiences. Efficiently managing and retrieving MMR data is essential for maintaining competitive integrity, enhancing
+user satisfaction, and fostering sustained player engagement.</p>
+
+<p>This assignment requires you to design a simplified <b>Game Ranking System API</b> to support various applications, such as matchmaking programs and ranking dashboards, by managing:</p>
+  <ul>
+    <li><b>Player IDs</b>: Unique identifiers for each player (strings).</li>
+    <li><b>MMR Values</b>: Numerical values indicating player skill levels (integers).</li>
+  </ul>
+<p>You will implement the system twice: first using a <b>Hash Table</b>, then using a <b>BST</b>. Later, you’ll integrate these implementations strategically to leverage their individual strengths.</p>
+
+<h2 class="ui dividing header">3. Assignment Tasks</h2>
+<p>You'll complete these tasks in order:</p>
+<ul>
+  <li><b>[Task 1]</b> Implementation using a hash table (35 points)</li>
+  <li><b>[Task 2]</b> Implementation using a binary search tree (35 points)</li>
+  <li><b>[Task 3]</b> Integrate both implementations strategically (20 points)</li>
+  <li><b>[Task 4]</b> Clearly document your design choices (10 points)</li>
+</ul>
+
+<p>NOTE: We provide skeleton code and several utilities
+  (e.g., Makefile and tests)
+  in <a href="./assignment3.tar.gz">assignment3.tar.gz</a>.
+  Please download it to your directory before starting your project
+  and check <code>README.md</code>.</p>
+
+
+<h2 class="ui dividing header">4. System Specification</h2>
+<p>Your API must follow the provided <code>mmr_db.h</code>. Do <b>NOT</b> modify this file. The API supports three categories of operations:</p>
+<ul>
+  <li><b>Database Management</b> (Create; Destroy; Register; Unregister; Update)</li>
+  <li><b>MMR Queries</b> (Retrieve MMR by player ID; Count players meeting criteria)</li>
+  <li><b>Rank Queries</b> (Retrieve a player’s rank; Retrieve a player ID by rank)</li>
+</ul>
+
+<br>
+<h3>4.1 Database Management Functions</h3>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <td colspan="2">
+      <code>typedef struct MMR_DB *MMR_DB_T;</code> — <strong>MMR_DB_T</strong> is an object representing the entire game ranking database, maintaining player records and the total number of players in the database.
+    </td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>MMR_DB_T CreateMMRDB(void);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Allocates and initializes a new game ranking database.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns a pointer to a new <code>MMR_DB_T</code> object.</li>
+        <li>On failure (e.g., memory allocation failure), returns <code>NULL</code>.</li>
+      </ol>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>void DestroyMMRDB(MMR_DB_T * db);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Frees all memory associated with the game ranking database and player records.</td>
+  </tr>
+  <tr>
+    <td>Guideline</td>
+    <td>Ensure all allocated memory is freed and avoid dangling pointers.</td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>int RegisterPlayer(MMR_DB_T db, const char *id);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Adds a new player record to the ranking system with a unique identifier (ID) and an initial MMR value of 0.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns 0.</li>
+        <li>If same ID already exists in the database, returns 1.</li>
+        <li>For other failures, returns -1.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td>Guideline</td>
+    <td>Copy the ID string so that the player record owns its own copy. Consider using <code>strdup()</code>. If you use <code>strdup()</code>, please add <code>-D_GNU_SOURCE</code> after <code>gcc209</code>. (e.g., <code>$ gcc209 -D_GNU_SOURCE -o testclient testclient.c</code>)</td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>int UnregisterPlayer(MMR_DB_T db, const char *id);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Removes the player record with the specified ID from the ranking system.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns 0.</li>
+        <li>If no matching record exists with the given ID, returns 1.</li>
+        <li>For other failures, returns -1.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td>Guideline</td>
+    <td>Ensure memory allocated for player record is properly freed.</td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>int UpdatePlayerMMR(MMR_DB_T db, const char *id, int mmr_change);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Adjust player’s MMR by the specified change.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns the player’s new MMR.</li>
+        <li>On failure, returns -1.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td>Guideline</td>
+    <td>MMR cannot be negative. If addition of <code>mmr_change</code> results in a negative MMR, set the new MMR value to 0.</td>
+  </tr>
+</table>
+
+<br>
+<h3>4.2 MMR Query Functions</h3>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>int GetMMRByID(MMR_DB_T db, const char *id);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Retrieves MMR for a specified player.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns the player’s MMR.</li>
+        <li>On failure, returns -1.</li>
+      </ol>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <td colspan="2">
+      <code>typedef bool (*MMR_FUNC_T)(const char *id, int mmr);</code> — Function pointer type for iterating over player records. The function should accept a player’s ID and MMR and return a boolean value (<code>true</code> or <code>false</code>).
+    </td>
+  </tr>
+</table>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>int CountPlayers(MMR_DB_T db, MMR_FUNC_T fp);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Iterates over all player records and counts players matching criteria defined by <code>fp</code>.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns the number of matching (<code>fp</code> returns <code>true</code>) players.</li>
+        <li>On failure, returns -1.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td>Guideline</td>
+    <td>This function can be used as a helper function for other operations.</td>
+  </tr>
+</table>
+
+<br>
+<h3>4.3 Rank Query Functions</h3>
+<div class="ui message warning">
+  For easier implementation, you can assume that all users have <b>unique MMR values</b> in all test cases, except during initialization (where MMR = 0). Additionally, the test cases will <b>not include queries for RankByID or IDByRank involving users with an MMR of zero</b>.
+</div>
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>int GetRankByID(MMR_DB_T db, const char *id);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Returns the rank of specified player in the database.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns the rank.</li>
+        <li>If the specified ID does not exist in the database, returns 0.</li>
+        <li>On failure, returns -1.</li>
+      </ol>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 80%;">
+  </colgroup>
+  <tr>
+    <th>Function</th>
+    <th>char * GetIDByRank(MMR_DB_T db, int rank);</th>
+  </tr>
+  <tr>
+    <td>Objective</td>
+    <td>Retrieves the player’s ID by rank.</td>
+  </tr>
+  <tr>
+    <td>Return Value</td>
+    <td>
+      <ol>
+        <li>On success, returns the player’s ID.</li>
+        <li>On failure, returns <code>NULL</code>.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td>Guideline</td>
+    <td>Ensure that the function validates the <code>rank</code> parameter (e.g., rank must be positive and within the total number of players).</td>
+  </tr>
+</table>
+
+<p><b>Note</b>: Handle all invalid inputs robustly (e.g., NULL pointers).</p>
+
+
+<h2 class="ui dividing header">5. Task Guidelines</h2>
+<p>Each task will be graded independently. The provided test files will help you validate your implementations and receive feedback. A detailed explanation of the build and test process is provided in the next section.
+</p>
+
+<br>
+<h2>[Task 1] Implementation Using a Hash Table (35 points) </h2>
+
+<img alt="hash table overview" class="ui centered image" src="Hash Table.png">
+
+<h3>Requirements</h3>
+<ul>
+  <li>Implement all functions using a hash table in a file named <code>mmr_db_ht.c</code>.</li>
+  <li>Start with a hash table bucket size of <strong>1024 entries</strong>.</li>
+  <li>Each new player registration should <strong>allocate memory</strong> for a new record.</li>
+</ul>
+
+<h3>Tips</h3>
+<ul>
+  <li>Use an appropriate <strong>hash function</strong> to minimize collisions. You may use the provided hash function included in the skeleton code of <code>mmr_db_ht.c</code> if desired.</li>
+  <li><strong>Avoid memory leaks</strong>. For every call to <code>malloc</code> or <code>calloc</code>, there must be exactly one corresponding call to <code>free</code> when the memory is no longer needed.</li>
+  <li>The test cases include scenarios where the number of entries exceeds the bucket size, meaning collisions will occur deterministically. Your implementation must still produce correct outputs regardless of collisions. The hash table diagram shown above is one example of how to handle collisions without compromising correctness.</li>
+</ul>
+
+<h3>Extra Credit (5 points)</h3>
+<p>Implement <b>hash table expansion</b> as follows: When the number of player records reaches 75% of the current bucket capacity, double the number of buckets. For instance, expand from 1024 to 2048 buckets when the node count reaches 768 (0.75 × 1024), and expand again from 2048 when the node count reaches 1536 (0.75 × 2048). Continue this expansion up to a maximum capacity of 1,048,576 buckets (2²⁰). After each expansion, ensure all previously stored records remain accessible.</p>
+
+<br>
+<h2>[Task 2] Implementation Using a Binary Search Tree (35 points)</h2>
+
+<img alt="bianry search tree overview" class="ui centered image" src="BST.png">
+
+<h3>Requirements</h3>
+<ul>
+  <li>Implement all functions using a binary search tree in a file named <code>mmr_db_bst.c</code>.</li>
+</ul>
+
+<h3>Tips</h3>
+<ul>
+  <li><strong>Avoid memory leaks.</strong></li>
+  <li>We recommend implementing two separate binary search trees (BSTs), as shown in the image above: one indexed by ID and the other by MMR value. Using only a single BST and performing traversals based on the other attribute may cause your implementation to fail certain test cases, especially those focused on execution time.</li>
+  <li>To pass the certain test cases, especially for rank-related functionalities, you should leverage the key advantage of BSTs for efficient querying. The image above shows one possible way to optimize rank-related tasks—where the blue boxes indicate the size of left subtree. This additional information helps achieve faster rank computations.</li>
+</ul>
+
+<h3>Extra Credit (5 points)</h3>
+<p>Implement a <b>self-balancing binary search tree (BST)</b>, such as an AVL tree or Red-Black tree, to enhance worst-case performance, which can deteriorate significantly in standard unbalanced BSTs. We have included a test case to verify whether your BST implementation maintains self-balancing properties. Failure to pass these tests will not affect your original score; passing them will only grant you extra points.</p>
+
+<h2>[Task 3] Integration (20 points)</h2>
+
+<p>Integrate the two implementations (Hash Table and BST) into one cohesive system. For each API function, select the data structure most suitable based on its performance characteristics. Your implementation does not need to dynamically adjust based on input; you can select data structures statically. However, ensure that your chosen approach provides better performance than alternative methods in most scenarios.</p>
+
+<h3>Tips</h3>
+<ul>
+  <li>For database management operations, you don’t need to prioritize efficiency since constructing multiple data structures might naturally take longer. However, if you construct a data structure that is not utilized by any subsequent operation, this will result in a point deduction (-5 points).</li>
+  <li>For instance, <code>GetMMRbyID</code> would be faster using a hash table rather than a BST, as it doesn’t require any traversing records across the data structure.</li>
+  <li>You may use both data structures within a single function, if desired.</li>
+  <li>You don’t need to implement hash table expansion for this task.</li>
+  <li>Avoid memory leaks.</li>
+</ul>
+
+<h2>[Task 4] Documentation (10 points)</h2>
+
+<p>Prepare a comprehensive <code>readme</code> document clearly explaining your design choices and any trade-offs between the two data structure implementations.</p>
+
+<p><b>Requirements</b></p>
+<ul>
+  <li><b>Advantages and Disadvantages:</b> Clearly explain the strengths and weaknesses of using a hash table versus a binary search tree (BST).</li>
+  <li><b>Selection Criteria:</b> Describe your rationale for choosing the appropriate data structure (hash table or BST) for each operation implemented in Task 3.</li>
+  <li><b>Extra Credit Features:</b> If you implemented any additional enhancements—such as dynamic hash table resizing or a self-balancing BST—document these clearly, describing their purpose and how they impact on performance.</li>
+  <li>Include your name, details of any collaboration or references used, and note any late-submission tokens utilized.</li>     
+  <li>(Optional) An indication of how much time you spent doing the assignment.</li>
+  <li>(Optional) Your assessment of the assignment.</li>
+  <li>(Optional) Any information that will help us to grade your work in the most favorable light. In particular, you should describe all known bugs.</li>
+</ul>
+
+<h2 class="ui dividing header">6. Build and Test</h2>
+<p>We provide the following directory structure as the starting point for your assignment. All your implementations should be written in the files located in the src folder. 
+The test folder contains test cases that will be used for actual grading.</p>
+<p>For documentation (Task 4), you must write your content in the readme file. 
+Additionally, make sure to replace the STUDENT_ID file content with <b>your own student ID</b> before submitting.</p>
+<div class="ui message">
+<pre>
+├── src/         # Source files (mmr_db implementations and header)
+├── test/        # Test functions
+├── Makefile     # Build configuration
+├── readme       # Documentation (Task 4)
+├── STUDENT_ID   # Your student ID (single line)
+└── README.md    # This file</pre>
+</div>
+<p></p>
+
+<p>To simplify building, testing, and packaging submission of your assignment, we provide a <code>Makefile</code>. You can use the ‘make’ commands to build and test each type of your implementation with the corresponding test cases. Detailed instructions are provided in <code>README.md</code>, so please read it carefully before starting the assignment.</p>
+
+<h2 class="ui dividing header">7. Logistics</h2>
+<p>The test cases are organized into two groups:</p>
+<h3>7.1 Correctness Test</h3>
+<p>This step checks whether each implemented functionality returns the correct output. There are <strong>50 test cases</strong>, ranging from simple cases to scalability checks.
+Not all test cases are independent. For instance, test cases targeting <code>UpdatePlayerMMR</code> will not pass 
+if <code>CreateMMRDB</code> and <code>RegisterPlayer</code> are not correctly implemented. Therefore, we highly recommend implementing in order.</p>
+
+<p>These test cases are shared across all three types of implementations. If you pass all correctness tests, you will receive full points for Tasks 1, 2, and 3. The second part of grading will add to or subtract from this score based on performance.</p>
+
+<h3>7.2 Performance Test (Black Box Test)</h3>
+<p>This part evaluates the <strong>efficiency and completeness</strong> of your implementation. The details vary depending on the implementation type:</p>
+
+<ul>
+  <li><strong>ht (Hash Table):</strong>
+    <ul>
+      <li>Checks whether <strong>hash table expansion</strong> is correctly implemented. </li>
+      <br>➤ <strong>+5 points</strong> if passed.
+    </ul>
+  </li>
+
+  <li><strong>bst (Binary Search Tree):</strong>
+    <ul>
+      <li>Checks if both <strong>ID-indexed BST</strong> and <strong>MMR-indexed BST</strong> are implemented.
+        <br>➤ <strong>–5 points</strong> for each missing implementation.</li>
+      <li>Checks whether your BST is <strong>self-balancing</strong> and meets performance thresholds.
+        <br>➤ <strong>+5 points</strong> if passed.</li>
+    </ul>
+  </li>
+
+  <li><strong>integrated:</strong>
+    <ul>
+      <li>Evaluates whether you selected an <strong>appropriate data structure</strong> for each functionality:
+        <code>GetMMRByID</code>, <code>CountPlayers</code>, <code>GetRankByID</code>, <code>GetIDByRank</code>
+      </li>
+        <br>➤ <strong>-2.5 points</strong> for each failure.
+    </ul>
+  </li>
+</ul>
+
+<div class="ui message warning">
+  Even if your code passes locally, it might fail on the eelab server. 
+  Since many students use the same hardware, performance may vary during peak usage.
+  <b>We strongly recommend testing multiple times at different hours to ensure stability</b>.
+  Final grading will be fairly conducted on the same device across all student submissions.
+</div>
+
+<h2 class="ui dividing header">8. Submission</h2>
+<p>Please submit your assignment using the KLMS submission link. Your submission must be a gzipped tar file named as <strong>YourStudentID_assign3.tar.gz</strong>. 
+  For example, if your student ID is <code>20251234</code>, the file should be named <code>20251234_assign3.tar.gz</code>.</p>
+
+<p>You can create this submission file by running the <code>make submit</code> command. This will automatically generate a correctly named tar.gz file. Before running <code>make submit</code>, follow the steps below:</p>
+
+<ol>
+  <li>Open the <code>STUDENT_ID</code> file and replace its contents with <strong>your actual student ID</strong>. This will be used to generate the correct file name.</li>
+  <li>Download and sign the <a href="../EthicsOath.docx">Observance of Ethics</a> document. Convert the signed document to PDF format and include it in your assignment folder.</li>
+  <li>Run the <code>make submit</code> command in your terminal. This will package your entire assignment folder into the required tar.gz file.</li>
+</ol>
+
+<p>Your submission file should look like this: </p>
+<div class="ui segment">
+  <div class="ui list">
+    <div class="item">
+      <i class="archive icon"></i>
+      <div class="content">
+        20251234_assign3.tar.gz
+        <div class="list">
+          <div class="item">
+            <i class="folder icon"></i>
+            <div class="content">
+              20251234_assign3
+              <div class="list">
+                <div class="item">
+                  <i class="folder icon"></i>
+                  <div class="content">
+                    src
+                    <div class="list">
+                      <div class="item">
+                        <i class="file icon"></i>
+                        <div class="content">mmr_db.h</div>
+                      </div>
+                      <div class="item">
+                        <i class="file icon"></i>
+                        <div class="content">mmr_db_ht.c</div>
+                      </div>
+                      <div class="item">
+                        <i class="file icon"></i>
+                        <div class="content">mmr_db_bst.c</div>
+                      </div>
+                      <div class="item">
+                        <i class="file icon"></i>
+                        <div class="content">mmr_db_integrated.c</div>
+                      </div>
+                    </div> <!-- end inner-most list -->
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="file icon"></i>
+                  <div class="content">readme</div>
+                </div>
+                <div class="item">
+                  <i class="file icon"></i>
+                  <div class="content">EthicsOath.pdf</div>
+                </div>
+              </div> <!-- end inner folder list -->
+            </div>
+          </div>
+        </div> <!-- end top-level folder list -->
+      </div>
+    </div>
+  </div>
+
+
+NOTE: Please use our <code>Makefile</code> to make your submission file.
+<div class="ui message"> <pre>
+// edit STUDENT_ID with your student id
+$ make submit
+$ ls 20251234_assign3.tar.gz
+20251234_assign3.tar.gz
+</pre></div>
+
+<h2 class="ui dividing header">Grading</h2>
+<div class="ui message error">
+If your code cannot be compiled at Haedong lounge server with <code>gcc209</code>, <b>we cannot give you any points (0 point)</b>. Please double check before you submit.
+</div>
+
+<p>We will grade your work on quality from the user's point of view and from the programmer's point of view. To encourage good coding practices, we will deduct points if <code>gcc209</code> generates warning messages.</p>
+
+<p>From the user's point of view, your module has quality if it behaves as it should.</p>
+
+<p>In part, style is defined by the rules given in <em>The Practice of Programming</em> (Kernighan and Pike), as summarized by the <a href="../../style.pdf">Rules of Programming Style</a> document. These additional rules apply:</p>
+
+<p><strong>Names</strong>: You should use a clear and consistent style for variable and function names. One example of such a style is to prefix each variable name with characters that indicate its type. For example, the prefix <code>c</code> might indicate that the variable is of type <code>char</code>, <code>i</code> might indicate <code>int</code>, <code>pc</code> might mean <code>char*</code>, <code>ui</code> might mean <code>unsigned int</code>, etc. But it is fine to use another style -- a style which does not include the type of a variable in its name -- as long as the result is a readable program.</p>
+
+<p><strong>Line lengths</strong>: Limit line lengths in your source code to 72 characters. Doing so allows us to print your work in two columns, thus saving paper.</p>
+
+<p><strong>Comments</strong>: Each source code file should begin with a comment that includes your name, student ID, and the description of the file.</p>
+
+<p><strong>Comments</strong>: Each function should begin with a comment that describes what the function does from the caller's point of view. The function comment should:</p>
+
+<ul>
+<li>Explicitly refer to the function's parameters (by name) and the function's return value.</li>
+
+<li>State what, if anything, the function reads from standard input or any other stream, and what, if anything, the function writes to standard output, standard error, or any other stream.</li>
+
+<li>State which global variables the function uses or affects.</li>
+
+<!-- <li>Appear in both the interface (.h) file for the sake of the <em>clients</em> of the function and the implementation (.c) file for the sake of the <em>maintainers</em> of the function.</li> -->
+</ul>
+
+<p><strong>Comments</strong>: Each structure type definition and each structure field definition should have a comment that describes it. Comments should be written in <strong>English</strong>.</p>
+<div class="ui message warning">
+Please note that passing all provided test cases does not guarantee full credit. 
+TAs may use additional hidden test cases to evaluate the correctness and robustness of your implementation. 
+Manual inspection will also be conducted to ensure your code adheres to the assignment specifications.
+</div>
+
+</div>
+<br>
+
+
+<script src="../../vendor/moment.min.js"></script>
+<script src="../../vendor/highlight.pack.js"></script>
+<script src="../../vendor/ee209_assignment.js"></script>
+<!-- <script>showTimer('2025-11-01T23:55:00+0900');</script> -->
+</body>
+
+</html>
