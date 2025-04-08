@@ -17,7 +17,7 @@ assignments.
 <li> Assignment 2:
 <a href="./string"> String Manipulation </a> (4/07, 11:55pm) </li>
 <li> Assignment 3:
-<a> TBD </a> (4/28, 11:55pm) </li>
+<a href="./mmr_db"> Game Ranking System </a> (4/28, 11:55pm) </li>
 <li> Assignment 4:
 <a> Assembly Language Programming </a> (5/14, 11:55pm) </li>
 <li> Assignment 5:
