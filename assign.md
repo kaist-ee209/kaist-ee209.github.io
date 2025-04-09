@@ -13,15 +13,15 @@ assignments.
 
 <ul>
 <li> Assignment 1:
-<a href="./tokenizer"> Tokenizer </a> (3/24, 11:55pm) </li>
+<a href="./tokenizer"> Tokenizer </a> (by 3/24, 11:55pm) </li>
 <li> Assignment 2:
-<a href="./string"> String Manipulation </a> (4/07, 11:55pm) </li>
+<a href="./string"> String Manipulation </a> (by 4/07, 11:55pm) </li>
 <li> Assignment 3:
-<a href="./mmr_db"> Game Ranking System </a> (4/28, 11:55pm) </li>
+<a href="./mmr_db"> Game Ranking System </a> (by 4/28, 11:55pm) </li>
 <li> Assignment 4:
-<a> Assembly Language Programming </a> (5/14, 11:55pm) </li>
+<a> Assembly Language Programming </a> (by 5/14, 11:55pm) </li>
 <li> Assignment 5:
-<a> Unix Shell Assignment </a> (6/14, 11:55pm) </li>
+<a> Unix Shell Assignment </a> (by 6/14, 11:55pm) </li>
 </ul>
 
 
