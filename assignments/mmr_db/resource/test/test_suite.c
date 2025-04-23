@@ -63,6 +63,7 @@ void run_registration_tests(const MMR_Interface *iface) {
         if (ret!=0) break;
     }
     RUN_TEST("Registration: Register multiple players", ret == 0);
+    iface->DestroyDB(&db);
 }
 
 void run_unregistration_tests(const MMR_Interface *iface) {
@@ -423,6 +424,7 @@ void run_getid_tests(const MMR_Interface *iface) {
             char expected[32]; snprintf(expected, sizeof(expected), "Player%03d", sorted_indices[i]);
             if (!id) { ret = -1; break; }
             if (strcmp(id, expected) != 0) { ret = -1; break; }
+            free(id);
         } else {
             if (id) { ret = -1; break; }
         }
@@ -566,7 +568,9 @@ void query_count(const MMR_Interface *iface, MMR_DB_T db, char **allIDs, int i) 
 void query_getrank(const MMR_Interface *iface, MMR_DB_T db, char **allIDs, int i) {
     iface->GetRankByID(db, allIDs[i]);}
 void query_getIDbyrank(const MMR_Interface *iface, MMR_DB_T db, char **allIDs, int i) {
-    iface->GetIDByRank(db, i + 1);}
+    char *id = iface->GetIDByRank(db, i + 1);
+    free(id);
+}
 
 /* measure_query_time */
 long measure_query_time(const MMR_Interface *iface, int N, bool id_shuffled, bool mmr_shuffled, QueryOp op) {
@@ -644,6 +648,7 @@ long measure_query_time(const MMR_Interface *iface, int N, bool id_shuffled, boo
         if(op == query_getIDbyrank){
             char *id = iface->GetIDByRank(db, i + 1);
             correctness = correctness && strcmp(id, expectedID) == 0;
+            free(id);
         }
         else if(op == query_getrank){
             correctness = correctness && iface->GetRankByID(db, expectedID) == i + 1;}
@@ -651,6 +656,7 @@ long measure_query_time(const MMR_Interface *iface, int N, bool id_shuffled, boo
             correctness = correctness && iface->CountPlayers(db, count_all) == N;}
         else if(op == query_getmmr){
             correctness = correctness && iface->GetMMRByID(db, allIDs[i]) == mmr_values[i];}
+        free(expectedID);
     }
 
     long secDiff = end.tv_sec - start.tv_sec;
@@ -662,6 +668,7 @@ long measure_query_time(const MMR_Interface *iface, int N, bool id_shuffled, boo
     }
     free(allIDs);
     free(mmr_values);
+    free(id_values);
     iface->DestroyDB(&db);
 
     return correctness ? totalMicroseconds : -1;
