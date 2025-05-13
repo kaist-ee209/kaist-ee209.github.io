@@ -21,7 +21,7 @@ assignments.
 <li> Assignment 4:
 <a href="./assembly"> Assembly Language Programming </a> (by 5/14, 11:55pm) </li>
 <li> Assignment 5:
-<a> Unix Shell Assignment </a> (by 6/14, 11:55pm) </li>
+<a href="./unixshell"> Unix Shell Assignment </a> (by 6/14, 11:55pm) </li>
 </ul>
 
 
