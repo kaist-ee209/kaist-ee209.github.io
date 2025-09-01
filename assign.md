@@ -13,15 +13,20 @@ assignments.
 
 <ul>
 <li> Assignment 1:
-<a href="./tokenizer"> Tokenizer </a> (by 3/24, 11:55pm) </li>
+<!-- <a href="./tokenizer"> Tokenizer </a> (by 9/24, 11:55pm) </li> -->
+<a> Tokenizer </a> (by 9/24, 11:55pm) </li>
 <li> Assignment 2:
-<a href="./string"> String Manipulation </a> (by 4/07, 11:55pm) </li>
+<!-- <a href="./string"> String Manipulation </a> (by 10/13, 11:55pm) </li> -->
+<a> String Manipulation </a> (by 10/13, 11:55pm) </li>
 <li> Assignment 3:
-<a href="./mmr_db"> Game Ranking System </a> (by 4/28, 11:55pm) </li>
+<!-- <a href="./mmr_db"> Game Ranking System </a> (by 11/03, 11:55pm) </li> -->
+<a > Game Ranking System </a> (by 11/03, 11:55pm) </li>
 <li> Assignment 4:
-<a href="./assembly"> Assembly Language Programming </a> (by 5/14, 11:55pm) </li>
+<!-- <a href="./assembly"> Assembly Language Programming </a> (by 11/24, 11:55pm) </li> -->
+<a> Assembly Language Programming </a> (by 11/24, 11:55pm) </li>
 <li> Assignment 5:
-<a href="./unixshell"> Unix Shell Assignment </a> (by 6/14, 11:55pm) </li>
+<!-- <a href="./unixshell"> Unix Shell Assignment </a> (by 12/21, 11:55pm) </li> -->
+<a> Unix Shell Assignment </a> (by 12/21, 11:55pm) </li>
 </ul>
 
 
