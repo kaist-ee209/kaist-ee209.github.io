@@ -27,3 +27,9 @@ exclude:
   - Gemfile.lock
   - minima-reboot.gemspec
   - vendor/bundle
+  - assignments/assignment1
+  - assignments/assignment2
+  - assignments/assignment3
+  - assignments/assignment4
+  - assignments/assignment5
+
