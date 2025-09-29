@@ -15,7 +15,8 @@ assignments.
 <li> Assignment 1:
 <a href="./assignment1"> Tokenizer </a> (by 9/28, 11:55pm) </li>
 <li> Assignment 2:
-<!-- <a href="./string"> String Manipulation </a> (by 10/13, 11:55pm) </li> -->
+<a href="./string"> String Manipulation </a> (by 10/14, 11:55pm) </li>
+<!-- <a> String Manipulation </a> (by 10/14, 11:55pm) </li> -->
 <a> String Manipulation </a> (by 10/14, 11:55pm) </li>
 <li> Assignment 3:
 <!-- <a href="./mmr_db"> Game Ranking System </a> (by 11/03, 11:55pm) </li> -->
