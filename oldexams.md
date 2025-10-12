@@ -195,6 +195,13 @@ We provide students with midterms/finals from previous semesters. Solutions for 
 <td> <a href="../assets/old_midterm/spring24exam_KAISTans.pdf"> Solution</a> </td>
 </tr>
 
+<tr>
+<td> 2025 </td>
+<td> Spring </td>
+<td> </td>
+<td> <a href="../assets/old_midterm/spring25exam_KAISTans.pdf"> Solution</a> </td>
+</tr>
+
 </tbody>
 </table>
 
