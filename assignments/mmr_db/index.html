@@ -378,14 +378,14 @@ user satisfaction, and fostering sustained player engagement.</p>
     <td>Return Value</td>
     <td>
       <ol>
-        <li>On success, returns the player’s ID.</li>
+        <li>On success, returns the copy of the player’s ID.</li>
         <li>On failure, returns <code>NULL</code>.</li>
       </ol>
     </td>
   </tr>
   <tr>
     <td>Guideline</td>
-    <td>Ensure that the function validates the <code>rank</code> parameter (e.g., rank must be positive and within the total number of players).</td>
+    <td>Ensure that the function validates the <code>rank</code> parameter (e.g., rank must be positive and within the total number of players). The function should allocate a new memory block for the copied ID string, which can be freed by the caller. Consider using <code>strdup()</code>. If you use <code>strdup()</code>, please add <code>-D_GNU_SOURCE</code> after <code>gcc209</code>.</td>
   </tr>
 </table>
 
