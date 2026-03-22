@@ -12,8 +12,8 @@ assignments.
 </p>
 
 <ul>
-<!-- <li> Assignment 1:
-<a href="./assignment1"> Tokenizer </a> (by 4/8, 11:55pm) </li> -->
+<li> Assignment 1:
+<a href="./assignments/assignment1"> Tokenizer </a> (by 4/8, 11:55pm) </li>
 <!-- <li> Assignment 2:
 <a href="./string"> String Manipulation </a> (by 4/27, 11:55pm) </li> -->
 <!-- <a> String Manipulation </a> (by 10/14, 11:55pm) </li> -->
