@@ -17,8 +17,8 @@ assignments.
 <li> Assignment 2:
 <a href="./string"> String Manipulation </a> (by 4/27, 11:55pm) </li>
 <!-- <a> String Manipulation </a> (by 10/14, 11:55pm) </li> -->
-<!-- <li> Assignment 3:
-<a href="./mmr_db"> Game Ranking System </a> (by 5/13, 11:55pm) </li> -->
+<li> Assignment 3:
+<a href="./mmr_db"> Game Ranking System </a> (by 5/13, 11:55pm) </li> 
 <!-- <a> Game Ranking System </a> (by 11/04, 11:55pm) </li> -->
 <!-- <li> Assignment 4:
 <a href="./assembly"> Assembly Language Programming </a> (by 6/1, 11:55pm) </li>-->
