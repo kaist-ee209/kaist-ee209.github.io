@@ -31,13 +31,13 @@ exclude:
   - assignments/assignment1
   - assignments/assignment2
   - assignments/assignment3
-  - assignments/assignment4
+  #- assignments/assignment4
   - assignments/assignment5
   # assignments original files
   - assignments/tokenizer
   - assignments/string
   - assignments/cm
-  - assignments/assembly
+  #- assignments/assembly
   - assignments/unixshell
   # misc
   - assignments/ht
