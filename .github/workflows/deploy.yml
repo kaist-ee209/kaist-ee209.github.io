@@ -4,13 +4,11 @@ on:
   push:
     branches:
       # - master
-      - 2026f
       - 2023s
       - main
   pull_request:
     branches:
       # - master
-      - 2026f
       - 2023s
       - main
 
