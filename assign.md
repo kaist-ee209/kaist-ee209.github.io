@@ -18,8 +18,8 @@ assignments.
 <a href="/assignments/assignment2"> String Manipulation </a> (by 10/26, 11:55pm) </li> -->
 <!-- <li> Assignment 3:
 <a href="/assignments/assignment3"> Game Ranking System </a> (by 11/11, 11:55pm) </li> -->
-<li> Assignment 4:
-<a href="/assignments/assignment4"> Assembly Language Programming </a> (by 11/30, 11:55pm) </li> 
+<!-- <li> Assignment 4:
+<a href="/assignments/assignment4"> Assembly Language Programming </a> (by 11/30, 11:55pm) </li> -->
 <!-- <li> Assignment 5:
 <a href="/assignments/assignment5"> Unix Shell Assignment </a> (by 12/18, 11:55pm) </li> -->
 </ul>
