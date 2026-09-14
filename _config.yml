@@ -28,7 +28,7 @@ exclude:
   - minima-reboot.gemspec
   - vendor/bundle
   # assignments symbolic links
-  - assignments/assignment1
+  # - assignments/assignment1
   - assignments/assignment2
   - assignments/assignment3
   - assignments/assignment4
