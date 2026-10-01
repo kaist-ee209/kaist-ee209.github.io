@@ -3,13 +3,12 @@ Gemfile.lock
 _site/
 .sass-cache
 vendor/bundle
+temp_auto_push.bat
 .bundle
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
 .ruby-version
 .tweet-cache
-branch_structure.json
-temp_auto_push.bat
-temp_interactive_push.bat
 .gitignore
+branch_structure.json
