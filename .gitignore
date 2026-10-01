@@ -11,3 +11,5 @@ temp_auto_push.bat
 .ruby-version
 .tweet-cache.gitignore
 branch_structure.json
+config.bat
+node_modules
