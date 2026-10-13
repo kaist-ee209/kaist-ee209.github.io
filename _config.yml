@@ -29,7 +29,7 @@ exclude:
   - vendor/bundle
   # assignments symbolic links
   # - assignments/assignment1
-  - assignments/assignment2
+  # - assignments/assignment2
   - assignments/assignment3
   - assignments/assignment4
   - assignments/assignment5
