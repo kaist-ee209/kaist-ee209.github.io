@@ -16,8 +16,8 @@ assignments.
 <a href="/assignments/assignment1"> Tokenizer </a> (by 10/07, 11:55pm) </li>
 <li> Assignment 2:
 <a href="/assignments/assignment2"> String Manipulation </a> (by 10/28, 11:55pm) </li>
-<!-- <li> Assignment 3:
-<a href="/assignments/assignment3"> Game Ranking System </a> (by 11/11, 11:55pm) </li> -->
+<li> Assignment 3:
+<a href="/assignments/assignment3"> Game Ranking System </a> (by 11/11, 11:55pm) </li>
 <!-- <li> Assignment 4:
 <a href="/assignments/assignment4"> Assembly Language Programming </a> (by 11/30, 11:55pm) </li> -->
 <!-- <li> Assignment 5:
