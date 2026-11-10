@@ -141,7 +141,10 @@ following operations.
   <li> <code>+, -, *</code> computes addition, subtraction, and multiplication, respectively.
   <li> <code>/</code> computes the quotient (in integer) in integer division. For example, <code>3/2 = 1</code>.
   <li> <code>%</code> performs remainder operation.
-  <li> <code>^</code> performs exponentiation (e.g., 2^4 = 16). You don't need to implement negative exponent.
+  <li> <code>^</code> performs exponentiation (e.g., 2^4 = 16).
+  An exponent of zero must produce 1, including <code>0^0</code>,
+  which is defined as 1 for this assignment.
+  You do not need to support negative exponents.
   </li>
   </ul>
 <li> Terminating operator: <code>q</code> </li>
@@ -325,6 +328,14 @@ q
 handling and ensure that your program does not crash with any given
 input.</strong> Here are the required error handlings.
 
+<p>
+  For arithmetic overflow (including exponentiation), division by zero,
+  or remainder by zero, your program must print the required error message
+  to <b>standard error</b> and terminate without crashing.
+  Printing an error message followed by a crash, such as a segmentation
+  fault, does not satisfy this requirement.
+</p>
+
 <ul>
   <li>
     Your program should ignore trailing characters from the input value.
@@ -485,7 +496,10 @@ if overflow:
   fprintf(stderr, "dc: overflow happens\n")
   exit(1)</pre>
           <ul>
-            <li>You can assume exponent (<code>op2</code>) is always a positive integer.</li>
+            <li>You can assume that the exponent (<code>op2</code>) is a non-negative
+                integer. Raising any integer to the power of zero must produce 1.
+                For this assignment, <code>0^0</code> is also defined as 1.
+                You do not need to support negative exponents.</li>
           </ul>
         </td>
       </tr>
